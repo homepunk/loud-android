@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/top_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="160dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        android:translationY="-120dp">
+
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp">
+
+            <com.github.abdularis.civ.CircleImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:highlightColor="@color/whiteBone"
+                app:srcCompat="@drawable/card_corners_shadow"
+                app:strokeColor="@color/whiteBone"
+                app:strokeWidth="2dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:paddingBottom="2dp"
+                android:text="all"
+                android:textAllCaps="true"
+                android:textColor="@color/text"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp">
+
+            <com.github.abdularis.civ.CircleImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:highlightColor="@color/colorAccent"
+                app:srcCompat="@drawable/card_corners_shadow"
+                app:strokeColor="@color/colorAccent"
+                app:strokeWidth="2dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:paddingBottom="2dp"
+                android:text="Vinyl"
+                android:textAllCaps="true"
+                android:textColor="@color/text"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp">
+
+            <com.github.abdularis.civ.CircleImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:highlightColor="@color/green"
+                app:srcCompat="@drawable/card_corners_shadow"
+                app:strokeColor="@color/green"
+                app:strokeWidth="2dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:paddingBottom="2dp"
+                android:text="Casette"
+                android:textAllCaps="true"
+                android:textColor="@color/text"
+                android:textSize="18sp" />
+        </FrameLayout>
+    </LinearLayout>
+</layout>

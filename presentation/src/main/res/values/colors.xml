@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#222629</color>
+    <color name="colorPrimaryDark">#212126</color>
+    <color name="colorAccent">#6763be</color>
+    <color name="charocal">#3A405A</color>
+    <color name="paleBlue">#AEC5EB</color>
+    <color name="colorAccent2">#F5F2B8</color>
+    <color name="colorAccentLight">#dfdfdf</color>
+    <color name="background">@color/colorPrimary</color>
+    <color name="title">#F6F1EB</color>
+    <color name="subtitle">#e6e0d9</color>
+    <color name="text">#ede9e3</color>
+    <color name="grey">#474B4F</color>
+    <color name="greyLight">#6B6E70</color>
+    <color name="green">#86C232</color>
+    <color name="greenDark">#61892F</color>
+    <color name="transparent">#00ffffff</color>
+    <color name="whiteBone">#F6F1EB</color>
+    <color name="card_shadow">#40222629</color>
+    <color name="darkBackground">#e21b1f21</color>
+    <color name="black">#24221b</color>
+    <color name="vinylAccent">#6763be</color>
+    <color name="casetteAccent">@color/green</color>
+    <color name="allAccent">@color/whiteBone</color>
+
+</resources>
