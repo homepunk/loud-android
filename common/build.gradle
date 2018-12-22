@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -23,22 +22,28 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
-    def dataDependencies = rootProject.ext.dataDependencies;
+    def commonDependecnies = rootProject.ext.commonDependecnies
 
-    implementation project(path: ':common')
+//    api commonDependecnies.daggerAndroid
+//    api commonDependecnies.daggerSupport // if you use the support libraries
 //    kapt commonDependecnies.daggerProcessor
 //    kapt commonDependecnies.daggerCompiler
 
-    //  Network
-    implementation dataDependencies.gson
-    implementation dataDependencies.okHttp
-    implementation dataDependencies.retrofit
-    implementation dataDependencies.rxJavaAdapter
-    implementation dataDependencies.gsonConverter
-    implementation dataDependencies.loggingInterceptor
-    implementation dataDependencies.clientDiscogs
+    //  Logging
+    api commonDependecnies.timber
+
+    //  Rx
+    api commonDependecnies.rxJava
+    api commonDependecnies.rxAndroid
+
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api 'com.android.support:appcompat-v7:28.0.0'
+    testApi 'junit:junit:4.12'
+    androidTestApi 'com.android.support.test:runner:1.0.2'
+    androidTestApi 'com.android.support.test.espresso:espresso-core:3.0.2'
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }

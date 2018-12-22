@@ -1,6 +1,8 @@
 package homepunk.github.com.data
 
 object Constant {
+    val BASE_URL = "https://api.discogs.com/"
+
     val CONSUMER_KEY = "cVVaWVwOrJfjKZXTBESj"
     val CONSUMER_SECRET = "XHePePmduCuACmziclqWDmTjvcLoUcjt"
     val CURRENT_TOKEN = "fEypjDdshBJkSupIrPNRqwTRfHiuJaniYYRGAyWb"

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -40,18 +41,16 @@ android {
 }
 
 dependencies {
-    def presentationDependencies = rootProject.ext.presentationDependencies;
+    def presentationDependencies = rootProject.ext.presentationDependencies
+//    def commonDependecnies = rootProject.ext.commonDependecnies
 
-    //  Logging
-    implementation presentationDependencies.timber
+//    kapt commonDependecnies.daggerProcessor
+//    kapt commonDependecnies.daggerCompiler
 
-    //  Dependency injection
-    implementation presentationDependencies.butterKnife
-    annotationProcessor presentationDependencies.butterKnifeProccessor
+    implementation project(path: ':common')
+    implementation project(path: ':data')
 
-    //  Rx
-    implementation presentationDependencies.rxJava
-    implementation presentationDependencies.rxAndroid
+       //  Rx
     implementation presentationDependencies.rxPermission
 
     //  Native UI
@@ -64,18 +63,4 @@ dependencies {
     implementation presentationDependencies.recyclerView
     implementation presentationDependencies.navigationTabStrip
     implementation presentationDependencies.circularImageView
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    testImplementation 'junit:junit:4.12'
-
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    kapt "com.android.databinding:compiler:3.1.4"
-
 }
-repositories {
-    mavenCentral()
-}
-
