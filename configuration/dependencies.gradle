@@ -15,8 +15,8 @@ ext {
     rxJavaVersion = '2.1.3'
     rxAndroidVersion = '2.0.1'
     gsonVersion = '2.8.2'
-    okHttpVersion = '3.9.0'
-    retrofitVerison = '2.3.0'
+    okHttpVersion = '3.12.0'
+    retrofitVerison = '2.5.0'
     butterKnifeVersion = '8.8.1'
     constraintLayoutVersion = '1.0.2'
     loggingInterceptorVerison = '3.4.1'
@@ -41,8 +41,6 @@ ext {
             cardView:               "com.android.support:cardview-v7:${supportVersion}",
             gridLayout:             "com.android.support:gridlayout-v7:${supportVersion}",
             recyclerView:           "com.android.support:recyclerview-v7:${supportVersion}",
-            butterKnife:            "com.jakewharton:butterknife:${butterKnifeVersion}",
-            butterKnifeProccessor:  "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
             circularImageView:      "com.github.abdularis:CircularImageView:v1.2"
     ]
 

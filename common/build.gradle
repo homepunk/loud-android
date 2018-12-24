@@ -27,10 +27,8 @@ android {
 dependencies {
     def commonDependecnies = rootProject.ext.commonDependecnies
 
-//    api commonDependecnies.daggerAndroid
-//    api commonDependecnies.daggerSupport // if you use the support libraries
-//    kapt commonDependecnies.daggerProcessor
-//    kapt commonDependecnies.daggerCompiler
+    api commonDependecnies.daggerAndroid
+    api commonDependecnies.daggerSupport // if you use the support libraries
 
     //  Logging
     api commonDependecnies.timber

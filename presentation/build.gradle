@@ -42,13 +42,13 @@ android {
 
 dependencies {
     def presentationDependencies = rootProject.ext.presentationDependencies
-//    def commonDependecnies = rootProject.ext.commonDependecnies
-
-//    kapt commonDependecnies.daggerProcessor
-//    kapt commonDependecnies.daggerCompiler
+    def commonDependecnies = rootProject.ext.commonDependecnies
 
     implementation project(path: ':common')
     implementation project(path: ':data')
+
+    kapt commonDependecnies.daggerProcessor
+    kapt commonDependecnies.daggerCompiler
 
        //  Rx
     implementation presentationDependencies.rxPermission

@@ -28,17 +28,19 @@ android {
 
 dependencies {
     def dataDependencies = rootProject.ext.dataDependencies;
+    def commonDependecnies = rootProject.ext.commonDependecnies
 
     implementation project(path: ':common')
-//    kapt commonDependecnies.daggerProcessor
-//    kapt commonDependecnies.daggerCompiler
+
+    kapt commonDependecnies.daggerProcessor
+    kapt commonDependecnies.daggerCompiler
 
     //  Network
-    implementation dataDependencies.gson
-    implementation dataDependencies.okHttp
-    implementation dataDependencies.retrofit
-    implementation dataDependencies.rxJavaAdapter
-    implementation dataDependencies.gsonConverter
-    implementation dataDependencies.loggingInterceptor
+    api dataDependencies.gson
+    api dataDependencies.okHttp
+    api dataDependencies.retrofit
+    api dataDependencies.rxJavaAdapter
+    api dataDependencies.gsonConverter
+    api dataDependencies.loggingInterceptor
     implementation dataDependencies.clientDiscogs
 }

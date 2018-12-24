@@ -4,18 +4,11 @@ import homepunk.github.com.common.repository.DiscogsRepository
 import homepunk.github.com.data.Constant
 import homepunk.github.com.data.base.BaseRepository
 import homepunk.github.com.data.remote.DiscogsApi
-import io.reactivex.Single
-import io.reactivex.SingleEmitter
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import io.reactivex.schedulers.Schedulers
 import saschpe.discogs.Discogs
-import saschpe.discogs.model.database.Search
-import saschpe.discogs.model.release.Artist
-import saschpe.discogs.service.DatabaseService.Companion.SEARCH_ARTIST
-import saschpe.discogs.service.DatabaseService.Companion.SEARCH_TRACK
+import javax.inject.Inject
 
-class DiscogsDataRepository /*@Inject*/ constructor(private var discogsApi: DiscogsApi?) : BaseRepository(), DiscogsRepository {
+class DiscogsDataRepository @Inject constructor(private var discogsApi: DiscogsApi) : BaseRepository(), DiscogsRepository {
     private lateinit var mDiscogsClient: Discogs
 
     fun init() {
@@ -27,6 +20,8 @@ class DiscogsDataRepository /*@Inject*/ constructor(private var discogsApi: Disc
     }
 
     fun getReleaseList() {
-        discogsApi?.getReleases()
+        discogsApi.getReleaseList()
+                .subscribeOn(Schedulers.io())
+                .subscribe({}, Throwable::printStackTrace)
     }
 }
