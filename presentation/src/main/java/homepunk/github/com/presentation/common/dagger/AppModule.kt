@@ -1,6 +1,5 @@
 package homepunk.github.com.presentation.common.dagger
 
-import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides

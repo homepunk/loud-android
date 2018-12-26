@@ -36,11 +36,15 @@ dependencies {
     kapt commonDependecnies.daggerCompiler
 
     //  Network
-    api dataDependencies.gson
-    api dataDependencies.okHttp
-    api dataDependencies.retrofit
-    api dataDependencies.rxJavaAdapter
-    api dataDependencies.gsonConverter
-    api dataDependencies.loggingInterceptor
+    implementation dataDependencies.gson
+    implementation dataDependencies.okHttp
+    implementation dataDependencies.retrofit
+    implementation dataDependencies.rxJavaAdapter
+    implementation dataDependencies.gsonConverter
+    implementation dataDependencies.loggingInterceptor
     implementation dataDependencies.clientDiscogs
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

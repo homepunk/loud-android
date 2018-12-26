@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.common.dagger
+package homepunk.github.com.data.common.dagger
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -19,7 +19,7 @@ import javax.inject.Singleton
 @Module
 class DataModule {
     @Provides
-    @Singleton
+    @DataScope
     fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .addInterceptor {
@@ -37,11 +37,11 @@ class DataModule {
             .build()
 
     @Provides
-    @Singleton
+    @DataScope
     fun provideGson() = GsonBuilder().setLenient().create()
 
     @Provides
-    @Singleton
+    @DataScope
     fun provideDiscogsApi(client: OkHttpClient, gson: Gson): DiscogsApi = Retrofit.Builder()
             .baseUrl(Constant.BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

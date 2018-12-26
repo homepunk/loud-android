@@ -2,8 +2,8 @@ package homepunk.github.com.presentation
 
 import android.app.Application
 import homepunk.github.com.presentation.common.dagger.AppModule
+import homepunk.github.com.data.common.dagger.DataModule
 import homepunk.github.com.presentation.common.dagger.DaggerAppComponent
-import homepunk.github.com.presentation.common.dagger.DataModule
 
 class VUApplication : Application() {
     lateinit var appComponent: DaggerAppComponent
@@ -13,8 +13,7 @@ class VUApplication : Application() {
         appComponent = DaggerAppComponent
                 .builder()
                 .appModule(AppModule(this))
-                .dataModule(DataModule())
                 .build() as DaggerAppComponent
-        appComponent.inject(this)
+        appComponent.newDataComponent(DataModule())
     }
 }
