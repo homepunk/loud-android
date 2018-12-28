@@ -19,7 +19,7 @@ class DiscogsDataRepository @Inject constructor(private var discogsApi: DiscogsA
                 Constant.CURRENT_TOKEN)
     }
 
-    fun getReleaseList() {
+    override fun getReleaseList() {
         discogsApi.getReleaseList()
                 .subscribeOn(Schedulers.io())
                 .subscribe({}, Throwable::printStackTrace)

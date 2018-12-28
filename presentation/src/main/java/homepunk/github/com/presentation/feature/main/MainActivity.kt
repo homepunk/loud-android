@@ -1,12 +1,12 @@
 package homepunk.github.com.presentation.feature.main;
 
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.view.ViewPager
 import android.view.View
 import android.widget.LinearLayout
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.base.BaseBindingActivity
-import homepunk.github.com.presentation.common.wrapper.BottomSheetCallbackWrapper
+import homepunk.github.com.presentation.core.base.BaseBindingActivity
+import homepunk.github.com.presentation.core.wrapper.BottomSheetCallbackWrapper
 import homepunk.github.com.presentation.databinding.ActivityMainBinding
 import homepunk.github.com.presentation.feature.adapter.ViewPagerAdapter
 import homepunk.github.com.presentation.feature.main.home.HomeFragment
@@ -62,7 +62,6 @@ class MainActivity : BaseBindingActivity<MainActivityViewModel, ActivityMainBind
                     navigation.onPageScrollStateChanged(state)
                 }
             })
-            navigation.setViewPager(viewPager)
         }
     }
 }

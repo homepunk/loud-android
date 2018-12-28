@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -27,13 +26,9 @@ android {
 }
 
 dependencies {
-    def dataDependencies = rootProject.ext.dataDependencies;
-    def commonDependecnies = rootProject.ext.commonDependecnies
+    def dataDependencies = rootProject.ext.dataDependencies
 
-    implementation project(path: ':common')
-
-    kapt commonDependecnies.daggerProcessor
-    kapt commonDependecnies.daggerCompiler
+    implementation project(path: ':core')
 
     //  Network
     implementation dataDependencies.gson
@@ -43,8 +38,4 @@ dependencies {
     implementation dataDependencies.gsonConverter
     implementation dataDependencies.loggingInterceptor
     implementation dataDependencies.clientDiscogs
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-}
-repositories {
-    mavenCentral()
 }

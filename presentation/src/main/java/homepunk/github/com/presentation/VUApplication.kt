@@ -1,19 +1,34 @@
 package homepunk.github.com.presentation
 
+import android.app.Activity
 import android.app.Application
-import homepunk.github.com.presentation.common.dagger.AppModule
-import homepunk.github.com.data.common.dagger.DataModule
-import homepunk.github.com.presentation.common.dagger.DaggerAppComponent
+import androidx.fragment.app.Fragment
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
+import dagger.android.support.HasSupportFragmentInjector
+import homepunk.github.com.presentation.core.dagger.component.DaggerAppComponent
+import timber.log.Timber
+import javax.inject.Inject
 
-class VUApplication : Application() {
-    lateinit var appComponent: DaggerAppComponent
+class VUApplication : Application(), HasSupportFragmentInjector, HasActivityInjector {
+    @Inject
+    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+    @Inject
+    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
         super.onCreate()
-        appComponent = DaggerAppComponent
+        Timber.plant()
+
+        DaggerAppComponent
                 .builder()
-                .appModule(AppModule(this))
-                .build() as DaggerAppComponent
-        appComponent.newDataComponent(DataModule())
+                .application(this)
+                .build()
+                .inject(this)
     }
+
+    override fun supportFragmentInjector() = fragmentInjector
+
+    override fun activityInjector() = activityInjector
+
 }

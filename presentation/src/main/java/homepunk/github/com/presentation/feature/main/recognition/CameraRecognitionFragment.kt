@@ -8,10 +8,12 @@ import android.os.Handler
 import android.os.HandlerThread
 import android.util.Size
 import android.util.SparseIntArray
-import android.view.*
+import android.view.Surface
+import android.view.SurfaceHolder
+import android.view.SurfaceView
 import com.tbruyelle.rxpermissions2.RxPermissions
 import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.base.BaseFragment
+import homepunk.github.com.presentation.core.base.BaseFragment
 import homepunk.github.com.presentation.databinding.FragmentCameraRecognitionBinding
 import timber.log.Timber
 import java.util.*
@@ -40,10 +42,10 @@ class CameraRecognitionFragment : BaseFragment<CameraRecognitionFragmentViewMode
 
     override fun createViewModel() = CameraRecognitionFragmentViewModel(context!!)
 
-    override fun onPreInflate() {
+//    fun onPreInflate() {
 //        activity!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
 //        activity!!.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-    }
+//    }
 
     override fun init() {
         orientations.append(Surface.ROTATION_0, 0)
@@ -52,10 +54,6 @@ class CameraRecognitionFragment : BaseFragment<CameraRecognitionFragmentViewMode
         orientations.append(Surface.ROTATION_270, 270)
 
         rxPermissions = RxPermissions(activity!!)
-    }
-
-    override fun onRestart() {
-
     }
 
     @SuppressLint("CheckResult")

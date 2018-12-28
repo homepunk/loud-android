@@ -1,10 +1,10 @@
-package homepunk.github.com.presentation.base
+package homepunk.github.com.presentation.core.base
 
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 
 
 abstract class BaseBindingActivity<VM : BaseViweModel, BINDING : ViewDataBinding> : AppCompatActivity(){

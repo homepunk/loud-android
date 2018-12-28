@@ -25,23 +25,26 @@ android {
 }
 
 dependencies {
-    def commonDependecnies = rootProject.ext.commonDependecnies
+    def coreDependencies = rootProject.ext.coreDependencies
+    def kotlinDependencies = rootProject.ext.kotlinDependencies
 
-    api commonDependecnies.daggerAndroid
-    api commonDependecnies.daggerSupport // if you use the support libraries
+    // Kotlin
+    api kotlinDependencies.kotlin
+    api kotlinDependencies.kotlinReflect
 
-    //  Logging
-    api commonDependecnies.timber
+    // Dagger 2
+    api coreDependencies.dagger
 
-    //  Rx
-    api commonDependecnies.rxJava
-    api commonDependecnies.rxAndroid
+    // Logging
+    api coreDependencies.timber
+
+    // Rx
+    api coreDependencies.rxJava
+    api coreDependencies.rxAndroid
 
     api fileTree(dir: 'libs', include: ['*.jar'])
     api 'com.android.support:appcompat-v7:28.0.0'
     testApi 'junit:junit:4.12'
     androidTestApi 'com.android.support.test:runner:1.0.2'
     androidTestApi 'com.android.support.test.espresso:espresso-core:3.0.2'
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }

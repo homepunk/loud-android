@@ -1,7 +1,7 @@
-package homepunk.github.com.presentation.base
+package homepunk.github.com.presentation.core.base
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 abstract class BaseActivity<VM: BaseViweModel> : AppCompatActivity() {
     abstract fun getLayoutId(): Int

@@ -1,7 +1,7 @@
-package homepunk.github.com.presentation.common.wrapper
+package homepunk.github.com.presentation.core.wrapper
 
-import android.support.design.widget.BottomSheetBehavior
 import android.view.View
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 open class BottomSheetCallbackWrapper : BottomSheetBehavior.BottomSheetCallback() {
     override fun onSlide(bottomSheet: View, slideOffset: Float) {

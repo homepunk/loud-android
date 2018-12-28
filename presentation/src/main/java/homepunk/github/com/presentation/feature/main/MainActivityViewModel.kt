@@ -1,7 +1,7 @@
 package homepunk.github.com.presentation.feature.main
 
 import android.content.Context
-import homepunk.github.com.presentation.base.BaseViweModel
+import homepunk.github.com.presentation.core.base.BaseViweModel
 
 class MainActivityViewModel(mContext: Context) : BaseViweModel(mContext) {
 

@@ -10,7 +10,7 @@
         android:layout_height="230dp"
         android:background="@android:color/transparent"
         app:behavior_peekHeight="52dp"
-        app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+        app:layout_behavior="@string/bottom_sheet_behavior">
 
         <FrameLayout
             android:layout_width="match_parent"
