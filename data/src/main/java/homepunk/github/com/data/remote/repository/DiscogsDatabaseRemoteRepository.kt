@@ -1,4 +1,4 @@
-package homepunk.github.com.data.repository.remote
+package homepunk.github.com.data.remote.repository
 
 import homepunk.github.com.data.remote.DiscogsApi
 import homepunk.github.com.domain.repository.DiscogsDatabaseRepository
