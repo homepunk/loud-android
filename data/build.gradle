@@ -29,6 +29,7 @@ dependencies {
     def dataDependencies = rootProject.ext.dataDependencies
 
     implementation project(path: ':core')
+    implementation project(path: ':domain')
 
     //  Network
     implementation dataDependencies.gson

@@ -40,16 +40,13 @@ android {
     }
 }
 
-kapt {
-    generateStubs = true
-}
-
-
 dependencies {
-    def presentationDependencies = rootProject.ext.presentationXDependencies
+    def presentationDependencies = rootProject.ext.presentationDependencies
+    def androidX = rootProject.ext.androidXDependencies
 
     implementation project(path: ':core')
     implementation project(path: ':data')
+    implementation project(path: ':domain')
 
     // Dagger 2
     kapt presentationDependencies.daggerCompiler
@@ -58,22 +55,23 @@ dependencies {
     implementation presentationDependencies.daggerSupport // if you use the support libraries
     kapt presentationDependencies.daggerProcessor
 
-    // ViewModel & LiveData
-    implementation presentationDependencies.lifecycleExtensions
-
     // Rx Permissions
+    implementation presentationDependencies.rxAndroid
     implementation presentationDependencies.rxPermission
-
-    // Native UI
-    implementation presentationDependencies.design
-    implementation presentationDependencies.appCompat
-
-    implementation presentationDependencies.cardView
-    implementation presentationDependencies.gridLayout
-    implementation presentationDependencies.recyclerView
-    implementation presentationDependencies.constraintLayout
 
     // 3d party UI
     implementation presentationDependencies.circularImageView
     implementation presentationDependencies.navigationTabStrip
+
+    // Native UI
+    implementation androidX.design
+    implementation androidX.appCompat
+
+    implementation androidX.cardView
+    implementation androidX.gridLayout
+    implementation androidX.recyclerView
+    implementation androidX.constraintLayout
+
+    // ViewModel & LiveData
+    implementation androidX.lifecycleExtensions
 }

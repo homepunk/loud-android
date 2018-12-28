@@ -16,6 +16,6 @@ class HomeFragment : BaseFragment<HomeFragmentViewModel, FragmentHomeBinding>(){
     override fun getLayoutResId() = R.layout.fragment_home
 
     override fun init() {
-        mViewModel.getReleaseList()
+        mViewModel.getLatestReleases()
     }
 }
