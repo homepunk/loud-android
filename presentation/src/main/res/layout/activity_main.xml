@@ -14,7 +14,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
             <include
                 android:id="@+id/toolbar"
                 layout="@layout/layout_toolbar"
@@ -32,6 +31,8 @@
                 app:nts_color="@color/colorAccent"
                 app:nts_corners_radius="8dp"
                 app:nts_factor="3.5"
+                android:layout_marginStart="@dimen/margin_big_20dp"
+                android:layout_marginEnd="@dimen/margin_big_20dp"
                 app:nts_gravity="bottom"
                 app:nts_inactive_color="@color/grey"
                 app:nts_size="14sp"

@@ -4,4 +4,13 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="bottom_sheet_corner_radius">8dp</dimen>
     <dimen name="bottom_sheet_top_padding">8dp</dimen>
+    <dimen name="radius_default_card">8dp</dimen>
+    <dimen name="width_card_default">180dp</dimen>
+    <dimen name="height_card_default">180dp</dimen>
+    <dimen name="margin_default_10dp">10dp</dimen>
+    <dimen name="margin_big_20dp">20dp</dimen>
+    <dimen name="width_divider">4dp</dimen>
+    <dimen name="height_divider">20dp</dimen>
+    <dimen name="margin_top_divider">16dp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
 </resources>

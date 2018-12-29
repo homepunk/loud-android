@@ -60,6 +60,7 @@ dependencies {
     implementation presentationDependencies.rxPermission
 
     // 3d party UI
+    implementation presentationDependencies.picasso
     implementation presentationDependencies.circularImageView
     implementation presentationDependencies.navigationTabStrip
 

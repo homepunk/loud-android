@@ -8,7 +8,7 @@ import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.core.base.BaseBindingActivity
 import homepunk.github.com.presentation.core.wrapper.BottomSheetCallbackWrapper
 import homepunk.github.com.presentation.databinding.ActivityMainBinding
-import homepunk.github.com.presentation.feature.adapter.ViewPagerAdapter
+import homepunk.github.com.presentation.feature.adapter.pager.ViewPagerAdapter
 import homepunk.github.com.presentation.feature.main.home.HomeFragment
 import homepunk.github.com.presentation.feature.main.recognition.CameraRecognitionFragment
 
@@ -62,6 +62,7 @@ class MainActivity : BaseBindingActivity<MainActivityViewModel, ActivityMainBind
                     navigation.onPageScrollStateChanged(state)
                 }
             })
+            viewPager.currentItem = 0
         }
     }
 }

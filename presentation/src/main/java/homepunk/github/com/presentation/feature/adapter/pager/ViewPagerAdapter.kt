@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.feature.adapter
+package homepunk.github.com.presentation.feature.adapter.pager
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

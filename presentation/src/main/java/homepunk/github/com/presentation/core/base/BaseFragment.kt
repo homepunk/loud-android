@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.DimenRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import dagger.android.support.AndroidSupportInjection
+import homepunk.github.com.presentation.R
 
 abstract class BaseFragment<VM : BaseViweModel, BINDING : ViewDataBinding> : Fragment() {
     abstract fun getLayoutResId(): Int
@@ -36,4 +38,6 @@ abstract class BaseFragment<VM : BaseViweModel, BINDING : ViewDataBinding> : Fra
     override fun onResume() {
         super.onResume()
     }
+
+    fun getDimen(@DimenRes dimenId: Int) = resources.getDimension(dimenId)
 }
