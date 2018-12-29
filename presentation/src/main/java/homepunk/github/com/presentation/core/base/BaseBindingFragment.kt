@@ -9,17 +9,20 @@ import androidx.annotation.DimenRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
-import homepunk.github.com.presentation.R
+import javax.inject.Inject
 
-abstract class BaseFragment<VM : BaseViweModel, BINDING : ViewDataBinding> : Fragment() {
+abstract class BaseBindingFragment<BINDING : ViewDataBinding> : Fragment() {
     abstract fun getLayoutResId(): Int
-
-    abstract fun createViewModel(): VM
-
     abstract fun init()
+    abstract fun initViewModels()
 
-    lateinit var mViewModel: VM
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
     lateinit var mDataBinding: BINDING
 
     override fun onAttach(context: Context?) {
@@ -30,7 +33,7 @@ abstract class BaseFragment<VM : BaseViweModel, BINDING : ViewDataBinding> : Fra
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         mDataBinding = DataBindingUtil.inflate(inflater, getLayoutResId(), container, false)
-        mViewModel = createViewModel()
+        initViewModels()
         init()
         return mDataBinding.root
     }
@@ -38,6 +41,8 @@ abstract class BaseFragment<VM : BaseViweModel, BINDING : ViewDataBinding> : Fra
     override fun onResume() {
         super.onResume()
     }
+
+    fun <T : ViewModel> getViewModel(clazz: Class<T>)  = ViewModelProviders.of(this, viewModelFactory)[clazz]
 
     fun getDimen(@DimenRes dimenId: Int) = resources.getDimension(dimenId)
 }

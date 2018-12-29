@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="sectionTitle"
+            type="String"/>
+    </data>
+
     <LinearLayout
         android:paddingTop="@dimen/margin_top_divider"
         android:paddingStart="@dimen/margin_big_20dp"
@@ -27,7 +33,8 @@
             android:lineSpacingExtra="1sp"
             android:textColor="@color/text"
             android:textSize="@dimen/text_size_large"
-            android:text="Latet Releases" />
+            android:text="@{sectionTitle}"
+            tools:text="Latet Releases" />
     </LinearLayout>
 
 </layout>

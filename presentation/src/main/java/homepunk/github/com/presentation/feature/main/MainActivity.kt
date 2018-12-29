@@ -13,13 +13,17 @@ import homepunk.github.com.presentation.feature.main.home.HomeFragment
 import homepunk.github.com.presentation.feature.main.recognition.CameraRecognitionFragment
 
 
-class MainActivity : BaseBindingActivity<MainActivityViewModel, ActivityMainBinding>() {
+class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
+    private lateinit var mMainViewModel: MainActivityViewModel
+
     private lateinit var homeFragment: HomeFragment
     private lateinit var cameraFragment: CameraRecognitionFragment
 
     override fun getLayoutId() = R.layout.activity_main
 
-    override fun createViewModel() = MainActivityViewModel(this)
+    override fun initViewModels() {
+        mMainViewModel = MainActivityViewModel(this)
+    }
 
     override fun init() {
         setUpViewPager()

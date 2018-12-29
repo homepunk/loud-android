@@ -8,20 +8,8 @@
         android:background="@color/background">
 
         <include
-            android:id="@+id/section_divider"
-            layout="@layout/item_section_divider" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_latest_releases"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/height_card_default"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/section_divider"
-            tools:ignore="RtlSymmetry"
-            tools:listItem="@layout/list_item_latest_release" />
+            android:id="@+id/latest_release_section"
+            layout="@layout/layout_section_square_horizontal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

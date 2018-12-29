@@ -13,12 +13,13 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import com.tbruyelle.rxpermissions2.RxPermissions
 import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.core.base.BaseFragment
+import homepunk.github.com.presentation.core.base.BaseBindingFragment
 import homepunk.github.com.presentation.databinding.FragmentCameraRecognitionBinding
 import timber.log.Timber
 import java.util.*
 
-class CameraRecognitionFragment : BaseFragment<CameraRecognitionFragmentViewModel, FragmentCameraRecognitionBinding>() {
+class CameraRecognitionFragment : BaseBindingFragment<FragmentCameraRecognitionBinding>() {
+
     private val orientations = SparseIntArray()
     private var cameraId: String? = null
 
@@ -40,12 +41,15 @@ class CameraRecognitionFragment : BaseFragment<CameraRecognitionFragmentViewMode
 
     override fun getLayoutResId() = R.layout.fragment_camera_recognition
 
-    override fun createViewModel() = CameraRecognitionFragmentViewModel(context!!)
 
 //    fun onPreInflate() {
 //        activity!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
 //        activity!!.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 //    }
+
+    override fun initViewModels() {
+        CameraRecognitionFragmentViewModel(context!!)
+    }
 
     override fun init() {
         orientations.append(Surface.ROTATION_0, 0)
