@@ -15,8 +15,7 @@
 
         <include
             android:id="@+id/section_divider"
-            layout="@layout/item_section_divider"
-            app:sectionTitle="@{@string/title_latest_releases}"/>
+            layout="@layout/item_section_divider"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/section_recycler"

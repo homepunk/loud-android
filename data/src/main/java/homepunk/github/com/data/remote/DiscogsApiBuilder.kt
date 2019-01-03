@@ -2,13 +2,14 @@ package homepunk.github.com.data.remote
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import homepunk.github.com.data.Constant
+import homepunk.github.com.data.constant.Constant
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+
 
 /**Created by Homepunk on 27.12.2018. **/
 class DiscogsApiBuilder {
@@ -19,8 +20,8 @@ class DiscogsApiBuilder {
             .addInterceptor {
                 val original = it.request()
                 val request = original.newBuilder()
-                        .header("User-Agent", Constant.USER_AGENT)
-                        .header("Authorization", "Discogs token=%s".format(Constant.CURRENT_TOKEN))
+                        .header("User-Agent", Constant.DISCOGS.USER_AGENT)
+                        .header("Authorization", "Discogs token=%s".format(Constant.DISCOGS.CURRENT_TOKEN))
                         .method(original.method(), original.body())
                         .build()
                 it.proceed(request)
@@ -33,7 +34,7 @@ class DiscogsApiBuilder {
     private fun createGson() = GsonBuilder().setLenient().create()
 
     private fun createDiscogsApi(client: OkHttpClient, gson: Gson): DiscogsApi = Retrofit.Builder()
-            .baseUrl(Constant.BASE_URL)
+            .baseUrl(Constant.DISCOGS.BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)

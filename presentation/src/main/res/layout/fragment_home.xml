@@ -7,9 +7,24 @@
         android:layout_height="match_parent"
         android:background="@color/background">
 
-        <include
-            android:id="@+id/latest_release_section"
-            layout="@layout/layout_section_square_horizontal" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:id="@+id/section_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="120dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/section_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listItem="@layout/layout_section_square_horizontal"/>
+
+            </LinearLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

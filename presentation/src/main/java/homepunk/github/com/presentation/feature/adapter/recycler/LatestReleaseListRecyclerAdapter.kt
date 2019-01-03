@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import homepunk.github.com.domain.model.search.SearchResult
+import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.databinding.ListItemLatestReleaseBinding
 import homepunk.github.com.presentation.feature.adapter.recycler.LatestReleaseListRecyclerAdapter.ViewHolder
 
@@ -31,6 +32,7 @@ class LatestReleaseListRecyclerAdapter : RecyclerView.Adapter<ViewHolder>() {
                 title.text = item.title
                 Picasso.get()
                         .load(item.thumb)
+                        .error(R.drawable.ic_image_black_24dp)
                         .into(thumb)
             }
         }

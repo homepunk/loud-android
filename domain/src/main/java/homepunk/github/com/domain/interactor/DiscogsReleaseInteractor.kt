@@ -16,4 +16,12 @@ class DiscogsReleaseInteractor @Inject constructor(discogsDatabaseRepository: Di
         return discogsDatabaseRepository.search(paramsMap)
                 .flatMapObservable { Observable.fromIterable(it) }
     }
+
+    fun getLatestGenreList(genreType: String) : Observable<SearchResult> {
+        val paramsMap = mutableMapOf<String, String>()
+        paramsMap[SEARCH_KEY_GENRE] = genreType
+        paramsMap[SEARCH_KEY_YEAR] = "2018"
+        return discogsDatabaseRepository.search(paramsMap)
+                .flatMapObservable { Observable.fromIterable(it) }
+    }
 }

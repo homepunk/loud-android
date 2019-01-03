@@ -66,7 +66,7 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
                     navigation.onPageScrollStateChanged(state)
                 }
             })
-            viewPager.currentItem = 0
+            viewPager.adapter = adapter
         }
     }
 }
