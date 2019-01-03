@@ -11,6 +11,7 @@ import homepunk.github.com.presentation.util.decoration.MarginItemDecoration
 import timber.log.Timber
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import homepunk.github.com.data.constant.Constant
 
 
 class HomeFragment : BaseBindingFragment<FragmentHomeBinding>() {
@@ -29,17 +30,21 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>() {
         latestReleaseViewModel.fetchAllLatest()
     }
 
-    fun addSection(title: String, rvAdapter: LatestReleaseListRecyclerAdapter) {
+    fun addSection(title: String, type: String, rvAdapter: LatestReleaseListRecyclerAdapter) {
         mDataBinding.run {
-            val binding = DataBindingUtil.inflate<LayoutSectionSquareHorizontalBinding>(
-                    layoutInflater,
-                    R.layout.layout_section_square_horizontal,
-                    sectionContainer, true)
+            val binding = DataBindingUtil.inflate<LayoutSectionSquareHorizontalBinding>(layoutInflater, R.layout.layout_section_square_horizontal,
+                    sectionContainer, false)
             binding.sectionDivider.sectionTitle = title
             binding.sectionRecycler.adapter = rvAdapter
             binding.sectionRecycler.addItemDecoration(MarginItemDecoration(
                     getDimen(R.dimen.margin_big_20dp).toInt(),
                     getDimen(R.dimen.margin_default_10dp).toInt()))
+            if (type == Constant.DISCOGS.LATEST_RELEASE_TYPE_RELEASE) {
+                sectionContainer.addView(binding.root, 0)
+            } else {
+                sectionContainer.addView(binding.root)
+            }
+
         }
     }
 }

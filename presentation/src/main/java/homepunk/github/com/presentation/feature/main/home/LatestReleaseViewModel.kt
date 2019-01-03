@@ -32,10 +32,10 @@ class LatestReleaseViewModel @Inject constructor(mContext: Context)
             }
         }
 
-        sectionList.forEach {pair ->
+        sectionList.forEach { pair ->
             pair.second.observeOn(AndroidSchedulers.mainThread())
                     .toList()
-                    .filter {it.isNotEmpty() }
+                    .filter { it.isNotEmpty() }
                     .doOnError { it.printStackTrace() }
                     .subscribe { releaseList ->
                         getView()?.run {
@@ -43,7 +43,7 @@ class LatestReleaseViewModel @Inject constructor(mContext: Context)
                                 val adapter = LatestReleaseListRecyclerAdapter()
                                 latestReleaseRvAdapterMap[pair.first.id] = adapter
                                 adapter.items = releaseList
-                                addSection(pair.first.title, adapter)
+                                addSection(pair.first.title, pair.first.type, adapter)
                             }
                         }
                     }
