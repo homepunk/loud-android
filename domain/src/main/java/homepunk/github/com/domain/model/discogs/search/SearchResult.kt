@@ -1,4 +1,4 @@
-package homepunk.github.com.domain.model.search
+package homepunk.github.com.domain.model.discogs.search
 
 class SearchResult {
     var style: List<String>? = null

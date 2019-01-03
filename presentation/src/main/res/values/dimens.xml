@@ -13,4 +13,5 @@
     <dimen name="height_divider">20dp</dimen>
     <dimen name="margin_top_divider">16dp</dimen>
     <dimen name="text_size_large">18sp</dimen>
+    <dimen name="height_event_card_default">42dp</dimen>
 </resources>

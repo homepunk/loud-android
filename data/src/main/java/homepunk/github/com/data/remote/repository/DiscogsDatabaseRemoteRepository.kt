@@ -1,9 +1,7 @@
 package homepunk.github.com.data.remote.repository
 
 import homepunk.github.com.data.remote.DiscogsApi
-import homepunk.github.com.domain.model.search.SearchResult
 import homepunk.github.com.domain.repository.DiscogsDatabaseRepository
-import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 

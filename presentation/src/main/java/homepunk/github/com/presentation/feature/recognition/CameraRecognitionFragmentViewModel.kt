@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.feature.main.recognition
+package homepunk.github.com.presentation.feature.recognition
 
 import android.content.Context
 import homepunk.github.com.presentation.core.base.BaseViewModel

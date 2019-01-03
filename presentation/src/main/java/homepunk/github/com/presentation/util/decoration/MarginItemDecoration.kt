@@ -5,6 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 class MarginItemDecoration(private val startLeft: Int,
+                           private val startTop: Int,
                            private val left: Int,
                            private val right: Int = 0,
                            private val top: Int = 0,
@@ -17,8 +18,11 @@ class MarginItemDecoration(private val startLeft: Int,
                 startLeft else
                 this@MarginItemDecoration.left
 
+            top = if (parent.getChildAdapterPosition(view) == 0)
+                startTop else
+                this@MarginItemDecoration.top
+
             right = this@MarginItemDecoration.right
-            top = this@MarginItemDecoration.top
             bottom = this@MarginItemDecoration.bottom
         }
     }

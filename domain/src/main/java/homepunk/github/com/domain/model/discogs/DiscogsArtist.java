@@ -1,4 +1,4 @@
-package homepunk.github.com.domain.model;
+package homepunk.github.com.domain.model.discogs;
 
 public class DiscogsArtist {
     private String anv;

@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.feature.main.recognition
+package homepunk.github.com.presentation.feature.recognition
 
 import android.annotation.SuppressLint
 import android.hardware.camera2.*

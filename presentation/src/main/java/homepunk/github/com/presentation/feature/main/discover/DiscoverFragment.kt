@@ -1,33 +1,31 @@
-package homepunk.github.com.presentation.feature.main.home
+package homepunk.github.com.presentation.feature.main.discover
 
 import android.annotation.SuppressLint
-import androidx.recyclerview.widget.RecyclerView
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.core.base.BaseBindingFragment
-import homepunk.github.com.presentation.databinding.FragmentHomeBinding
 import homepunk.github.com.presentation.databinding.LayoutSectionSquareHorizontalBinding
 import homepunk.github.com.presentation.feature.adapter.recycler.LatestReleaseListRecyclerAdapter
 import homepunk.github.com.presentation.util.decoration.MarginItemDecoration
 import timber.log.Timber
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import homepunk.github.com.data.constant.Constant
+import homepunk.github.com.presentation.databinding.FragmentDiscoverBinding
 
 
-class HomeFragment : BaseBindingFragment<FragmentHomeBinding>() {
-    private lateinit var latestReleaseViewModel: LatestReleaseViewModel
+class DiscoverFragment : BaseBindingFragment<FragmentDiscoverBinding>() {
+    private lateinit var discoverLatestViewModel: DiscoverLatestViewModel
     internal val latestReleaseRvAdapterMap = mutableMapOf<Int, LatestReleaseListRecyclerAdapter>()
 
-    override fun getLayoutResId() = R.layout.fragment_home
+    override fun getLayoutResId() = R.layout.fragment_discover
 
     override fun initViewModels() {
-        latestReleaseViewModel = getViewModel(LatestReleaseViewModel::class.java)
-        latestReleaseViewModel.bind(this)
+        discoverLatestViewModel = getViewModel(DiscoverLatestViewModel::class.java)
+        discoverLatestViewModel.bind(this)
     }
 
     @SuppressLint("CheckResult")
     override fun init() {
-        latestReleaseViewModel.fetchAllLatest()
+        discoverLatestViewModel.fetchAllLatest()
     }
 
     fun addSection(title: String, type: String, rvAdapter: LatestReleaseListRecyclerAdapter) {
@@ -38,13 +36,13 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>() {
             binding.sectionRecycler.adapter = rvAdapter
             binding.sectionRecycler.addItemDecoration(MarginItemDecoration(
                     getDimen(R.dimen.margin_big_20dp).toInt(),
+                    0,
                     getDimen(R.dimen.margin_default_10dp).toInt()))
             if (type == Constant.DISCOGS.LATEST_RELEASE_TYPE_RELEASE) {
                 sectionContainer.addView(binding.root, 0)
             } else {
                 sectionContainer.addView(binding.root)
             }
-
         }
     }
 }

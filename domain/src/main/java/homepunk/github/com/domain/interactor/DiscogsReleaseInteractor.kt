@@ -1,7 +1,7 @@
 package homepunk.github.com.domain.interactor
 
 import homepunk.github.com.domain.base.BaseDiscogsInteractor
-import homepunk.github.com.domain.model.search.SearchResult
+import homepunk.github.com.domain.model.discogs.search.SearchResult
 import homepunk.github.com.domain.repository.DiscogsDatabaseRepository
 import io.reactivex.Observable
 import javax.inject.Inject

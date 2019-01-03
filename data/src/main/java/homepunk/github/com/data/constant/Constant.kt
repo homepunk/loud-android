@@ -15,4 +15,9 @@ interface Constant {
         val LATEST_RELEASE_GENRE_TYPE_REGGAE = "Reggae"
         val LATEST_RELEASE_GENRE_TYPE_ELECTRONIC = "Electronic"
     }
+
+    object SONGKICK {
+        val BASE_URL = "https://api.songkick.com/api/3.0/"
+        val API_KEY = "rX8RhAq6lkDw5OnK"
+    }
 }

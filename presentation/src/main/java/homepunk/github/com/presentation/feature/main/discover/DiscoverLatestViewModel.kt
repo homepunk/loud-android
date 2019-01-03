@@ -1,22 +1,20 @@
-package homepunk.github.com.presentation.feature.main.home
+package homepunk.github.com.presentation.feature.main.discover
 
 import android.content.Context
 import homepunk.github.com.data.constant.Constant
 import homepunk.github.com.data.constant.DataFactory
 import homepunk.github.com.data.constant.model.LatestReleaseTypeModel
 import homepunk.github.com.domain.interactor.DiscogsReleaseInteractor
-import homepunk.github.com.domain.model.search.SearchResult
+import homepunk.github.com.domain.model.discogs.search.SearchResult
 import homepunk.github.com.presentation.core.base.BaseViewModel
 import homepunk.github.com.presentation.feature.adapter.recycler.LatestReleaseListRecyclerAdapter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.internal.observers.FutureObserver
 import timber.log.Timber
-import java.util.concurrent.Future
 import javax.inject.Inject
 
-class LatestReleaseViewModel @Inject constructor(mContext: Context)
-    : BaseViewModel<HomeFragment>(mContext) {
+class DiscoverLatestViewModel @Inject constructor(mContext: Context)
+    : BaseViewModel<DiscoverFragment>(mContext) {
 
     @Inject
     lateinit var discogsReleaseInteractor: DiscogsReleaseInteractor

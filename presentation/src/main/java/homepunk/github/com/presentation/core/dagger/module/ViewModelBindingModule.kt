@@ -7,7 +7,8 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import homepunk.github.com.presentation.core.dagger.ViewModelFactory
 import homepunk.github.com.presentation.core.dagger.ViewModelKey
-import homepunk.github.com.presentation.feature.main.home.LatestReleaseViewModel
+import homepunk.github.com.presentation.feature.main.discover.DiscoverLatestViewModel
+import homepunk.github.com.presentation.feature.main.event.UpcomingEventsViewModel
 
 /**Created by Homepunk on 27.12.2018. **/
 @Module
@@ -17,6 +18,11 @@ interface ViewModelBindingModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(LatestReleaseViewModel::class )
-    fun bindHomeFragmentViewModel(viewModel: LatestReleaseViewModel): ViewModel
+    @ViewModelKey(DiscoverLatestViewModel::class )
+    fun bindHomeFragmentViewModel(viewModel: DiscoverLatestViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UpcomingEventsViewModel::class )
+    fun bindUpcomingEventsViewModel(viewModel: UpcomingEventsViewModel): ViewModel
 }

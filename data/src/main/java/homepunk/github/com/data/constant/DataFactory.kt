@@ -15,5 +15,7 @@ class DataFactory {
             dataList.add(LatestReleaseTypeModel(4, Constant.DISCOGS.LATEST_RELEASE_TYPE_RELEASE, context.resources.getStringArray(R.array.genres)[4]))
             return dataList
         }
+
+        fun getSongkickArtistThumb(id: String) = "https://images.sk-static.com/images/media/profile_images/artists/$id/huge_avatar"
     }
 }

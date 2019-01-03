@@ -2,8 +2,9 @@ package homepunk.github.com.presentation.core.dagger.module
 
 import dagger.Module
 import dagger.Provides
+import homepunk.github.com.data.remote.ApiClient
 import homepunk.github.com.data.remote.DiscogsApi
-import homepunk.github.com.data.remote.DiscogsApiBuilder
+import homepunk.github.com.data.remote.SongkickApi
 import javax.inject.Singleton
 
 /**Created by Homepunk on 27.12.2018. **/
@@ -11,5 +12,9 @@ import javax.inject.Singleton
 class DataModule {
     @Provides
     @Singleton
-    fun provideDiscogsApi(): DiscogsApi = DiscogsApiBuilder().build()
+    fun provideDiscogsApi(): DiscogsApi = ApiClient.Builder.buildDiscogsApi()
+
+    @Provides
+    @Singleton
+    fun provideSongkickApi(): SongkickApi = ApiClient.Builder.buildSongkickApi()
 }

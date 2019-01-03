@@ -9,14 +9,16 @@ import homepunk.github.com.presentation.core.base.BaseBindingActivity
 import homepunk.github.com.presentation.core.wrapper.BottomSheetCallbackWrapper
 import homepunk.github.com.presentation.databinding.ActivityMainBinding
 import homepunk.github.com.presentation.feature.adapter.pager.ViewPagerAdapter
-import homepunk.github.com.presentation.feature.main.home.HomeFragment
-import homepunk.github.com.presentation.feature.main.recognition.CameraRecognitionFragment
+import homepunk.github.com.presentation.feature.main.discover.DiscoverFragment
+import homepunk.github.com.presentation.feature.main.event.EventFragment
+import homepunk.github.com.presentation.feature.recognition.CameraRecognitionFragment
 
 
 class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
     private lateinit var mMainViewModel: MainActivityViewModel
 
-    private lateinit var homeFragment: HomeFragment
+    private lateinit var discoverFragment: DiscoverFragment
+    private lateinit var eventFragment: EventFragment
     private lateinit var cameraFragment: CameraRecognitionFragment
 
     override fun getLayoutId() = R.layout.activity_main
@@ -44,12 +46,12 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
 
     private fun setUpViewPager() {
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        homeFragment = HomeFragment()
-        val homeFragment2 = HomeFragment()
-        val homeFragment3 = HomeFragment()
+        discoverFragment = DiscoverFragment()
+        eventFragment = EventFragment()
+        val homeFragment3 = DiscoverFragment()
         cameraFragment = CameraRecognitionFragment()
-        adapter.addFragment(homeFragment)
-        adapter.addFragment(homeFragment2)
+        adapter.addFragment(discoverFragment)
+        adapter.addFragment(eventFragment)
         adapter.addFragment(homeFragment3)
         mDataBinding.run {
             viewPager.adapter = adapter
@@ -66,7 +68,6 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
                     navigation.onPageScrollStateChanged(state)
                 }
             })
-            viewPager.adapter = adapter
         }
     }
 }

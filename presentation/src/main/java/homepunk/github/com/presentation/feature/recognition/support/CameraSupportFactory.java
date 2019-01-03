@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.feature.main.recognition.support;
+package homepunk.github.com.presentation.feature.recognition.support;
 
 import android.content.Context;
 import android.os.Build;

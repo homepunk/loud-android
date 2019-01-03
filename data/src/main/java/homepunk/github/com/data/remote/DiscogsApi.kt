@@ -1,6 +1,6 @@
 package homepunk.github.com.data.remote
 
-import homepunk.github.com.data.remote.model.search.DiscogsSearchResponse
+import homepunk.github.com.data.remote.model.discogs.search.DiscogsSearchResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
