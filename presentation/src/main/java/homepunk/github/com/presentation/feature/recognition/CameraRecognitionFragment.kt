@@ -48,7 +48,7 @@ class CameraRecognitionFragment : BaseBindingFragment<FragmentCameraRecognitionB
 //    }
 
     override fun initViewModels() {
-        CameraRecognitionFragmentViewModel(context!!)
+        CameraRecognitionFragmentViewModel()
     }
 
     override fun init() {

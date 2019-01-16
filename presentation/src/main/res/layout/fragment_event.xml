@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="homepunk.github.com.presentation.feature.main.event.upcoming.UpcomingEventListViewModel" />
+    </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:text="@string/app_name"
         android:orientation="vertical">
 
         <include
             android:id="@+id/section_divider"
-            layout="@layout/item_section_divider"/>
+            layout="@layout/item_section_divider"
+            bind:sectionTitle="@{context.getString(viewModel.titleResId)}"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_upcoming_event"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/layout_item_upcoming_event"/>
+            bind:adapter="@{viewModel.adapter}"
+            bind:itemDecoration_left="@{@dimen/margin_big_20dp}"
+            bind:itemDecoration_right="@{@dimen/margin_big_20dp}"
+            bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
+            bind:itemDecoration_top="@{@dimen/margin_default_10dp}"
+            tools:listitem="@layout/layout_item_upcoming_event" />
 
     </LinearLayout>
 </layout>

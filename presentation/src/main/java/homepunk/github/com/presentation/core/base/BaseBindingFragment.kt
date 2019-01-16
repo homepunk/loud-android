@@ -38,10 +38,6 @@ abstract class BaseBindingFragment<BINDING : ViewDataBinding> : Fragment() {
         return mDataBinding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     fun <T : ViewModel> getViewModel(clazz: Class<T>)  = ViewModelProviders.of(this, viewModelFactory)[clazz]
 
     fun getDimen(@DimenRes dimenId: Int) = resources.getDimension(dimenId)

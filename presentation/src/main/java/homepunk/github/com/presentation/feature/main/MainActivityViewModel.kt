@@ -3,6 +3,6 @@ package homepunk.github.com.presentation.feature.main
 import android.content.Context
 import homepunk.github.com.presentation.core.base.BaseViewModel
 
-class MainActivityViewModel(mContext: Context) : BaseViewModel<MainActivity>(mContext) {
+class MainActivityViewModel() : BaseViewModel() {
 
 }

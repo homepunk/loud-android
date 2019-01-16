@@ -5,10 +5,10 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/bottom_menu_container"
         style="@style/CustomBottomSheetDialogTheme"
-        android:paddingTop="44dp"
         android:layout_width="match_parent"
         android:layout_height="230dp"
         android:background="@android:color/transparent"
+        android:paddingTop="44dp"
         app:behavior_peekHeight="52dp"
         app:layout_behavior="@string/bottom_sheet_behavior">
 
@@ -25,17 +25,23 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/card_corners">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:background="@color/background"
                     android:orientation="vertical">
 
-                </LinearLayout>
+                    <include
+                        android:id="@+id/layout_toolbar"
+                        layout="@layout/layout_bottom_menu_toolbar"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="4dp"
+                    android:layout_height="@dimen/hieght_top_divider"
                     android:background="@drawable/line_cornered" />
             </FrameLayout>
 

@@ -1,8 +1,6 @@
 package homepunk.github.com.domain.interactor
 
-import homepunk.github.com.domain.base.BaseDiscogsInteractor
 import homepunk.github.com.domain.base.BaseSongkickInteractor
-import homepunk.github.com.domain.repository.DiscogsDatabaseRepository
 import homepunk.github.com.domain.repository.LocationRepository
 import homepunk.github.com.domain.repository.SongkickEventRepository
 import javax.inject.Inject

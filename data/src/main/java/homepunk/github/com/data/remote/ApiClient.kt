@@ -1,7 +1,5 @@
 package homepunk.github.com.data.remote
 
-import android.os.Build
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import homepunk.github.com.data.constant.Constant
 import okhttp3.OkHttpClient
@@ -26,7 +24,6 @@ class ApiClient {
                             .addInterceptor {
                                 val original = it.request()
                                 val request = original.newBuilder()
-                                        .header("User-Agent", Constant.DISCOGS.USER_AGENT)
                                         .header("Authorization", "Discogs token=%s".format(Constant.DISCOGS.CURRENT_TOKEN))
                                         .method(original.method(), original.body())
                                         .build()

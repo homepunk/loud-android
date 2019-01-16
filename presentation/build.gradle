@@ -21,6 +21,7 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
+
     buildTypes {
         release {
             minifyEnabled false
@@ -38,13 +39,24 @@ android {
     dataBinding {
         enabled = true
     }
+
+    sourceSets {
+        main {
+            res.srcDirs +=
+                    [
+                            'src/main/res/drawables/flags',
+                            'src/main/res/drawables',
+                            'src/main/res'
+                    ]
+        }
+    }
 }
 
 dependencies {
     def presentationDependencies = rootProject.ext.presentationDependencies
     def androidX = rootProject.ext.androidXDependencies
 
-    implementation project(path: ':core')
+    implementation project(path: ':presentation-core')
     implementation project(path: ':data')
     implementation project(path: ':domain')
 

@@ -1,5 +1,6 @@
 package homepunk.github.com.data.remote.repository
 
+import homepunk.github.com.data.constant.Constant
 import homepunk.github.com.data.remote.SongkickApi
 import homepunk.github.com.domain.model.songkick.SongkickLocation
 import homepunk.github.com.domain.repository.LocationRepository
@@ -9,7 +10,7 @@ import javax.inject.Inject
 
 class SongkickLocationDataRepository @Inject constructor(private var songkickApi: SongkickApi) : LocationRepository {
     override fun getSongkickLocation(query: String): Observable<SongkickLocation> =
-            songkickApi.getLocationByQuery(query, "rX8RhAq6lkDw5OnK")
+            songkickApi.getLocationByQuery(query, Constant.SONGKICK.API_KEY)
                     .subscribeOn(Schedulers.io())
                     .doOnError { it.printStackTrace() }
                     .map { it.resultsPage }

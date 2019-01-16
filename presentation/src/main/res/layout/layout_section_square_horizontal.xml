@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="title"
-            type="String"/>
+            type="String" />
+
+        <variable
+            name="viewModel"
+            type="homepunk.github.com.presentation.feature.main.discover.section.DiscoverSectionViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +21,8 @@
 
         <include
             android:id="@+id/section_divider"
-            layout="@layout/item_section_divider"/>
+            layout="@layout/item_section_divider"
+            bind:sectionTitle="@{viewModel.sectionModel.title}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/section_recycler"
@@ -26,8 +33,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/section_divider"
-            tools:ignore="RtlSymmetry"
+            bind:adapter="@{viewModel.adapter}"
+            bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
+            bind:itemDecoration_left="@{@dimen/margin_default_10dp}"
             tools:listItem="@layout/list_item_latest_release" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <homepunk.github.com.presentation.widget.searchview.MaterialSearchToLine
+            android:id="@+id/material_search_to_line"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="16dp"
+            app:breadth="5"
+            app:search_color="@color/text" />
+
+        <com.github.abdularis.civ.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/ic_ua"
+            app:highlightColor="@color/text"
+            app:strokeWidth="2dp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/material_edit_text_line"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="16dp"
+                android:background="@null"
+                android:hint="Search for ..."
+                android:paddingBottom="6dp"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/material_clear_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:layout_gravity="right"
+                android:animateLayoutChanges="true"
+                android:background="@drawable/ic_close_gray"
+                android:visibility="visible" />
+        </FrameLayout>
+    </RelativeLayout>
+</layout>

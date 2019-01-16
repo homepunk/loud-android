@@ -18,6 +18,7 @@ interface Constant {
 
     object SONGKICK {
         val BASE_URL = "https://api.songkick.com/api/3.0/"
-        val API_KEY = "rX8RhAq6lkDw5OnK"
+//        val API_KEY = "rX8RhAq6lkDw5OnK"
+        val API_KEY = "A2lsBUAKcGTUHv7K"
     }
 }

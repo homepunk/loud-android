@@ -1,12 +1,10 @@
 package homepunk.github.com.presentation.core.base
 
-import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
-import java.lang.ref.WeakReference
 
-abstract class BaseViewModel<T>(val mContext: Context) : ViewModel() {
-    private lateinit var weakReference: WeakReference<T>
+abstract class BaseViewModel : ViewModel() {
     var compositeDisposable: CompositeDisposable? = null
 
     init {
@@ -18,21 +16,24 @@ abstract class BaseViewModel<T>(val mContext: Context) : ViewModel() {
 
     }
 
-    fun bind(view: T) {
-        weakReference = WeakReference(view)
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable?.run {
+            if (!isDisposed) {
+                dispose()
+            }
+        }
     }
 
-    fun unbind() {
-        weakReference.clear()
+    fun dLog(message: String) {
+        Log.d(this.javaClass.canonicalName, message)
     }
 
-    open fun isViewExisted(): Boolean {
-        if (weakReference.get() == null)
-            return false
-        return true
+    fun wLog(message: String) {
+        Log.w(this.javaClass.canonicalName, message)
     }
 
-    open fun getView(): T? {
-        return weakReference.get()
+    fun eLog(message: String) {
+        Log.e(this.javaClass.canonicalName, message)
     }
 }
