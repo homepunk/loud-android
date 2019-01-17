@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package homepunk.github.com.presentation.core.ext
 
 import androidx.databinding.BindingAdapter

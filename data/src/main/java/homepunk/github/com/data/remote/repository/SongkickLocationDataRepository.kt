@@ -1,6 +1,6 @@
 package homepunk.github.com.data.remote.repository
 
-import homepunk.github.com.data.constant.Constant
+import homepunk.github.com.data.core.constant.Constant
 import homepunk.github.com.data.remote.SongkickApi
 import homepunk.github.com.domain.model.songkick.SongkickLocation
 import homepunk.github.com.domain.repository.LocationRepository

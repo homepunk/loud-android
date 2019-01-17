@@ -1,7 +1,7 @@
 package homepunk.github.com.data.remote
 
 import com.google.gson.GsonBuilder
-import homepunk.github.com.data.constant.Constant
+import homepunk.github.com.data.core.constant.Constant
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

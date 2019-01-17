@@ -73,6 +73,7 @@ dependencies {
 
     // 3d party UI
     implementation presentationDependencies.picasso
+    implementation presentationDependencies.boomMenu
     implementation presentationDependencies.circularImageView
     implementation presentationDependencies.navigationTabStrip
 

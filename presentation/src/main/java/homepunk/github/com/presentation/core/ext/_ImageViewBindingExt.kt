@@ -8,8 +8,10 @@ import homepunk.github.com.presentation.R
 /**Created by Homepunk on 11.01.2019. **/
 @BindingAdapter("imageUrl")
 fun ImageView.bindImageUrl(imageUrl: String?) {
-    Picasso.get()
-            .load(imageUrl)
-            .error(R.drawable.ic_image_black_24dp)
-            .into(this)
+    if (!imageUrl.isNullOrEmpty()) {
+        Picasso.get()
+                .load(imageUrl)
+                .error(R.drawable.ic_image_black_24dp)
+                .into(this)
+    }
 }

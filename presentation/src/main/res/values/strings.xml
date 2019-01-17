@@ -1,4 +1,25 @@
 <resources>
+    <string-array name="genres">
+        <item>Rap</item>
+        <item>Rock</item>
+        <item>Reggae</item>
+        <item>Electronic</item>
+        <item>Latest Releases</item>
+    </string-array>
+
+    <string-array name="modes">
+        <item>Library</item>
+        <item>Event</item>
+        <item>Gear</item>
+    </string-array>
+
+    <string-array name="menu_title">
+        <item>LIBRARY</item>
+        <item>EVENT</item>
+        <item>GEAR</item>
+        <item>SEARCH</item>
+    </string-array>
+
     <string name="app_name">vinyl-underground</string>
     <string name="title_home">Home</string>
     <string name="title_camera">Camera</string>

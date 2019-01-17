@@ -2,7 +2,7 @@
 <resources>
     <string-array name="titles">
         <item>DISCOVER</item>
-        <item>EVENTS</item>
+        <item>COLLECTION</item>
         <item>MAP</item>
     </string-array>
 </resources>

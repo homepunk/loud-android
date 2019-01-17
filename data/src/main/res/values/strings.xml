@@ -1,11 +1,3 @@
 <resources>
     <string name="app_name">data</string>
-
-    <string-array name="genres">
-        <item>Rap</item>
-        <item>Rock</item>
-        <item>Reggae</item>
-        <item>Electronic</item>
-        <item>Latest Releases</item>
-    </string-array>
 </resources>

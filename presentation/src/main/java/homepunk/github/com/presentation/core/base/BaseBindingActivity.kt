@@ -5,7 +5,9 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
@@ -28,6 +30,8 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : AppCompatActivit
         initViewModels()
         init()
     }
+
+    fun <T : ViewModel> getViewModel(clazz: Class<T>)  = ViewModelProviders.of(this, viewModelFactory)[clazz]
 
     fun dLog(message: String) {
         Log.d(this.javaClass.canonicalName, message)

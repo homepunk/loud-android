@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp">
 
-        <homepunk.github.com.presentation.widget.searchview.MaterialSearchToLine
+        <homepunk.github.com.presentation.feature.widget.searchview.MaterialSearchToLine
             android:id="@+id/material_search_to_line"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
