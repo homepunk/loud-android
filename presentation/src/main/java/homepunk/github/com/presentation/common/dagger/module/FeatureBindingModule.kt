@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import homepunk.github.com.presentation.feature.main.MainActivity
 import homepunk.github.com.presentation.feature.main.discover.DiscoverFragment
-import homepunk.github.com.presentation.feature.main.event.EventFragment
+import homepunk.github.com.presentation.feature.mode.event.EventFragment
 
 /**Created by Homepunk on 27.12.2018. **/
 @Module()

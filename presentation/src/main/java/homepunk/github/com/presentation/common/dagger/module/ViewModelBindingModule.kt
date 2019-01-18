@@ -9,7 +9,7 @@ import homepunk.github.com.presentation.common.dagger.ViewModelFactory
 import homepunk.github.com.presentation.common.dagger.ViewModelKey
 import homepunk.github.com.presentation.feature.main.MainActivityViewModel
 import homepunk.github.com.presentation.feature.main.discover.DiscoverViewModel
-import homepunk.github.com.presentation.feature.main.event.upcoming.UpcomingEventListViewModel
+import homepunk.github.com.presentation.feature.mode.event.upcoming.UpcomingEventListViewModel
 
 /**Created by Homepunk on 27.12.2018. **/
 @Module

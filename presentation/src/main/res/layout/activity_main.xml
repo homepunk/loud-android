@@ -8,10 +8,6 @@
         <variable
             name="viewModel"
             type="homepunk.github.com.presentation.feature.main.MainActivityViewModel" />
-
-        <variable
-            name="countryMenuViewModel"
-            type="homepunk.github.com.presentation.feature.menu.CountryMenuViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -32,7 +28,6 @@
                 android:layout_height="56dp"
                 android:layout_margin="@dimen/margin_big_20dp"
                 app:appModeModel="@{viewModel.currentAppModeModel}"
-                app:countryMenuViewModel="@{countryMenuViewModel}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -68,10 +63,9 @@
                 app:bmb_normalColor="@color/colorAccent"
                 app:layout_constraintBottom_toTopOf="@+id/bottom_nav_layout"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:menuIconPaddingBottom="@{@dimen/margin_default_8dp}"
-                app:menuIconPaddingRight="@{@dimen/margin_default_8dp}"
+                app:menuIconPaddingLeft="@{@dimen/margin_default_8dp}"
                 app:menuIconPaddingTop="@{@dimen/margin_default_8dp}"
-                app:menuList="@{viewModel.appModeModelList}" />
+                app:menuList="@{viewModel.menuList}" />
 
             <LinearLayout
                 android:id="@+id/bottom_nav_layout"

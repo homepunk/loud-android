@@ -8,6 +8,9 @@
     <dimen name="width_card_default">180dp</dimen>
     <dimen name="height_card_default">180dp</dimen>
 
+    <dimen name="margin_small_2dp">2dp</dimen>
+    <dimen name="margin_small_4dp">4dp</dimen>
+    <dimen name="margin_small_6dp">6dp</dimen>
     <dimen name="margin_default_8dp">8dp</dimen>
     <dimen name="margin_default_10dp">10dp</dimen>
     <dimen name="margin_big_16dp">16dp</dimen>

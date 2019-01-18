@@ -20,6 +20,11 @@
         <item>SEARCH</item>
     </string-array>
 
+    <string name="title_menu_library">LIBRARY</string>
+    <string name="title_menu_events">EVENT</string>
+    <string name="title_menu_gear">GEAR</string>
+    <string name="title_menu_settings">SETTINGS</string>
+
     <string name="app_name">vinyl-underground</string>
     <string name="title_home">Home</string>
     <string name="title_camera">Camera</string>

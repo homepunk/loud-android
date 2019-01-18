@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.feature.menu
+package homepunk.github.com.presentation.feature.main.menu
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable

@@ -6,16 +6,12 @@ import homepunk.github.com.presentation.core.adapter.SimpleViewPagerAdapter
 import homepunk.github.com.presentation.core.base.BaseBindingActivity
 import homepunk.github.com.presentation.databinding.ActivityMainBinding
 import homepunk.github.com.presentation.feature.main.discover.DiscoverFragment
-import homepunk.github.com.presentation.feature.main.event.EventFragment
-import homepunk.github.com.presentation.feature.menu.CountryMenuViewModel
+import homepunk.github.com.presentation.feature.mode.event.EventFragment
 import homepunk.github.com.presentation.feature.recognition.CameraRecognitionFragment
-import javax.inject.Inject
 
 
 class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
     private lateinit var mMainViewModel: MainActivityViewModel
-
-    @Inject lateinit var mCountryMenuViewModel: CountryMenuViewModel
 
     private lateinit var discoverFragment: DiscoverFragment
     private lateinit var eventFragment: EventFragment
@@ -29,7 +25,6 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
 
     override fun init() {
         mDataBinding.viewModel = mMainViewModel
-        mDataBinding.countryMenuViewModel = mCountryMenuViewModel
         setUpViewPager()
     }
 
