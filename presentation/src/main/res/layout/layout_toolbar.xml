@@ -27,7 +27,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
-                android:text="@{appModeModel.title}"
+                android:text="@{appModeModel.titleResId}"
                 android:textAllCaps="true"
                 android:textColor="@color/whiteBone"
                 android:textSize="16sp"

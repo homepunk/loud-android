@@ -27,8 +27,13 @@ android {
 
 dependencies {
     def dataDependencies = rootProject.ext.dataDependencies
+    def androidX = rootProject.ext.androidXDependencies
 
     implementation project(path: ':domain')
+
+    // ViewModel & LiveData
+    implementation androidX.lifecycleExtensions
+    implementation androidX.reactiveStreams
 
     //  Network
     implementation dataDependencies.gson

@@ -34,6 +34,7 @@ ext {
             cardView:               "androidx.cardview:cardview:${supportVersionX}",
             gridLayout:             "androidx.gridlayout:gridlayout:${supportVersionX}",
             recyclerView:           "androidx.recyclerview:recyclerview:${supportVersionX}",
+            reactiveStreams:           "android.arch.lifecycle:reactivestreams:1.0.0-beta2",
     ]
 
     androidSupportDependencies = [

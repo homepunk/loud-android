@@ -2,6 +2,7 @@ package homepunk.github.com.presentation.common.data
 
 import android.content.Context
 import homepunk.github.com.data.core.constant.Constant
+import homepunk.github.com.domain.model.AppMode
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.common.model.menu.MenuModel
 import homepunk.github.com.presentation.common.model.mode.AppModeModel
@@ -22,17 +23,17 @@ class AppDataFactory @Inject constructor(val context: Context) {
 
     fun getAppModeModelList(): List<AppModeModel> {
         val dataList = mutableListOf<AppModeModel>()
-        dataList.add(AppModeModel(AppModeModel.Mode.LIBRARY, R.string.title_menu_library, R.color.modeLibraryColor, R.drawable.ic_mode_library))
-        dataList.add(AppModeModel(AppModeModel.Mode.EVENT, R.string.title_menu_events, R.color.modeEventsColor, R.drawable.ic_mode_events))
-        dataList.add(AppModeModel(AppModeModel.Mode.GEAR, R.string.title_menu_gear, R.color.modeGearColor, R.drawable.ic_mode_gear))
+        dataList.add(AppModeModel(AppMode.LIBRARY, context.getString(R.string.title_menu_library), R.color.modeLibraryColor, R.drawable.ic_mode_library))
+        dataList.add(AppModeModel(AppMode.EVENTS, context.getString(R.string.title_menu_events), R.color.modeEventsColor, R.drawable.ic_mode_events))
+        dataList.add(AppModeModel(AppMode.GEAR, context.getString(R.string.title_menu_gear), R.color.modeGearColor, R.drawable.ic_mode_gear))
         return dataList
     }
 
     fun getMenuList(): List<MenuModel> {
         val menuList = mutableListOf<MenuModel>()
-        menuList.add(MenuModel(MenuModel.TYPE.LIBRARY, R.color.modeLibraryColor, R.string.title_menu_library, R.drawable.ic_mode_library))
-        menuList.add(MenuModel(MenuModel.TYPE.EVENTS, R.color.modeEventsColor, R.string.title_menu_events, R.drawable.ic_mode_events))
-        menuList.add(MenuModel(MenuModel.TYPE.GEAR, R.color.modeGearColor, R.string.title_menu_gear, R.drawable.ic_mode_gear))
+        menuList.add(MenuModel(MenuModel.TYPE.LIBRARY, R.color.modeLibraryColor, R.string.title_menu_library, R.drawable.ic_mode_library, AppMode.LIBRARY))
+        menuList.add(MenuModel(MenuModel.TYPE.EVENTS, R.color.modeEventsColor, R.string.title_menu_events, R.drawable.ic_mode_events, AppMode.EVENTS))
+        menuList.add(MenuModel(MenuModel.TYPE.GEAR, R.color.modeGearColor, R.string.title_menu_gear, R.drawable.ic_mode_gear, AppMode.GEAR))
         menuList.add(MenuModel(MenuModel.TYPE.SETTINGS, R.color.menuColorSettings, R.string.title_menu_settings, R.drawable.ic_settings))
         return menuList
     }

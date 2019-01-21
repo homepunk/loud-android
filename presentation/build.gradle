@@ -88,4 +88,5 @@ dependencies {
 
     // ViewModel & LiveData
     implementation androidX.lifecycleExtensions
+    implementation androidX.reactiveStreams
 }

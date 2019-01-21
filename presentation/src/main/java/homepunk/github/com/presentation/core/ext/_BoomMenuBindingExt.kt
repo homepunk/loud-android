@@ -8,6 +8,7 @@ import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum
 import com.nightonke.boommenu.BoomButtons.TextOutsideCircleButton
 import com.nightonke.boommenu.BoomMenuButton
 import com.nightonke.boommenu.ButtonEnum
+import com.nightonke.boommenu.OnBoomListener
 import com.nightonke.boommenu.Piece.PiecePlaceEnum
 import com.nightonke.boommenu.Util
 import homepunk.github.com.presentation.common.model.menu.MenuModel
@@ -53,6 +54,12 @@ fun BoomMenuButton.bindAppModeMenu(menuList: List<MenuModel>, iconPaddingLeft: F
     customButtonPlacePositions.add(PointF(w + buttonHorizontalMargin, -h_0_5 - vm_0_5))
     customButtonPlacePositions.add(PointF(0F, +h_0_5 + vm_0_5))
 }
+
+@BindingAdapter("onBoomListener")
+fun BoomMenuButton.bindOnBoomListener(listener: OnBoomListener) {
+    onBoomListener = listener
+}
+
 
 @BindingAdapter("countryList")
 fun BoomMenuButton.bindCountryList(countryList: List<CountryModel>) {

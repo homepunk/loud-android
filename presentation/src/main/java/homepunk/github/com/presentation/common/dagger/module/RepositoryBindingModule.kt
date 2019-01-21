@@ -2,9 +2,11 @@ package homepunk.github.com.presentation.common.dagger.module
 
 import dagger.Binds
 import dagger.Module
+import homepunk.github.com.data.local.repository.AppModeDataRepository
 import homepunk.github.com.data.remote.repository.DiscogsDatabaseRemoteRepository
 import homepunk.github.com.data.remote.repository.SongkickEventDataRepository
 import homepunk.github.com.data.remote.repository.SongkickLocationDataRepository
+import homepunk.github.com.domain.repository.AppModeRepository
 import homepunk.github.com.domain.repository.DiscogsDatabaseRepository
 import homepunk.github.com.domain.repository.LocationRepository
 import homepunk.github.com.domain.repository.SongkickEventRepository
@@ -20,4 +22,7 @@ interface RepositoryBindingModule {
 
     @Binds
     fun bindLocationRepository(repo: SongkickLocationDataRepository): LocationRepository
+
+    @Binds
+    fun bindAppModeDataRepository(repo: AppModeDataRepository): AppModeRepository
 }

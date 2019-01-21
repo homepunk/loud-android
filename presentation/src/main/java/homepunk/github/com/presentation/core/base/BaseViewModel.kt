@@ -5,10 +5,9 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseViewModel : ViewModel() {
-    var compositeDisposable: CompositeDisposable? = null
+    var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     init {
-        compositeDisposable = CompositeDisposable()
         init()
     }
 
@@ -18,7 +17,7 @@ abstract class BaseViewModel : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        compositeDisposable?.run {
+        compositeDisposable.run {
             if (!isDisposed) {
                 dispose()
             }

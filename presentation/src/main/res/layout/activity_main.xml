@@ -8,6 +8,13 @@
         <variable
             name="viewModel"
             type="homepunk.github.com.presentation.feature.main.MainActivityViewModel" />
+
+        <variable
+            name="modeModel"
+            type="homepunk.github.com.presentation.common.model.mode.AppModeModel" />
+        <variable
+            name="menuViewModel"
+            type="homepunk.github.com.presentation.feature.main.menu.MainMenuViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -27,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_margin="@dimen/margin_big_20dp"
-                app:appModeModel="@{viewModel.currentAppModeModel}"
+                app:appModeModel="@{viewModel.currentAppModeModelLiveData}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -65,7 +72,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:menuIconPaddingLeft="@{@dimen/margin_default_8dp}"
                 app:menuIconPaddingTop="@{@dimen/margin_default_8dp}"
-                app:menuList="@{viewModel.menuList}" />
+                app:onBoomListener="@{menuViewModel.onBoomMenuListener}"
+                app:menuList="@{menuViewModel.menuList}" />
 
             <LinearLayout
                 android:id="@+id/bottom_nav_layout"
