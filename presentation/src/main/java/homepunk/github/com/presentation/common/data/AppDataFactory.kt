@@ -23,9 +23,9 @@ class AppDataFactory @Inject constructor(val context: Context) {
 
     fun getAppModeModelList(): List<AppModeModel> {
         val dataList = mutableListOf<AppModeModel>()
-        dataList.add(AppModeModel(AppMode.LIBRARY, context.getString(R.string.title_menu_library), R.color.modeLibraryColor, R.drawable.ic_mode_library))
-        dataList.add(AppModeModel(AppMode.EVENTS, context.getString(R.string.title_menu_events), R.color.modeEventsColor, R.drawable.ic_mode_events))
-        dataList.add(AppModeModel(AppMode.GEAR, context.getString(R.string.title_menu_gear), R.color.modeGearColor, R.drawable.ic_mode_gear))
+        dataList.add(AppModeModel(AppMode.LIBRARY, context.getString(R.string.title_menu_library), R.color.modeLibraryColor, R.drawable.ic_mode_library, R.style.AppModeLibraryTheme))
+        dataList.add(AppModeModel(AppMode.EVENTS, context.getString(R.string.title_menu_events), R.color.modeEventsColor, R.drawable.ic_mode_events, R.style.AppModeEventTheme))
+        dataList.add(AppModeModel(AppMode.GEAR, context.getString(R.string.title_menu_gear), R.color.modeGearColor, R.drawable.ic_mode_gear, R.style.AppModeGearTheme))
         return dataList
     }
 

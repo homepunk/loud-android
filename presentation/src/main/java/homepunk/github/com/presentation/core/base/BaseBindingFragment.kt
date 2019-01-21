@@ -2,6 +2,7 @@ package homepunk.github.com.presentation.core.base
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,4 +42,16 @@ abstract class BaseBindingFragment<BINDING : ViewDataBinding> : Fragment() {
     fun <T : ViewModel> getViewModel(clazz: Class<T>)  = ViewModelProviders.of(this, viewModelFactory)[clazz]
 
     fun getDimen(@DimenRes dimenId: Int) = resources.getDimension(dimenId)
+
+    fun dLog(message: String) {
+        Log.d(this.javaClass.canonicalName, message)
+    }
+
+    fun wLog(message: String) {
+        Log.w(this.javaClass.canonicalName, message)
+    }
+
+    fun eLog(message: String) {
+        Log.e(this.javaClass.canonicalName, message)
+    }
 }

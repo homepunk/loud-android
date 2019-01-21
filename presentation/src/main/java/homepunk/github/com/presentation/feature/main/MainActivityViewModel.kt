@@ -8,20 +8,22 @@ import homepunk.github.com.presentation.core.base.BaseViewModel
 import javax.inject.Inject
 
 class MainActivityViewModel @Inject constructor() : BaseViewModel() {
-    @Inject
-    lateinit var appDataFactory: AppDataFactory
-    @Inject
-    lateinit var appModeInteractor: AppModeInteractor
+    @Inject lateinit var appDataFactory: AppDataFactory
+    @Inject lateinit var appModeInteractor: AppModeInteractor
+
+    var themeLiveData = MutableLiveData<Int>()
+    var currentTheme: Int? = null
 
     val currentAppModeModelLiveData = MutableLiveData<AppModeModel>()
 
-    fun setUp() {
+    fun setUpAppMode() {
         compositeDisposable.add(appModeInteractor.getCurrentAppMode()
+                .distinctUntilChanged()
                 .map { mode -> appDataFactory.getAppModeModelList().find { it.mode == mode }!! }
                 .doOnError { it.printStackTrace() }
-                .subscribe {
-                    currentAppModeModelLiveData.value = it
-                })
+                .doOnNext { themeLiveData.value = it.themeResId }
+                .doOnNext { currentTheme = it.themeResId }
+                .subscribe { currentAppModeModelLiveData.value = it })
     }
 }
 

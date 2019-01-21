@@ -24,7 +24,12 @@ class DiscoverFragment : BaseBindingFragment<FragmentDiscoverBinding>() {
                 .subscribe(this::addSection)
     }
 
+    override fun onResume() {
+        super.onResume()
+        wLog("onResume")
+    }
     private fun addSection(viewModel: DiscoverSectionViewModel) {
+        wLog("addSection")
         mDataBinding.run {
             val binding = DataBindingUtil.inflate<LayoutSectionSquareHorizontalBinding>(layoutInflater, R.layout.layout_section_square_horizontal,
                     sectionContainer, false)

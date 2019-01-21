@@ -16,6 +16,7 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : AppCompatActivit
     abstract fun getLayoutId(): Int
     abstract fun initViewModels()
     abstract fun init()
+    abstract fun onPreInfalte()
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -24,10 +25,11 @@ abstract class BaseBindingActivity<BINDING : ViewDataBinding> : AppCompatActivit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
+        initViewModels()
+        onPreInfalte()
         super.onCreate(savedInstanceState)
         mDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
 
-        initViewModels()
         init()
     }
 

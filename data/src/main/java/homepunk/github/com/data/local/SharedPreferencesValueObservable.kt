@@ -5,7 +5,7 @@ import io.reactivex.Observable
 import timber.log.Timber
 
 /**Created by Homepunk on 18.01.2019. **/
-class SharedPreferencesObservable<T>(val prefsManager: SharedPreferencesManager, val key: String, val defValue: T) {
+class SharedPreferencesValueObservable<T>(val prefsManager: SharedPreferencesManager, val key: String, val defValue: T) {
     val valueObservable: Observable<T> = Observable.create { emitter ->
         val mListener = SharedPreferences.OnSharedPreferenceChangeListener { prefs, key ->
             Timber.e("onPrefsChanged = $key")

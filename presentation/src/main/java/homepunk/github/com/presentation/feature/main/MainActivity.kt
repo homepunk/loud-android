@@ -1,5 +1,7 @@
 package homepunk.github.com.presentation.feature.main;
 
+import android.content.res.Resources
+import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.core.adapter.SimpleViewPagerAdapter
@@ -13,7 +15,8 @@ import javax.inject.Inject
 
 
 class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
-    @Inject lateinit var mMainMenuViewModel: MainMenuViewModel
+    @Inject
+    lateinit var mMainMenuViewModel: MainMenuViewModel
 
     private lateinit var mMainViewModel: MainActivityViewModel
 
@@ -28,11 +31,35 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>() {
     }
 
     override fun init() {
-        mDataBinding.setLifecycleOwner(this)
+        wLog("init")
         mDataBinding.viewModel = mMainViewModel
         mDataBinding.menuViewModel = mMainMenuViewModel
+    }
 
-        mMainViewModel.setUp()
+    override fun onPreInfalte() {
+        mMainViewModel.setUpAppMode()
+    }
+
+    override fun getTheme(): Resources.Theme {
+        val theme = super.getTheme()
+        mMainViewModel.currentTheme?.run {
+            theme.applyStyle(this, true)
+        }
+        return theme
+    }
+    override fun onResume() {
+        super.onResume()
+        wLog("onResume")
+        mMainViewModel.themeLiveData.observe(this, Observer {
+            wLog("observe $it")
+            try {
+                if (mMainViewModel.currentTheme != it) {
+                    recreate()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        })
         setUpViewPager()
     }
 

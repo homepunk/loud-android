@@ -12,6 +12,7 @@
         <variable
             name="modeModel"
             type="homepunk.github.com.presentation.common.model.mode.AppModeModel" />
+
         <variable
             name="menuViewModel"
             type="homepunk.github.com.presentation.feature.main.menu.MainMenuViewModel" />
@@ -67,7 +68,7 @@
                 android:alpha="0.91"
                 app:bmb_autoHide="true"
                 app:bmb_buttonEnum="textOutsideCircle"
-                app:bmb_normalColor="@color/colorAccent"
+                app:bmb_normalColor="?attr/colorAccent"
                 app:layout_constraintBottom_toTopOf="@+id/bottom_nav_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:menuIconPaddingLeft="@{@dimen/margin_default_8dp}"
