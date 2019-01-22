@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.feature.main.discover
+package homepunk.github.com.presentation.feature.discover.library
 
 import homepunk.github.com.data.core.constant.Constant
 import homepunk.github.com.domain.interactor.DiscogsReleaseInteractor
@@ -11,27 +11,24 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import javax.inject.Inject
 
-class DiscoverViewModel @Inject constructor()
+class LibraryDiscoverViewModel @Inject constructor()
     : BaseViewModel() {
 
-    @Inject
-    lateinit var appDataFactory: AppDataFactory
-
-    @Inject
-    lateinit var discogsReleaseInteractor: DiscogsReleaseInteractor
+    @Inject lateinit var appDataFactory: AppDataFactory
+    @Inject lateinit var discogsReleaseInteractor: DiscogsReleaseInteractor
 
 
     override fun init() {
 
     }
 
-    fun getDiscoverSectionObservable(): Observable<DiscoverSectionViewModel> {
-        return Observable.fromIterable(appDataFactory.getDiscoverLibrarySectionList())
+    fun getDiscoverSectionObservable(): Observable<LibraryDiscoverSectionViewModel> {
+        return Observable.fromIterable(appDataFactory.getLibraryDiscoverSectionList())
                 .doOnError { it.printStackTrace() }
                 .flatMap {
                     Observable.zip(Observable.just(it), getDiscogsDiscoverLatestByType(it.type),
                             BiFunction { section: DiscoverSectionModel, dataList: List<SearchResult> ->
-                                DiscoverSectionViewModel(section, dataList)
+                                LibraryDiscoverSectionViewModel(section, dataList)
                             })
                 }
                 .observeOn(AndroidSchedulers.mainThread())

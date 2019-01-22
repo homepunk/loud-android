@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.feature.mode.event.upcoming
+package homepunk.github.com.presentation.feature.discover.event.upcoming
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel

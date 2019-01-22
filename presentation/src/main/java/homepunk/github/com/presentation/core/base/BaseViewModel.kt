@@ -7,10 +7,6 @@ import io.reactivex.disposables.CompositeDisposable
 abstract class BaseViewModel : ViewModel() {
     var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    init {
-        init()
-    }
-
     open fun init() {
 
     }

@@ -16,13 +16,11 @@ import androidx.lifecycle.ViewModelProviders
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-abstract class BaseBindingFragment<BINDING : ViewDataBinding> : Fragment() {
+abstract class BaseFragment<BINDING : ViewDataBinding> : Fragment() {
     abstract fun getLayoutResId(): Int
     abstract fun init()
-    abstract fun initViewModels()
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
     lateinit var mDataBinding: BINDING
 
@@ -34,7 +32,6 @@ abstract class BaseBindingFragment<BINDING : ViewDataBinding> : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         mDataBinding = DataBindingUtil.inflate(inflater, getLayoutResId(), container, false)
-        initViewModels()
         init()
         return mDataBinding.root
     }

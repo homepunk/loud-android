@@ -13,12 +13,12 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import com.tbruyelle.rxpermissions2.RxPermissions
 import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.core.base.BaseBindingFragment
+import homepunk.github.com.presentation.core.base.BaseFragment
 import homepunk.github.com.presentation.databinding.FragmentCameraRecognitionBinding
 import timber.log.Timber
 import java.util.*
 
-class CameraRecognitionFragment : BaseBindingFragment<FragmentCameraRecognitionBinding>() {
+class CameraRecognitionFragment : BaseFragment<FragmentCameraRecognitionBinding>() {
 
     private val orientations = SparseIntArray()
     private var cameraId: String? = null

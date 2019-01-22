@@ -8,7 +8,7 @@
             <size
                 android:width="4dp"
                 android:height="4dp" />
-            <solid android:color="@color/casetteAccent" />
+            <solid android:color="?attr/colorAccent" />
             <corners android:radius="360dp" />
         </shape>
     </item>
@@ -20,7 +20,7 @@
             <size
                 android:width="4dp"
                 android:height="4dp" />
-            <solid android:color="@color/vinylAccent" />
+            <solid android:color="#6763be" />
             <corners android:radius="360dp" />
         </shape>
     </item>
@@ -32,7 +32,7 @@
             <size
                 android:width="4dp"
                 android:height="4dp" />
-            <solid android:color="@color/allAccent" />
+            <solid android:color="@color/whiteBone" />
             <corners android:radius="360dp" />
         </shape>
     </item>

@@ -11,7 +11,7 @@ import homepunk.github.com.presentation.feature.widget.countrypicker.CountryMode
 import javax.inject.Inject
 
 class AppDataFactory @Inject constructor(val context: Context) {
-    fun getDiscoverLibrarySectionList(): List<DiscoverSectionModel> {
+    fun getLibraryDiscoverSectionList(): List<DiscoverSectionModel> {
         val dataList = mutableListOf<DiscoverSectionModel>()
         dataList.add(DiscoverSectionModel(0, Constant.DISCOGS.LATEST_RELEASE_GENRE_TYPE_RAP, context.resources.getStringArray(R.array.genres)[0]))
         dataList.add(DiscoverSectionModel(1, Constant.DISCOGS.LATEST_RELEASE_GENRE_TYPE_ROCK, context.resources.getStringArray(R.array.genres)[1]))

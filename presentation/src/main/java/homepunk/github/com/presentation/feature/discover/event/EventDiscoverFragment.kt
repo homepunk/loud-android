@@ -1,20 +1,17 @@
-package homepunk.github.com.presentation.feature.mode.event
+package homepunk.github.com.presentation.feature.discover.event
 
 import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.core.base.BaseBindingFragment
+import homepunk.github.com.presentation.core.base.BaseFragment
 import homepunk.github.com.presentation.databinding.FragmentEventBinding
-import homepunk.github.com.presentation.feature.mode.event.upcoming.UpcomingEventListViewModel
+import homepunk.github.com.presentation.feature.discover.event.upcoming.UpcomingEventListViewModel
 
-class EventFragment : BaseBindingFragment<FragmentEventBinding>() {
+class EventDiscoverFragment : BaseFragment<FragmentEventBinding>() {
     private lateinit var upcomingEventListViewModel: UpcomingEventListViewModel
 
     override fun getLayoutResId() = R.layout.fragment_event
 
-    override fun initViewModels() {
-        upcomingEventListViewModel = getViewModel(UpcomingEventListViewModel::class.java)
-    }
-
     override fun init() {
+        upcomingEventListViewModel = getViewModel(UpcomingEventListViewModel::class.java)
         mDataBinding.run {
             viewModel = upcomingEventListViewModel
         }

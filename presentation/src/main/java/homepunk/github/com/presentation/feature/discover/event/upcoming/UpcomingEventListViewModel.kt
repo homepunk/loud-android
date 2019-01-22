@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.feature.mode.event.upcoming
+package homepunk.github.com.presentation.feature.discover.event.upcoming
 
 import android.annotation.SuppressLint
 import homepunk.github.com.domain.interactor.SongkickEventInteractor

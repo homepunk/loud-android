@@ -61,6 +61,8 @@ dependencies {
     implementation project(path: ':domain')
 
     // Dagger 2
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-alpha1'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1'
     kapt presentationDependencies.daggerCompiler
     // Dagger Android
     implementation presentationDependencies.daggerAndroid

@@ -1,29 +1,38 @@
 package homepunk.github.com.presentation.feature.main
 
-import androidx.lifecycle.MutableLiveData
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import homepunk.github.com.domain.interactor.AppModeInteractor
 import homepunk.github.com.presentation.common.data.AppDataFactory
-import homepunk.github.com.presentation.common.model.mode.AppModeModel
 import homepunk.github.com.presentation.core.base.BaseViewModel
+import homepunk.github.com.presentation.feature.discover.DiscoverHostFragment
 import javax.inject.Inject
 
 class MainActivityViewModel @Inject constructor() : BaseViewModel() {
     @Inject lateinit var appDataFactory: AppDataFactory
     @Inject lateinit var appModeInteractor: AppModeInteractor
 
-    var themeLiveData = MutableLiveData<Int>()
-    var currentTheme: Int? = null
+    var fragmentList = arrayListOf<Fragment>()
 
-    val currentAppModeModelLiveData = MutableLiveData<AppModeModel>()
+    var onPageChangeListener = object : ViewPager.OnPageChangeListener {
+        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+//                    navigation.onPageScrolled(position, positionOffset, positionOffsetPixels)
+        }
 
-    fun setUpAppMode() {
-        compositeDisposable.add(appModeInteractor.getCurrentAppMode()
-                .distinctUntilChanged()
-                .map { mode -> appDataFactory.getAppModeModelList().find { it.mode == mode }!! }
-                .doOnError { it.printStackTrace() }
-                .doOnNext { themeLiveData.value = it.themeResId }
-                .doOnNext { currentTheme = it.themeResId }
-                .subscribe { currentAppModeModelLiveData.value = it })
+        override fun onPageSelected(position: Int) {
+//                    navigation.onPageSelected(position)
+        }
+
+        override fun onPageScrollStateChanged(state: Int) {
+//                    navigation.onPageScrollStateChanged(state)
+        }
+    }
+
+
+    override fun init() {
+        fragmentList.add(DiscoverHostFragment())
+        fragmentList.add(Fragment())
+        fragmentList.add(Fragment())
     }
 }
 
