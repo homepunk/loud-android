@@ -35,7 +35,7 @@
                 android:paddingEnd="@dimen/margin_default_10dp"
                 android:layout_marginBottom="@dimen/margin_default_10dp"
                 android:background="@android:color/transparent"
-                android:visibility="@{parentModel.isParentExpanded ? View.VISIBLE : View.GONE}"
+                bind:expand="@{parentModel.isParentExpanded}"
                 bind:children="@{parentModel.events}"/>
 
         </LinearLayout>

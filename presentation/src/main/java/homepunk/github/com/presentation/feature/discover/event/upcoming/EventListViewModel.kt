@@ -23,11 +23,15 @@ class EventListViewModel @Inject constructor()
     @SuppressLint("CheckResult")
     fun fetchUpcomingEventList() {
         eventInteractor.getUpcomingEventList()
-//                .doOnNext { wLog(it.displayName) }
                 .doOnNext { wLog("Location: ${it.first.city?.displayName}, events = ${it.second.size}") }
+                .map {
+                    val eventModels = arrayListOf<EventModel>()
+                    it.second.forEach { eventModels.add(EventModel(it)) }
+                    return@map Pair(it.first, eventModels)
+                }
                 .map { EventLocationModel(it.first.city?.displayName, it.second) }
                 .toList()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {itemList -> adapter.itemList = itemList}
+                .subscribe { itemList -> adapter.itemList = itemList }
     }
 }
