@@ -83,68 +83,20 @@
                 app:menuList="@{menuViewModel.menuList}"
                 app:onBoomListener="@{menuViewModel.onBoomMenuListener}" />
 
-            <LinearLayout
+
+            <homepunk.github.com.presentation.feature.widget.tablayout.BubbleTabLayout
                 android:id="@+id/bottom_nav_layout"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginStart="@dimen/margin_big_20dp"
                 android:layout_marginEnd="@dimen/margin_big_20dp"
-                android:orientation="horizontal"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                app:layout_constraintBottom_toBottomOf="parent">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginEnd="2dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/line_cornered">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="DISCOVER"
-                        android:textColor="@color/text" />
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginEnd="2dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_empty_circle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="4dp"
-                        android:text="COLLECTION"
-                        android:textAlignment="center"
-                        android:textColor="@color/text" />
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginEnd="2dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_empty_circle">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="MAP"
-                        android:textColor="@color/text" />
-                </FrameLayout>
-            </LinearLayout>
-
+                android:layout_marginStart="@dimen/margin_big_20dp"
+                android:layout_marginBottom="@dimen/margin_default_10dp"
+                android:layout_height="56dp"
+                app:bubble_buttonGap="@dimen/margin_default_10dp"
+                app:bubble_defaultColor="@color/grey"
+                app:bubble_highlightedColor="?attr/colorAccent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!--<include layout="@layout/layout_bottom_menu" />-->

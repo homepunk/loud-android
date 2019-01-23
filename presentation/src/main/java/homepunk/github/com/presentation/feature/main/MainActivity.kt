@@ -20,9 +20,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun init() {
         wLog("init")
-        mDataBinding.pagerAdapter = SimpleViewPagerAdapter(supportFragmentManager)
-        mDataBinding.viewModel = mMainViewModel
-        mDataBinding.menuViewModel = mMainMenuViewModel
+        mDataBinding.run {
+            viewModel = mMainViewModel
+            menuViewModel = mMainMenuViewModel
+
+            pagerAdapter = SimpleViewPagerAdapter(supportFragmentManager)
+            bottomNavLayout.setTitleArray(arrayOf("Discover", "Collection", "Map"))
+            bottomNavLayout.setupWithViewPager(viewPager)
+        }
     }
 
     override fun onResume() {

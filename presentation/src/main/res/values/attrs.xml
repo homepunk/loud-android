@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BubbleTabLayout">
+        <attr name="bubble_buttonGap" format="integer|dimension"/>
+        <attr name="bubble_defaultColor" format="color"/>
+        <attr name="bubble_highlightedColor" format="color"/>
+        <attr name="bubble_textAllCaps" format="boolean"/>
+    </declare-styleable>
+
+</resources>

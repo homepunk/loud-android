@@ -47,11 +47,9 @@ class CameraRecognitionFragment : BaseFragment<FragmentCameraRecognitionBinding>
 //        activity!!.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 //    }
 
-    override fun initViewModels() {
-        CameraRecognitionFragmentViewModel()
-    }
-
     override fun init() {
+        CameraRecognitionFragmentViewModel()
+
         orientations.append(Surface.ROTATION_0, 0)
         orientations.append(Surface.ROTATION_90, 90)
         orientations.append(Surface.ROTATION_180, 180)
