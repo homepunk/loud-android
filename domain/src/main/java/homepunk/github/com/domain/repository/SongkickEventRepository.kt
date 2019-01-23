@@ -4,5 +4,5 @@ import homepunk.github.com.domain.model.songkick.SongkickEvent
 import io.reactivex.Observable
 
 interface SongkickEventRepository {
-    fun getUpcomingEventList(metroAreaId: Long): Observable<SongkickEvent>
+    fun getUpcomingEventList(metroAreaId: Long): Observable<List<SongkickEvent>>
 }

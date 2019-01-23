@@ -3,8 +3,8 @@ package homepunk.github.com.presentation.common.dagger.module
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import homepunk.github.com.presentation.feature.discover.DiscoverHostFragment
-import homepunk.github.com.presentation.feature.discover.event.EventDiscoverFragment
-import homepunk.github.com.presentation.feature.discover.library.LibraryDiscoverFragment
+import homepunk.github.com.presentation.feature.discover.event.DiscoverEventFragment
+import homepunk.github.com.presentation.feature.discover.library.DiscoverLibraryFragment
 import homepunk.github.com.presentation.feature.main.MainActivity
 
 /**Created by Homepunk on 27.12.2018. **/
@@ -17,8 +17,8 @@ interface FeatureBindingModule {
     fun discoverHostFragment(): DiscoverHostFragment
 
     @ContributesAndroidInjector
-    fun discoverlibraryFragment(): LibraryDiscoverFragment
+    fun discoverlibraryFragment(): DiscoverLibraryFragment
 
     @ContributesAndroidInjector
-    fun discoverEventFragment(): EventDiscoverFragment
+    fun discoverEventFragment(): DiscoverEventFragment
 }

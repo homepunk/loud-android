@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
             name="sectionTitle"
             type="String"/>
+
+        <variable
+            name="onClickListener"
+            type="android.view.View.OnClickListener"/>
     </data>
 
     <LinearLayout
@@ -15,6 +20,7 @@
         android:paddingBottom="@dimen/margin_top_divider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        bind:onClick="@{onClickListener}"
         android:orientation="horizontal">
 
         <View

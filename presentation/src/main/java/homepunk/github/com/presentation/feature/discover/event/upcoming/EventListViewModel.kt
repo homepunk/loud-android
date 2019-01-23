@@ -9,14 +9,13 @@ import homepunk.github.com.presentation.core.base.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class UpcomingEventListViewModel @Inject constructor()
+class EventListViewModel @Inject constructor()
     : BaseViewModel() {
 
     @Inject
     lateinit var eventInteractor: SongkickEventInteractor
 
-    val adapter: SimpleBindingRecyclerViewAdapter<UpcomingEventItemViewModel> = SimpleBindingRecyclerViewAdapter(R.layout.layout_item_upcoming_event, BR.viewModel)
-    val titleResId = R.string.title_upcoming_event
+    val adapter: SimpleBindingRecyclerViewAdapter<EventLocationModel> = SimpleBindingRecyclerViewAdapter(R.layout.layout_item_parent_children, BR.parentModel)
 
     override fun init() {
     }
@@ -24,8 +23,9 @@ class UpcomingEventListViewModel @Inject constructor()
     @SuppressLint("CheckResult")
     fun fetchUpcomingEventList() {
         eventInteractor.getUpcomingEventList()
-                .doOnNext { wLog(it.displayName) }
-                .map { UpcomingEventItemViewModel(it.displayName, it.performance[0].artist?.id?.toString()) }
+//                .doOnNext { wLog(it.displayName) }
+                .doOnNext { wLog("Location: ${it.first.city?.displayName}, events = ${it.second.size}") }
+                .map { EventLocationModel(it.first.city?.displayName, it.second) }
                 .toList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {itemList -> adapter.itemList = itemList}

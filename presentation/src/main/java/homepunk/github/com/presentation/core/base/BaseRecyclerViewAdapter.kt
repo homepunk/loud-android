@@ -17,7 +17,9 @@ abstract class BaseRecyclerViewAdapter<ITEM, VH : BaseRecyclerViewAdapter.BaseVi
 
     override fun getItemCount() = itemList.size
 
-    override fun onBindViewHolder(holder: VH, position: Int) = holder.bind(itemList[position])
+    override fun onBindViewHolder(holder: VH, position: Int) {
+        holder.bind(itemList[position])
+    }
 
     open fun <T : ViewDataBinding> inflateVH(parent: ViewGroup, layoutId: Int) = DataBindingUtil.inflate<T>(LayoutInflater.from(parent.context), layoutId, parent, false)!!
 

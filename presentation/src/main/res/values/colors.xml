@@ -6,7 +6,7 @@
 
     <color name="charocal">#3A405A</color>
     <color name="paleBlue">#AEC5EB</color>
-    <color name="background">@color/colorPrimary</color>
+    <color name="background">@color/colorPrimaryDark</color>
     <color name="title">#F6F1EB</color>
     <color name="subtitle">#e6e0d9</color>
     <color name="text">#ede9e3</color>

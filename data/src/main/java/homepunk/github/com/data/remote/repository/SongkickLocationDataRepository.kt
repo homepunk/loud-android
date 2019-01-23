@@ -9,7 +9,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class SongkickLocationDataRepository @Inject constructor(private var songkickApi: SongkickApi) : LocationRepository {
-    override fun getSongkickLocation(query: String): Observable<SongkickLocation> =
+    override fun getSongkickLocationByQuery(query: String): Observable<SongkickLocation> =
             songkickApi.getLocationByQuery(query, Constant.SONGKICK.API_KEY)
                     .subscribeOn(Schedulers.io())
                     .doOnError { it.printStackTrace() }
@@ -19,4 +19,16 @@ class SongkickLocationDataRepository @Inject constructor(private var songkickApi
                             Observable.fromIterable(it.results!!.location)
                         else
                             Observable.empty<SongkickLocation>() }
+
+    override fun getSongkickLocationByLatLng(latLng: String): Observable<SongkickLocation> =
+            songkickApi.getLocationByLatLng(latLng, Constant.SONGKICK.API_KEY)
+                    .subscribeOn(Schedulers.io())
+                    .doOnError { it.printStackTrace() }
+                    .map { it.resultsPage }
+                    .flatMapObservable {
+                        if (it.results != null && !it.results!!.location.isNullOrEmpty())
+                            Observable.fromIterable(it.results!!.location)
+                        else
+                            Observable.empty<SongkickLocation>() }
+
 }

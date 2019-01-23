@@ -11,7 +11,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import javax.inject.Inject
 
-class LibraryDiscoverViewModel @Inject constructor()
+class DiscoverLibraryViewModel @Inject constructor()
     : BaseViewModel() {
 
     @Inject lateinit var appDataFactory: AppDataFactory

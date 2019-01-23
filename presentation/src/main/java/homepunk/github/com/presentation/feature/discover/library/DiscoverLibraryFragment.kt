@@ -13,13 +13,13 @@ import homepunk.github.com.presentation.databinding.FragmentDiscoverBinding
 import homepunk.github.com.presentation.databinding.LayoutSectionSquareHorizontalBinding
 
 
-class LibraryDiscoverFragment : BaseFragment<FragmentDiscoverBinding>() {
-    private lateinit var discoverViewModel: LibraryDiscoverViewModel
+class DiscoverLibraryFragment : BaseFragment<FragmentDiscoverBinding>() {
+    private lateinit var discoverViewModel: DiscoverLibraryViewModel
 
     override fun getLayoutResId() = R.layout.fragment_discover
 
     override fun init() {
-        discoverViewModel = getViewModel(LibraryDiscoverViewModel::class.java)
+        discoverViewModel = getViewModel(DiscoverLibraryViewModel::class.java)
     }
 
     @SuppressLint("CheckResult")

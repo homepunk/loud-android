@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="homepunk.github.com.presentation.feature.discover.event.upcoming.UpcomingEventListViewModel" />
+            type="homepunk.github.com.presentation.feature.discover.event.upcoming.EventListViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,21 +16,22 @@
         android:text="@string/app_name"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/section_divider"
-            layout="@layout/item_section_divider"
-            bind:sectionTitle="@{context.getString(viewModel.titleResId)}"/>
+        <!--<include-->
+            <!--android:id="@+id/section_divider"-->
+            <!--layout="@layout/item_section_divider"-->
+            <!--bind:sectionTitle="@{context.getString(viewModel.titleResId)}"/>-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_upcoming_event"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             bind:adapter="@{viewModel.adapter}"
             bind:itemDecoration_left="@{@dimen/margin_big_20dp}"
             bind:itemDecoration_right="@{@dimen/margin_big_20dp}"
             bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
             bind:itemDecoration_top="@{@dimen/margin_default_10dp}"
+            android:layout_marginBottom="@dimen/margin_big_20dp"
             tools:listitem="@layout/layout_item_upcoming_event" />
 
     </LinearLayout>
