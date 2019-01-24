@@ -2,7 +2,6 @@
 <layout xmlns:bind="http://schemas.android.com/tools">
     <data>
         <import type="android.view.View"/>
-        <import type="homepunk.github.com.presentation.common.model.BooleanHolder"/>
 
         <variable
             name="parentModel"

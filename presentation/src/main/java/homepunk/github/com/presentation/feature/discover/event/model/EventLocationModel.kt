@@ -4,7 +4,6 @@ import android.view.View
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.databinding.ObservableBoolean
-import homepunk.github.com.presentation.common.model.BooleanHolder
 import homepunk.github.com.presentation.core.ext.swap
 
 /**Created by Homepunk on 11.01.2019. **/
