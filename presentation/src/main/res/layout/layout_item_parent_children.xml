@@ -2,6 +2,7 @@
 <layout xmlns:bind="http://schemas.android.com/tools">
     <data>
         <import type="android.view.View"/>
+        <import type="homepunk.github.com.presentation.common.model.BooleanHolder"/>
 
         <variable
             name="parentModel"
@@ -22,6 +23,8 @@
             <include
                 android:id="@+id/parent_layout"
                 layout="@layout/item_section_divider"
+                bind:showPlus="@{true}"
+                bind:isParentExpanded="@{parentModel.isParentExpanded}"
                 bind:onClickListener="@{parentModel.onParentClickListener}"
                 bind:sectionTitle="@{parentModel.locationName}" />
 

@@ -5,6 +5,12 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
+
+        <import type="homepunk.github.com.presentation.R"/>
+
+        <import type="homepunk.github.com.presentation.common.model.BooleanHolder"/>
+
         <variable
             name="sectionTitle"
             type="String"/>
@@ -12,21 +18,31 @@
         <variable
             name="onClickListener"
             type="android.view.View.OnClickListener"/>
+
+        <variable
+            name="isParentExpanded"
+            type="Boolean"/>
+
+        <variable
+            name="showPlus"
+            type="Boolean"/>
     </data>
 
-    <LinearLayout
-        android:paddingTop="@dimen/margin_top_divider"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:paddingStart="@dimen/margin_big_20dp"
-        android:paddingBottom="@dimen/margin_top_divider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        bind:onClick="@{onClickListener}"
+        bind:onClickListener="@{onClickListener}"
         android:orientation="horizontal">
 
         <View
+            android:id="@+id/dot"
+            android:layout_marginTop="@dimen/margin_top_divider"
             android:layout_width="@dimen/width_divider"
+            android:layout_marginBottom="@dimen/margin_top_divider"
             android:layout_height="@dimen/width_divider"
-            android:layout_gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:background="?attr/colorAccent" />
 
         <TextView
@@ -35,12 +51,29 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_top_divider"
             android:letterSpacing="0.02"
-            android:textAllCaps="true"
             android:lineSpacingExtra="1sp"
+            android:text="@{sectionTitle}"
+            android:textAllCaps="true"
             android:textColor="@color/text"
             android:textSize="@dimen/text_size_large"
-            android:text="@{sectionTitle}"
+            app:layout_constraintBottom_toBottomOf="@+id/dot"
+            app:layout_constraintStart_toEndOf="@+id/dot"
+            app:layout_constraintTop_toTopOf="@+id/dot"
             tools:text="Latet Releases" />
-    </LinearLayout>
+
+        <ImageView
+            android:layout_width="@dimen/plus_button_width"
+            android:layout_height="@dimen/plus_button_width"
+            android:layout_gravity="end"
+            android:visibility="@{showPlus ? View.VISIBLE : View.GONE}"
+            android:layout_marginEnd="@dimen/margin_big_20dp"
+            android:src="@drawable/plus"
+            android:stateListAnimator="@animator/plus_minus_state_list_animator"
+            bind:animatableDrawable="@{isParentExpanded ? R.drawable.animated_plus : R.drawable.animated_minus}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

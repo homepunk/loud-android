@@ -1,5 +1,6 @@
 package homepunk.github.com.presentation.core.ext
 
+import android.graphics.drawable.Animatable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Picasso
@@ -13,5 +14,15 @@ fun ImageView.bindImageUrl(imageUrl: String?) {
                 .load(imageUrl)
                 .error(R.drawable.ic_image_black_24dp)
                 .into(this)
+    }
+}
+
+@BindingAdapter("animatableDrawable")
+fun ImageView.bindAnimatebleDrawable(resId: Int) {
+    setImageResource(resId)
+    drawable?.run {
+        this as Animatable
+    }?.let {
+        it.start()
     }
 }
