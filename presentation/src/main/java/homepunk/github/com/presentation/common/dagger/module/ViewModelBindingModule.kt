@@ -8,7 +8,7 @@ import dagger.multibindings.IntoMap
 import homepunk.github.com.presentation.common.dagger.ViewModelFactory
 import homepunk.github.com.presentation.common.dagger.ViewModelKey
 import homepunk.github.com.presentation.feature.discover.DiscoverHostViewModel
-import homepunk.github.com.presentation.feature.discover.event.upcoming.EventListViewModel
+import homepunk.github.com.presentation.feature.discover.event.DiscoverEventViewModel
 import homepunk.github.com.presentation.feature.discover.library.DiscoverLibraryViewModel
 import homepunk.github.com.presentation.feature.main.MainActivityViewModel
 import homepunk.github.com.presentation.feature.mode.AppModeViewModel
@@ -31,8 +31,8 @@ interface ViewModelBindingModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(EventListViewModel::class )
-    fun bindUpcomingEventsViewModel(viewModel: EventListViewModel): ViewModel
+    @ViewModelKey(DiscoverEventViewModel::class )
+    fun bindUpcomingEventsViewModel(viewModel: DiscoverEventViewModel): ViewModel
 
     @Binds
     @IntoMap

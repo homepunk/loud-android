@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.feature.discover.event.upcoming
+package homepunk.github.com.presentation.feature.discover.event
 
 import android.annotation.SuppressLint
 import homepunk.github.com.domain.interactor.SongkickEventInteractor
@@ -6,10 +6,12 @@ import homepunk.github.com.presentation.BR
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.core.adapter.SimpleBindingRecyclerViewAdapter
 import homepunk.github.com.presentation.core.base.BaseViewModel
+import homepunk.github.com.presentation.feature.discover.event.model.EventLocationModel
+import homepunk.github.com.presentation.feature.discover.event.model.EventModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class EventListViewModel @Inject constructor()
+class DiscoverEventViewModel @Inject constructor()
     : BaseViewModel() {
 
     @Inject

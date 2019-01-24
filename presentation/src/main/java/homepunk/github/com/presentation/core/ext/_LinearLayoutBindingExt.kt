@@ -2,6 +2,7 @@ package homepunk.github.com.presentation.core.ext
 
 import android.animation.Animator
 import android.animation.ValueAnimator
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -11,24 +12,43 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.databinding.BindingAdapter
 import homepunk.github.com.presentation.core.wrapper.AnimatorListenerWrapper
-import homepunk.github.com.presentation.databinding.LayoutItemUpcomingEventBinding
-import homepunk.github.com.presentation.feature.discover.event.upcoming.EventModel
-import homepunk.github.com.presentation.util.DimensionUtil
+import homepunk.github.com.presentation.databinding.LayoutItemTimelineEventBinding
+import homepunk.github.com.presentation.databinding.LayoutItemTimelineMonthBinding
+import homepunk.github.com.presentation.feature.discover.event.model.EventModel
+import homepunk.github.com.presentation.util.DateTimeUtil
 
 
 /**Created by Homepunk on 23.01.2019. **/
 
 @BindingAdapter("children")
 fun LinearLayout.bindChildren(children: List<EventModel>) {
+    var currentMonth = -1
+    val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
     for (i in 0 until children.size) {
-        val binding = LayoutItemUpcomingEventBinding.inflate(LayoutInflater.from(context), null, false)
-        binding.model = children[i]
-        val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        if (i != 0) {
-            params.topMargin = DimensionUtil.dpToPx(context, 10f)
+        val child = children[i]
+        val monthNum = child.month.get()
+        if (monthNum != -1 && monthNum != currentMonth) {
+            currentMonth = monthNum
+
+            val monthLayoutBinding = getMonthLayoutBinding(context, child)
+            addView(monthLayoutBinding.root, params)
         }
-        addView(binding.root, params)
+        val eventLayoutBinding = getEventLayoutBinding(context, child)
+        addView(eventLayoutBinding.root, params)
     }
+}
+
+private fun getMonthLayoutBinding(context: Context, model: EventModel): LayoutItemTimelineMonthBinding {
+    val binding = LayoutItemTimelineMonthBinding.inflate(LayoutInflater.from(context), null, false)
+    binding.month = DateTimeUtil.getMonthForInt(model.month.get())
+    return binding
+}
+
+private fun getEventLayoutBinding(context: Context, model: EventModel): LayoutItemTimelineEventBinding {
+    val binding = LayoutItemTimelineEventBinding.inflate(LayoutInflater.from(context), null, false)
+    binding.model = model
+    return binding
 }
 
 @BindingAdapter("onClick")

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="homepunk.github.com.presentation.feature.discover.event.upcoming.EventListViewModel" />
+            type="homepunk.github.com.presentation.feature.discover.event.DiscoverEventViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -32,7 +32,7 @@
             bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
             bind:itemDecoration_top="@{@dimen/margin_default_10dp}"
             android:layout_marginBottom="@dimen/margin_big_20dp"
-            tools:listitem="@layout/layout_item_upcoming_event" />
+            tools:listitem="@layout/layout_item_parent_children" />
 
     </LinearLayout>
 </layout>

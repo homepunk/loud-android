@@ -15,11 +15,14 @@
     <dimen name="margin_default_10dp">10dp</dimen>
     <dimen name="margin_big_16dp">16dp</dimen>
     <dimen name="margin_big_20dp">20dp</dimen>
+    <dimen name="margin_big_24dp">24dp</dimen>
 
     <dimen name="width_divider">4dp</dimen>
     <dimen name="height_divider">20dp</dimen>
     <dimen name="margin_top_divider">16dp</dimen>
     <dimen name="text_size_large">18sp</dimen>
+    <dimen name="text_size_large_26sp">26sp</dimen>
+    <dimen name="text_size_large_28sp">28sp</dimen>
     <dimen name="height_event_card_default">42dp</dimen>
     <dimen name="hieght_top_divider">4dp</dimen>
     <dimen name="radius_small_card">4dp</dimen>

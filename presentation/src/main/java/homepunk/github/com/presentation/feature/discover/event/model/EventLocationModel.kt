@@ -1,9 +1,10 @@
-package homepunk.github.com.presentation.feature.discover.event.upcoming
+package homepunk.github.com.presentation.feature.discover.event.model
 
 import android.view.View
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.databinding.ObservableBoolean
+import homepunk.github.com.presentation.core.ext.swap
 
 /**Created by Homepunk on 11.01.2019. **/
 class EventLocationModel(private var locationName: String? = "",
@@ -25,5 +26,3 @@ class EventLocationModel(private var locationName: String? = "",
     @Bindable
     fun getOnParentClickListener() = View.OnClickListener { isParentExpanded.swap() }
 }
-
-fun ObservableBoolean.swap() = set(!get())

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="month"
+            type="String"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/timeline"
+            android:layout_marginStart="@dimen/margin_big_20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="4dp"
+            android:layout_height="50dp"
+            android:background="@color/greyLight"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_big_24dp"
+            android:text="@{month}"
+            tools:text="JUNE"
+            android:textAllCaps="true"
+            android:textColor="?attr/colorAccent"
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/timeline"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
