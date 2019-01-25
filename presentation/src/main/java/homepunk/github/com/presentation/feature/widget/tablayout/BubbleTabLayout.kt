@@ -74,9 +74,9 @@ class BubbleTabLayout @JvmOverloads constructor(context: Context, attrs: Attribu
                         this as? BubbleTab
                     }?.apply {
                         if (isSelected) {
-                            updateBackgroundWithoutBorder(buttonHighlightColor)
+                            updateBackground(R.drawable.filter_selected_backgorund)
                         } else {
-                            updateBackgroundWithoutBorder(buttonDefaultColor)
+                            updateBackground(R.drawable.filter_background)
                         }
                     }
         }
@@ -93,9 +93,11 @@ class BubbleTabLayout @JvmOverloads constructor(context: Context, attrs: Attribu
             val title = mTabTextArray[i]
             tab.tabText.isAllCaps = buttonTextAllCaps
             tab.tabText.text = title
-            tab.updateBackgroundWithoutBorder(buttonDefaultColor)
-            val params = LinearLayout.LayoutParams(0,
-                    ViewGroup.LayoutParams.MATCH_PARENT, 1f)
+//            tab.updateBackgroundWithoutBorder(R.drawable.shape_circle)
+//            val params = LinearLayout.LayoutParams(0,
+//                    ViewGroup.LayoutParams.MATCH_PARENT, 1f)
+            val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT)
 
             if (i == mTabTextArray.size - 1) {
                 params.rightMargin = 0

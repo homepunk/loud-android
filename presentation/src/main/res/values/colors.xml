@@ -6,14 +6,15 @@
 
     <color name="charocal">#3A405A</color>
     <color name="paleBlue">#AEC5EB</color>
-    <color name="background">@color/colorPrimaryDark</color>
+    <color name="background">@color/colorPrimary</color>
+    <color name="backgroundLight">#24282b</color>
     <color name="title">#F6F1EB</color>
     <color name="subtitle">#e6e0d9</color>
     <color name="text">#ede9e3</color>
-    <color name="grey">#474B4F</color>
+    <color name="grey">#515867</color>
     <color name="greyLight">#6B6E70</color>
     <color name="green">#86C232</color>
-    <color name="greenDark">#61892F</color>
+    <color name="yellow">#FCA311</color>
     <color name="transparent">#00ffffff</color>
     <color name="whiteBone">#F6F1EB</color>
     <color name="card_shadow">#40222629</color>
@@ -21,10 +22,12 @@
     <color name="black">#24221b</color>
     <color name="background1">#262337</color>
 
-    <color name="modeGearColor">#bb0f1b</color>
+    <color name="modeGearColor">#5C2751</color>
     <color name="modeEventsColor">#DD7230</color>
-    <color name="modeLibraryColor">#6763be</color>
+    <color name="modeLibraryColor">#129877</color>
     <color name="menuColorSettings">#3A435E</color>
+
+    <color name="timeline">@color/modeEventsColor</color>
 
     <color name="color3">#3A435E</color>
 

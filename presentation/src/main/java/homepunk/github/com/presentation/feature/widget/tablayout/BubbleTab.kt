@@ -26,4 +26,11 @@ class BubbleTab(context: Context) : FrameLayout(context) {
         gdDefault.cornerRadii = floatArrayOf(360f, 360f, 360f, 360f, 360f, 360f, 360f, 360f)
         tabBackground.background = gdDefault
     }
+
+    fun updateBackground(resId: Int) {
+//        val gdDefault = GradientDrawable()
+//        gdDefault.setColor(color)
+//        gdDefault.cornerRadii = floatArrayOf(360f, 360f, 360f, 360f, 360f, 360f, 360f, 360f)
+        tabBackground.setBackgroundResource(resId)
+    }
 }

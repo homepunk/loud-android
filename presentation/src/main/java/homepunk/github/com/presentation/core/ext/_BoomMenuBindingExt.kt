@@ -11,6 +11,7 @@ import com.nightonke.boommenu.ButtonEnum
 import com.nightonke.boommenu.OnBoomListener
 import com.nightonke.boommenu.Piece.PiecePlaceEnum
 import com.nightonke.boommenu.Util
+import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.common.model.menu.MenuModel
 import homepunk.github.com.presentation.feature.widget.countrypicker.CountryModel
 import homepunk.github.com.presentation.util.DimensionUtil
@@ -45,6 +46,8 @@ fun BoomMenuButton.bindAppModeMenu(menuList: List<MenuModel>, iconPaddingLeft: F
         val builder = TextOutsideCircleButton.Builder()
                 .normalImageRes(menuItem.iconResId)
                 .normalColorRes(menuItem.colorResId)
+                .normalTextColorRes(R.color.whiteBone)
+                .textSize(18)
                 .imagePadding(Rect(iconPaddingLeft.toInt(), iconPaddingRight.toInt(), iconPaddingTop.toInt(), iconPaddingBottom.toInt()))
                 .normalTextRes(menuItem.titleResId)
         addBuilder(builder)

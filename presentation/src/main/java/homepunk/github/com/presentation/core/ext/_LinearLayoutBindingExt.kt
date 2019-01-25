@@ -31,7 +31,7 @@ fun LinearLayout.bindChildren(children: List<EventModel>) {
         if (monthNum != -1 && monthNum != currentMonth) {
             currentMonth = monthNum
 
-            val monthLayoutBinding = getMonthLayoutBinding(context, child)
+            val monthLayoutBinding = getMonthLayoutBinding(context, child, i == 0)
             addView(monthLayoutBinding.root, params)
         }
         val eventLayoutBinding = getEventLayoutBinding(context, child)
@@ -39,9 +39,10 @@ fun LinearLayout.bindChildren(children: List<EventModel>) {
     }
 }
 
-private fun getMonthLayoutBinding(context: Context, model: EventModel): LayoutItemTimelineMonthBinding {
+private fun getMonthLayoutBinding(context: Context, model: EventModel, isUpcoming: Boolean): LayoutItemTimelineMonthBinding {
     val binding = LayoutItemTimelineMonthBinding.inflate(LayoutInflater.from(context), null, false)
     binding.month = DateTimeUtil.getMonthForInt(model.month.get())
+    binding.isUpcoming = isUpcoming
     return binding
 }
 

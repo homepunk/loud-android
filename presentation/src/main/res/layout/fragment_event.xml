@@ -31,7 +31,6 @@
             bind:itemDecoration_right="@{@dimen/margin_big_20dp}"
             bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
             bind:itemDecoration_top="@{@dimen/margin_default_10dp}"
-            android:layout_marginBottom="@dimen/margin_big_20dp"
             tools:listitem="@layout/layout_item_parent_children" />
 
     </LinearLayout>
