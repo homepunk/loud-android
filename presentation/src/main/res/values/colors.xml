@@ -13,8 +13,9 @@
     <color name="text">#ede9e3</color>
     <color name="grey">#515867</color>
     <color name="greyLight">#6B6E70</color>
-    <color name="green">#86C232</color>
+    <color name="green">#093824</color>
     <color name="yellow">#FCA311</color>
+    <color name="greenDark">#001011</color>
     <color name="transparent">#00ffffff</color>
     <color name="whiteBone">#F6F1EB</color>
     <color name="card_shadow">#40222629</color>
@@ -22,9 +23,9 @@
     <color name="black">#24221b</color>
     <color name="background1">#262337</color>
 
-    <color name="modeGearColor">#5C2751</color>
+    <color name="modeGearColor">#5c273f</color>
     <color name="modeEventsColor">#DD7230</color>
-    <color name="modeLibraryColor">#129877</color>
+    <color name="modeLibraryColor">@color/green</color>
     <color name="menuColorSettings">#3A435E</color>
 
     <color name="timeline">@color/modeEventsColor</color>

@@ -9,14 +9,18 @@ import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.viewpager.widget.ViewPager
 import homepunk.github.com.presentation.R
+import homepunk.github.com.presentation.core.ext.getMaxLenString
 
 
 /**Created by Homepunk on 22.01.2019. **/
 class BubbleTabLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : HorizontalScrollView(context, attrs, defStyleAttr) {
 
+    private var startMargin: Int
     private var buttonGap: Int
+    private var buttonVerticalMargin: Int
     private var buttonTextAllCaps: Boolean
+    private var buttonFixedWidth: Boolean
     @ColorInt
     private var buttonDefaultColor: Int
     @ColorInt
@@ -29,13 +33,17 @@ class BubbleTabLayout @JvmOverloads constructor(context: Context, attrs: Attribu
     private val mTabCount
         get() = mTabTextArray.size
 
+
     init {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.BubbleTabLayout, 0, 0)
         try {
             buttonGap = typedArray.getDimensionPixelSize(R.styleable.BubbleTabLayout_bubble_buttonGap, 0)
+            buttonVerticalMargin = typedArray.getDimensionPixelSize(R.styleable.BubbleTabLayout_bubble_tabVerticalMargin, 0)
+            startMargin = typedArray.getDimensionPixelSize(R.styleable.BubbleTabLayout_bubble_startMargin, 0)
             buttonDefaultColor = typedArray.getColor(R.styleable.BubbleTabLayout_bubble_defaultColor, Color.DKGRAY)
             buttonHighlightColor = typedArray.getColor(R.styleable.BubbleTabLayout_bubble_highlightedColor, Color.LTGRAY)
             buttonTextAllCaps = typedArray.getBoolean(R.styleable.BubbleTabLayout_bubble_textAllCaps, true)
+            buttonFixedWidth = typedArray.getBoolean(R.styleable.BubbleTabLayout_bubble_tabFixedWidth, true)
         } finally {
             typedArray.recycle()
         }
@@ -74,7 +82,7 @@ class BubbleTabLayout @JvmOverloads constructor(context: Context, attrs: Attribu
                         this as? BubbleTab
                     }?.apply {
                         if (isSelected) {
-                            updateBackground(R.drawable.filter_selected_backgorund)
+                            updateBackground(R.drawable.filter_backgorund_selected)
                         } else {
                             updateBackground(R.drawable.filter_background)
                         }
@@ -88,24 +96,38 @@ class BubbleTabLayout @JvmOverloads constructor(context: Context, attrs: Attribu
     }
 
     private fun setUpTabLayout() {
-        for (i in 0 until mTabTextArray.size) {
-            val tab = BubbleTab(context)
-            val title = mTabTextArray[i]
-            tab.tabText.isAllCaps = buttonTextAllCaps
-            tab.tabText.text = title
-//            tab.updateBackgroundWithoutBorder(R.drawable.shape_circle)
-//            val params = LinearLayout.LayoutParams(0,
-//                    ViewGroup.LayoutParams.MATCH_PARENT, 1f)
-            val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT)
+        val tabWidth = if (buttonFixedWidth) {
+            getBubbleTab(mTabTextArray.getMaxLenString())
+                    .apply { measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT) }
+                    .measuredWidth
+        } else {
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        }
 
-            if (i == mTabTextArray.size - 1) {
-                params.rightMargin = 0
-            } else {
-                params.rightMargin = buttonGap
+        for (i in 0 until mTabTextArray.size) {
+            val tab = getBubbleTab(mTabTextArray[i]).apply {
+                setOnClickListener { highlightTab(i) }
             }
+            val params = LinearLayout.LayoutParams(tabWidth, ViewGroup.LayoutParams.MATCH_PARENT)
+
+            if (i == 0) {
+                params.marginStart = startMargin
+            } else {
+                params.marginStart = buttonGap
+            }
+
+            params.topMargin = buttonVerticalMargin
+            params.bottomMargin = buttonVerticalMargin
             mTabLayout.addView(tab, params)
         }
+    }
+
+    private fun getBubbleTab(title: String): BubbleTab {
+        val tab = BubbleTab(context)
+        tab.tabText.isAllCaps = buttonTextAllCaps
+        tab.tabText.text = title
+
+        return tab
     }
 
     private fun dp2px(dpValue: Float) = (dpValue * resources.displayMetrics.density + 0.5f).toInt()

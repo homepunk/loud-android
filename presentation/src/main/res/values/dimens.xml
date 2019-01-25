@@ -32,6 +32,7 @@
     <dimen name="plus_button_width">16dp</dimen>
     <dimen name="text_size_timeline_date">20sp</dimen>
     <dimen name="height_timeline_event">56dp</dimen>
-    <dimen name="margin_timeline">21dp</dimen>
+    <dimen name="margin_timeline">11dp</dimen>
     <dimen name="width_timeline">2dp</dimen>
+    <dimen name="radius_filter_card">8dp</dimen>
 </resources>

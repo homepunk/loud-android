@@ -5,6 +5,9 @@
         <attr name="bubble_defaultColor" format="color"/>
         <attr name="bubble_highlightedColor" format="color"/>
         <attr name="bubble_textAllCaps" format="boolean"/>
+        <attr name="bubble_tabFixedWidth" format="boolean"/>
+        <attr name="bubble_tabVerticalMargin" format="integer|dimension"/>
+        <attr name="bubble_startMargin" format="integer|dimension"/>
     </declare-styleable>
 
 </resources>
