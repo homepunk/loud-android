@@ -2,34 +2,45 @@
 <resources>
     <color name="colorPrimary">#222629</color>
     <color name="colorPrimaryDark">#212126</color>
-    <color name="colorAccent">#6763be</color>
+    <color name="colorAccent">#DD7230</color>
 
     <color name="charocal">#3A405A</color>
     <color name="paleBlue">#AEC5EB</color>
-    <color name="background">@color/colorPrimary</color>
+    <color name="background">#202426</color>
+    <color name="background_card">#31393C</color>
+    <color name="backgroundDark">@color/colorPrimary</color>
     <color name="backgroundLight">#24282b</color>
     <color name="title">#F6F1EB</color>
+    <color name="title2">#FBF5F3</color>
     <color name="subtitle">#e6e0d9</color>
     <color name="text">#ede9e3</color>
-    <color name="grey">#515867</color>
+    <color name="red">#92140C</color>
+    <color name="pale_red">#AD343E</color>
+    <color name="grey">#565656</color>
     <color name="greyLight">#6B6E70</color>
     <color name="green">#093824</color>
     <color name="yellow">#FCA311</color>
+    <color name="bright_yellow">#FE9920</color>
+    <color name="orange">#DD7230</color>
+    <color name="bright_orange">#FA7921</color>
     <color name="greenDark">#001011</color>
-    <color name="transparent">#00ffffff</color>
+    <color name="transparent"> #00ffffff</color>
     <color name="whiteBone">#F6F1EB</color>
     <color name="card_shadow">#40222629</color>
     <color name="darkBackground">#e21b1f21</color>
     <color name="black">#24221b</color>
     <color name="background1">#262337</color>
+    <color name="blue_dark">#33658A</color>
 
-    <color name="modeGearColor">#5c273f</color>
-    <color name="modeEventsColor">#DD7230</color>
-    <color name="modeLibraryColor">@color/green</color>
+    <color name="modeGearColor">#92140C</color>
+    <color name="modeEventsColor">#feb800</color>
+    <!--<color name="modeEventsColor">#5A9DF5</color>-->
+    <color name="modeLibraryColor">#397367</color>
     <color name="menuColorSettings">#3A435E</color>
 
     <color name="timeline">@color/modeEventsColor</color>
 
     <color name="color3">#3A435E</color>
+    <color name="background_gray">#393D3F</color>
 
 </resources>

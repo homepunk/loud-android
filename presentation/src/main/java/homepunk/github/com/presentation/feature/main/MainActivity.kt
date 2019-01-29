@@ -50,7 +50,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     prevMenuItem = bottomNav.menu.getItem(position).apply { isChecked = true }
                 }
             })
-            bottomNavLayout.setTitleArray(arrayOf("RAP", "ROCK", "DUB", "REGGAE", "NOISE"))
+            bottomNavLayout.setTitleArray(arrayOf("RAP", "ROCK", "DUB", "REGGAE", "NOISE", "PARTY", "TECHNO"))
         }
     }
 

@@ -82,9 +82,9 @@ class BubbleTabLayout @JvmOverloads constructor(context: Context, attrs: Attribu
                         this as? BubbleTab
                     }?.apply {
                         if (isSelected) {
-                            updateBackground(R.drawable.filter_backgorund_selected)
+                            updateBackground(R.drawable.background_rect_round_corners_accent)
                         } else {
-                            updateBackground(R.drawable.filter_background)
+                            updateBackground(R.drawable.background_rect_round_corners_gray)
                         }
                     }
         }

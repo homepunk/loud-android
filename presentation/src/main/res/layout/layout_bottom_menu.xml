@@ -23,7 +23,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/filter_background">
+                android:background="@drawable/background_rect_round_corners_gray">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -42,7 +42,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/hieght_top_divider"
-                    android:background="@drawable/line_cornered" />
+                    android:background="@drawable/background_circle_filled_white" />
             </FrameLayout>
 
         </FrameLayout>

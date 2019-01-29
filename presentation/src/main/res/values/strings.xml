@@ -9,19 +9,19 @@
 
     <string-array name="modes">
         <item>Library</item>
-        <item>Event</item>
+        <item>Events</item>
         <item>Gear</item>
     </string-array>
 
     <string-array name="menu_title">
         <item>LIBRARY</item>
-        <item>EVENT</item>
+        <item>EVENTS</item>
         <item>GEAR</item>
         <item>SEARCH</item>
     </string-array>
 
     <string name="title_menu_library">LIBRARY</string>
-    <string name="title_menu_events">EVENT</string>
+    <string name="title_menu_events">EVENTS</string>
     <string name="title_menu_gear">GEAR</string>
     <string name="title_menu_settings">SETTINGS</string>
 

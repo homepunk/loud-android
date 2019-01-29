@@ -48,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_top_divider"
+            android:fontFamily="@font/lato_bold"
             android:letterSpacing="0.02"
             android:lineSpacingExtra="1sp"
             android:text="@{sectionTitle}"
