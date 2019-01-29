@@ -30,6 +30,7 @@
     <string name="title_camera">Camera</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_latest_releases">Latest Releases</string>
-    <string name="title_upcoming_event">Upcoming Events</string>
+    <string name="title_upcoming_event">Upcoming</string>
+    <string name="title_most_popular_event">Most popular</string>
 
 </resources>

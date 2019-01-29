@@ -21,7 +21,7 @@
 
         <include
             android:id="@+id/section_divider"
-            layout="@layout/item_section_divider"
+            layout="@layout/item_section_header_default"
             bind:sectionTitle="@{viewModel.sectionModel.title}" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -37,7 +37,5 @@
             bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
             bind:itemDecoration_left="@{@dimen/margin_default_10dp}"
             tools:listItem="@layout/list_item_latest_release" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

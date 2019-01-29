@@ -13,17 +13,40 @@ import homepunk.github.com.presentation.util.SongkickUtil
 class EventModel(var event: SongkickEvent) : BaseObservable() {
     var date = ObservableField<String>()
     var title = ObservableField<String>()
+    var location = ObservableField<String>()
     var month = ObservableInt()
 
     init {
         date.set(getDate(event.start?.date))
         month.set(getMonth(event.start?.date))
-        title.set(getTitle(event.displayName))
+        title.set(getTitle2(event.displayName))
+        location.set(getLocationname(event.displayName))
+    }
+
+    private fun getLocationname(value: String): String {
+        return getTitle(value).run {
+            if (indexOf("at") != -1)
+                substring(indexOf("at"))
+            else
+                "Unknown"
+        }
+
     }
 
     @Bindable
     fun getThumb(): String {
         return SongkickUtil.getSongkickArtistThumb(event.performance[0].artist?.id?.toString())
+    }
+
+    private fun getTitle2(value: String): String {
+        return value.run {
+            if (indexOf("at") != -1)
+                substring(0, indexOf("at"))
+            else if (indexOf("(") != -1)
+                substring(0, indexOf("("))
+            else
+                this
+        }
     }
 
     private fun getTitle(value: String): String {

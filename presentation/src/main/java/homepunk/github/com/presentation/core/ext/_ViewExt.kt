@@ -2,6 +2,8 @@ package homepunk.github.com.presentation.core.ext
 
 import android.graphics.drawable.Drawable
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import org.xmlpull.v1.XmlPullParserException
 import java.io.IOException
 
@@ -18,4 +20,12 @@ fun View.getDrawableFromXml(id: Int): Drawable? {
     }
 
     return drawable
+}
+
+fun View.swapVisibility() {
+    visibility = if (visibility == GONE) {
+        VISIBLE
+    } else {
+        GONE
+    }
 }

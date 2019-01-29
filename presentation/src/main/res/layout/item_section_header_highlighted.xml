@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+
+        <import type="homepunk.github.com.presentation.R"/>
+
+        <variable
+            name="sectionTitle"
+            type="String"/>
+
+        <variable
+            name="onClickListener"
+            type="android.view.View.OnClickListener"/>
+
+        <variable
+            name="isParentExpanded"
+            type="Boolean"/>
+
+        <variable
+            name="showPlus"
+            type="Boolean"/>
+
+        <variable
+            name="isTitleHighlighted"
+            type="Boolean"/>
+
+        <variable
+            name="highlightColor"
+            type="Integer"/>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:paddingStart="@dimen/margin_big_20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        bind:onClickListener="@{onClickListener}"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/dot"
+            android:layout_marginTop="@dimen/margin_top_divider"
+            android:layout_width="@dimen/width_divider"
+            android:layout_marginBottom="@dimen/margin_top_divider"
+            android:layout_height="@dimen/width_divider"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="?attr/colorAccent" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_top_divider"
+            android:fontFamily="@font/lato_bold"
+            android:letterSpacing="0.02"
+            android:lineSpacingExtra="1sp"
+            android:text="@{sectionTitle}"
+            android:textAllCaps="true"
+            android:textColor="?attr/colorAccent"
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintBottom_toBottomOf="@+id/dot"
+            app:layout_constraintStart_toEndOf="@+id/dot"
+            app:layout_constraintTop_toTopOf="@+id/dot"
+            tools:text="Latet Releases" />
+
+        <ImageView
+            android:layout_width="@dimen/plus_button_width"
+            android:layout_height="@dimen/plus_button_width"
+            android:layout_gravity="end"
+            android:visibility="@{showPlus ? View.VISIBLE : View.GONE}"
+            android:layout_marginEnd="@dimen/margin_big_20dp"
+            android:src="@drawable/plus"
+            android:stateListAnimator="@animator/plus_minus_state_list_animator"
+            bind:animatableDrawable="@{isParentExpanded ? R.drawable.animated_plus : R.drawable.animated_minus}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

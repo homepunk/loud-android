@@ -1,5 +1,7 @@
 package homepunk.github.com.presentation.feature.discover.event
 
+import android.os.Bundle
+import android.view.View
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.core.base.BaseFragment
 import homepunk.github.com.presentation.databinding.FragmentEventBinding
@@ -14,8 +16,8 @@ class DiscoverEventFragment : BaseFragment<FragmentEventBinding>() {
         mDataBinding.viewModel = eventListViewModel
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         eventListViewModel.fetchUpcomingEventList()
     }
 }

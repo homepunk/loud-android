@@ -2,9 +2,9 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <corners
-        android:topLeftRadius="@dimen/radius_filter_card"
-        android:topRightRadius="@dimen/radius_filter_card"
-        android:bottomLeftRadius="@dimen/radius_filter_card"
-        android:bottomRightRadius="@dimen/radius_filter_card" />
+        android:topLeftRadius="@dimen/radius_default_card"
+        android:topRightRadius="@dimen/radius_default_card"
+        android:bottomLeftRadius="@dimen/radius_default_card"
+        android:bottomRightRadius="@dimen/radius_default_card" />
     <solid android:color="@color/background_gray"/>
 </shape>

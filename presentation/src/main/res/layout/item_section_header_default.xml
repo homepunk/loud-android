@@ -27,7 +27,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:paddingStart="@dimen/margin_default_10dp"
+        android:paddingStart="@dimen/margin_big_20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         bind:onClickListener="@{onClickListener}"
@@ -41,14 +41,14 @@
             android:layout_height="@dimen/width_divider"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="?attr/colorAccent" />
+            android:background="@color/text" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_top_divider"
-            android:fontFamily="@font/lato_bold"
+            android:fontFamily="@font/lato"
             android:letterSpacing="0.02"
             android:lineSpacingExtra="1sp"
             android:text="@{sectionTitle}"
@@ -65,7 +65,7 @@
             android:layout_height="@dimen/plus_button_width"
             android:layout_gravity="end"
             android:visibility="@{showPlus ? View.VISIBLE : View.GONE}"
-            android:layout_marginEnd="@dimen/margin_default_10dp"
+            android:layout_marginEnd="@dimen/margin_big_20dp"
             android:src="@drawable/plus"
             android:stateListAnimator="@animator/plus_minus_state_list_animator"
             bind:animatableDrawable="@{isParentExpanded ? R.drawable.animated_plus : R.drawable.animated_minus}"

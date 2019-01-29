@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -10,28 +11,51 @@
             type="homepunk.github.com.presentation.feature.discover.event.DiscoverEventViewModel" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/app_name"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <!--<include-->
-            <!--android:id="@+id/section_divider"-->
-            <!--layout="@layout/item_section_divider"-->
-            <!--bind:sectionTitle="@{context.getString(viewModel.titleResId)}"/>-->
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_upcoming_event"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            bind:adapter="@{viewModel.adapter}"
-            bind:itemDecoration_left="@{@dimen/margin_big_20dp}"
-            bind:itemDecoration_right="@{@dimen/margin_big_20dp}"
-            bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
-            bind:itemDecoration_top="@{@dimen/margin_default_10dp}"
-            tools:listitem="@layout/layout_item_parent_children" />
+            android:orientation="vertical"
+            android:text="@string/app_name">
 
-    </LinearLayout>
+            <!--<include-->
+            <!--android:id="@+id/section_divider"-->
+            <!--layout="@layout/item_section_header_default"-->
+            <!--bind:sectionTitle="@{context.getString(viewModel.titleResId)}"/>-->
+
+            <include
+                layout="@layout/item_section_header_highlighted"
+                bind:sectionTitle="@{@string/title_most_popular_event}" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/section_recycler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default_10dp"
+                android:layout_marginBottom="@dimen/margin_default_10dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                bind:adapter="@{viewModel.primaryEventAdapter}"
+                bind:itemDecoration_left="@{@dimen/margin_default_10dp}"
+                bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
+                tools:listitem="@layout/layout_item_primary_event" />
+
+            <include
+                layout="@layout/item_section_header_highlighted"
+                bind:sectionTitle="@{@string/title_upcoming_event}" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_upcoming_event"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_default_10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                bind:adapter="@{viewModel.adapter}"
+                bind:itemDecoration_top="@{@dimen/margin_default_10dp}"
+                tools:listitem="@layout/layout_item_parent_children" />
+        </LinearLayout>
+    </ScrollView>
 </layout>

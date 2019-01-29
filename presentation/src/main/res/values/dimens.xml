@@ -5,8 +5,12 @@
     <dimen name="bottom_sheet_corner_radius">8dp</dimen>
     <dimen name="bottom_sheet_top_padding">8dp</dimen>
     <dimen name="radius_default_card">8dp</dimen>
+
     <dimen name="width_card_default">180dp</dimen>
     <dimen name="height_card_default">180dp</dimen>
+
+    <dimen name="width_card_primary">200dp</dimen>
+    <dimen name="height_card_primary">220dp</dimen>
 
     <dimen name="margin_small_2dp">2dp</dimen>
     <dimen name="margin_small_4dp">4dp</dimen>
@@ -23,6 +27,7 @@
     <dimen name="height_divider">20dp</dimen>
     <dimen name="margin_top_divider">16dp</dimen>
     <dimen name="text_size_default">16sp</dimen>
+    <dimen name="text_size_event_subtitle">12sp</dimen>
     <dimen name="text_size_large">18sp</dimen>
     <dimen name="text_size_large_26sp">26sp</dimen>
     <dimen name="text_size_large_28sp">28sp</dimen>
@@ -31,8 +36,9 @@
     <dimen name="radius_small_card">4dp</dimen>
     <dimen name="plus_button_width">16dp</dimen>
     <dimen name="text_size_timeline_date">20sp</dimen>
-    <dimen name="height_timeline_event">56dp</dimen>
+    <dimen name="height_timeline_event">64dp</dimen>
     <dimen name="margin_timeline">11dp</dimen>
     <dimen name="width_timeline">2dp</dimen>
+
     <dimen name="radius_filter_card">16dp</dimen>
 </resources>

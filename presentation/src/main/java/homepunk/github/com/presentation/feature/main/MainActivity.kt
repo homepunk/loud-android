@@ -5,6 +5,7 @@ import androidx.viewpager.widget.ViewPager
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.core.adapter.SimpleViewPagerAdapter
 import homepunk.github.com.presentation.core.base.BaseActivity
+import homepunk.github.com.presentation.core.ext.swapVisibility
 import homepunk.github.com.presentation.databinding.ActivityMainBinding
 import homepunk.github.com.presentation.feature.main.menu.MainMenuViewModel
 import javax.inject.Inject
@@ -51,6 +52,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 }
             })
             bottomNavLayout.setTitleArray(arrayOf("RAP", "ROCK", "DUB", "REGGAE", "NOISE", "PARTY", "TECHNO"))
+
+            modeButton.setOnClickListener {
+                it.swapVisibility()
+                boomFab.swapVisibility()
+            }
+            boomFab.setOnClickListener {
+                it.swapVisibility()
+                modeButton.swapVisibility()
+            }
         }
     }
 

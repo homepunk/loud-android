@@ -21,7 +21,7 @@
 
             <include
                 android:id="@+id/parent_layout"
-                layout="@layout/item_section_divider"
+                layout="@layout/item_section_header_default"
                 bind:showPlus="@{true}"
                 bind:isParentExpanded="@{parentModel.isParentExpanded}"
                 bind:onClickListener="@{parentModel.onParentClickListener}"
@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingEnd="@dimen/margin_default_10dp"
+                android:paddingStart="@dimen/margin_default_10dp"
                 android:background="@android:color/transparent"
                 bind:expand="@{parentModel.isParentExpanded}"
                 bind:children="@{parentModel.events}">
