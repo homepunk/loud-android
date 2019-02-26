@@ -32,5 +32,6 @@
     <string name="title_latest_releases">Latest Releases</string>
     <string name="title_upcoming_event">Upcoming</string>
     <string name="title_most_popular_event">Most popular</string>
+    <string name="label_menu">Menu</string>
 
 </resources>

@@ -13,7 +13,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:nestedScrollingEnabled="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,7 +25,7 @@
             <!--<include-->
             <!--android:id="@+id/section_divider"-->
             <!--layout="@layout/item_section_header_default"-->
-            <!--bind:sectionTitle="@{context.getString(viewModel.titleResId)}"/>-->
+            <!--bind:sectionTitle="@{context.getString(viewModel.title)}"/>-->
 
             <include
                 layout="@layout/item_section_header_highlighted"
@@ -51,6 +52,7 @@
                 android:id="@+id/rv_upcoming_event"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:nestedScrollingEnabled="false"
                 android:layout_marginTop="@dimen/margin_default_10dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 bind:adapter="@{viewModel.adapter}"

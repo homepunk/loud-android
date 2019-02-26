@@ -8,6 +8,8 @@
         <attr name="bubble_tabFixedWidth" format="boolean"/>
         <attr name="bubble_tabVerticalMargin" format="integer|dimension"/>
         <attr name="bubble_startMargin" format="integer|dimension"/>
+        <attr name="bubble_iconWidth" format="integer|dimension"/>
+        <attr name="bubble_iconHeight" format="integer|dimension"/>
     </declare-styleable>
 
 </resources>

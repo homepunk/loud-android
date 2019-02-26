@@ -15,7 +15,7 @@ class DiscoverHostViewModel @Inject constructor() : BaseViewModel() {
     val fragmentLiveData: MutableLiveData<Fragment> = MutableLiveData()
 
     override fun init() {
-        compositeDisposable.add(appModeInteractor.getCurrentAppMode()
+        compositeDisposable.add(appModeInteractor.getAppMode()
                 .subscribe {
                     when (it) {
                         AppMode.LIBRARY -> {

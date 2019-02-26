@@ -12,6 +12,18 @@ fun Array<String>.getMaxLenString(): String {
     return maxLenText
 }
 
+fun Array<Pair<Int, String>>.getMaxLenString(): String {
+    var maxLenText = ""
+    forEach {
+        if (it.second.length > maxLenText.length) {
+            maxLenText = it.second
+        }
+    }
+    return maxLenText
+}
+
+
+
 fun Array<String>.getMaxLenStringIndex(): Int {
     var maxLenText = ""
     var maxLenTextIndex = 0

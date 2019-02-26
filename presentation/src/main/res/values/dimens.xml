@@ -26,11 +26,13 @@
     <dimen name="width_divider">4dp</dimen>
     <dimen name="height_divider">20dp</dimen>
     <dimen name="margin_top_divider">16dp</dimen>
+
     <dimen name="text_size_default">16sp</dimen>
-    <dimen name="text_size_event_subtitle">12sp</dimen>
     <dimen name="text_size_large">18sp</dimen>
     <dimen name="text_size_large_26sp">26sp</dimen>
     <dimen name="text_size_large_28sp">28sp</dimen>
+    <dimen name="text_size_event_subtitle">12sp</dimen>
+
     <dimen name="height_event_card_default">42dp</dimen>
     <dimen name="hieght_top_divider">4dp</dimen>
     <dimen name="radius_small_card">4dp</dimen>
@@ -41,4 +43,5 @@
     <dimen name="width_timeline">2dp</dimen>
 
     <dimen name="radius_filter_card">16dp</dimen>
+    <dimen name="text_size_menu_item">18sp</dimen>
 </resources>

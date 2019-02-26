@@ -8,33 +8,44 @@ import homepunk.github.com.presentation.common.model.menu.MenuModel
 import homepunk.github.com.presentation.common.model.mode.AppModeModel
 import homepunk.github.com.presentation.common.model.section.DiscoverSectionModel
 import homepunk.github.com.presentation.feature.widget.countrypicker.CountryModel
+import homepunk.github.com.presentation.feature.widget.tablayout.BubbleTabLayout
 import javax.inject.Inject
 
 class AppDataFactory @Inject constructor(val context: Context) {
+    private var modeModelList= mutableListOf<AppModeModel>()
+    private var librarySectionList = mutableListOf<DiscoverSectionModel>()
+
+    lateinit var modeTabArray: Array<BubbleTabLayout.TabItem>
+
+    init {
+        modeModelList.add(AppModeModel(AppMode.LIBRARY, context.getString(R.string.title_menu_library), R.color.modeLibraryColor, R.drawable.ic_mode_library, R.style.AppModeLibraryTheme))
+        modeModelList.add(AppModeModel(AppMode.EVENTS, context.getString(R.string.title_menu_events), R.color.modeEventsColor, R.drawable.ic_mode_events, R.style.AppModeEventTheme))
+        modeModelList.add(AppModeModel(AppMode.GEAR, context.getString(R.string.title_menu_gear), R.color.modeGearColor, R.drawable.ic_mode_gear, R.style.AppModeGearTheme))
+
+
+        librarySectionList.add(DiscoverSectionModel(0, Constant.DISCOGS.LATEST_RELEASE_GENRE_TYPE_RAP, context.resources.getStringArray(R.array.genres)[0]))
+        librarySectionList.add(DiscoverSectionModel(1, Constant.DISCOGS.LATEST_RELEASE_GENRE_TYPE_ROCK, context.resources.getStringArray(R.array.genres)[1]))
+        librarySectionList.add(DiscoverSectionModel(2, Constant.DISCOGS.LATEST_RELEASE_GENRE_TYPE_REGGAE, context.resources.getStringArray(R.array.genres)[2]))
+        librarySectionList.add(DiscoverSectionModel(3, Constant.DISCOGS.LATEST_RELEASE_GENRE_TYPE_ELECTRONIC, context.resources.getStringArray(R.array.genres)[3]))
+        librarySectionList.add(DiscoverSectionModel(4, Constant.DISCOGS.LATEST_RELEASE_TYPE_RELEASE, context.resources.getStringArray(R.array.genres)[4]))
+    }
+
+
     fun getLibraryDiscoverSectionList(): List<DiscoverSectionModel> {
-        val dataList = mutableListOf<DiscoverSectionModel>()
-        dataList.add(DiscoverSectionModel(0, Constant.DISCOGS.LATEST_RELEASE_GENRE_TYPE_RAP, context.resources.getStringArray(R.array.genres)[0]))
-        dataList.add(DiscoverSectionModel(1, Constant.DISCOGS.LATEST_RELEASE_GENRE_TYPE_ROCK, context.resources.getStringArray(R.array.genres)[1]))
-        dataList.add(DiscoverSectionModel(2, Constant.DISCOGS.LATEST_RELEASE_GENRE_TYPE_REGGAE, context.resources.getStringArray(R.array.genres)[2]))
-        dataList.add(DiscoverSectionModel(3, Constant.DISCOGS.LATEST_RELEASE_GENRE_TYPE_ELECTRONIC, context.resources.getStringArray(R.array.genres)[3]))
-        dataList.add(DiscoverSectionModel(4, Constant.DISCOGS.LATEST_RELEASE_TYPE_RELEASE, context.resources.getStringArray(R.array.genres)[4]))
-        return dataList
+        return librarySectionList
     }
 
     fun getAppModeModelList(): List<AppModeModel> {
-        val dataList = mutableListOf<AppModeModel>()
-        dataList.add(AppModeModel(AppMode.LIBRARY, context.getString(R.string.title_menu_library), R.color.modeLibraryColor, R.drawable.ic_mode_library, R.style.AppModeLibraryTheme))
-        dataList.add(AppModeModel(AppMode.EVENTS, context.getString(R.string.title_menu_events), R.color.modeEventsColor, R.drawable.ic_mode_events, R.style.AppModeEventTheme))
-        dataList.add(AppModeModel(AppMode.GEAR, context.getString(R.string.title_menu_gear), R.color.modeGearColor, R.drawable.ic_mode_gear, R.style.AppModeGearTheme))
-        return dataList
+        return modeModelList
     }
+
+    fun getAppModeModel(mode: AppMode) = modeModelList.find { it.mode == mode }!!
 
     fun getMenuList(): List<MenuModel> {
         val menuList = mutableListOf<MenuModel>()
         menuList.add(MenuModel(MenuModel.TYPE.LIBRARY, R.color.modeLibraryColor, R.string.title_menu_library, R.drawable.ic_mode_library, AppMode.LIBRARY))
         menuList.add(MenuModel(MenuModel.TYPE.EVENTS, R.color.modeEventsColor, R.string.title_menu_events, R.drawable.ic_mode_events, AppMode.EVENTS))
         menuList.add(MenuModel(MenuModel.TYPE.GEAR, R.color.modeGearColor, R.string.title_menu_gear, R.drawable.ic_mode_gear, AppMode.GEAR))
-        menuList.add(MenuModel(MenuModel.TYPE.SETTINGS, R.color.menuColorSettings, R.string.title_menu_settings, R.drawable.ic_settings))
         return menuList
     }
 

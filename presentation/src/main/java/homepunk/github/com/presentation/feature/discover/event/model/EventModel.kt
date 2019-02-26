@@ -30,7 +30,6 @@ class EventModel(var event: SongkickEvent) : BaseObservable() {
             else
                 "Unknown"
         }
-
     }
 
     @Bindable

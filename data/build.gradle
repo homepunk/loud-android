@@ -43,4 +43,6 @@ dependencies {
     implementation dataDependencies.gsonConverter
     implementation dataDependencies.loggingInterceptor
     implementation dataDependencies.clientDiscogs
+
+    api dataDependencies.facebook
 }

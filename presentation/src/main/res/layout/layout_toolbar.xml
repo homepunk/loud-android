@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <import type="homepunk.github.com.presentation.R" />
+
         <variable
             name="appModeModel"
             type="homepunk.github.com.presentation.common.model.mode.AppModeModel" />
+
+        <variable
+            name="menuViewModel"
+            type="homepunk.github.com.presentation.feature.main.menu.MainMenuViewModel" />
+
+        <variable
+            name="onMenuClickListener"
+            type="android.view.View.OnClickListener" />
 
     </data>
     <!--<androidx.cardview.widget.CardView-->
@@ -18,33 +29,45 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="56dp"
+        android:fitsSystemWindows="true"
         app:cardBackgroundColor="@color/background">
 
         <View
             android:id="@+id/dot"
-            android:layout_width="0dp"
-            android:layout_marginTop="@dimen/margin_small_4dp"
-            android:layout_height="3dp"
+            android:layout_width="4dp"
+            android:layout_height="0dp"
             android:background="?attr/colorAccent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="@+id/textView"/>
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/title_frame"
+            app:layout_constraintEnd_toStartOf="@+id/title_frame"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/title_frame" />
 
-        <TextView
-            android:id="@+id/textView"
+        <FrameLayout
+            android:id="@+id/title_frame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_default_10dp"
-            android:fontFamily="@font/lato_bold"
-            android:text="@{appModeModel.titleResId}"
-            android:textAllCaps="true"
-            android:textColor="@color/whiteBone"
-            android:textSize="20sp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Library"
-            tools:textColor="@color/grey" />
+            app:layout_constraintStart_toEndOf="@+id/dot"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_default_10dp"
+                android:fontFamily="@font/lato_bold"
+                android:textAllCaps="true"
+                android:textColor="@color/whiteBone"
+                android:textSize="20sp"
+                bind:animationResId="@{R.anim.translate_down}"
+                bind:text="@{menuViewModel.title}"
+                tools:text="EVENTS"/>
+        </FrameLayout>
 
         <ImageView
             android:layout_width="0dp"
@@ -54,19 +77,21 @@
             android:layout_marginBottom="@dimen/margin_small_6dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="@+id/title_frame"
+            app:layout_constraintStart_toStartOf="@+id/title_frame"
+            app:layout_constraintTop_toBottomOf="@+id/title_frame"
             app:srcCompat="@drawable/title_arrow" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/textView"
-            app:layout_constraintBottom_toBottomOf="@id/textView"
             android:layout_marginTop="6dp"
+            android:onClickListener="@{menuViewModel.onMenuClickListener}"
+            android:src="@drawable/ic_controls"
+            app:layout_constraintBottom_toBottomOf="@+id/title_frame"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_controls"/>
+            app:layout_constraintTop_toTopOf="@+id/title_frame" />
+
         <View
             android:layout_width="42dp"
             android:layout_height="2dp"
@@ -78,7 +103,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/title_frame" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!--</androidx.cardview.widget.CardView>-->
 </layout>

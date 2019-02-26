@@ -25,7 +25,7 @@
             android:layout_width="@dimen/width_timeline"
             android:layout_height="24dp"
             android:layout_marginStart="@dimen/margin_timeline"
-            android:background="?attr/colorAccent"
+            android:background="@color/timeline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,7 +48,7 @@
             android:layout_width="@dimen/width_timeline"
             android:layout_height="24dp"
             android:layout_marginStart="@dimen/margin_timeline"
-            android:background="?attr/colorAccent"
+            android:background="@color/timeline"
             app:layout_constraintTop_toBottomOf="@+id/date"
             app:layout_constraintStart_toStartOf="parent" />
 

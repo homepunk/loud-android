@@ -66,6 +66,7 @@ ext {
     ]
 
     dataDependencies = [
+            facebook:               "com.facebook.android:facebook-android-sdk:4.33.0",
             okHttp:                 "com.squareup.okhttp3:okhttp:${okHttpVersion}",
             gson:                   "com.google.code.gson:gson:${gsonVersion}",
             retrofit:               "com.squareup.retrofit2:retrofit:${retrofitVerison}",

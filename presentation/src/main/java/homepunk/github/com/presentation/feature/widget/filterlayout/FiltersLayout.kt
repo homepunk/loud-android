@@ -109,8 +109,8 @@ class FiltersLayout @JvmOverloads constructor(context: Context, attrs: Attribute
 
     private fun getBubbleTab(title: String): BubbleTab {
         val tab = BubbleTab(context)
-        tab.tabText.isAllCaps = buttonTextAllCaps
-        tab.tabText.text = title
+        tab.title.isAllCaps = buttonTextAllCaps
+        tab.title.text = title
 
         return tab
     }

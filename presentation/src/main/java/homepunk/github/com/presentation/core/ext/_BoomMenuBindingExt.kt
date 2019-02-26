@@ -13,7 +13,9 @@ import com.nightonke.boommenu.Piece.PiecePlaceEnum
 import com.nightonke.boommenu.Util
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.common.model.menu.MenuModel
+import homepunk.github.com.presentation.common.model.mode.AppModeModel
 import homepunk.github.com.presentation.feature.widget.countrypicker.CountryModel
+import homepunk.github.com.presentation.feature.widget.tablayout.BubbleTabLayout
 import homepunk.github.com.presentation.util.DimensionUtil
 
 /**Created by Homepunk on 17.01.2019. **/
@@ -81,3 +83,28 @@ fun BoomMenuButton.bindCountryList(countryList: List<CountryModel>) {
         addBuilder(builder)
     }
 }
+
+
+@BindingAdapter("menu")
+fun BubbleTabLayout.bindMenuList(menuList: List<MenuModel>) {
+    val arr = arrayOfNulls<BubbleTabLayout.TabItem>(menuList.size)
+    menuList.forEachIndexed {i, model ->
+        arr[i] = BubbleTabLayout.TabItem(model.iconResId, model.titleResId, model.colorResId)
+    }
+   setImageAndTitleArray(arr)
+}
+
+@BindingAdapter("onBubbleTabClickListener")
+fun BubbleTabLayout.bindOnMenuTabClickListener(listener: BubbleTabLayout.OnMenuTabClickListener) {
+    onMenuTabClickListener = listener
+}
+
+@BindingAdapter("currentTabItem")
+fun BubbleTabLayout.bindCurrentTabItem(appModeModel: AppModeModel) {
+    mTabItemArray.forEachIndexed { position, tab ->
+        if (tab?.colorResId == appModeModel.colorResId) {
+            currentTabPosition = position
+        }
+    }
+}
+

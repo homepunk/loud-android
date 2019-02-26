@@ -38,7 +38,7 @@
     <color name="modeLibraryColor">#397367</color>
     <color name="menuColorSettings">#3A435E</color>
 
-    <color name="timeline">@color/modeEventsColor</color>
+    <color name="timeline">@color/whiteBone</color>
 
     <color name="color3">#3A435E</color>
     <color name="background_gray">#393D3F</color>
