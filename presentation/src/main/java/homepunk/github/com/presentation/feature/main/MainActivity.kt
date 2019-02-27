@@ -11,8 +11,7 @@ import javax.inject.Inject
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
-    @Inject
-    lateinit var mMainMenuViewModel: MainMenuViewModel
+    @Inject lateinit var mMainMenuViewModel: MainMenuViewModel
     private lateinit var mMainViewModel: MainActivityViewModel
 
     override fun getLayoutId() = R.layout.activity_main
@@ -27,8 +26,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             menuViewModel = mMainMenuViewModel
             viewModel = mMainViewModel
 
-            mMainMenuViewModel.title.set(mAppModeViewModel.currentAppModeModelLiveData.value!!.title)
-            pagerAdapter = SimpleViewPagerAdapter(supportFragmentManager)
+            mMainMenuViewModel.mainTitle.set(mAppModeViewModel.currentAppModeModelLiveData.value!!.title)
+            pagerAdapter = SimpleViewPagerAdapter(supportFragmentManager).apply {
+                mTitleList = mutableListOf("Discover", "Collection", "Map")
+            }
+            menuItemPagerAdapter = SimpleViewPagerAdapter(supportFragmentManager)
             mainContent.bottomNav.setOnNavigationItemSelectedListener listener@{
                 when (it.itemId) {
                     R.id.action_discover -> mainContent.viewPager.currentItem = 0

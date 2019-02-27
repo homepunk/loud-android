@@ -17,7 +17,7 @@ class DiscoverEventViewModel @Inject constructor()
     @Inject
     lateinit var eventInteractor: SongkickEventInteractor
 
-    val adapter: SimpleBindingRecyclerViewAdapter<EventLocationModel> = SimpleBindingRecyclerViewAdapter(R.layout.layout_item_parent_children, BR.parentModel)
+    val locatonEventsAdapter: SimpleBindingRecyclerViewAdapter<EventLocationModel> = SimpleBindingRecyclerViewAdapter(R.layout.layout_item_parent_children, BR.parentModel)
     val primaryEventAdapter: SimpleBindingRecyclerViewAdapter<EventModel> = SimpleBindingRecyclerViewAdapter(R.layout.layout_item_primary_event, BR.model)
 
     override fun init() {
@@ -36,6 +36,6 @@ class DiscoverEventViewModel @Inject constructor()
                 .toList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess { pair -> primaryEventAdapter.itemList = pair[1].getEvents()}
-                .subscribe { itemList -> adapter.itemList = itemList }
+                .subscribe { itemList -> locatonEventsAdapter.itemList = itemList }
     }
 }

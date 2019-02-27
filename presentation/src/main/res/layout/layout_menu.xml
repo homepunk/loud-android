@@ -11,6 +11,10 @@
         <import type="homepunk.github.com.presentation.R" />
 
         <variable
+            name="menuItemPagerAdapter"
+            type="homepunk.github.com.presentation.core.adapter.SimpleViewPagerAdapter"/>
+
+        <variable
             name="menuViewModel"
             type="homepunk.github.com.presentation.feature.main.menu.MainMenuViewModel" />
 
@@ -41,7 +45,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:menu="@{menuViewModel.menuList}"
+            bind:menu="@{menuViewModel.modeList}"
             bind:currentTabItem="@{appModeModel}"
             bind:onBubbleTabClickListener="@{menuViewModel.onMenuTabClickListener}" />
 
@@ -51,7 +55,6 @@
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/margin_big_20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mode_tab_layout"
@@ -61,6 +64,29 @@
             bind:visibility="@{menuViewModel.isMenuOpened ? View.VISIBLE : View.GONE}"
             tools:listitem="@layout/layout_item_menu" />
 
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginBottom="@dimen/margin_big_20dp"
+            android:layout_marginStart="@dimen/margin_big_20dp"
+            android:layout_marginEnd="@dimen/margin_big_20dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintBottom_toTopOf="@+id/vp_menu_item_detail"
+            app:layout_constraintTop_toBottomOf="@+id/rv_mode_menu"
+            android:background="@drawable/background_circle_filled_gray"/>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp_menu_item_detail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            bind:selectedItemPosition="@{menuViewModel.menuItemFragmentIndex}"
+            bind:adapter="@{menuItemPagerAdapter}"
+            bind:fragmentList="@{menuViewModel.menuItemFragmentList}"
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

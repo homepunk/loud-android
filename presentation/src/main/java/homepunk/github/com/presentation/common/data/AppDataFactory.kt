@@ -4,6 +4,7 @@ import android.content.Context
 import homepunk.github.com.data.core.constant.Constant
 import homepunk.github.com.domain.model.AppMode
 import homepunk.github.com.presentation.R
+import homepunk.github.com.presentation.common.model.menu.MenuModeModel
 import homepunk.github.com.presentation.common.model.menu.MenuModel
 import homepunk.github.com.presentation.common.model.mode.AppModeModel
 import homepunk.github.com.presentation.common.model.section.DiscoverSectionModel
@@ -41,19 +42,23 @@ class AppDataFactory @Inject constructor(val context: Context) {
 
     fun getAppModeModel(mode: AppMode) = modeModelList.find { it.mode == mode }!!
 
-    fun getMenuList(): List<MenuModel> {
-        val menuList = mutableListOf<MenuModel>()
-        menuList.add(MenuModel(MenuModel.TYPE.LIBRARY, R.color.modeLibraryColor, R.string.title_menu_library, R.drawable.ic_mode_library, AppMode.LIBRARY))
-        menuList.add(MenuModel(MenuModel.TYPE.EVENTS, R.color.modeEventsColor, R.string.title_menu_events, R.drawable.ic_mode_events, AppMode.EVENTS))
-        menuList.add(MenuModel(MenuModel.TYPE.GEAR, R.color.modeGearColor, R.string.title_menu_gear, R.drawable.ic_mode_gear, AppMode.GEAR))
+    fun getMenuModeList(): MutableList<MenuModeModel> {
+        val menuList = mutableListOf<MenuModeModel>()
+        menuList.add(MenuModeModel(MenuModeModel.TYPE.LIBRARY, R.color.modeLibraryColor, R.string.title_menu_library, R.drawable.ic_mode_library, AppMode.LIBRARY))
+        menuList.add(MenuModeModel(MenuModeModel.TYPE.EVENTS, R.color.modeEventsColor, R.string.title_menu_events, R.drawable.ic_mode_events, AppMode.EVENTS))
+        menuList.add(MenuModeModel(MenuModeModel.TYPE.GEAR, R.color.modeGearColor, R.string.title_menu_gear, R.drawable.ic_mode_gear, AppMode.GEAR))
         return menuList
     }
+
+    fun getMenuList() = MenuModel.values().asList()
 
     fun getCountryModelList(): List<CountryModel> {
         val dataList = mutableListOf<CountryModel>()
         dataList.add(CountryModel.UA)
-        dataList.add(CountryModel.FR)
         dataList.add(CountryModel.RU)
+        dataList.add(CountryModel.FR)
+        dataList.add(CountryModel.US)
+        dataList.add(CountryModel.JM)
         return dataList
     }
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="homepunk.github.com.presentation.feature.main.menu.CountryListViewModel"/>
+
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            bind:adapter="@{viewModel.adapter}"
+            bind:itemDecoration_bottom="@{@dimen/margin_default_10dp}"
+            bind:itemDecoration_left="@{@dimen/margin_big_20dp}"
+            bind:itemDecoration_right="@{@dimen/margin_big_20dp}"
+            bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listItem="@layout/layout_item_country" />
+    </LinearLayout>
+</layout>

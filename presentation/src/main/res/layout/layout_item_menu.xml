@@ -4,15 +4,19 @@
         <variable
             name="title"
             type="String"/>
+        <variable
+            name="model"
+            type="homepunk.github.com.presentation.common.model.menu.MenuModel"/>
+
     </data>
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:textColor="@color/whiteBone"
+            android:textColor="@drawable/menu_text_color_selector"
             android:fontFamily="@font/lato"
-            android:text="@{title}"
+            android:text="@{model.title}"
             android:layout_gravity="center_horizontal"
             android:textSize="@dimen/text_size_menu_item"
             tools:text="Setting"

@@ -17,7 +17,7 @@ fun ImageView.bindImageUrl(imageUrl: String?) {
     }
 }
 
-@BindingAdapter("animatableDrawable")
+@BindingAdapter("animatableImageResId")
 fun ImageView.bindAnimatebleDrawable(resId: Int) {
     setImageResource(resId)
     drawable?.run {
@@ -25,4 +25,8 @@ fun ImageView.bindAnimatebleDrawable(resId: Int) {
     }?.let {
         it.start()
     }
+}
+@BindingAdapter("imageResId")
+fun ImageView.bindDrawable(resId: Int) {
+    setImageResource(resId)
 }

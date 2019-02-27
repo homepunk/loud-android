@@ -11,6 +11,7 @@ import homepunk.github.com.presentation.feature.discover.DiscoverHostViewModel
 import homepunk.github.com.presentation.feature.discover.event.DiscoverEventViewModel
 import homepunk.github.com.presentation.feature.discover.library.DiscoverLibraryViewModel
 import homepunk.github.com.presentation.feature.main.MainActivityViewModel
+import homepunk.github.com.presentation.feature.main.menu.CountryListViewModel
 import homepunk.github.com.presentation.feature.mode.AppModeViewModel
 
 /**Created by Homepunk on 27.12.2018. **/
@@ -43,4 +44,9 @@ interface ViewModelBindingModule {
     @IntoMap
     @ViewModelKey(DiscoverHostViewModel::class )
     fun bindDiscoverHostViewModel(viewModel: DiscoverHostViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CountryListViewModel::class )
+    fun bindCountryListViewModel(viewModel: CountryListViewModel): ViewModel
 }

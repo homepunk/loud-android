@@ -15,6 +15,10 @@
             type="homepunk.github.com.presentation.core.adapter.SimpleViewPagerAdapter" />
 
         <variable
+            name="menuItemPagerAdapter"
+            type="homepunk.github.com.presentation.core.adapter.SimpleViewPagerAdapter"/>
+
+        <variable
             name="viewModel"
             type="homepunk.github.com.presentation.feature.main.MainActivityViewModel" />
 
@@ -65,6 +69,7 @@
                 <include
                     android:id="@+id/menu_content"
                     layout="@layout/layout_menu"
+                    app:menuItemPagerAdapter="@{menuItemPagerAdapter}"
                     app:appModeModel="@{appModeModel}"
                     app:menuViewModel="@{menuViewModel}" />
 

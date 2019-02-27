@@ -20,3 +20,8 @@ fun ViewPager.setUpViewPager(adapter: SimpleViewPagerAdapter, fragmentList: List
 fun ViewPager.bindOnPageChangeListener(listener: ViewPager.OnPageChangeListener) {
     addOnPageChangeListener(listener)
 }
+
+@BindingAdapter("selectedItemPosition")
+fun ViewPager.bindSelectedItemPosition(position: Int) {
+    setCurrentItem(position, true)
+}

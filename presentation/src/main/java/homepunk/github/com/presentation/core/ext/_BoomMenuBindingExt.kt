@@ -12,7 +12,7 @@ import com.nightonke.boommenu.OnBoomListener
 import com.nightonke.boommenu.Piece.PiecePlaceEnum
 import com.nightonke.boommenu.Util
 import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.common.model.menu.MenuModel
+import homepunk.github.com.presentation.common.model.menu.MenuModeModel
 import homepunk.github.com.presentation.common.model.mode.AppModeModel
 import homepunk.github.com.presentation.feature.widget.countrypicker.CountryModel
 import homepunk.github.com.presentation.feature.widget.tablayout.BubbleTabLayout
@@ -29,9 +29,9 @@ import homepunk.github.com.presentation.util.DimensionUtil
             "menuIconPaddingTop",
             "menuIconPaddingBottom"
         ])
-fun BoomMenuButton.bindAppModeMenu(menuList: List<MenuModel>, iconPaddingLeft: Float = 0f, iconPaddingRight: Float = 0f, iconPaddingTop: Float = 0f, iconPaddingBottom: Float = 0f) {
-    if (menuList.size != 4) {
-        throw ArrayIndexOutOfBoundsException("Menu buttons count = ${menuList.size}, please pass 3 buttons or change PiecePlaceEnum.DOT_X_N to X match count of buttons")
+fun BoomMenuButton.bindAppModeMenu(menuModeList: List<MenuModeModel>, iconPaddingLeft: Float = 0f, iconPaddingRight: Float = 0f, iconPaddingTop: Float = 0f, iconPaddingBottom: Float = 0f) {
+    if (menuModeList.size != 4) {
+        throw ArrayIndexOutOfBoundsException("Menu buttons count = ${menuModeList.size}, please pass 3 buttons or change PiecePlaceEnum.DOT_X_N to X match count of buttons")
     } else {
         buttonEnum = ButtonEnum.TextOutsideCircle
         piecePlaceEnum = PiecePlaceEnum.DOT_4_2
@@ -44,7 +44,7 @@ fun BoomMenuButton.bindAppModeMenu(menuList: List<MenuModel>, iconPaddingLeft: F
     val vm_0_5 = buttonHorizontalMargin / 2
     val vm_1_5 = buttonVerticalMargin * 1.5f
 
-    menuList.forEach { menuItem ->
+    menuModeList.forEach { menuItem ->
         val builder = TextOutsideCircleButton.Builder()
                 .normalImageRes(menuItem.iconResId)
                 .normalColorRes(menuItem.colorResId)
@@ -86,9 +86,9 @@ fun BoomMenuButton.bindCountryList(countryList: List<CountryModel>) {
 
 
 @BindingAdapter("menu")
-fun BubbleTabLayout.bindMenuList(menuList: List<MenuModel>) {
-    val arr = arrayOfNulls<BubbleTabLayout.TabItem>(menuList.size)
-    menuList.forEachIndexed {i, model ->
+fun BubbleTabLayout.bindMenuList(menuModeList: List<MenuModeModel>) {
+    val arr = arrayOfNulls<BubbleTabLayout.TabItem>(menuModeList.size)
+    menuModeList.forEachIndexed { i, model ->
         arr[i] = BubbleTabLayout.TabItem(model.iconResId, model.titleResId, model.colorResId)
     }
    setImageAndTitleArray(arr)

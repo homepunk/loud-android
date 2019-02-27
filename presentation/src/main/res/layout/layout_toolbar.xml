@@ -65,7 +65,7 @@
                 android:textColor="@color/whiteBone"
                 android:textSize="20sp"
                 bind:animationResId="@{R.anim.translate_down}"
-                bind:text="@{menuViewModel.title}"
+                bind:text="@{menuViewModel.mainTitle}"
                 tools:text="EVENTS"/>
         </FrameLayout>
 

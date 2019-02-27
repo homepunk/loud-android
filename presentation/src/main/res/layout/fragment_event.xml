@@ -25,7 +25,7 @@
             <!--<include-->
             <!--android:id="@+id/section_divider"-->
             <!--layout="@layout/item_section_header_default"-->
-            <!--bind:sectionTitle="@{context.getString(viewModel.title)}"/>-->
+            <!--bind:sectionTitle="@{context.getString(viewModel.mainTitle)}"/>-->
 
             <include
                 layout="@layout/item_section_header_highlighted"
@@ -55,7 +55,7 @@
                 android:nestedScrollingEnabled="false"
                 android:layout_marginTop="@dimen/margin_default_10dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                bind:adapter="@{viewModel.adapter}"
+                bind:adapter="@{viewModel.locatonEventsAdapter}"
                 bind:itemDecoration_top="@{@dimen/margin_default_10dp}"
                 tools:listitem="@layout/layout_item_parent_children" />
         </LinearLayout>
