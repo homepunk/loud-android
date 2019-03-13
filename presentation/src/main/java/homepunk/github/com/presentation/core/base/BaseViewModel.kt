@@ -4,8 +4,12 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 
-abstract class BaseViewModel : ViewModel() {
+abstract class BaseViewModel : ViewModel {
     var compositeDisposable: CompositeDisposable = CompositeDisposable()
+
+    constructor() {
+//        init()
+    }
 
     open fun init() {
 

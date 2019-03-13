@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 /**Created by Homepunk on 11.01.2019. **/
 class SimpleViewPagerAdapter(var supportFragmentManager: FragmentManager?) : FragmentPagerAdapter(supportFragmentManager) {
     val mFragmentList = arrayListOf<Fragment>()
-    var mTitleList = /*arrayOf("Discover", "Collection", "Map")*/mutableListOf<String>()
+    var mTitleList = mutableListOf<String>()
 
     override fun getItem(position: Int) = mFragmentList[position]
 

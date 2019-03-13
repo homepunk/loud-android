@@ -6,14 +6,18 @@ import homepunk.github.com.presentation.feature.discover.DiscoverHostFragment
 import homepunk.github.com.presentation.feature.discover.event.DiscoverEventFragment
 import homepunk.github.com.presentation.feature.discover.library.DiscoverLibraryFragment
 import homepunk.github.com.presentation.feature.main.MainActivity
-import homepunk.github.com.presentation.feature.main.menu.CountryListFragment
-import homepunk.github.com.presentation.feature.main.menu.LanguageListFragment
+import homepunk.github.com.presentation.feature.menu.CountryListFragment
+import homepunk.github.com.presentation.feature.menu.LanguageListFragment
+import homepunk.github.com.presentation.feature.menu.MenuActivity
 
 /**Created by Homepunk on 27.12.2018. **/
 @Module()
 interface FeatureBindingModule {
     @ContributesAndroidInjector
     fun mainAcitivity(): MainActivity
+
+    @ContributesAndroidInjector
+    fun menuAcitivity(): MenuActivity
 
     @ContributesAndroidInjector
     fun discoverHostFragment(): DiscoverHostFragment

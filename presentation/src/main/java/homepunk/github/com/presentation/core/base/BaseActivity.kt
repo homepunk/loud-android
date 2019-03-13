@@ -1,6 +1,5 @@
 package homepunk.github.com.presentation.core.base
 
-import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -37,13 +36,16 @@ abstract class BaseActivity<BINDING : ViewDataBinding> : AppCompatActivity() {
             currentAppModeModelLiveData.observe(this@BaseActivity, Observer {
                 mDataBinding.setVariable(BR.appModeModel, it)
 
-                currentAppModeTheme?.let { currentTheme ->
-                    if (currentTheme != it.themeResId) {
-                        recreate()
-                    }
+                if (!isThemeApplied) {
+                    recreate()
                 }
             })
             subscribeOnModeChanges()
+        }
+
+        mAppModeViewModel.currentAppModeTheme?.run {
+            mAppModeViewModel.isThemeApplied = true
+            setTheme(this)
         }
         super.onCreate(savedInstanceState)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -54,13 +56,22 @@ abstract class BaseActivity<BINDING : ViewDataBinding> : AppCompatActivity() {
         init()
     }
 
-    override fun getTheme(): Resources.Theme {
-        val theme = super.getTheme()
-        mAppModeViewModel.currentAppModeTheme?.run {
-            theme.applyStyle(this, true)
+    override fun onResume() {
+        super.onResume()
+        mAppModeViewModel.run {
+            if (!isThemeApplied) {
+                recreate()
+            }
         }
-        return theme
     }
+
+    /* override fun getTheme(): Resources.Theme {
+         val theme = super.getTheme()
+         mAppModeViewModel.currentAppModeTheme?.run {
+             theme.applyStyle(this, true)
+         }
+         return theme
+     }*/
 
     fun <T : ViewModel> getViewModel(clazz: Class<T>) = ViewModelProviders.of(this, viewModelFactory)[clazz]
 

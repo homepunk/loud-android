@@ -1,17 +1,16 @@
 package homepunk.github.com.presentation.feature.main;
 
-import android.view.MenuItem
-import androidx.viewpager.widget.ViewPager
+import android.content.Intent
+import android.view.View
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.core.adapter.SimpleViewPagerAdapter
 import homepunk.github.com.presentation.core.base.BaseActivity
+import homepunk.github.com.presentation.core.ext.setupWithViewPager
 import homepunk.github.com.presentation.databinding.ActivityMainBinding
-import homepunk.github.com.presentation.feature.main.menu.MainMenuViewModel
-import javax.inject.Inject
+import homepunk.github.com.presentation.feature.menu.MenuActivity
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
-    @Inject lateinit var mMainMenuViewModel: MainMenuViewModel
     private lateinit var mMainViewModel: MainActivityViewModel
 
     override fun getLayoutId() = R.layout.activity_main
@@ -23,36 +22,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun init() {
         wLog("init")
         mDataBinding.run {
-            menuViewModel = mMainMenuViewModel
             viewModel = mMainViewModel
-
-            mMainMenuViewModel.mainTitle.set(mAppModeViewModel.currentAppModeModelLiveData.value!!.title)
-            pagerAdapter = SimpleViewPagerAdapter(supportFragmentManager).apply {
-                mTitleList = mutableListOf("Discover", "Collection", "Map")
+            onMenuClickListener = View.OnClickListener {
+                startActivity(Intent(this@MainActivity, MenuActivity::class.java))
             }
-            menuItemPagerAdapter = SimpleViewPagerAdapter(supportFragmentManager)
-            mainContent.bottomNav.setOnNavigationItemSelectedListener listener@{
-                when (it.itemId) {
-                    R.id.action_discover -> mainContent.viewPager.currentItem = 0
-                    R.id.action_favorites -> mainContent.viewPager.currentItem = 1
-                    R.id.action_map -> mainContent.viewPager.currentItem = 2
-                }
-                return@listener true
-            }
-            mainContent.viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-                var prevMenuItem: MenuItem? = null
-                override fun onPageScrollStateChanged(state: Int) {
 
-                }
-
-                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                }
-
-                override fun onPageSelected(position: Int) {
-                    prevMenuItem?.isChecked = false
-                    prevMenuItem = mainContent.bottomNav.menu.getItem(position).apply { isChecked = true }
-                }
-            })
+            mainContent.viewPager.adapter = SimpleViewPagerAdapter(supportFragmentManager)
+            mainContent.bottomNav.setupWithViewPager(mainContent.viewPager)
         }
     }
 

@@ -29,3 +29,14 @@ fun View.swapVisibility() {
         GONE
     }
 }
+
+//@BindingAdapter("background")
+//fun View.setBackgroundColorRes(@ColorRes colorRes: Int) {
+//    background = ColorDrawable(ContextCompat.getColor(context, colorRes))
+//}
+//
+//@BindingAdapter("textColor")
+//fun TextView.setTextColorRes(@ColorRes colorRes: Int) {
+//    setTextColor(ContextCompat.getColor(context, colorRes))
+//}
+

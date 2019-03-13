@@ -17,17 +17,11 @@
             name="viewModel"
             type="homepunk.github.com.presentation.feature.main.MainActivityViewModel" />
 
-        <variable
-            name="menuViewModel"
-            type="homepunk.github.com.presentation.feature.main.menu.MainMenuViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        bind:animationResId="@{R.anim.translate_up_and_fade}"
-        bind:visibility="@{menuViewModel.isMenuOpened ? View.GONE : View.VISIBLE}">
+        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
@@ -55,9 +49,7 @@
                 android:id="@+id/view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                bind:adapter="@{pagerAdapter}"
-                bind:fragmentList="@{viewModel.fragmentList}"
-                bind:onPageChangeListener="@{viewModel.onPageChangeListener}" />
+                bind:fragmentList="@{viewModel.fragmentList}"/>
 
             <View
                 android:id="@+id/pager_overlay"

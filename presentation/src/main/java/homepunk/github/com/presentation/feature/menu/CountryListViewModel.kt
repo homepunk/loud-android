@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.feature.main.menu
+package homepunk.github.com.presentation.feature.menu
 
 import homepunk.github.com.presentation.BR
 import homepunk.github.com.presentation.R

@@ -21,21 +21,36 @@
         <variable
             name="appModeModel"
             type="homepunk.github.com.presentation.common.model.mode.AppModeModel" />
+
+        <variable
+            name="onMenuClickListener"
+            type="android.view.View.OnClickListener"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"
-        android:orientation="vertical"
-        android:paddingTop="@dimen/margin_default_10dp">
-<!--
-        bind:animationResId="@{R.anim.translate_up_and_fade}"
-        bind:visibility="@{menuViewModel.isMenuOpened ? View.VISIBLE : View.GONE}"-->
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginStart="@dimen/margin_big_20dp"
+            android:layout_marginEnd="@dimen/margin_big_20dp"
+            app:title="@{@string/label_menu}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:onMenuClickListener="@{onMenuClickListener}" />
+
         <homepunk.github.com.presentation.feature.widget.tablayout.BubbleTabLayout
             android:id="@+id/mode_tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:bubble_defaultColor="@color/whiteBone"
             app:bubble_iconHeight="48dp"
             app:bubble_iconWidth="48dp"
@@ -44,14 +59,15 @@
             app:bubble_startMargin="-20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
             bind:menu="@{menuViewModel.modeList}"
-            bind:currentTabItem="@{appModeModel}" />
+            bind:currentTabItem="@{appModeModel}"
+            bind:onBubbleTabClickListener="@{menuViewModel.onMenuTabClickListener}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_mode_menu"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_big_20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,10 +75,9 @@
             app:layout_constraintTop_toBottomOf="@+id/mode_tab_layout"
             bind:adapter="@{menuViewModel.menuAdapter}"
             bind:itemAnimationEnabled="@{true}"
-            bind:itemDecoration_top="@{@dimen/margin_big_20dp}"/>
-<!--
-            bind:visibility="@{menuViewModel.isMenuOpened ? View.VISIBLE : View.GONE}"
-            tools:listitem="@layout/layout_item_menu" -->
+            bind:itemDecoration_top="@{@dimen/margin_big_20dp}"
+            tools:listitem="@layout/layout_item_menu" />
+
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"

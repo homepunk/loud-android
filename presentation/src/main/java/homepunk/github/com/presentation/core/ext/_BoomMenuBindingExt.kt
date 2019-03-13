@@ -102,7 +102,7 @@ fun BubbleTabLayout.bindOnMenuTabClickListener(listener: BubbleTabLayout.OnMenuT
 @BindingAdapter("currentTabItem")
 fun BubbleTabLayout.bindCurrentTabItem(appModeModel: AppModeModel) {
     mTabItemArray.forEachIndexed { position, tab ->
-        if (tab?.colorResId == appModeModel.colorResId) {
+        if (tab?.colorResId == appModeModel.color) {
             currentTabPosition = position
         }
     }

@@ -8,10 +8,10 @@ import homepunk.github.com.presentation.core.base.BaseViewModel
 import javax.inject.Inject
 
 /**Created by Homepunk on 21.01.2019. **/
-class AppModeViewModel @Inject constructor() : BaseViewModel() {
-    @Inject lateinit var appDataFactory: AppDataFactory
-    @Inject lateinit var appModeInteractor: AppModeInteractor
+class AppModeViewModel @Inject constructor(var appDataFactory: AppDataFactory,
+                                           var appModeInteractor: AppModeInteractor) : BaseViewModel() {
 
+    var isThemeApplied = false
     var currentAppModeTheme: Int? = null
     val currentAppModeModelLiveData = MutableLiveData<AppModeModel>()
 
@@ -20,6 +20,11 @@ class AppModeViewModel @Inject constructor() : BaseViewModel() {
                 .map { mode -> appDataFactory.getAppModeModel(mode) }
                 .doOnError { it.printStackTrace() }
                 .doOnNext { currentAppModeModelLiveData.value = it }
+                .doOnNext {
+                    if (it.themeResId != currentAppModeTheme) {
+                        isThemeApplied = false
+                    }
+                }
                 .subscribe { currentAppModeTheme = it.themeResId })
     }
 }

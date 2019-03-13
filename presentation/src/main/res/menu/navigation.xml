@@ -5,18 +5,21 @@
         android:id="@+id/action_discover"
         android:enabled="true"
         android:icon="@drawable/ic_discover"
-        android:title=""
+        android:title="Discover"
+        android:orderInCategory="0"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_favorites"
         android:enabled="true"
+        android:orderInCategory="1"
         android:icon="@drawable/ic_heart"
-        android:title=""
+        android:title="Collection"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_map"
         android:enabled="true"
         android:icon="@drawable/ic_map"
-        android:title=""
+        android:orderInCategory="2"
+        android:title="Map"
         app:showAsAction="ifRoom" />
 </menu>

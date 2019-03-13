@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="homepunk.github.com.presentation.feature.main.menu.CountryListViewModel"/>
+            type="homepunk.github.com.presentation.feature.menu.CountryListViewModel"/>
 
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

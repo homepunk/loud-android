@@ -1,6 +1,7 @@
 package homepunk.github.com.presentation.common.data
 
 import android.content.Context
+import androidx.core.content.ContextCompat
 import homepunk.github.com.data.core.constant.Constant
 import homepunk.github.com.domain.model.AppMode
 import homepunk.github.com.presentation.R
@@ -19,9 +20,9 @@ class AppDataFactory @Inject constructor(val context: Context) {
     lateinit var modeTabArray: Array<BubbleTabLayout.TabItem>
 
     init {
-        modeModelList.add(AppModeModel(AppMode.LIBRARY, context.getString(R.string.title_menu_library), R.color.modeLibraryColor, R.drawable.ic_mode_library, R.style.AppModeLibraryTheme))
-        modeModelList.add(AppModeModel(AppMode.EVENTS, context.getString(R.string.title_menu_events), R.color.modeEventsColor, R.drawable.ic_mode_events, R.style.AppModeEventTheme))
-        modeModelList.add(AppModeModel(AppMode.GEAR, context.getString(R.string.title_menu_gear), R.color.modeGearColor, R.drawable.ic_mode_gear, R.style.AppModeGearTheme))
+        modeModelList.add(AppModeModel(AppMode.LIBRARY, context.getString(R.string.title_menu_library), ContextCompat.getColor(context, R.color.modeLibraryColor), R.drawable.ic_mode_library, R.style.AppModeLibraryTheme))
+        modeModelList.add(AppModeModel(AppMode.EVENTS, context.getString(R.string.title_menu_events), ContextCompat.getColor(context, R.color.modeEventsColor), R.drawable.ic_mode_events, R.style.AppModeEventTheme))
+        modeModelList.add(AppModeModel(AppMode.GEAR, context.getString(R.string.title_menu_gear), ContextCompat.getColor(context, R.color.modeGearColor), R.drawable.ic_mode_gear, R.style.AppModeGearTheme))
 
 
         librarySectionList.add(DiscoverSectionModel(0, Constant.DISCOGS.LATEST_RELEASE_GENRE_TYPE_RAP, context.resources.getStringArray(R.array.genres)[0]))
