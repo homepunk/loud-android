@@ -8,6 +8,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import homepunk.github.com.presentation.core.listener.OnItemClickListener
+import homepunk.github.com.presentation.core.listener.OnItemPositionClickListener
 
 /**Created by Homepunk on 10.01.2019. **/
 abstract class BaseRecyclerViewAdapter<ITEM, VH : BaseRecyclerViewAdapter.BaseViewHolder<ITEM>> : RecyclerView.Adapter<VH>() {
@@ -20,6 +21,7 @@ abstract class BaseRecyclerViewAdapter<ITEM, VH : BaseRecyclerViewAdapter.BaseVi
         }
 
     open var onItemClickListener: OnItemClickListener<ITEM>? = null
+    open var onItemPositionClickListener: OnItemPositionClickListener? = null
 
     override fun getItemCount() = itemList.size
 
@@ -30,17 +32,26 @@ abstract class BaseRecyclerViewAdapter<ITEM, VH : BaseRecyclerViewAdapter.BaseVi
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.bind(itemList[position])
+
         holder.root.setOnClickListener {
             notifyItemChanged(focusedItem)
             focusedItem = position
             notifyItemChanged(focusedItem)
             onItemClickListener?.onClick(position, itemList[position])
+            onItemPositionClickListener?.onClick(position)
         }
         holder.root.isSelected = focusedItem == position
     }
 
 
+    fun highlightItem(position: Int) {
+        notifyItemChanged(focusedItem)
+        focusedItem = position
+        notifyItemChanged(focusedItem)
+    }
+
     open fun <T : ViewDataBinding> inflateVH(parent: ViewGroup, layoutId: Int) = DataBindingUtil.inflate<T>(LayoutInflater.from(parent.context), layoutId, parent, false)!!
+
     abstract class BaseViewHolder<ITEM>(val root: View) : RecyclerView.ViewHolder(root) {
         abstract fun bind(item: ITEM)
     }

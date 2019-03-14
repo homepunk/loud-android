@@ -1,5 +1,6 @@
 package homepunk.github.com.presentation.feature.main;
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.view.View
 import homepunk.github.com.presentation.R
@@ -24,7 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         mDataBinding.run {
             viewModel = mMainViewModel
             onMenuClickListener = View.OnClickListener {
-                startActivity(Intent(this@MainActivity, MenuActivity::class.java))
+                startActivity(Intent(this@MainActivity, MenuActivity::class.java), ActivityOptions.makeSceneTransitionAnimation(this@MainActivity).toBundle())
             }
 
             mainContent.viewPager.adapter = SimpleViewPagerAdapter(supportFragmentManager)

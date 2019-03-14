@@ -43,7 +43,7 @@ class AppDataFactory @Inject constructor(val context: Context) {
 
     fun getAppModeModel(mode: AppMode) = modeModelList.find { it.mode == mode }!!
 
-    fun getMenuModeList(): MutableList<MenuModeModel> {
+    fun getModeList(): MutableList<MenuModeModel> {
         val menuList = mutableListOf<MenuModeModel>()
         menuList.add(MenuModeModel(MenuModeModel.TYPE.LIBRARY, R.color.modeLibraryColor, R.string.title_menu_library, R.drawable.ic_mode_library, AppMode.LIBRARY))
         menuList.add(MenuModeModel(MenuModeModel.TYPE.EVENTS, R.color.modeEventsColor, R.string.title_menu_events, R.drawable.ic_mode_events, AppMode.EVENTS))
@@ -51,7 +51,7 @@ class AppDataFactory @Inject constructor(val context: Context) {
         return menuList
     }
 
-    fun getMenuList() = MenuModel.values().asList()
+    fun getModeMenuList() = MenuModel.values().asList()
 
     fun getCountryModelList(): List<CountryModel> {
         val dataList = mutableListOf<CountryModel>()

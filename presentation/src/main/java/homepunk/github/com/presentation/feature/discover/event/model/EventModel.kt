@@ -20,10 +20,10 @@ class EventModel(var event: SongkickEvent) : BaseObservable() {
         date.set(getDate(event.start?.date))
         month.set(getMonth(event.start?.date))
         title.set(getTitle2(event.displayName))
-        location.set(getLocationname(event.displayName))
+        location.set(getLocationName(event.displayName))
     }
 
-    private fun getLocationname(value: String): String {
+    private fun getLocationName(value: String): String {
         return getTitle(value).run {
             if (indexOf("at") != -1)
                 substring(indexOf("at"))

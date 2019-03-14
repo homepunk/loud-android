@@ -10,9 +10,9 @@
 
         <import type="homepunk.github.com.presentation.R" />
 
-        <variable
-            name="menuItemPagerAdapter"
-            type="homepunk.github.com.presentation.core.adapter.SimpleViewPagerAdapter"/>
+        <!--<variable-->
+            <!--name="menuItemPagerAdapter"-->
+            <!--type="homepunk.github.com.presentation.core.adapter.SimpleViewPagerAdapter"/>-->
 
         <variable
             name="menuViewModel"
@@ -73,7 +73,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mode_tab_layout"
-            bind:adapter="@{menuViewModel.menuAdapter}"
+            bind:itemList="@{menuViewModel.menuItemList}"
             bind:itemAnimationEnabled="@{true}"
             bind:itemDecoration_top="@{@dimen/margin_big_20dp}"
             tools:listitem="@layout/layout_item_menu" />
@@ -94,8 +94,6 @@
             android:id="@+id/vp_menu_item_detail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            bind:selectedItemPosition="@{menuViewModel.menuItemFragmentIndex}"
-            bind:adapter="@{menuItemPagerAdapter}"
             bind:fragmentList="@{menuViewModel.menuItemFragmentList}"
             app:layout_constraintTop_toBottomOf="@+id/divider"
             app:layout_constraintStart_toStartOf="parent"

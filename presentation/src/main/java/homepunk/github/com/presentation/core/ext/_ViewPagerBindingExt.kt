@@ -35,7 +35,6 @@ fun ViewPager.bindSelectedItemPosition(position: Int) {
     setCurrentItem(position, true)
 }
 
-
 fun BottomNavigationView.setupWithViewPager(viewPager: ViewPager) {
     viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
         var prevMenuItem: MenuItem? = null
@@ -69,3 +68,4 @@ fun BottomNavigationView.setupWithViewPager(viewPager: ViewPager) {
     }
 
 }
+

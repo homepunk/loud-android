@@ -9,8 +9,7 @@ import homepunk.github.com.presentation.feature.discover.event.DiscoverEventFrag
 import homepunk.github.com.presentation.feature.discover.library.DiscoverLibraryFragment
 import javax.inject.Inject
 
-class DiscoverHostViewModel @Inject constructor() : BaseViewModel() {
-    @Inject lateinit var appModeInteractor: AppModeInteractor
+class DiscoverHostViewModel @Inject constructor(var appModeInteractor: AppModeInteractor) : BaseViewModel() {
 
     val fragmentLiveData: MutableLiveData<Fragment> = MutableLiveData()
 
