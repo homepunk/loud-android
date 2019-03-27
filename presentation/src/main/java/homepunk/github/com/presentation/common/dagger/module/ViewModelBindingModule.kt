@@ -11,7 +11,7 @@ import homepunk.github.com.presentation.feature.discover.DiscoverHostViewModel
 import homepunk.github.com.presentation.feature.discover.event.DiscoverEventViewModel
 import homepunk.github.com.presentation.feature.discover.library.DiscoverLibraryViewModel
 import homepunk.github.com.presentation.feature.main.MainViewModel
-import homepunk.github.com.presentation.feature.menu.CountryListViewModel
+import homepunk.github.com.presentation.feature.menu.country.CountryListViewModel
 import homepunk.github.com.presentation.feature.menu.MenuViewModel
 import homepunk.github.com.presentation.feature.mode.AppModeViewModel
 

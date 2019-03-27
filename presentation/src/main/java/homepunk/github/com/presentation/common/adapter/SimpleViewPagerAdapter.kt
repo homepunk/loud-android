@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.core.adapter
+package homepunk.github.com.presentation.common.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

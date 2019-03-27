@@ -6,8 +6,8 @@ import homepunk.github.com.presentation.feature.discover.DiscoverHostFragment
 import homepunk.github.com.presentation.feature.discover.event.DiscoverEventFragment
 import homepunk.github.com.presentation.feature.discover.library.DiscoverLibraryFragment
 import homepunk.github.com.presentation.feature.main.MainActivity
-import homepunk.github.com.presentation.feature.menu.CountryListFragment
-import homepunk.github.com.presentation.feature.menu.LanguageListFragment
+import homepunk.github.com.presentation.feature.menu.country.CountryListFragment
+import homepunk.github.com.presentation.feature.menu.language.LanguageListFragment
 import homepunk.github.com.presentation.feature.menu.MenuActivity
 
 /**Created by Homepunk on 27.12.2018. **/

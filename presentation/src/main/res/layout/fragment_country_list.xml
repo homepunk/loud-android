@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="homepunk.github.com.presentation.feature.menu.CountryListViewModel" />
+            type="homepunk.github.com.presentation.feature.menu.country.CountryListViewModel" />
 
     </data>
 
@@ -26,7 +26,7 @@
             bind:itemDecoration_left="@{@dimen/margin_big_20dp}"
             bind:itemDecoration_right="@{@dimen/margin_big_20dp}"
             bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
-            bind:itemList="@{viewModel.parentWithChildrenList}"
+            bind:expandableItemList="@{viewModel.itemList}"
             tools:listItem="@layout/layout_item_country" />
     </LinearLayout>
 </layout>

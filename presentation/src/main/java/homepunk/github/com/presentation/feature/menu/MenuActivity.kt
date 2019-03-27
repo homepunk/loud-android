@@ -8,8 +8,8 @@ import android.view.Window
 import homepunk.github.com.presentation.BR
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.common.model.menu.MenuModel
-import homepunk.github.com.presentation.core.adapter.SimpleBindingRecyclerViewAdapter
-import homepunk.github.com.presentation.core.adapter.SimpleViewPagerAdapter
+import homepunk.github.com.presentation.common.adapter.SimpleBindingRecyclerAdapter
+import homepunk.github.com.presentation.common.adapter.SimpleViewPagerAdapter
 import homepunk.github.com.presentation.core.base.BaseActivity
 import homepunk.github.com.presentation.core.ext.setupWithViewPager
 import homepunk.github.com.presentation.databinding.ActivityMenuBinding
@@ -31,7 +31,7 @@ class MenuActivity : BaseActivity<ActivityMenuBinding>() {
             menuViewModel = mMenuViewModel
 
             vpMenuItemDetail.adapter = SimpleViewPagerAdapter(supportFragmentManager)
-            rvModeMenu.adapter = SimpleBindingRecyclerViewAdapter<MenuModel>(R.layout.layout_item_menu, BR.model)
+            rvModeMenu.adapter = SimpleBindingRecyclerAdapter<MenuModel>(R.layout.layout_item_menu, BR.model)
             rvModeMenu.setupWithViewPager(vpMenuItemDetail)
 
             onMenuClickListener = View.OnClickListener {

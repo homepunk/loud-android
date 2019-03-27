@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import homepunk.github.com.domain.interactor.SongkickEventInteractor
 import homepunk.github.com.presentation.BR
 import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.core.adapter.SimpleBindingRecyclerViewAdapter
+import homepunk.github.com.presentation.common.adapter.SimpleBindingRecyclerAdapter
 import homepunk.github.com.presentation.core.base.BaseViewModel
 import homepunk.github.com.presentation.feature.discover.event.model.EventLocationModel
 import homepunk.github.com.presentation.feature.discover.event.model.EventModel
@@ -17,8 +17,8 @@ class DiscoverEventViewModel @Inject constructor()
     @Inject
     lateinit var eventInteractor: SongkickEventInteractor
 
-    val locatonEventsAdapter: SimpleBindingRecyclerViewAdapter<EventLocationModel> = SimpleBindingRecyclerViewAdapter(R.layout.layout_item_parent_location_children_events, BR.parentModel)
-    val primaryEventAdapter: SimpleBindingRecyclerViewAdapter<EventModel> = SimpleBindingRecyclerViewAdapter(R.layout.layout_item_primary_event, BR.model)
+    val locatonEventsAdapter: SimpleBindingRecyclerAdapter<EventLocationModel> = SimpleBindingRecyclerAdapter(R.layout.layout_item_parent_location_children_events, BR.parentModel)
+    val primaryEventAdapter: SimpleBindingRecyclerAdapter<EventModel> = SimpleBindingRecyclerAdapter(R.layout.layout_item_primary_event, BR.model)
 
     override fun init() {
     }

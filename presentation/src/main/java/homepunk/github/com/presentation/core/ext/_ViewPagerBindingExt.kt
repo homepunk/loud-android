@@ -5,7 +5,7 @@ import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import homepunk.github.com.presentation.core.adapter.SimpleViewPagerAdapter
+import homepunk.github.com.presentation.common.adapter.SimpleViewPagerAdapter
 
 /**Created by Homepunk on 21.01.2019. **/
 

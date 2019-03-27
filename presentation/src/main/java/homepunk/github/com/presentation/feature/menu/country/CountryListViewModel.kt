@@ -1,20 +1,21 @@
-package homepunk.github.com.presentation.feature.menu
+package homepunk.github.com.presentation.feature.menu.country
 
 import androidx.databinding.ObservableArrayList
 import homepunk.github.com.presentation.common.data.AppDataFactory
 import homepunk.github.com.presentation.core.base.BaseViewModel
-import homepunk.github.com.presentation.feature.menu.location.CountryParentCityChildModel
+import homepunk.github.com.presentation.feature.menu.country.model.CityBindingChildModel
+import homepunk.github.com.presentation.feature.menu.country.model.CountryBindingParentModel
 import javax.inject.Inject
 
 /**Created by Homepunk on 17.01.2019. **/
 class CountryListViewModel @Inject constructor(var appDataFactory: AppDataFactory) : BaseViewModel() {
 
-    var parentWithChildrenList = ObservableArrayList<CountryParentCityChildModel>()
+    var itemList = ObservableArrayList<CountryBindingParentModel>()
 
     override fun init() {
         appDataFactory.getCountryModelList().run {
             forEach {
-                parentWithChildrenList.add(CountryParentCityChildModel(it))
+                itemList.add(CountryBindingParentModel(it, arrayListOf(CityBindingChildModel("Kharkiv"), CityBindingChildModel("Odessa"))))
             }
         }
     }

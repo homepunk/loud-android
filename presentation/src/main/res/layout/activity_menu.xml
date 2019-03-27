@@ -12,7 +12,7 @@
 
         <!--<variable-->
             <!--name="menuItemPagerAdapter"-->
-            <!--type="homepunk.github.com.presentation.core.adapter.SimpleViewPagerAdapter"/>-->
+            <!--type="homepunk.github.com.presentation.common.adapter.SimpleViewPagerAdapter"/>-->
 
         <variable
             name="menuViewModel"

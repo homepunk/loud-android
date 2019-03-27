@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.feature.menu
+package homepunk.github.com.presentation.feature.menu.language
 
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.core.base.BaseFragment

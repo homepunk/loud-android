@@ -6,7 +6,10 @@ import android.view.MenuItem
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
-import homepunk.github.com.presentation.core.adapter.SimpleBindingRecyclerViewAdapter
+import homepunk.github.com.presentation.common.adapter.ExpandableBindingRecyclerAdapter
+import homepunk.github.com.presentation.common.adapter.SimpleBindingRecyclerAdapter
+import homepunk.github.com.presentation.common.adapter.model.ExpandableBindingChildModel
+import homepunk.github.com.presentation.common.adapter.model.ExpandableBindingParentModel
 import homepunk.github.com.presentation.core.base.BaseRecyclerViewAdapter
 import homepunk.github.com.presentation.core.listener.OnItemPositionClickListener
 import homepunk.github.com.presentation.util.decoration.MarginItemDecoration
@@ -14,14 +17,20 @@ import homepunk.github.com.presentation.util.decoration.MarginItemDecoration
 /**Created by Homepunk on 14.01.2019. **/
 
 @BindingAdapter("adapter")
-fun <T> RecyclerView.bindAdapter(adapter: SimpleBindingRecyclerViewAdapter<T>) {
+fun <T> RecyclerView.bindAdapter(adapter: SimpleBindingRecyclerAdapter<T>) {
     this.adapter = adapter
 }
 
 @BindingAdapter("itemList")
 fun <T> RecyclerView.bindItemList(itemList: List<T>) {
-    (adapter as? SimpleBindingRecyclerViewAdapter<T>)?.let {
+    (adapter as? SimpleBindingRecyclerAdapter<T>)?.let {
         it.itemList = itemList
+    }
+}
+@BindingAdapter("expandableItemList")
+fun <CHILD : ExpandableBindingChildModel, PARENT : ExpandableBindingParentModel<CHILD>> RecyclerView.bindParentList(itemList: List<PARENT>) {
+    (adapter as? ExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
+        it.parentList = itemList
     }
 }
 

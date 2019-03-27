@@ -4,7 +4,7 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.view.View
 import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.core.adapter.SimpleViewPagerAdapter
+import homepunk.github.com.presentation.common.adapter.SimpleViewPagerAdapter
 import homepunk.github.com.presentation.core.base.BaseActivity
 import homepunk.github.com.presentation.core.ext.setupWithViewPager
 import homepunk.github.com.presentation.databinding.ActivityMainBinding
