@@ -10,8 +10,8 @@ import homepunk.github.com.presentation.feature.widget.tablayout.BubbleTabLayout
 import javax.inject.Inject
 
 /**Created by Homepunk on 18.01.2019. **/
-class MenuActivityViewModel @Inject constructor(var appDataFactory: AppDataFactory,
-                                                var appModeInteractor: AppModeInteractor) : BaseViewModel() {
+class MenuViewModel @Inject constructor(var appDataFactory: AppDataFactory,
+                                        var appModeInteractor: AppModeInteractor) : BaseViewModel() {
 
     var modeList = mutableListOf<MenuModeModel>()
 

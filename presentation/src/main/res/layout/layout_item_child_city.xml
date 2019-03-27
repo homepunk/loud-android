@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="title"
+            type="String"/>
+
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/margin_small_6dp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/grey" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_default_8dp"
+            android:textColor="@color/text"
+            android:textSize="@dimen/text_size_default"
+            android:fontFamily="@font/lato"
+            android:text="@{title}"
+            tools:text="Kharkiv"/>
+    </LinearLayout>
+</layout>

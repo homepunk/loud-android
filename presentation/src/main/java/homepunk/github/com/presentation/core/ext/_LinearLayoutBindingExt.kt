@@ -12,6 +12,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.databinding.BindingAdapter
 import homepunk.github.com.presentation.core.wrapper.AnimatorListenerWrapper
+import homepunk.github.com.presentation.databinding.LayoutItemChildCityBinding
 import homepunk.github.com.presentation.databinding.LayoutItemTimelineEventBinding
 import homepunk.github.com.presentation.databinding.LayoutItemTimelineMonthBinding
 import homepunk.github.com.presentation.feature.discover.event.model.EventModel
@@ -36,6 +37,17 @@ fun LinearLayout.bindChildren(children: List<EventModel>) {
         }
         val eventLayoutBinding = getEventLayoutBinding(context, child, i == children.lastIndex)
         addView(eventLayoutBinding.root, params)
+    }
+}
+
+@BindingAdapter("cityList")
+fun LinearLayout.bindCityListChildren(children: List<String>) {
+    val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+    for (i in 0 until children.size) {
+        val cityLayoutBinding = LayoutItemChildCityBinding.inflate(LayoutInflater.from(context), null, false)
+        cityLayoutBinding.title = children[i]
+        addView(cityLayoutBinding.root, params)
     }
 }
 

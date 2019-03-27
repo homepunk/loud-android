@@ -61,7 +61,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 bind:adapter="@{viewModel.locatonEventsAdapter}"
                 bind:itemDecoration_top="@{@dimen/margin_default_10dp}"
-                tools:listitem="@layout/layout_item_parent_children" />
+                tools:listitem="@layout/layout_item_parent_location_children_events" />
         </LinearLayout>
     </ScrollView>
 </layout>

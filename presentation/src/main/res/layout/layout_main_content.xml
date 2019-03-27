@@ -15,7 +15,7 @@
 
         <variable
             name="viewModel"
-            type="homepunk.github.com.presentation.feature.main.MainActivityViewModel" />
+            type="homepunk.github.com.presentation.feature.main.MainViewModel" />
 
     </data>
 

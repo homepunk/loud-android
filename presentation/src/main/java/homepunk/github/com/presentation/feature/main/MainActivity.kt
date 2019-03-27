@@ -12,12 +12,12 @@ import homepunk.github.com.presentation.feature.menu.MenuActivity
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
-    private lateinit var mMainViewModel: MainActivityViewModel
+    private lateinit var mMainViewModel: MainViewModel
 
     override fun getLayoutId() = R.layout.activity_main
 
     override fun initViewModels() {
-        mMainViewModel = getViewModel(MainActivityViewModel::class.java)
+        mMainViewModel = getViewModel(MainViewModel::class.java)
     }
 
     override fun init() {

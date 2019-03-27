@@ -66,7 +66,7 @@ fun BoomMenuButton.bindOnBoomListener(listener: OnBoomListener) {
 }
 
 
-@BindingAdapter("countryList")
+@BindingAdapter("parentWithChildrenList")
 fun BoomMenuButton.bindCountryList(countryList: List<CountryModel>) {
     piecePlaceEnum = PiecePlaceEnum.DOT_3_1
     buttonPlaceEnum = ButtonPlaceEnum.Horizontal

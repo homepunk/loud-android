@@ -12,7 +12,7 @@
 
         <variable
             name="menuViewModel"
-            type="homepunk.github.com.presentation.feature.menu.MenuActivityViewModel" />
+            type="homepunk.github.com.presentation.feature.menu.MenuViewModel" />
 
         <variable
             name="appModeModel"

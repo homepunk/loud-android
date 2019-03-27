@@ -7,7 +7,7 @@ import homepunk.github.com.presentation.core.base.BaseViewModel
 import homepunk.github.com.presentation.feature.discover.DiscoverHostFragment
 import javax.inject.Inject
 
-class MainActivityViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
         var appDataFactory: AppDataFactory,
         var appModeInteractor: AppModeInteractor) : BaseViewModel() {
 
