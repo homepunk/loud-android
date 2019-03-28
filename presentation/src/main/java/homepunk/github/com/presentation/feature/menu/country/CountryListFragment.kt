@@ -11,10 +11,11 @@ import homepunk.github.com.presentation.feature.menu.country.model.CountryBindin
 class CountryListFragment : BaseFragment<FragmentCountryListBinding>() {
     private lateinit var viewModel: CountryListViewModel
 
-    override fun getLayoutResId() = R.layout.fragment_country_list
+    override var layoutId = R.layout.fragment_country_list
 
     override fun init() {
         viewModel = getViewModel(CountryListViewModel::class.java)
+
         mDataBinding.viewModel = viewModel
         mDataBinding.rvCountries.adapter = ExpandableBindingRecyclerAdapter<CityBindingChildModel, CountryBindingParentModel>()
     }

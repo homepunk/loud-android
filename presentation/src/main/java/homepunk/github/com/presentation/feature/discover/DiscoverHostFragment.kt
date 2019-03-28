@@ -8,7 +8,7 @@ import homepunk.github.com.presentation.databinding.DiscoverHostFragmentBinding
 class DiscoverHostFragment : BaseFragment<DiscoverHostFragmentBinding>() {
     private lateinit var viewModel: DiscoverHostViewModel
 
-    override fun getLayoutResId() = R.layout.discover_host_fragment
+    override var layoutId = R.layout.discover_host_fragment
 
     override fun init() {
         viewModel = getViewModel(DiscoverHostViewModel::class.java)

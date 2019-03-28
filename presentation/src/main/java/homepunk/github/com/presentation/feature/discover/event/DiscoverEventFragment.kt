@@ -16,14 +16,11 @@ import homepunk.github.com.presentation.feature.discover.event.model.UpcomingEve
 class DiscoverEventFragment : BaseFragment<FragmentEventBinding>() {
     private lateinit var eventListViewModel: DiscoverEventViewModel
 
-
-//    private val locatonEventsAdapter: SimpleBindingRecyclerAdapter<EventLocationModel> = SimpleBindingRecyclerAdapter(R.layout.layout_item_parent_location_children_events, BR.parentModel)
-//    private val primaryEventsAdapter: SimpleBindingRecyclerAdapter<EventModel> = SimpleBindingRecyclerAdapter(R.layout.layout_item_primary_event, BR.model)
-
-    override fun getLayoutResId() = R.layout.fragment_event
+    override var layoutId = R.layout.fragment_event
 
     override fun init() {
         eventListViewModel = getViewModel(DiscoverEventViewModel::class.java)
+
         with(mDataBinding) {
             rvPrimaryEvents.adapter = SimpleBindingRecyclerAdapter<EventModel>(R.layout.layout_item_primary_event, BR.model)
             rvUpcomingEvents.adapter = ExpandableBindingRecyclerAdapter<UpcomingEventBindingChildModel, UpcomingEventBindingParentModel>()

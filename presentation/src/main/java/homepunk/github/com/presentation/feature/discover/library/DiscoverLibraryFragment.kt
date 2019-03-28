@@ -16,7 +16,7 @@ import homepunk.github.com.presentation.databinding.LayoutSectionSquareHorizonta
 class DiscoverLibraryFragment : BaseFragment<FragmentDiscoverBinding>() {
     private lateinit var discoverViewModel: DiscoverLibraryViewModel
 
-    override fun getLayoutResId() = R.layout.fragment_discover
+    override var layoutId = R.layout.fragment_discover
 
     override fun init() {
         discoverViewModel = getViewModel(DiscoverLibraryViewModel::class.java)

@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 
 abstract class BaseActivity<BINDING : ViewDataBinding> : AppCompatActivity() {
-    abstract fun getLayoutId(): Int
+    abstract var layoutId: Int
     abstract fun init()
 
     @Inject
@@ -49,7 +49,7 @@ abstract class BaseActivity<BINDING : ViewDataBinding> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         window.navigationBarColor = ContextCompat.getColor(this, R.color.background)
-        mDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
+        mDataBinding = DataBindingUtil.setContentView(this, layoutId)
 
         init()
     }

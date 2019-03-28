@@ -19,7 +19,7 @@ import homepunk.github.com.presentation.databinding.ActivityMenuBinding
 class MenuActivity : BaseActivity<ActivityMenuBinding>() {
     private lateinit var mMenuViewModel: MenuViewModel
 
-    override fun getLayoutId() = R.layout.activity_menu
+    override var layoutId = R.layout.activity_menu
 
     override fun init() {
         mMenuViewModel = getViewModel(MenuViewModel::class.java)

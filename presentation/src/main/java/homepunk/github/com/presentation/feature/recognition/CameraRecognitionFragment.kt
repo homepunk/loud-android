@@ -39,7 +39,7 @@ class CameraRecognitionFragment : BaseFragment<FragmentCameraRecognitionBinding>
 
     private lateinit var rxPermissions: RxPermissions
 
-    override fun getLayoutResId() = R.layout.fragment_camera_recognition
+    override var layoutId = R.layout.fragment_camera_recognition
 
 
 //    fun onPreInflate() {

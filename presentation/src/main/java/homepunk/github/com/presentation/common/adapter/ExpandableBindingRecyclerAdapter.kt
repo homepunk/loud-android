@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableList
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import homepunk.github.com.presentation.R
@@ -15,6 +16,7 @@ import homepunk.github.com.presentation.core.ext.swap
 import homepunk.github.com.presentation.core.listener.OnItemClickListener
 import homepunk.github.com.presentation.core.listener.OnParentChildClickListener
 import homepunk.github.com.presentation.databinding.CustomLayoutItemExpandableParentBinding
+import timber.log.Timber
 
 /**Created by Homepunk on 18.03.2019. **/
 class ExpandableBindingRecyclerAdapter<CHILD : ExpandableBindingChildModel, PARENT : ExpandableBindingParentModel<CHILD>>
@@ -32,7 +34,10 @@ class ExpandableBindingRecyclerAdapter<CHILD : ExpandableBindingChildModel, PARE
     override fun getItemCount() = parentList.size
 
     override fun onBindViewHolder(holder: ExpandableViewHolder<CHILD, PARENT>, position: Int) {
-        holder.bind(parentList[position], onParentChildClickListener)
+        holder.bind(parentList[position], onParentChildClickListener) {
+            Timber.w("DATASETCHANGED")
+            notifyDataSetChanged()
+        }
         holder.binding.root.setOnClickListener {
             onParentClickListener?.onClick(position, parentList[position])
         }
@@ -44,7 +49,7 @@ class ExpandableBindingRecyclerAdapter<CHILD : ExpandableBindingChildModel, PARE
 
     class ExpandableViewHolder<CHILD : ExpandableBindingChildModel, PARENT : ExpandableBindingParentModel<CHILD>>(val binding: CustomLayoutItemExpandableParentBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(parent: PARENT, onParentChildClickListener: OnParentChildClickListener<CHILD, PARENT>?) {
+        fun bind(parent: PARENT, onParentChildClickListener: OnParentChildClickListener<CHILD, PARENT>?, propertyChangedListener: (() -> Unit) ?= null) {
             with(binding) {
                 val root = inflateParentLayout(parent)
                 container.addView(root, 0)

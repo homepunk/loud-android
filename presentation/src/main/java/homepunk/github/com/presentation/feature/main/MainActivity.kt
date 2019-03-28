@@ -14,7 +14,7 @@ import homepunk.github.com.presentation.feature.menu.MenuActivity
 class MainActivity : BaseActivity<ActivityMainBinding>() {
     private lateinit var mMainViewModel: MainViewModel
 
-    override fun getLayoutId() = R.layout.activity_main
+    override var layoutId = R.layout.activity_main
 
     override fun init() {
         wLog("init")

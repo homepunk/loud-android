@@ -259,7 +259,7 @@ enum class CountryModel constructor(val countryFlag: Int) {
     ZW(R.drawable.ic_zw);
 
     val countryName: String
-        get() = Locale(Locale.getDefault().language, name).displayCountry
+        get() = Locale(Locale.ENGLISH.language, name).getDisplayCountry(Locale.ENGLISH)
 
     fun getFlagDrawable(context: Context): Drawable? {
         return AppCompatResources.getDrawable(context, countryFlag)

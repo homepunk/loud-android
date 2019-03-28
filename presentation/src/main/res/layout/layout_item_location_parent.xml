@@ -17,6 +17,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:paddingBottom="@dimen/margin_small_6dp"
         android:layout_height="wrap_content">
 
         <ImageView
@@ -38,7 +39,7 @@
             android:fontFamily="@font/lato"
             android:text="@{model.countryModel.countryName}"
             android:textColor="@color/text"
-            android:textSize="@dimen/text_size_default"
+            android:textSize="@dimen/text_size_large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             bind:layout_constraintStart_toEndOf="@+id/flag"

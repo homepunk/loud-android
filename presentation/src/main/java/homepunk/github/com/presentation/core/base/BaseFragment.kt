@@ -20,7 +20,8 @@ import homepunk.github.com.presentation.feature.mode.AppModeViewModel
 import javax.inject.Inject
 
 abstract class BaseFragment<BINDING : ViewDataBinding> : Fragment() {
-    abstract fun getLayoutResId(): Int
+    abstract var layoutId: Int
+
     abstract fun init()
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -35,7 +36,7 @@ abstract class BaseFragment<BINDING : ViewDataBinding> : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        mDataBinding = DataBindingUtil.inflate(inflater, getLayoutResId(), container, false)
+        mDataBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         mAppModeViewModel = getViewModel(AppModeViewModel::class.java)
         mAppModeViewModel.run {
             currentAppModeModelLiveData.observe(this@BaseFragment, Observer {
