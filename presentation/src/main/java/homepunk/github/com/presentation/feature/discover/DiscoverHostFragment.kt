@@ -12,7 +12,6 @@ class DiscoverHostFragment : BaseFragment<DiscoverHostFragmentBinding>() {
 
     override fun init() {
         viewModel = getViewModel(DiscoverHostViewModel::class.java)
-        viewModel.init()
         viewModel.fragmentLiveData.observe(this, Observer {
             childFragmentManager.beginTransaction().replace(R.id.container, it).commit()
         })

@@ -1,29 +1,26 @@
 package homepunk.github.com.presentation.feature.discover.event
 
-import android.annotation.SuppressLint
+import androidx.databinding.ObservableArrayList
 import homepunk.github.com.domain.interactor.SongkickEventInteractor
-import homepunk.github.com.presentation.BR
-import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.common.adapter.SimpleBindingRecyclerAdapter
 import homepunk.github.com.presentation.core.base.BaseViewModel
-import homepunk.github.com.presentation.feature.discover.event.model.EventLocationModel
+import homepunk.github.com.presentation.core.ext.addAllToEmptyList
 import homepunk.github.com.presentation.feature.discover.event.model.EventModel
+import homepunk.github.com.presentation.feature.discover.event.model.UpcomingEventBindingParentModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
-class DiscoverEventViewModel @Inject constructor()
-    : BaseViewModel() {
+class DiscoverEventViewModel @Inject constructor(var eventInteractor: SongkickEventInteractor) : BaseViewModel() {
 
-    @Inject
-    lateinit var eventInteractor: SongkickEventInteractor
+//    @Inject
+//    lateinit var eventInteractor: SongkickEventInteractor
 
-    val locatonEventsAdapter: SimpleBindingRecyclerAdapter<EventLocationModel> = SimpleBindingRecyclerAdapter(R.layout.layout_item_parent_location_children_events, BR.parentModel)
-    val primaryEventAdapter: SimpleBindingRecyclerAdapter<EventModel> = SimpleBindingRecyclerAdapter(R.layout.layout_item_primary_event, BR.model)
+    var primaryEventsList = ObservableArrayList<EventModel>()
+    var locationEventsList = ObservableArrayList<UpcomingEventBindingParentModel>()
 
-    override fun init() {
+    init {
+        fetchUpcomingEventList()
     }
 
-    @SuppressLint("CheckResult")
     fun fetchUpcomingEventList() {
         eventInteractor.getUpcomingEventList()
                 .doOnNext { wLog("Location: ${it.first.city?.displayName}, events = ${it.second.size}") }
@@ -32,10 +29,11 @@ class DiscoverEventViewModel @Inject constructor()
                     it.second.forEach { eventModels.add(EventModel(it)) }
                     return@map Pair(it.first, eventModels)
                 }
-                .map { EventLocationModel(it.first.city?.displayName, it.second) }
+                .map { UpcomingEventBindingParentModel(it.first.city?.displayName, it.second) }
                 .toList()
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess { pair -> primaryEventAdapter.itemList = pair[1].getEvents()}
-                .subscribe { itemList -> locatonEventsAdapter.itemList = itemList }
+                .doOnSuccess { pair -> primaryEventsList.addAllToEmptyList(pair[1].eventList) }
+                .subscribe { itemList -> locationEventsList.addAllToEmptyList(itemList) }
     }
 }
+

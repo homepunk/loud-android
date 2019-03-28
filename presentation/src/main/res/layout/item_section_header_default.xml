@@ -25,7 +25,6 @@
             name="showPlus"
             type="Boolean"/>
     </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:paddingStart="@dimen/margin_big_20dp"
         android:layout_width="match_parent"
@@ -74,5 +73,4 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

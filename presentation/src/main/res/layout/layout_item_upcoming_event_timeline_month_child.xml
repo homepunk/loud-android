@@ -4,12 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="month"
-            type="String"/>
-
-        <variable
-            name="isUpcoming"
-            type="Boolean"/>
+            name="model"
+            type="homepunk.github.com.presentation.feature.discover.event.model.UpcomingEventBindingChildModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,11 +26,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_big_26dp"
-            android:text="@{month}"
+            android:text="@{model.month}"
             tools:text="JUNE"
             android:textAllCaps="true"
             android:fontFamily="@font/lato"
-            android:textColor="@{isUpcoming ? @color/modeEventsColor : @color/whiteBone}"
+            android:textColor="@{model.isUpcoming ? @color/modeEventsColor : @color/whiteBone}"
             android:textSize="@dimen/text_size_large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/timeline"

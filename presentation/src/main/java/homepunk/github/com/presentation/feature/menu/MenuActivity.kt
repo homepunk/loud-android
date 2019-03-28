@@ -7,9 +7,9 @@ import android.view.View
 import android.view.Window
 import homepunk.github.com.presentation.BR
 import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.common.model.menu.MenuModel
 import homepunk.github.com.presentation.common.adapter.SimpleBindingRecyclerAdapter
 import homepunk.github.com.presentation.common.adapter.SimpleViewPagerAdapter
+import homepunk.github.com.presentation.common.model.menu.MenuModel
 import homepunk.github.com.presentation.core.base.BaseActivity
 import homepunk.github.com.presentation.core.ext.setupWithViewPager
 import homepunk.github.com.presentation.databinding.ActivityMenuBinding
@@ -21,12 +21,8 @@ class MenuActivity : BaseActivity<ActivityMenuBinding>() {
 
     override fun getLayoutId() = R.layout.activity_menu
 
-    override fun initViewModels() {
-        mMenuViewModel = getViewModel(MenuViewModel::class.java)
-    }
-
     override fun init() {
-        mMenuViewModel.init()
+        mMenuViewModel = getViewModel(MenuViewModel::class.java)
         mDataBinding.run {
             menuViewModel = mMenuViewModel
 

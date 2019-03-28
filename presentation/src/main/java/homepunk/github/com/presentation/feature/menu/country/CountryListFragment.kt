@@ -15,7 +15,6 @@ class CountryListFragment : BaseFragment<FragmentCountryListBinding>() {
 
     override fun init() {
         viewModel = getViewModel(CountryListViewModel::class.java)
-        viewModel.init()
         mDataBinding.viewModel = viewModel
         mDataBinding.rvCountries.adapter = ExpandableBindingRecyclerAdapter<CityBindingChildModel, CountryBindingParentModel>()
     }

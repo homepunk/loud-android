@@ -36,32 +36,34 @@
                 bind:sectionTitle="@{@string/title_most_popular_event}" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/section_recycler"
+                android:id="@+id/rv_primary_events"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default_10dp"
                 android:layout_marginBottom="@dimen/margin_default_10dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                bind:adapter="@{viewModel.primaryEventAdapter}"
+                bind:itemList="@{viewModel.primaryEventsList}"
                 bind:itemDecoration_left="@{@dimen/margin_default_10dp}"
                 bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
                 tools:listitem="@layout/layout_item_primary_event" />
+            <!--bind:adapter="@{viewModel.primaryEventAdapter}"-->
 
             <include
                 layout="@layout/item_section_header_highlighted"
                 bind:sectionTitle="@{@string/title_upcoming_event}" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_upcoming_event"
+                android:id="@+id/rv_upcoming_events"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:nestedScrollingEnabled="false"
                 android:layout_marginTop="@dimen/margin_default_10dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                bind:adapter="@{viewModel.locatonEventsAdapter}"
+                bind:expandableItemList="@{viewModel.locationEventsList}"
                 bind:itemDecoration_top="@{@dimen/margin_default_10dp}"
                 tools:listitem="@layout/layout_item_parent_location_children_events" />
+            <!--bind:adapter="@{viewModel.locatonEventsAdapter}"-->
         </LinearLayout>
     </ScrollView>
 </layout>

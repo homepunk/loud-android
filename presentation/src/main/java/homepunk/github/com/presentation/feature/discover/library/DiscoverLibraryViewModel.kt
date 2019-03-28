@@ -11,16 +11,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import javax.inject.Inject
 
-class DiscoverLibraryViewModel @Inject constructor()
-    : BaseViewModel() {
-
-    @Inject lateinit var appDataFactory: AppDataFactory
-    @Inject lateinit var discogsReleaseInteractor: DiscogsReleaseInteractor
-
-
-    override fun init() {
-
-    }
+class DiscoverLibraryViewModel @Inject constructor(var appDataFactory: AppDataFactory,
+                                                   var discogsReleaseInteractor: DiscogsReleaseInteractor) : BaseViewModel() {
 
     fun getDiscoverSectionObservable(): Observable<LibraryDiscoverSectionViewModel> {
         return Observable.fromIterable(appDataFactory.getLibraryDiscoverSectionList())

@@ -12,7 +12,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import homepunk.github.com.presentation.core.wrapper.AnimationListenerWrapper
-import homepunk.github.com.presentation.feature.animation.ReverseInterpolator
+import homepunk.github.com.presentation.feature.widget.animation.ReverseInterpolator
 
 /**Created by Homepunk on 31.01.2019. **/
 
@@ -91,5 +91,12 @@ fun RecyclerView.bindItemAnimation(newValue: Int, itemAnimationEnabled: Boolean)
         }
     } else {
         visibility = newValue
+    }
+}
+
+@BindingAdapter("bind:onClickListener")
+fun View.SetOnClick(listener: View.OnClickListener?) {
+    listener?.let {
+        setOnClickListener(it)
     }
 }

@@ -16,12 +16,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun getLayoutId() = R.layout.activity_main
 
-    override fun initViewModels() {
-        mMainViewModel = getViewModel(MainViewModel::class.java)
-    }
-
     override fun init() {
         wLog("init")
+        mMainViewModel = getViewModel(MainViewModel::class.java)
+
         mDataBinding.run {
             viewModel = mMainViewModel
             onMenuClickListener = View.OnClickListener {
@@ -31,11 +29,5 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             mainContent.viewPager.adapter = SimpleViewPagerAdapter(supportFragmentManager)
             mainContent.bottomNav.setupWithViewPager(mainContent.viewPager)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mMainViewModel.init()
-
     }
 }

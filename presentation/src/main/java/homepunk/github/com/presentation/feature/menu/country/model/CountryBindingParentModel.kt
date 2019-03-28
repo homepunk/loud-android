@@ -7,7 +7,7 @@ import homepunk.github.com.presentation.feature.widget.countrypicker.CountryMode
 
 /**Created by Homepunk on 27.03.2019. **/
 class CountryBindingParentModel(val countryModel: CountryModel,
-                                var children: List<CityBindingChildModel>) : ExpandableBindingParentModel<CityBindingChildModel>(children) {
+                                cities: List<CityBindingChildModel>) : ExpandableBindingParentModel<CityBindingChildModel>(cities) {
     override fun getBindingVariableId() = BR.model
 
     override fun getLayoutId() = R.layout.layout_item_location_parent

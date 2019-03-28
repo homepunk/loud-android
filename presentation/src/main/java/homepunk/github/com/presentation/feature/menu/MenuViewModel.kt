@@ -20,6 +20,13 @@ class MenuViewModel @Inject constructor(var appDataFactory: AppDataFactory,
     var menuItemList = listOf<MenuModel>()
     var menuItemFragmentList = arrayListOf<Fragment>()
 
+    var onMenuTabClickListener = object : BubbleTabLayout.OnMenuTabClickListener {
+        override fun onTabClick(index: Int, item: BubbleTabLayout.TabItem) {
+            val menuModel = modeList[index]
+            appModeInteractor.changeAppMode(menuModel.appMode!!)
+        }
+    }
+
     init {
         modeList = appDataFactory.getModeList()
         menuItemList = appDataFactory.getModeMenuList().apply {
@@ -31,13 +38,6 @@ class MenuViewModel @Inject constructor(var appDataFactory: AppDataFactory,
                             MenuModel.LANGUAGE -> LanguageListFragment()
                         })
             }
-        }
-    }
-
-    var onMenuTabClickListener = object : BubbleTabLayout.OnMenuTabClickListener {
-        override fun onTabClick(index: Int, item: BubbleTabLayout.TabItem) {
-            val menuModel = modeList[index]
-            appModeInteractor.changeAppMode(menuModel.appMode!!)
         }
     }
 }

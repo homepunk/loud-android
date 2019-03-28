@@ -12,7 +12,7 @@ class CountryListViewModel @Inject constructor(var appDataFactory: AppDataFactor
 
     var itemList = ObservableArrayList<CountryBindingParentModel>()
 
-    override fun init() {
+    init {
         appDataFactory.getCountryModelList().run {
             forEach {
                 itemList.add(CountryBindingParentModel(it, arrayListOf(CityBindingChildModel("Kharkiv"), CityBindingChildModel("Odessa"))))

@@ -7,7 +7,6 @@ import android.widget.FrameLayout
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SimpleItemAnimator
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.common.adapter.ExpandableBindingRecyclerAdapter.ExpandableViewHolder
 import homepunk.github.com.presentation.common.adapter.model.ExpandableBindingChildModel
@@ -32,11 +31,6 @@ class ExpandableBindingRecyclerAdapter<CHILD : ExpandableBindingChildModel, PARE
 
     override fun getItemCount() = parentList.size
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-        (recyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
-    }
-
     override fun onBindViewHolder(holder: ExpandableViewHolder<CHILD, PARENT>, position: Int) {
         holder.bind(parentList[position], onParentChildClickListener)
         holder.binding.root.setOnClickListener {
@@ -44,10 +38,9 @@ class ExpandableBindingRecyclerAdapter<CHILD : ExpandableBindingChildModel, PARE
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ExpandableViewHolder<CHILD, PARENT>(inflateVH(parent, R.layout.custom_layout_item_expandable_parent))
 
-    open fun <T : ViewDataBinding> inflateVH(parent: ViewGroup, layoutId: Int) = DataBindingUtil.inflate<T>(LayoutInflater.from(parent.context), layoutId, parent, false)!!
+    private fun <T : ViewDataBinding> inflateVH(parent: ViewGroup, layoutId: Int) = DataBindingUtil.inflate<T>(LayoutInflater.from(parent.context), layoutId, parent, false)!!
 
     class ExpandableViewHolder<CHILD : ExpandableBindingChildModel, PARENT : ExpandableBindingParentModel<CHILD>>(val binding: CustomLayoutItemExpandableParentBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -56,7 +49,7 @@ class ExpandableBindingRecyclerAdapter<CHILD : ExpandableBindingChildModel, PARE
                 val root = inflateParentLayout(parent)
                 container.addView(root, 0)
 
-                parent.parentChildren.forEachIndexed{ index, child ->
+                parent.children.forEachIndexed { index, child ->
                     val root = inflateChildLayout(child)
                     root.setOnClickListener { onParentChildClickListener?.onClick(index, child, parent) }
                     childrenLayout.addView(root)

@@ -20,7 +20,6 @@ import javax.inject.Inject
 
 abstract class BaseActivity<BINDING : ViewDataBinding> : AppCompatActivity() {
     abstract fun getLayoutId(): Int
-    abstract fun initViewModels()
     abstract fun init()
 
     @Inject
@@ -52,7 +51,6 @@ abstract class BaseActivity<BINDING : ViewDataBinding> : AppCompatActivity() {
         window.navigationBarColor = ContextCompat.getColor(this, R.color.background)
         mDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
 
-        initViewModels()
         init()
     }
 
