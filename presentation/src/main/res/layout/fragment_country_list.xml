@@ -27,6 +27,7 @@
             bind:itemDecoration_right="@{@dimen/margin_big_20dp}"
             bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
             bind:expandableItemList="@{viewModel.itemList}"
+            bind:onParentChildClickListener="@{viewModel.onParentChildClickListener}"
             tools:listItem="@layout/layout_item_country" />
     </LinearLayout>
 </layout>

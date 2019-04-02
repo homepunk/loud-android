@@ -16,6 +16,7 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
+
     fun dLog(message: String) {
         Log.d(this.javaClass.canonicalName, message)
     }

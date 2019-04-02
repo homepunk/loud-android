@@ -53,5 +53,8 @@ class SharedPreferencesManager @Inject constructor(mContext: Context) {
 
     companion object {
         const val KEY_CURRENT_APP_MODE = "KEY_APP_MODE"
+        const val KEY_CURRENT_COUNTRY = "KEY_CURRENT_COUNTRY"
+        const val KEY_COUNTRY_CITIES = "KEY_COUNTRY_CITIES"
+        const val KEY_CURRENT_COUNTRY_CITIES = "KEY_CURRENT_COUNTRY_CITIES"
     }
 }

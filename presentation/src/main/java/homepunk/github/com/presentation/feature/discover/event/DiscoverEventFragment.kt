@@ -20,6 +20,7 @@ class DiscoverEventFragment : BaseFragment<FragmentEventBinding>() {
 
     override fun init() {
         eventListViewModel = getViewModel(DiscoverEventViewModel::class.java)
+        wLog("init")
 
         with(mDataBinding) {
             rvPrimaryEvents.adapter = SimpleBindingRecyclerAdapter<EventModel>(R.layout.layout_item_primary_event, BR.model)
@@ -33,5 +34,10 @@ class DiscoverEventFragment : BaseFragment<FragmentEventBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        eventListViewModel.fetchUpcomingEventList()
+    }
+
+    override fun onResume() {
+        super.onResume()
+            wLog("onResume")
     }
 }

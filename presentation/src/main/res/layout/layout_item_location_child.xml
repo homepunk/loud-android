@@ -19,7 +19,7 @@
             android:layout_marginStart="@dimen/margin_big_24dp"
             android:textSize="@dimen/text_size_default"
             android:fontFamily="@font/lato"
-            android:textColor="@color/text"
+            android:textColor="@{model.isSelected ? @color/colorAccent : @color/text}"
             android:text="@{model.name}"
             tools:text="KHARKIV" />
     </LinearLayout>
