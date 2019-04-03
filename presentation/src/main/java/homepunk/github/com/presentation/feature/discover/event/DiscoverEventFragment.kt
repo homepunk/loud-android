@@ -3,6 +3,7 @@ package homepunk.github.com.presentation.feature.discover.event
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import homepunk.github.com.presentation.BR
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.common.adapter.ExpandableBindingRecyclerAdapter
@@ -10,8 +11,8 @@ import homepunk.github.com.presentation.common.adapter.SimpleBindingRecyclerAdap
 import homepunk.github.com.presentation.core.base.BaseFragment
 import homepunk.github.com.presentation.databinding.FragmentEventBinding
 import homepunk.github.com.presentation.feature.discover.event.model.EventModel
+import homepunk.github.com.presentation.feature.discover.event.model.LocationEventBindingParentModel
 import homepunk.github.com.presentation.feature.discover.event.model.UpcomingEventBindingChildModel
-import homepunk.github.com.presentation.feature.discover.event.model.UpcomingEventBindingParentModel
 
 class DiscoverEventFragment : BaseFragment<FragmentEventBinding>() {
     private lateinit var eventListViewModel: DiscoverEventViewModel
@@ -20,14 +21,18 @@ class DiscoverEventFragment : BaseFragment<FragmentEventBinding>() {
 
     override fun init() {
         eventListViewModel = getViewModel(DiscoverEventViewModel::class.java)
-        wLog("init")
 
         with(mDataBinding) {
             rvPrimaryEvents.adapter = SimpleBindingRecyclerAdapter<EventModel>(R.layout.layout_item_primary_event, BR.model)
-            rvUpcomingEvents.adapter = ExpandableBindingRecyclerAdapter<UpcomingEventBindingChildModel, UpcomingEventBindingParentModel>()
+            rvUpcomingEvents.adapter = ExpandableBindingRecyclerAdapter<UpcomingEventBindingChildModel, LocationEventBindingParentModel>()
 
             viewModel = eventListViewModel
         }
+
+        eventListViewModel.userLocationLiveData.observe(this, Observer {
+            wLog("LIVA DATA CHANGED: ${it.locations.size}")
+            eventListViewModel.fetchUpcomingEventList(it)
+        })
     }
 
     @SuppressLint("CheckResult")
@@ -38,6 +43,6 @@ class DiscoverEventFragment : BaseFragment<FragmentEventBinding>() {
 
     override fun onResume() {
         super.onResume()
-            wLog("onResume")
+        wLog("onResume")
     }
 }

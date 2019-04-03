@@ -35,3 +35,26 @@ fun Array<String>.getMaxLenStringIndex(): Int {
     }
     return maxLenTextIndex
 }
+
+
+fun <E> MutableList<E>.containsLike(predicate: (E) -> Boolean): Boolean {
+    forEachIndexed { index, item ->
+        if (predicate.invoke(item)) {
+            return true
+        }
+    }
+    return false
+}
+
+
+fun <E> MutableList<E>.removeWhen(predicate: (E) -> Boolean): Boolean{
+    with(iterator()) {
+        while (hasNext()) {
+            if (predicate.invoke(next())) {
+                remove()
+                return true
+            }
+        }
+    }
+    return false
+}

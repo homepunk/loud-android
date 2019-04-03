@@ -20,12 +20,25 @@ fun LinearLayout.bindOnClick(listener: View.OnClickListener?) {
     }
 }
 
-@BindingAdapter("expand")
-fun LinearLayout.expand(isExpanded: Boolean) {
+@BindingAdapter(
+        value = ["expand"],
+        requireAll = false)
+fun LinearLayout.expand(prevExpand: Boolean,
+                        expand: Boolean) {
     measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    if (expand == prevExpand) {
+        if (expand) {
+            layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            visibility = VISIBLE
+        } else {
+            layoutParams.height = 0
+            visibility = GONE
+        }
+        return
+    }
 
     val va: ValueAnimator?
-    if (isExpanded) {
+    if (expand) {
         va = ValueAnimator.ofInt(1, measuredHeight)
         visibility = VISIBLE
     } else {
@@ -38,7 +51,7 @@ fun LinearLayout.expand(isExpanded: Boolean) {
     }
     va.addListener(object : AnimatorListenerWrapper() {
         override fun onAnimationEnd(animation: Animator?) {
-            if (isExpanded) {
+            if (expand) {
                 layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
             } else {
                 visibility = GONE

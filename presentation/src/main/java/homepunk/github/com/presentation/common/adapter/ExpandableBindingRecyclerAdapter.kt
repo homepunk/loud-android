@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableArrayList
+import androidx.databinding.ObservableList
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import homepunk.github.com.presentation.R
@@ -24,13 +26,44 @@ open class ExpandableBindingRecyclerAdapter<CHILD : ExpandableBindingChildModel,
     var onParentClickListener: OnItemClickListener<PARENT>? = null
     var onParentChildClickListener: OnParentChildClickListener<CHILD, PARENT>? = null
 
-    var parentList: ArrayList<PARENT> = arrayListOf()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    lateinit var parentList: ObservableList<PARENT>
+//        set(value) {
+//            field = value
+//            notifyDataSetChanged()
+//        }
 
-    override fun getItemCount() = parentList.size
+    fun isParentListInitialized() = ::parentList.isInitialized
+
+    fun setParentList(parentList: ObservableArrayList<PARENT>) {
+        this.parentList = parentList
+        this.parentList.addOnListChangedCallback(object: ObservableList.OnListChangedCallback<ObservableList<PARENT>?>() {
+            override fun onChanged(sender: ObservableList<PARENT>?) {
+                notifyDataSetChanged()
+                Timber.w("onChanged")            }
+
+            override fun onItemRangeRemoved(sender: ObservableList<PARENT>?, positionStart: Int, itemCount: Int) {
+                Timber.w("onItemRangeRemoved $positionStart, $itemCount")
+                notifyItemRemoved(positionStart)
+            }
+
+            override fun onItemRangeMoved(sender: ObservableList<PARENT>?, fromPosition: Int, toPosition: Int, itemCount: Int) {
+                Timber.w("onItemRangeMoved")
+                notifyItemMoved(fromPosition, toPosition)
+            }
+
+            override fun onItemRangeInserted(sender: ObservableList<PARENT>?, positionStart: Int, itemCount: Int) {
+                Timber.w("onItemRangeInserted")
+                notifyItemRangeInserted(positionStart, itemCount)
+            }
+
+            override fun onItemRangeChanged(sender: ObservableList<PARENT>?, positionStart: Int, itemCount: Int) {
+                Timber.w("onItemRangeChanged")
+                notifyItemRangeChanged(positionStart, itemCount)
+            }
+        })
+    }
+
+    override fun getItemCount() = if (isParentListInitialized()) parentList.size else 0
 
     override fun onBindViewHolder(holder: ExpandableViewHolder<CHILD, PARENT>, position: Int) {
         Timber.w("BIND: ${parentList.size}, position = $position")

@@ -1,8 +1,8 @@
 package homepunk.github.com.domain.interactor
 
-import homepunk.github.com.domain.model.internal.UserEventLocationSettings
+import homepunk.github.com.domain.model.internal.UserLocation
 import homepunk.github.com.domain.model.songkick.SongkickLocation
-import homepunk.github.com.domain.repository.EventSettingsRepository
+import homepunk.github.com.domain.repository.UserLocationRepository
 import homepunk.github.com.domain.repository.LocationRepository
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -10,8 +10,8 @@ import javax.inject.Singleton
 
 /**Created by Homepunk on 29.03.2019. **/
 @Singleton
-class UserLocationSettingsInteractor @Inject constructor(var locationRepository: LocationRepository,
-                                                         var userSettingsRepository: EventSettingsRepository) {
+class UserLocationInteractor @Inject constructor(var locationRepository: LocationRepository,
+                                                 var userSettingsRepository: UserLocationRepository) {
 
     private lateinit var currentUserLocationList: ArrayList<SongkickLocation>
     private var userCountryLocationsMap = hashMapOf<String, ArrayList<SongkickLocation>>()
@@ -28,14 +28,14 @@ class UserLocationSettingsInteractor @Inject constructor(var locationRepository:
 
     }
 
-    fun getCurrentUserLocationSettings(): Observable<UserEventLocationSettings> {
+    fun getCountryUserLocation(countryName: String): Observable<UserLocation> {
+        return userSettingsRepository.getUserLocationListForCountry(countryName)
+                .doOnNext { userCountryLocationsMap[countryName] = it.locations as ArrayList<SongkickLocation> } }
+
+    fun getCurrentUserLocation(): Observable<UserLocation> {
         return userSettingsRepository.getUserLocationListForCountry(userSettingsRepository.getUserCountryName())
                 .doOnNext {
-                    currentUserLocationList = it.currentUserLocationList as ArrayList<SongkickLocation>
+                    currentUserLocationList = it.locations as ArrayList<SongkickLocation>
                 }
     }
-
-    fun getCountryUserLocationSettings(countryName: String): Observable<UserEventLocationSettings> {
-        return userSettingsRepository.getUserLocationListForCountry(countryName)
-                .doOnNext { userCountryLocationsMap[countryName] = it.currentUserLocationList as ArrayList<SongkickLocation> } }
 }

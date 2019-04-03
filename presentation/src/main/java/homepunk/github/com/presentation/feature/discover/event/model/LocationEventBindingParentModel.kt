@@ -7,7 +7,7 @@ import homepunk.github.com.presentation.common.adapter.model.ExpandableBindingPa
 import homepunk.github.com.presentation.util.DateTimeUtil
 
 /**Created by Homepunk on 27.03.2019. **/
-class UpcomingEventBindingParentModel(private var locationName: String? = "",
+class LocationEventBindingParentModel(private var locationName: String? = "",
                                       var eventList: List<EventModel>) : ExpandableBindingParentModel<UpcomingEventBindingChildModel>() {
 
     override fun getLayoutId() = R.layout.layout_item_upcoming_event_parent
@@ -15,9 +15,9 @@ class UpcomingEventBindingParentModel(private var locationName: String? = "",
     override fun getBindingVariableId() = BR.parentModel
 
     init {
-        if (locationName.equals("kharkiv", true)) {
-            isParentExpanded.set(true)
-        }
+//        if (locationName.equals("kharkiv", true)) {
+//            isParentExpanded.set(true)
+//        }
 
         var currentMonth = -1
         for (i in 0 until eventList.size) {

@@ -35,7 +35,10 @@ fun <T> RecyclerView.bindItemList(itemList: List<T>) {
 fun <CHILD : ExpandableBindingChildModel, PARENT : ExpandableBindingParentModel<CHILD>> RecyclerView.bindParentList(itemList: ObservableArrayList<PARENT>) {
     Timber.w("BIND NEW PARENT LIST: ${itemList.size}")
     (adapter as? ExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
-        it.parentList = itemList
+        if (!it.isParentListInitialized()) {
+            Timber.w("INITIALIZE")
+            it.setParentList(itemList)
+        }
     }
 }
 

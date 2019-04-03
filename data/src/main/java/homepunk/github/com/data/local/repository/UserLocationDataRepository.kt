@@ -6,15 +6,15 @@ import homepunk.github.com.data.local.SharedPreferencesManager
 import homepunk.github.com.data.local.SharedPreferencesManager.Companion.KEY_COUNTRY_CITIES
 import homepunk.github.com.data.local.SharedPreferencesManager.Companion.KEY_CURRENT_COUNTRY
 import homepunk.github.com.data.local.SharedPreferencesValueObservable
-import homepunk.github.com.domain.model.internal.UserEventLocationSettings
+import homepunk.github.com.domain.model.internal.UserLocation
 import homepunk.github.com.domain.model.songkick.SongkickLocation
-import homepunk.github.com.domain.repository.EventSettingsRepository
+import homepunk.github.com.domain.repository.UserLocationRepository
 import io.reactivex.Observable
 import timber.log.Timber
 import javax.inject.Inject
 
 /**Created by Homepunk on 29.03.2019. **/
-class EventSettingsDataRepository @Inject constructor(val prefsManager: SharedPreferencesManager) : EventSettingsRepository {
+class UserLocationDataRepository @Inject constructor(val prefsManager: SharedPreferencesManager) : UserLocationRepository {
 
 
     private lateinit var locationListObservable: SharedPreferencesValueObservable<String>
@@ -41,13 +41,16 @@ class EventSettingsDataRepository @Inject constructor(val prefsManager: SharedPr
         prefsManager.put(key, Gson().toJson(currentLocationList))
     }
 
-    override fun getUserLocationListForCountry(countryName: String): Observable<UserEventLocationSettings> {
+    override fun getUserLocationListForCountry(countryName: String): Observable<UserLocation> {
         locationListObservable = SharedPreferencesValueObservable(prefsManager, KEY_COUNTRY_CITIES.postfix(countryName), "")
-
+        locationListObservable.valueObservable
+                .doOnNext { Timber.w("ON NEXT") }
+                .doOnComplete { Timber.w("ON COMPLETE") }
+                .subscribe { Timber.w("SUBSCRIBE") }
         return locationListObservable.valueObservable
                 .map { getSongkickLocationList(it) }
                 .doOnNext { Timber.w("UPDATE CITIES COUNT ${it.size}") }
-                .map { UserEventLocationSettings(countryName, it) }
+                .map { UserLocation(countryName, it) }
     }
 
     private fun getCurrentLocationList(key: String): ArrayList<SongkickLocation> {
