@@ -27,10 +27,6 @@ open class ExpandableBindingRecyclerAdapter<CHILD : ExpandableBindingChildModel,
     var onParentChildClickListener: OnParentChildClickListener<CHILD, PARENT>? = null
 
     lateinit var parentList: ObservableList<PARENT>
-//        set(value) {
-//            field = value
-//            notifyDataSetChanged()
-//        }
 
     fun isParentListInitialized() = ::parentList.isInitialized
 
@@ -67,12 +63,7 @@ open class ExpandableBindingRecyclerAdapter<CHILD : ExpandableBindingChildModel,
 
     override fun onBindViewHolder(holder: ExpandableViewHolder<CHILD, PARENT>, position: Int) {
         Timber.w("BIND: ${parentList.size}, position = $position")
-        holder.bind(parentList[position], onParentChildClickListener) {
-            notifyDataSetChanged()
-        }
-        holder.binding.root.setOnClickListener {
-            onParentClickListener?.onClick(position, parentList[position])
-        }
+        holder.bind(parentList[position], position, onParentChildClickListener, onParentClickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ExpandableViewHolder<CHILD, PARENT>(inflateVH(parent, R.layout.custom_layout_item_expandable_parent))
@@ -80,21 +71,21 @@ open class ExpandableBindingRecyclerAdapter<CHILD : ExpandableBindingChildModel,
     private fun <T : ViewDataBinding> inflateVH(parent: ViewGroup, layoutId: Int) = DataBindingUtil.inflate<T>(LayoutInflater.from(parent.context), layoutId, parent, false)!!
 
     class ExpandableViewHolder<CHILD : ExpandableBindingChildModel, PARENT : ExpandableBindingParentModel<CHILD>>(val binding: CustomLayoutItemExpandableParentBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(parent: PARENT, onParentChildClickListener: OnParentChildClickListener<CHILD, PARENT>?, propertyChangedListener: (() -> Unit)? = null) {
+        fun bind(parent: PARENT, position: Int, onParentChildClickListener: OnParentChildClickListener<CHILD, PARENT>?, onParentClickListener: OnItemClickListener<PARENT>?) {
             with(binding) {
                 if (parentLayout.childCount == 2) {
                     parentLayout.removeViewAt(0)
                     childrenLayout.removeAllViews()
                 }
 
-                with(inflateParentLayout(parent)) {
+                with(inflateParentLayout(parent, position, onParentClickListener)) {
                     parentLayout.addView(this, 0)
                 }
 
                 parent.children.forEachIndexed { index, child ->
                     childrenLayout.addView(inflateChildLayout(child)
                             .apply {
-                                setOnClickListener { onParentChildClickListener?.onClick(index, child, parent) }
+                                setOnClickListener { onParentChildClickListener?.onClick(position, parent, index, child) }
                             })
                 }
 
@@ -110,10 +101,13 @@ open class ExpandableBindingRecyclerAdapter<CHILD : ExpandableBindingChildModel,
             return childLayoutBinding.root
         }
 
-        private fun inflateParentLayout(parent: PARENT): View {
+        private fun inflateParentLayout(parent: PARENT, position: Int, onParentClickListener: OnItemClickListener<PARENT>?): View {
             val parentLayoutItemBinding = DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(binding.root.context), parent.getLayoutId(), null, false)
             parentLayoutItemBinding.setVariable(parent.getBindingVariableId(), parent)
-            parentLayoutItemBinding.root.setOnClickListener { parent.isParentExpanded.swap() }
+            parentLayoutItemBinding.root.setOnClickListener {
+                parent.isParentExpanded.swap()
+                onParentClickListener?.onClick(position, parent)
+            }
             return parentLayoutItemBinding.root
         }
     }

@@ -12,6 +12,7 @@ import homepunk.github.com.presentation.common.adapter.SimpleBindingRecyclerAdap
 import homepunk.github.com.presentation.common.adapter.model.ExpandableBindingChildModel
 import homepunk.github.com.presentation.common.adapter.model.ExpandableBindingParentModel
 import homepunk.github.com.presentation.core.base.BaseRecyclerViewAdapter
+import homepunk.github.com.presentation.core.listener.OnItemClickListener
 import homepunk.github.com.presentation.core.listener.OnItemPositionClickListener
 import homepunk.github.com.presentation.core.listener.OnParentChildClickListener
 import homepunk.github.com.presentation.util.decoration.MarginItemDecoration
@@ -47,6 +48,17 @@ fun <CHILD : ExpandableBindingChildModel, PARENT : ExpandableBindingParentModel<
     (adapter as? ExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
         it.onParentChildClickListener = listener
     }
+}
+@BindingAdapter("onParentClickListener")
+fun <CHILD : ExpandableBindingChildModel, PARENT : ExpandableBindingParentModel<CHILD>> RecyclerView.setOnParentClickListener(listener: OnItemClickListener<PARENT>) {
+    (adapter as? ExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
+        it.onParentClickListener = listener
+    }
+}
+
+@BindingAdapter("hasFixedSize")
+fun RecyclerView.setHasFixedSize(hasFixedSize: Boolean) {
+    setHasFixedSize(hasFixedSize)
 }
 
 @BindingAdapter(

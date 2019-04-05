@@ -6,6 +6,8 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
 import android.widget.LinearLayout
 import androidx.databinding.BindingAdapter
 import homepunk.github.com.presentation.core.wrapper.AnimatorListenerWrapper
@@ -40,9 +42,11 @@ fun LinearLayout.expand(prevExpand: Boolean,
     val va: ValueAnimator?
     if (expand) {
         va = ValueAnimator.ofInt(1, measuredHeight)
+        va.interpolator = AccelerateInterpolator()
         visibility = VISIBLE
     } else {
         va = ValueAnimator.ofInt(measuredHeight, 0)
+        va.interpolator = DecelerateInterpolator()
     }
 
     va.addUpdateListener { animation ->
@@ -58,6 +62,6 @@ fun LinearLayout.expand(prevExpand: Boolean,
             }
         }
     })
-    va.duration = 300
+    va.duration = 400
     va.start()
 }

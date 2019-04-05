@@ -1,7 +1,7 @@
 package homepunk.github.com.presentation.feature.discover.event
 
-import android.annotation.SuppressLint
 import androidx.databinding.ObservableArrayList
+import androidx.databinding.ObservableInt
 import homepunk.github.com.domain.interactor.SongkickEventInteractor
 import homepunk.github.com.domain.interactor.UserLocationInteractor
 import homepunk.github.com.domain.model.internal.UserLocation
@@ -9,11 +9,11 @@ import homepunk.github.com.presentation.core.base.BaseViewModel
 import homepunk.github.com.presentation.core.ext.addAllToEmptyList
 import homepunk.github.com.presentation.core.ext.removeWhen
 import homepunk.github.com.presentation.core.ext.toLiveData
+import homepunk.github.com.presentation.core.listener.OnItemClickListener
 import homepunk.github.com.presentation.feature.discover.event.model.EventModel
 import homepunk.github.com.presentation.feature.discover.event.model.LocationEventBindingParentModel
 import io.reactivex.BackpressureStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
-import timber.log.Timber
 import javax.inject.Inject
 
 class DiscoverEventViewModel @Inject constructor(var eventInteractor: SongkickEventInteractor,
@@ -23,6 +23,17 @@ class DiscoverEventViewModel @Inject constructor(var eventInteractor: SongkickEv
     var locationEventsList = ObservableArrayList<LocationEventBindingParentModel>()
 
     var userLocationLiveData = userLocationInteractor.getCurrentUserLocation().toLiveData(BackpressureStrategy.LATEST)
+
+    var parentFocusIndex =  ObservableInt(-1)
+    var onParentClickListener = object : OnItemClickListener<LocationEventBindingParentModel> {
+        override fun onClick(position: Int, parent: LocationEventBindingParentModel) {
+            if (parent.isParentExpanded.get()) {
+                parentFocusIndex.set(position)
+            } else {
+                parentFocusIndex.set(-1)
+            }
+        }
+    }
 
     fun fetchUpcomingEventList(userLocation: UserLocation) {
         compositeDisposable.add(eventInteractor.getUpcomingEventsForUserLocation(userLocation)

@@ -38,7 +38,11 @@ class CountryListViewModel @Inject constructor(appDataFactory: AppDataFactory,
                         BiFunction { location: SongkickLocation, countryLocationUserList: List<SongkickLocation> ->
                             CityBindingChildModel(location, countryLocationUserList.contains(location))
                         })
-                        .toList()
+                        .toSortedList { o1, o2 ->
+                            if (!o1.isSelected.get() && o2.isSelected.get()) 1
+                            else if (o1.isSelected.get() && !o2.isSelected.get()) -1
+                            else o1.name.get()!!.compareTo(o2.name.get()!!)
+                        }
                         .map { CountryBindingParentModel(countryModel, it) }
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe { parent ->
@@ -50,7 +54,7 @@ class CountryListViewModel @Inject constructor(appDataFactory: AppDataFactory,
 
     var onParentChildClickListener = object : OnParentChildClickListener<CityBindingChildModel, CountryBindingParentModel> {
         @SuppressLint("CheckResult")
-        override fun onClick(position: Int, child: CityBindingChildModel, parent: CountryBindingParentModel) {
+        override fun onClick(position: Int, parent: CountryBindingParentModel, childPosition: Int, child: CityBindingChildModel) {
             Timber.w("onClick $position, PARENT: ${parent.countryModel.countryName} -> CHILD: ${child.name.get()}")
             child.isSelected.swap()
             userLocationInteractor.saveUserLocationForCountry(parent.countryModel.countryName, child.location)
