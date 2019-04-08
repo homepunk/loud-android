@@ -13,6 +13,7 @@ class UpcomingEventBindingChildModel(private var layoutId: Int) : ExpandableBind
 
     // Required EVENT fields
     var isLast = ObservableBoolean(false)
+    var isNewDay = ObservableBoolean(false)
     var event = ObservableField<EventModel>()
 
     override fun getLayoutId() = layoutId
@@ -24,8 +25,9 @@ class UpcomingEventBindingChildModel(private var layoutId: Int) : ExpandableBind
         this.month.set(month)
     }
 
-    fun setUpEvent(isLast: Boolean, event: EventModel) {
+    fun setUpEvent(isLast: Boolean, isNewDay: Boolean, event: EventModel) {
         this.isLast.set(isLast)
+        this.isNewDay.set(isNewDay)
         this.event.set(event)
     }
 }

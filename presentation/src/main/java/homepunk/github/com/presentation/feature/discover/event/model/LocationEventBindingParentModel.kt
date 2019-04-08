@@ -20,6 +20,7 @@ class LocationEventBindingParentModel(private var locationName: String? = "",
 //        }
 
         var currentMonth = -1
+        var currentDay = -1
         for (i in 0 until eventList.size) {
             val child = eventList[i]
             val monthNum = child.month.get()
@@ -31,7 +32,8 @@ class LocationEventBindingParentModel(private var locationName: String? = "",
             }
 
             children.add(UpcomingEventBindingChildModel(R.layout.layout_item_upcoming_event_timeline_event_child)
-                    .apply { setUpEvent(i == eventList.lastIndex, child) })
+                    .apply { setUpEvent(i == eventList.lastIndex, currentDay != Integer.valueOf(child.date.get()), child) })
+            currentDay = Integer.valueOf(child.date.get())
         }
     }
 
