@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
 /**Created by Homepunk on 11.01.2019. **/
-class SimpleViewPagerAdapter(var supportFragmentManager: FragmentManager?) : FragmentPagerAdapter(supportFragmentManager) {
+class SimpleViewPagerAdapter(var supportFragmentManager: FragmentManager) : FragmentPagerAdapter(supportFragmentManager) {
     val mFragmentList = arrayListOf<Fragment>()
     var mTitleList = mutableListOf<String>()
 

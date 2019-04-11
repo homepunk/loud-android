@@ -1,5 +1,7 @@
 package homepunk.github.com.domain.model.songkick
 
+import java.io.Serializable
+
 data class SongkickEvent (
         var id : Long,
         var displayName : String = "",
@@ -13,4 +15,4 @@ data class SongkickEvent (
 //    "flaggedAsEnded":false,
 //    "venue":{  },
 //    "location":{  }
-)
+) : Serializable

@@ -29,7 +29,7 @@ abstract class BaseFragment<BINDING : ViewDataBinding> : Fragment() {
     lateinit var mDataBinding: BINDING
     lateinit var mAppModeViewModel: AppModeViewModel
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
     }

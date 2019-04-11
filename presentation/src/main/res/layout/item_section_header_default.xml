@@ -46,7 +46,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_top_divider"
+            android:layout_marginStart="@dimen/margin_default_10dp"
             android:fontFamily="@font/lato"
             android:letterSpacing="0.02"
             android:lineSpacingExtra="1sp"

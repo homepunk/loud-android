@@ -8,13 +8,15 @@ import homepunk.github.com.domain.model.songkick.SongkickEvent
 import homepunk.github.com.presentation.core.ext.dayOfMonth
 import homepunk.github.com.presentation.core.ext.month
 import homepunk.github.com.presentation.util.SongkickUtil
+import java.io.Serializable
 
 /**Created by Homepunk on 23.01.2019. **/
-class EventModel(var event: SongkickEvent) : BaseObservable() {
+class EventModel(var event: SongkickEvent) : Serializable, BaseObservable() {
     var date = ObservableField<String>()
     var title = ObservableField<String>()
     var location = ObservableField<String>()
     var month = ObservableInt()
+
 
     init {
         date.set(getDate(event.start?.date))

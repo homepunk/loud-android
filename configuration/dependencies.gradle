@@ -62,7 +62,8 @@ ext {
             navigationTabStrip:     "com.github.devlight.navigationtabstrip:navigationtabstrip:+",
             circularImageView:      "com.github.abdularis:CircularImageView:v1.2",
             picasso:                "com.squareup.picasso:picasso:2.71828",
-            boomMenu:               "com.nightonke:boommenu:2.1.1"
+            boomMenu:               "com.nightonke:boommenu:2.1.1",
+            recyclerAnimations:     "jp.wasabeef:recyclerview-animators:3.0.0"
     ]
 
     dataDependencies = [

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.LinearInterpolator
-import android.widget.ScrollView
+import androidx.core.widget.NestedScrollView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.xmlpull.v1.XmlPullParserException
@@ -37,7 +37,7 @@ fun View.swapVisibility() {
 }
 
 @BindingAdapter("scrollToPosition", "scrollToRecyclerId", requireAll = true)
-fun ScrollView.scrollToRecyclerChild(position: Int, scrollAnchorId: Int) {
+fun NestedScrollView.scrollToRecyclerChild(position: Int, scrollAnchorId: Int) {
     if (position != -1) {
         post {
             getChildAt(0).findViewById<RecyclerView>(scrollAnchorId).let {

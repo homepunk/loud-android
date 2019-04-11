@@ -7,12 +7,13 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import homepunk.github.com.presentation.common.dagger.ViewModelFactory
 import homepunk.github.com.presentation.common.dagger.ViewModelKey
+import homepunk.github.com.presentation.feature.detail.event.EventViewModel
 import homepunk.github.com.presentation.feature.discover.DiscoverHostViewModel
 import homepunk.github.com.presentation.feature.discover.event.DiscoverEventViewModel
 import homepunk.github.com.presentation.feature.discover.library.DiscoverLibraryViewModel
 import homepunk.github.com.presentation.feature.main.MainViewModel
-import homepunk.github.com.presentation.feature.menu.country.CountryListViewModel
 import homepunk.github.com.presentation.feature.menu.MenuViewModel
+import homepunk.github.com.presentation.feature.menu.country.CountryListViewModel
 import homepunk.github.com.presentation.feature.mode.AppModeViewModel
 
 /**Created by Homepunk on 27.12.2018. **/
@@ -54,5 +55,10 @@ interface ViewModelBindingModule {
     @Binds
     @IntoMap
     @ViewModelKey(CountryListViewModel::class )
-    fun bindCountryListViewModel(viewModel: CountryListViewModel): ViewModel
+    fun bindCountryListViewModel(viewModel: CountryListViewModel):  ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EventViewModel::class )
+    fun bindEventViewModel(viewModel: EventViewModel): ViewModel
 }

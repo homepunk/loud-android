@@ -38,10 +38,11 @@
     <dimen name="radius_small_card">4dp</dimen>
     <dimen name="plus_button_width">16dp</dimen>
     <dimen name="text_size_timeline_date">20sp</dimen>
-    <dimen name="height_timeline_event">64dp</dimen>
+    <dimen name="height_timeline_event">80dp</dimen>
     <dimen name="margin_timeline">11dp</dimen>
     <dimen name="width_timeline">2dp</dimen>
 
     <dimen name="radius_filter_card">16dp</dimen>
     <dimen name="text_size_menu_item">18sp</dimen>
+    <dimen name="text_size_large_22sp">22sp</dimen>
 </resources>

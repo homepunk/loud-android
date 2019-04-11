@@ -1,76 +1,113 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="viewModel"
-            type="homepunk.github.com.presentation.feature.discover.event.DiscoverEventViewModel" />
-
-        <variable
-            name="appModeModel"
-            type="homepunk.github.com.presentation.common.model.mode.AppModeModel" />
+            name="model"
+            type="homepunk.github.com.presentation.feature.discover.event.model.EventModel" />
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
-        bind:scrollToPosition="@{viewModel.parentFocusIndex}"
-        bind:scrollToRecyclerId="@{@id/rv_upcoming_events}"
-        android:fillViewport="true"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:background="@color/background"
+        android:fillViewport="true">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:nestedScrollingEnabled="false"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical">
 
-            <include
-                android:id="@+id/header_primary_events"
-                layout="@layout/item_section_header_highlighted"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                bind:sectionTitle="@{@string/title_most_popular_event}" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_primary_events"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/header_primary_events"
-                android:layout_marginTop="@dimen/margin_default_10dp"
-                android:layout_marginBottom="@dimen/margin_default_10dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                bind:itemDecoration_left="@{@dimen/margin_default_10dp}"
-                bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
-                bind:itemList="@{viewModel.primaryEventsList}"
-                tools:listitem="@layout/layout_item_primary_event" />
-            <!--bind:adapter="@{viewModel.primaryEventAdapter}"-->
-
-            <include
-                android:id="@+id/header_upcoming_events"
-                layout="@layout/item_section_header_highlighted"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/rv_primary_events"
-                bind:sectionTitle="@{@string/title_upcoming_event}" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_upcoming_events"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_event"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/header_upcoming_events"
+                android:layout_marginStart="@dimen/margin_big_20dp"
                 android:layout_marginTop="@dimen/margin_default_10dp"
-                android:nestedScrollingEnabled="false"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                bind:expandableItemList="@{viewModel.locationEventsList}"
-                bind:itemDecoration_top="@{@dimen/margin_default_10dp}"
-                bind:onParentClickListener="@{viewModel.onParentClickListener}"
-                tools:listitem="@layout/layout_item_parent_location_children_events" />
-            <!--bind:adapter="@{viewModel.locatonEventsAdapter}"-->
-        </RelativeLayout>
+                android:layout_marginEnd="@dimen/margin_big_20dp"
+                app:cardBackgroundColor="@color/background_gray"
+                app:cardCornerRadius="@dimen/radius_default_card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.25"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/margin_default_10dp">
+
+                    <com.github.abdularis.civ.CircleImageView
+                        android:id="@+id/thumb"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        app:imageUrl="@{model.thumb}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/margin_default_10dp"
+                        android:layout_marginEnd="@dimen/margin_default_10dp"
+                        android:fontFamily="@font/lato_bold"
+                        android:text="@{model.title}"
+                        android:textColor="@color/text"
+                        android:textSize="@dimen/text_size_large_22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView"
+                        app:layout_constraintStart_toEndOf="@+id/thumb"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Spiritual Front" />
+
+                    <ImageView
+                        android:id="@+id/time"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/margin_small_4dp"
+                        android:rotation="180"
+                        android:src="@drawable/ic_arrow_right"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/margin_small_4dp"
+                        android:layout_marginEnd="@dimen/margin_default_10dp"
+                        android:src="@drawable/ic_heart"
+                        app:layout_constraintBottom_toBottomOf="@+id/time"
+                        app:layout_constraintEnd_toStartOf="@+id/time"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_big_20dp"
+                android:layout_marginTop="@dimen/margin_default_10dp"
+                android:layout_marginEnd="@dimen/margin_big_20dp"
+                app:cardBackgroundColor="@color/background_gray"
+                app:cardCornerRadius="@dimen/radius_default_card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.25"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
     </ScrollView>
 </layout>

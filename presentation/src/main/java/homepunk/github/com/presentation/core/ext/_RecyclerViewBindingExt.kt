@@ -49,10 +49,18 @@ fun <CHILD : ExpandableBindingChildModel, PARENT : ExpandableBindingParentModel<
         it.onParentChildClickListener = listener
     }
 }
+
 @BindingAdapter("onParentClickListener")
 fun <CHILD : ExpandableBindingChildModel, PARENT : ExpandableBindingParentModel<CHILD>> RecyclerView.setOnParentClickListener(listener: OnItemClickListener<PARENT>) {
     (adapter as? ExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
         it.onParentClickListener = listener
+    }
+}
+
+@BindingAdapter("onChildClickListener")
+fun <CHILD : ExpandableBindingChildModel, PARENT : ExpandableBindingParentModel<CHILD>> RecyclerView.setOnChildClickListener(listener: OnItemClickListener<CHILD>) {
+    (adapter as? ExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
+        it.onChildClickListener = listener
     }
 }
 
