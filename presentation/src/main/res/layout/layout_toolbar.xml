@@ -18,10 +18,10 @@
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_root_layout"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:fitsSystemWindows="true"
-        app:cardBackgroundColor="@color/background">
+        android:fitsSystemWindows="true">
 
         <View
             android:id="@+id/dot"

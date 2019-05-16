@@ -1,5 +1,6 @@
 package homepunk.github.com.data.remote.repository
 
+import homepunk.github.com.data.core.constant.Constant
 import homepunk.github.com.data.remote.SongkickApi
 import homepunk.github.com.domain.model.songkick.SongkickEvent
 import homepunk.github.com.domain.repository.SongkickEventRepository
@@ -18,5 +19,18 @@ class SongkickEventDataRepository @Inject constructor(private var songkickApi: S
                         Observable.just(it.results!!.event)
                     else
                         Observable.empty<List<SongkickEvent>>() }
+    }
+
+    override fun getEventDetails(eventId: Long): Observable<SongkickEvent> {
+        return songkickApi.getEventDetails(eventId.toString(), Constant.SONGKICK.API_KEY)
+                .subscribeOn(Schedulers.io())
+                .doOnError { it.printStackTrace() }
+                .map { it.resultsPage }
+                .flatMapObservable {
+                    if (it.results != null && it.results!!.event != null)
+                        Observable.just(it.results!!.event!!)
+                    else
+                        Observable.empty<SongkickEvent>() }
+
     }
 }

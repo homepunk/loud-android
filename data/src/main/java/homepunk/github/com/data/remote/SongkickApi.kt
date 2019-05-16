@@ -1,6 +1,7 @@
 package homepunk.github.com.data.remote
 
 import homepunk.github.com.data.remote.model.songkick.BaseSongkickResponse
+import homepunk.github.com.data.remote.model.songkick.SongkickEventResponse
 import homepunk.github.com.data.remote.model.songkick.SongkickLocationResponse
 import homepunk.github.com.data.remote.model.songkick.SongkickUpcomingEventResponse
 import io.reactivex.Single
@@ -17,4 +18,7 @@ interface SongkickApi {
 
     @GET("search/locations.json")
     fun getLocationByQuery(@Query("query") query: String, @Query("apikey") apikey: String): Single<BaseSongkickResponse<SongkickLocationResponse>>
+
+    @GET("events/{event_id}.json")
+    fun getEventDetails(@Path("event_id") eventId: String, @Query("apikey") apikey: String): Single<BaseSongkickResponse<SongkickEventResponse>>
 }

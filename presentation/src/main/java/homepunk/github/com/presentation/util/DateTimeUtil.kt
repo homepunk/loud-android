@@ -7,8 +7,8 @@ object DateTimeUtil {
     fun getMonthForInt(num: Int): String {
         var month = "wrong"
         val dfs = DateFormatSymbols()
-        val months = dfs.getMonths()
-        if (num >= 0 && num <= 11) {
+        val months = dfs.months
+        if (num in 0..11) {
             month = months[num]
         }
         return month

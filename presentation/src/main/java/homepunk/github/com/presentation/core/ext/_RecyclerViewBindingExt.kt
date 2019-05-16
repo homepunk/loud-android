@@ -7,10 +7,10 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableArrayList
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
-import homepunk.github.com.presentation.common.adapter.ExpandableBindingRecyclerAdapter
 import homepunk.github.com.presentation.common.adapter.SimpleBindingRecyclerAdapter
-import homepunk.github.com.presentation.common.adapter.model.ExpandableBindingChildModel
-import homepunk.github.com.presentation.common.adapter.model.ExpandableBindingParentModel
+import homepunk.github.com.presentation.common.adapter.SimpleExpandableBindingRecyclerAdapter
+import homepunk.github.com.presentation.common.adapter.model.ExpandableChildModel
+import homepunk.github.com.presentation.common.adapter.model.ExpandableParentModel
 import homepunk.github.com.presentation.core.base.BaseRecyclerViewAdapter
 import homepunk.github.com.presentation.core.listener.OnItemClickListener
 import homepunk.github.com.presentation.core.listener.OnItemPositionClickListener
@@ -32,37 +32,39 @@ fun <T> RecyclerView.bindItemList(itemList: List<T>) {
     }
 }
 
+
 @BindingAdapter("expandableItemList")
-fun <CHILD : ExpandableBindingChildModel, PARENT : ExpandableBindingParentModel<CHILD>> RecyclerView.bindParentList(itemList: ObservableArrayList<PARENT>) {
+fun <CHILD : ExpandableChildModel, PARENT : ExpandableParentModel<CHILD>> RecyclerView.bindParentList(itemList: ObservableArrayList<PARENT>) {
     Timber.w("BIND NEW PARENT LIST: ${itemList.size}")
-    (adapter as? ExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
+    (adapter as? SimpleExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
         if (!it.isParentListInitialized()) {
             Timber.w("INITIALIZE")
-            it.setParentList(itemList)
+            it.setItemList(itemList)
         }
     }
 }
 
 @BindingAdapter("onParentChildClickListener")
-fun <CHILD : ExpandableBindingChildModel, PARENT : ExpandableBindingParentModel<CHILD>> RecyclerView.setOnParentChildClickListener(listener: OnParentChildClickListener<CHILD, PARENT>) {
-    (adapter as? ExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
+fun <CHILD : ExpandableChildModel, PARENT : ExpandableParentModel<CHILD>> RecyclerView.setOnParentChildClickListener(listener: OnParentChildClickListener<PARENT, CHILD>) {
+    (adapter as? SimpleExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
         it.onParentChildClickListener = listener
     }
 }
 
 @BindingAdapter("onParentClickListener")
-fun <CHILD : ExpandableBindingChildModel, PARENT : ExpandableBindingParentModel<CHILD>> RecyclerView.setOnParentClickListener(listener: OnItemClickListener<PARENT>) {
-    (adapter as? ExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
+fun <CHILD : ExpandableChildModel, PARENT : ExpandableParentModel<CHILD>> RecyclerView.setOnParentClickListener(listener: OnItemClickListener<PARENT>) {
+    (adapter as? SimpleExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
         it.onParentClickListener = listener
     }
 }
 
-@BindingAdapter("onChildClickListener")
-fun <CHILD : ExpandableBindingChildModel, PARENT : ExpandableBindingParentModel<CHILD>> RecyclerView.setOnChildClickListener(listener: OnItemClickListener<CHILD>) {
-    (adapter as? ExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
+@BindingAdapter("onParentChildClickListener")
+fun <CHILD : ExpandableChildModel, PARENT : ExpandableParentModel<CHILD>> RecyclerView.setOnChildClickListener(listener: OnItemClickListener<CHILD>) {
+    (adapter as? SimpleExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
         it.onChildClickListener = listener
     }
 }
+
 
 @BindingAdapter("hasFixedSize")
 fun RecyclerView.setHasFixedSize(hasFixedSize: Boolean) {

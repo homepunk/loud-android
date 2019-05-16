@@ -26,6 +26,10 @@ ext {
             kotlinReflect:          "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     ]
 
+    googleDependencies = [
+            map:              "com.google.android.gms:play-services-maps:10.2.0"
+    ]
+
     androidXDependencies = [
             design:                 "com.google.android.material:material:${materialDesignVersion}",
             lifecycleExtensions:    "androidx.lifecycle:lifecycle-extensions:2.0.0",

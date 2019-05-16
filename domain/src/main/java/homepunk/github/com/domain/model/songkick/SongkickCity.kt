@@ -1,8 +1,10 @@
 package homepunk.github.com.domain.model.songkick
 
 data class SongkickCity(
-        //    "country":{  },
+        val country: SongkickCountry? = null,
         var lat: Double,
         var lng: Double,
-        var displayName: String = ""
+        var displayName: String = "",
+        val id: Int? = null,
+        val uri: String? = null
 )

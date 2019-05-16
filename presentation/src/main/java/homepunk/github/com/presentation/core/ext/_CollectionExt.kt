@@ -58,3 +58,8 @@ fun <E> MutableList<E>.removeWhen(predicate: (E) -> Boolean): Boolean{
     }
     return false
 }
+
+
+fun <E> Collection<E>.toArrayList(): java.util.ArrayList<E> {
+    return ArrayList(this)
+}

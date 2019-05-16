@@ -94,7 +94,7 @@ fun RecyclerView.bindItemAnimation(newValue: Int, itemAnimationEnabled: Boolean)
     }
 }
 
-@BindingAdapter("bind:onClickListener")
+@BindingAdapter("bind:onParentChildClickListener")
 fun View.SetOnClick(listener: View.OnClickListener?) {
     listener?.let {
         setOnClickListener(it)

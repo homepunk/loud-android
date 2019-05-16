@@ -22,7 +22,7 @@
                     android:id="@+id/section_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listItem="@layout/layout_section_square_horizontal"/>
+                    tools:listitem="@layout/layout_section_square_horizontal"/>
 
             </LinearLayout>
         </ScrollView>

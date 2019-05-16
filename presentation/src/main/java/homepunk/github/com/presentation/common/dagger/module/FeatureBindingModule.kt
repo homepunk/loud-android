@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import homepunk.github.com.presentation.feature.detail.event.EventFragment
 import homepunk.github.com.presentation.feature.discover.DiscoverHostFragment
-import homepunk.github.com.presentation.feature.discover.event.DiscoverEventFragment
+import homepunk.github.com.presentation.feature.discover.event.EventListFragment
 import homepunk.github.com.presentation.feature.discover.library.DiscoverLibraryFragment
 import homepunk.github.com.presentation.feature.main.MainActivity
 import homepunk.github.com.presentation.feature.menu.MenuActivity
@@ -27,7 +27,7 @@ interface FeatureBindingModule {
     fun discoverlibraryFragment(): DiscoverLibraryFragment
 
     @ContributesAndroidInjector
-    fun discoverEventFragment(): DiscoverEventFragment
+    fun discoverEventFragment(): EventListFragment
 
     @ContributesAndroidInjector
     fun countryListFragment(): CountryListFragment

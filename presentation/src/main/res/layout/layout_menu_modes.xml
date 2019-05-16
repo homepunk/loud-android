@@ -10,50 +10,33 @@
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:alpha="0.8"
+        android:layout_marginEnd="-12dp"
         android:background="@drawable/background_rect_round_left_corners_accent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/margin_default_10dp"
+            android:layout_marginStart="@dimen/margin_big_20dp"
             android:layout_marginEnd="@dimen/margin_big_20dp"
             android:fontFamily="@font/lato_bold"
             android:gravity="center"
-            android:text="EVENTS"
+            android:text="INFO"
             android:textColor="@color/text" />
     </FrameLayout>
 
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:alpha="0.8"
-        android:background="@color/modeLibraryColor">
+        android:background="@drawable/background_rect_round_left_corners_gray">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/margin_default_10dp"
+            android:layout_marginStart="@dimen/margin_big_20dp"
             android:layout_marginEnd="@dimen/margin_big_20dp"
             android:fontFamily="@font/lato_bold"
             android:gravity="center"
-            android:text="LIBRARY"
-            android:textColor="@color/text" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:alpha="0.8"
-        android:background="@color/modeGearColor">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/margin_default_10dp"
-            android:layout_marginEnd="@dimen/margin_big_20dp"
-            android:fontFamily="@font/lato_bold"
-            android:gravity="center"
-            android:text="GEAR"
+            android:text="LINE UP"
             android:textColor="@color/text" />
     </FrameLayout>
 

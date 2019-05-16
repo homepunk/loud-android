@@ -5,7 +5,7 @@ import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableBoolean
 
 /**Created by Homepunk on 18.03.2019. **/
-abstract class ExpandableBindingParentModel<CHILD : ExpandableBindingChildModel>() : BaseObservable() {
+abstract class ExpandableParentModel<CHILD : ExpandableChildModel>() : BaseObservable() {
     var children = ObservableArrayList<CHILD>()
     open var isParentExpanded = ObservableBoolean(false)
 

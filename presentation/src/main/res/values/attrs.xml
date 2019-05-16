@@ -12,4 +12,12 @@
         <attr name="bubble_iconHeight" format="integer|dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="ExpandableHeader">
+        <attr name="el_title" format="string"/>
+        <attr name="el_expanded" format="boolean"/>
+        <attr name="el_headerTint" format="color"/>
+        <attr name="el_headerTitleStartMargin" format="integer|dimension"/>
+        <attr name="el_headerHorizontalPadding" format="integer|dimension"/>
+    </declare-styleable>
+
 </resources>

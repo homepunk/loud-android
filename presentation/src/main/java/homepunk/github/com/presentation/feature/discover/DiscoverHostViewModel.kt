@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import homepunk.github.com.domain.interactor.AppModeInteractor
 import homepunk.github.com.domain.model.AppMode
 import homepunk.github.com.presentation.core.base.BaseViewModel
-import homepunk.github.com.presentation.feature.discover.event.DiscoverEventFragment
+import homepunk.github.com.presentation.feature.discover.event.EventListFragment
 import homepunk.github.com.presentation.feature.discover.library.DiscoverLibraryFragment
 import javax.inject.Inject
 
@@ -21,7 +21,7 @@ class DiscoverHostViewModel @Inject constructor(var appModeInteractor: AppModeIn
                             fragmentLiveData.value = DiscoverLibraryFragment()
                         }
                         AppMode.EVENTS -> {
-                            fragmentLiveData.value = DiscoverEventFragment()
+                            fragmentLiveData.value = EventListFragment()
                         }
                         else -> {
                         }

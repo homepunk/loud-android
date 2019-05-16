@@ -5,7 +5,12 @@ import androidx.databinding.ObservableBoolean
 
 /**Created by Homepunk on 23.01.2019. **/
 
-fun ObservableBoolean.swap() = set(!get())
+fun ObservableBoolean.swap(): Boolean {
+    set(!get())
+    return get()
+}
+
+fun Boolean.swap() = !this
 
 
 fun <T> ObservableArrayList<T>.addAllToEmptyList(collection: List<T>) {

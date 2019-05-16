@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="date"
+            type="String" />
+
+        <variable
+            name="month"
+            type="int" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <View
+            android:id="@+id/title_divider"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="?colorAccent" />
+
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--android:background="@drawable/curved_date_background"-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato"
+                android:layout_marginStart="@dimen/margin_big_20dp"
+                android:textColor="@color/whiteBone"
+                android:textSize="@dimen/text_size_default"
+                bind:monthForInt="@{month}"
+                tools:text="July" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_big_20dp"
+                android:fontFamily="@font/lato"
+                android:text="@{date}"
+                android:textColor="@color/whiteBone"
+                android:textSize="22sp"
+                tools:text="30" />
+
+        </LinearLayout>
+    </FrameLayout>
+</layout>

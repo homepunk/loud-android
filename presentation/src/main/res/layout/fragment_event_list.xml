@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="homepunk.github.com.presentation.feature.discover.event.DiscoverEventViewModel" />
+            type="homepunk.github.com.presentation.feature.discover.event.EventListViewModel" />
 
         <variable
             name="appModeModel"
@@ -16,21 +16,21 @@
 
         <variable
             name="onParentChildClickListener"
-            type="homepunk.github.com.presentation.core.listener.OnParentChildClickListener"/>
+            type="homepunk.github.com.presentation.core.listener.OnParentChildClickListener" />
     </data>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/sv_root_layout"
         android:layout_width="match_parent"
-        bind:scrollToPosition="@{viewModel.parentFocusIndex}"
-        bind:scrollToRecyclerId="@{@id/rv_upcoming_events}"
-        android:fillViewport="true"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <!--
+                bind:scrollToPosition="@{viewModel.parentFocusIndex}"
+                bind:scrollToRecyclerId="@{@id/rv_upcoming_events}"-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:nestedScrollingEnabled="false"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false">
 
             <include
                 android:id="@+id/header_primary_events"
@@ -53,7 +53,6 @@
                 bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
                 bind:itemList="@{viewModel.primaryEventsList}"
                 tools:listitem="@layout/layout_item_primary_event" />
-            <!--bind:adapter="@{viewModel.primaryEventAdapter}"-->
 
             <include
                 android:id="@+id/header_upcoming_events"
@@ -71,12 +70,10 @@
                 android:layout_marginTop="@dimen/margin_default_10dp"
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                bind:expandableItemList="@{viewModel.locationEventsList}"
                 bind:itemDecoration_top="@{@dimen/margin_default_10dp}"
-                bind:onParentClickListener="@{viewModel.onParentClickListener}"
-                bind:onChildClickListener="@{viewModel.onChildClickListener}"
-                tools:listitem="@layout/layout_item_parent_location_children_events" />
-            <!--bind:adapter="@{viewModel.locatonEventsAdapter}"-->
+                bind:itemList="@{viewModel.upcomingEventsList}"
+                tools:listItem="@layout/layout_item_parent_location_children_events" />
+
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

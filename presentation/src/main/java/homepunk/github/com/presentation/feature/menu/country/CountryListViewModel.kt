@@ -52,7 +52,7 @@ class CountryListViewModel @Inject constructor(appDataFactory: AppDataFactory,
         }
     }
 
-    var onParentChildClickListener = object : OnParentChildClickListener<CityBindingChildModel, CountryBindingParentModel> {
+    var onParentChildClickListener = object : OnParentChildClickListener<CountryBindingParentModel, CityBindingChildModel> {
         @SuppressLint("CheckResult")
         override fun onClick(position: Int, parent: CountryBindingParentModel, childPosition: Int, child: CityBindingChildModel) {
             Timber.w("onClick $position, PARENT: ${parent.countryModel.countryName} -> CHILD: ${child.name.get()}")

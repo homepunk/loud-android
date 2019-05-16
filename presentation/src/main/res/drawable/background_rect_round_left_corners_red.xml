@@ -2,7 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <corners
-        android:topLeftRadius="@dimen/radius_filter_card"
-        android:bottomLeftRadius="@dimen/radius_filter_card" />
-    <solid android:color="@color/modeGearColor"/>
+        android:bottomLeftRadius="@dimen/radius_default_card"
+        android:topLeftRadius="@dimen/radius_default_card" />
+    <solid
+        android:color="@color/modeGearColor" />
 </shape>

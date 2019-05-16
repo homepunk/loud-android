@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="homepunk.github.com.presentation.util.SongkickUtil"/>
+
+        <variable
+            name="model"
+            type="homepunk.github.com.domain.model.songkick.SongkickArtist"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:paddingStart="@dimen/margin_big_20dp"
+        android:paddingEnd="@dimen/margin_big_20dp"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="3dp"
+            android:layout_height="3dp"
+            android:background="@color/whiteBone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/cover"
+            app:layout_constraintTop_toTopOf="@+id/cover"
+            android:visibility="visible"/>
+
+        <com.github.abdularis.civ.CircleImageView
+            android:id="@+id/cover"
+            android:layout_width="60dp"
+            android:layout_marginTop="@dimen/margin_default_10dp"
+            android:layout_height="60dp"
+            app:layout_constraintStart_toEndOf="@+id/divider"
+            android:layout_marginStart="@dimen/margin_big_20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:songkickThumb="@{model.id}" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_large"
+            android:textColor="@color/whiteBone"
+            android:fontFamily="@font/lato"
+            android:text="@{model.displayName}"
+            android:layout_marginStart="@dimen/margin_big_20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/cover"
+            app:layout_constraintStart_toEndOf="@+id/cover"
+            app:layout_constraintTop_toTopOf="@+id/cover"
+            tools:text="Product KF" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

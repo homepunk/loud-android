@@ -1,113 +1,335 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <import type="homepunk.github.com.presentation.R" />
+
+        <import type="android.view.View" />
+
         <variable
-            name="model"
-            type="homepunk.github.com.presentation.feature.discover.event.model.EventModel" />
+            name="viewModel"
+            type="homepunk.github.com.presentation.feature.detail.event.EventViewModel" />
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
         android:background="@color/background"
+        android:clipToPadding="false"
         android:fillViewport="true">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
-            android:fitsSystemWindows="true"
-            android:orientation="vertical">
+            android:fitsSystemWindows="true">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_event"
+            <ImageView
+                android:id="@+id/thumb"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_big_20dp"
-                android:layout_marginTop="@dimen/margin_default_10dp"
-                android:layout_marginEnd="@dimen/margin_big_20dp"
-                app:cardBackgroundColor="@color/background_gray"
-                app:cardCornerRadius="@dimen/radius_default_card"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{viewModel.eventModel.thumb}"
+                app:layout_constraintDimensionRatio="H,1:1.3"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.25"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/background_events_6" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="@dimen/margin_default_10dp">
+            <View
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:alpha="0.8"
+                android:background="@drawable/bg_shadow_detail"
+                app:layout_constraintBottom_toBottomOf="@+id/thumb"
+                app:layout_constraintEnd_toEndOf="@+id/thumb"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/thumb" />
 
-                    <com.github.abdularis.civ.CircleImageView
-                        android:id="@+id/thumb"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:scaleType="centerCrop"
-                        app:imageUrl="@{model.thumb}"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/title"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginBottom="@dimen/margin_default_10dp"
+                android:alpha="0.65"
+                android:background="@drawable/background_rect_round_left_corners_red"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="parent">
 
-                    <TextView
-                        android:id="@+id/title"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/margin_default_10dp"
-                        android:layout_marginEnd="@dimen/margin_default_10dp"
-                        android:fontFamily="@font/lato_bold"
-                        android:text="@{model.title}"
-                        android:textColor="@color/text"
-                        android:textSize="@dimen/text_size_large_22sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/imageView"
-                        app:layout_constraintStart_toEndOf="@+id/thumb"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="Spiritual Front" />
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_big_20dp"
+                    android:layout_marginEnd="@dimen/margin_big_20dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:gravity="center"
+                    android:src="@drawable/ic_play"
+                    android:text="PLAY" />
+            </FrameLayout>
 
-                    <ImageView
-                        android:id="@+id/time"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginTop="@dimen/margin_small_4dp"
-                        android:rotation="180"
-                        android:src="@drawable/ic_arrow_right"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+            <!-- <ImageView
+                 android:layout_width="48dp"
+                 android:layout_height="48dp"
+                 android:layout_marginEnd="20dp"
+                 android:src="@drawable/ic_play"
+                 android:tint="@color/red"/>-->
 
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginTop="@dimen/margin_small_4dp"
-                        android:layout_marginEnd="@dimen/margin_default_10dp"
-                        android:src="@drawable/ic_heart"
-                        app:layout_constraintBottom_toBottomOf="@+id/time"
-                        app:layout_constraintEnd_toStartOf="@+id/time"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <include
+                android:id="@+id/include"
+                layout="@layout/layout_date_container"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
                 android:layout_marginStart="@dimen/margin_big_20dp"
-                android:layout_marginTop="@dimen/margin_default_10dp"
+                android:layout_marginBottom="@dimen/margin_big_26dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@+id/tv_title"
+                app:layout_constraintStart_toStartOf="parent"
+                bind:date="@{viewModel.eventModel.date}"
+                bind:month="@{viewModel.eventModel.month}" />
+
+
+            <TextView
+                android:id="@+id/tv_place"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_big_20dp"
-                app:cardBackgroundColor="@color/background_gray"
-                app:cardCornerRadius="@dimen/radius_default_card"
+                android:layout_marginBottom="@dimen/margin_big_20dp"
+                android:fontFamily="@font/lato"
+                android:text="@{`At ` + viewModel.eventModel.location}"
+                android:textColor="@color/text"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.25"
+                app:layout_constraintStart_toStartOf="@+id/tv_title"
+                tools:text="At Green Theatre" />
+
+            <!--               <ImageView
+                               android:id="@+id/place_dot"
+                               android:layout_width="16dp"
+                               android:layout_height="16dp"
+                               android:layout_marginStart="20dp"
+                               android:src="@drawable/ic_pin2"
+                               app:layout_constraintBottom_toBottomOf="@+id/tv_place"
+                               app:layout_constraintStart_toStartOf="parent"
+                               app:layout_constraintTop_toTopOf="@+id/tv_place" />-->
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_big_20dp"
+                android:layout_marginBottom="@dimen/margin_default_10dp"
+                android:fontFamily="@font/lato_bold"
+                android:text="@{viewModel.eventModel.title}"
+                android:textColor="?colorAccent"
+                android:textSize="42sp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_place"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/title_divider"
+                tools:text="Spiritual Front" />
+
+            <View
+                android:id="@+id/title_divider"
+                android:layout_width="4dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/margin_default_10dp"
+                android:background="?colorAccent"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+                app:layout_constraintStart_toStartOf="@+id/include"
+                app:layout_constraintTop_toTopOf="@+id/tv_title" />
+
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/margin_big_20dp"
+                android:layout_marginTop="34dp"
+                android:src="@drawable/ic_left_arrow"
+                android:tint="@color/whiteBone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-        </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_big_20dp"
+                android:src="@drawable/ic_heart"
+                android:tint="@color/whiteBone"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_back"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btn_back" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/margin_big_20dp"
+                android:layout_marginTop="@dimen/margin_default_10dp"
+                android:background="?colorAccent"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/block_line_up"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/block_line_up" />
+
+            <homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader
+                android:id="@+id/block_line_up"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/margin_default_10dp"
+                app:el_expanded="true"
+                app:el_headerHorizontalPadding="@dimen/margin_big_20dp"
+                app:el_title="@string/title_line_up"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/thumb"
+                tools:visibility="gone">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_line_up"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    bind:itemDecoration_top="@{@dimen/margin_default_10dp}"
+                    bind:itemList="@{viewModel.performanceList}"
+                    tools:listitem="@layout/layout_item_event_info_line_up"
+                    tools:visibility="gone" />
+            </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>
+
+            <homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader
+                android:id="@+id/block_venue"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/margin_default_10dp"
+                app:el_expanded="true"
+                app:el_headerHorizontalPadding="@dimen/margin_big_20dp"
+                app:el_title="@string/title_location"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/block_line_up">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_big_20dp"
+                    android:layout_marginTop="@dimen/margin_default_10dp"
+                    android:layout_marginEnd="@dimen/margin_big_20dp"
+                    android:orientation="horizontal"
+                    tools:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/background_circle_filled_gray"
+                        android:padding="@dimen/margin_default_12dp"
+                        android:src="@drawable/ic_phone_stroke"
+                        android:visibility="@{viewModel.venueModel.phone.isEmpty() ? View.GONE: View.VISIBLE}" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_default_10dp"
+                        android:visibility="@{viewModel.venueModel.website.isEmpty() ? View.GONE: View.VISIBLE}">
+
+                        <ImageView
+                            android:layout_width="47dp"
+                            android:layout_height="47dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/background_circle_filled_white" />
+
+                        <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_internet" />
+
+                    </FrameLayout>
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="@dimen/margin_default_10dp"
+                        android:background="@drawable/background_circle_filled_gray"
+                        android:padding="@dimen/margin_default_12dp"
+                        android:src="@drawable/ic_route"
+                        android:visibility="@{viewModel.venueModel.getLocation() != null ? View.VISIBLE : View.GONE}" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_big_20dp"
+                    android:layout_marginTop="@dimen/margin_default_10dp"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:padding="@dimen/margin_default_12dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/background_circle_filled_gray"
+                        android:src="@drawable/ic_pin2" />
+
+                    <TextView
+                        style="@style/BlockTextStyle"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="58dp"
+                        android:text="@{viewModel.venueModel.address}"
+                        tools:text="Zhivot" />
+                </FrameLayout>
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/venue_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="@dimen/margin_big_20dp"
+                    android:visibility="@{viewModel.venueModel.getLocation() != null ? View.VISIBLE : View.GONE}"
+                    bind:map_style="@{R.raw.mapstyle_night}"
+                    bind:pin="@{viewModel.venueModel.location}" />
+            </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>
+
+            <homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader
+                android:id="@+id/block_nearest_events"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default_10dp"
+                app:el_expanded="true"
+                app:el_headerHorizontalPadding="@dimen/margin_big_20dp"
+                app:el_title="@string/title_nearest_events"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/block_venue">
+
+                <homepunk.github.com.presentation.feature.widget.timeline.TimelineView
+                    android:id="@+id/timeline_nearest_events"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_default_10dp"
+                    android:layout_marginTop="@dimen/margin_default_10dp"
+                    android:layout_marginEnd="@dimen/margin_default_10dp"
+                    android:nestedScrollingEnabled="false"
+                    app:timeline_adapter="@{viewModel.timelineEventAdapter}" />
+            </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>
+
+            <homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader
+                android:id="@+id/block_related_artists"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default_10dp"
+                app:el_expanded="false"
+                app:el_headerHorizontalPadding="@dimen/margin_big_20dp"
+                app:el_title="@string/title_related_artists"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/block_nearest_events">
+
+            </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

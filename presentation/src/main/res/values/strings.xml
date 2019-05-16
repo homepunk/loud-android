@@ -36,5 +36,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_location">Venue</string>
+    <string name="title_line_up">Line Up</string>
+    <string name="visit_website">Visit venue website</string>
+    <string name="title_nearest_events">Nearest events</string>
+    <string name="title_related_artists">Related artists</string>
 
 </resources>

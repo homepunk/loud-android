@@ -5,4 +5,6 @@ import io.reactivex.Observable
 
 interface SongkickEventRepository {
     fun getUpcomingEventList(metroAreaId: Long): Observable<List<SongkickEvent>>
+
+    fun getEventDetails(eventId: Long): Observable<SongkickEvent>
 }

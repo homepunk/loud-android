@@ -8,7 +8,7 @@
 
         <variable
             name="parentModel"
-            type="homepunk.github.com.presentation.common.adapter.model.ExpandableBindingParentModel" />
+            type="homepunk.github.com.presentation.common.adapter.model.ExpandableParentModel" />
     </data>
 
     <LinearLayout

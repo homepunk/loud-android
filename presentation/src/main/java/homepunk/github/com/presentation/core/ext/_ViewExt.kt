@@ -1,5 +1,6 @@
 package homepunk.github.com.presentation.core.ext
 
+import android.animation.Animator
 import android.animation.ValueAnimator
 import android.graphics.drawable.Drawable
 import android.view.View
@@ -9,6 +10,9 @@ import android.view.animation.LinearInterpolator
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import homepunk.github.com.presentation.core.wrapper.AnimatorListenerWrapper
+import homepunk.github.com.presentation.feature.widget.animation.AnimationEventLiveData
+import homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader
 import org.xmlpull.v1.XmlPullParserException
 import timber.log.Timber
 import java.io.IOException
@@ -36,6 +40,11 @@ fun View.swapVisibility() {
     }
 }
 
+@BindingAdapter("isVisible")
+fun View.isVisible(isVisible: Boolean) {
+    visibility = if (isVisible) VISIBLE else GONE
+}
+
 @BindingAdapter("scrollToPosition", "scrollToRecyclerId", requireAll = true)
 fun NestedScrollView.scrollToRecyclerChild(position: Int, scrollAnchorId: Int) {
     if (position != -1) {
@@ -49,14 +58,41 @@ fun NestedScrollView.scrollToRecyclerChild(position: Int, scrollAnchorId: Int) {
                 animator.interpolator = LinearInterpolator()
                 animator.addUpdateListener {
                     val y = it.animatedValue as Int
-                    Timber.w("SCROLL TO $y")
+//                    Timber.w("SCROLL TO $y")
                     scrollTo(0, y)
                 }
+                animator.addListener(object : AnimatorListenerWrapper() {
+                    override fun onAnimationStart(animation: Animator?) {
+                        AnimationEventLiveData.getInstance().isScrollToPosition = true
+                        Timber.w("SCROLL TO ITEM isScrollToPosition = true")
+                    }
+
+                    override fun onAnimationEnd(animation: Animator?) {
+                        AnimationEventLiveData.getInstance().isScrollToPosition = false
+                        Timber.w("SCROLL TO ITEM isScrollToPosition = false")
+                    }
+                })
                 animator.start()
+
             }
         }
     }
 }
+
+//@BindingAdapter("timeline_list")
+//fun <T> TimelineView<T>.bindTimelineList(itemList: List<TimelineItem<T>>) {
+//    setUpTimeline(itemList)
+//}
+
+@BindingAdapter("el_title")
+fun ExpandableHeader.bindElTitle(title: String) {
+    setHeaderTitle(title)
+}
+
+
+fun View.isNotVisible(): Boolean = visibility == GONE || visibility == View.INVISIBLE
+
+fun View.isVisible(): Boolean = visibility == VISIBLE
 
 //@BindingAdapter("background")
 //fun View.setBackgroundColorRes(@ColorRes colorRes: Int) {

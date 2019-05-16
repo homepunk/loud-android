@@ -7,28 +7,30 @@ import androidx.databinding.ObservableInt
 import homepunk.github.com.domain.model.songkick.SongkickEvent
 import homepunk.github.com.presentation.core.ext.dayOfMonth
 import homepunk.github.com.presentation.core.ext.month
+import homepunk.github.com.presentation.util.DateTimeUtil
 import homepunk.github.com.presentation.util.SongkickUtil
 import java.io.Serializable
 
 /**Created by Homepunk on 23.01.2019. **/
 class EventModel(var event: SongkickEvent) : Serializable, BaseObservable() {
+    var month = ObservableInt()
     var date = ObservableField<String>()
+    var fullDate = ObservableField<String>()
     var title = ObservableField<String>()
     var location = ObservableField<String>()
-    var month = ObservableInt()
-
 
     init {
         date.set(getDate(event.start?.date))
         month.set(getMonth(event.start?.date))
+        fullDate.set(date.get() + " " + DateTimeUtil.getMonthForInt(month.get()))
         title.set(getTitle2(event.displayName))
         location.set(getLocationName(event.displayName))
     }
 
     private fun getLocationName(value: String): String {
         return getTitle(value).run {
-            if (indexOf("at") != -1)
-                substring(indexOf("at"))
+            if (indexOf("at ") != -1)
+                substring(indexOf("at ") + 3)
             else
                 "Unknown"
         }
@@ -79,6 +81,7 @@ class EventModel(var event: SongkickEvent) : Serializable, BaseObservable() {
                 -1
             }
         }
+        return -1
     }
 }
 

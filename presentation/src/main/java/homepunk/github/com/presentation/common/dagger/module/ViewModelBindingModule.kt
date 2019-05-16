@@ -9,7 +9,7 @@ import homepunk.github.com.presentation.common.dagger.ViewModelFactory
 import homepunk.github.com.presentation.common.dagger.ViewModelKey
 import homepunk.github.com.presentation.feature.detail.event.EventViewModel
 import homepunk.github.com.presentation.feature.discover.DiscoverHostViewModel
-import homepunk.github.com.presentation.feature.discover.event.DiscoverEventViewModel
+import homepunk.github.com.presentation.feature.discover.event.EventListViewModel
 import homepunk.github.com.presentation.feature.discover.library.DiscoverLibraryViewModel
 import homepunk.github.com.presentation.feature.main.MainViewModel
 import homepunk.github.com.presentation.feature.menu.MenuViewModel
@@ -39,8 +39,8 @@ interface ViewModelBindingModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(DiscoverEventViewModel::class )
-    fun bindUpcomingEventsViewModel(viewModel: DiscoverEventViewModel): ViewModel
+    @ViewModelKey(EventListViewModel::class )
+    fun bindUpcomingEventsViewModel(viewModel: EventListViewModel): ViewModel
 
     @Binds
     @IntoMap

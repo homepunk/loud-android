@@ -49,4 +49,8 @@ class SongkickEventInteractor @Inject constructor(private val songkickEventRepos
                             })
                 }
     }
+
+    fun getEventDetails(eventId: Long): Observable<SongkickEvent> {
+        return songkickEventRepository.getEventDetails(eventId)
+    }
 }

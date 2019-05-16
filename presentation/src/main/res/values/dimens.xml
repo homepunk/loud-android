@@ -17,7 +17,7 @@
     <dimen name="margin_small_6dp">6dp</dimen>
     <dimen name="margin_default_8dp">8dp</dimen>
     <dimen name="margin_default_10dp">10dp</dimen>
-    <dimen name="margin_default_12dp">10dp</dimen>
+    <dimen name="margin_default_12dp">12dp</dimen>
     <dimen name="margin_big_16dp">16dp</dimen>
     <dimen name="margin_big_20dp">20dp</dimen>
     <dimen name="margin_big_24dp">24dp</dimen>
@@ -29,7 +29,9 @@
 
     <dimen name="text_size_default">16sp</dimen>
     <dimen name="text_size_large">18sp</dimen>
+    <dimen name="text_size_large_20sp">20sp</dimen>
     <dimen name="text_size_large_26sp">26sp</dimen>
+    <dimen name="text_size_large_24sp">24sp</dimen>
     <dimen name="text_size_large_28sp">28sp</dimen>
     <dimen name="text_size_event_subtitle">12sp</dimen>
 

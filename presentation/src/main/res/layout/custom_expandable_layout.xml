@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout >
+
+    <data>
+
+        <import type="homepunk.github.com.presentation.R" />
+
+        <variable
+            name="isExpanded"
+            type="androidx.databinding.ObservableBoolean" />
+
+        <variable
+            name="headerTint"
+            type="Integer" />
+    </data>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/dot"
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="@dimen/margin_top_divider"
+                android:layout_marginBottom="@dimen/margin_top_divider"
+                android:background="@{headerTint}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato"
+                android:letterSpacing="0.02"
+                android:lineSpacingExtra="1sp"
+                android:textAllCaps="true"
+                android:textColor="@{headerTint}"
+                android:textSize="@dimen/text_size_large"
+                app:layout_constraintBottom_toBottomOf="@+id/dot"
+                app:layout_constraintStart_toEndOf="@+id/dot"
+                app:layout_constraintTop_toTopOf="@+id/dot"
+                tools:text="Latet Releases" />
+
+            <ImageView
+                android:id="@+id/btn_expand"
+                android:layout_width="@dimen/plus_button_width"
+                android:layout_height="@dimen/plus_button_width"
+                android:layout_gravity="end"
+                android:src="@drawable/plus"
+                android:stateListAnimator="@animator/plus_minus_state_list_animator"
+                android:tint="@{headerTint}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:animatableImageResId="@{isExpanded ? R.drawable.animated_plus : R.drawable.animated_minus}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</layout>
