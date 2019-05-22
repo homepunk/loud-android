@@ -13,7 +13,7 @@ import java.util.*
 
 /**Created by Homepunk on 15.05.2019. **/
 
-class TimelineEventAdapter<T> : TimelineAdapter<EventModel>() {
+class TimelineEventAdapter : TimelineAdapter<EventModel>() {
     var onItemClickListener: OnItemClickListener<EventModel>? = null
 
     override fun getDate(value: EventModel): String {

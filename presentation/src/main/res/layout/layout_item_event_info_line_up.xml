@@ -19,8 +19,8 @@
 
         <View
             android:id="@+id/divider"
-            android:layout_width="3dp"
-            android:layout_height="3dp"
+            android:layout_width="@dimen/width_timeline"
+            android:layout_height="@dimen/width_timeline"
             android:background="@color/whiteBone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/cover"

@@ -12,7 +12,7 @@
                     ring : A ring shape.
         -->
         <shape android:shape="oval">
-            <stroke android:color="@color/modeEventsColor" android:width="2dp"/>
+            <stroke android:color="@color/subtitle" android:width="2dp"/>
             <!-- Set the same value for both width and height to get a circular shape -->
         </shape>
     </item>

@@ -25,7 +25,7 @@ fun TextView.bindTextRes(value: Int) {
 
 @BindingAdapter("monthForInt")
 fun TextView.bindMonthForInt(value: Int) {
-    text = DateTimeUtil.getMonthForInt(value)
+    text = DateTimeUtil.getMonthForInt(value).substring(0, 3).plus(".")
 }
 
 @BindingAdapter("link")

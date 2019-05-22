@@ -26,16 +26,24 @@
     <color name="1">#3d3d3d</color>-->
     <color name="charocal">#3A405A</color>
     <color name="paleBlue">#AEC5EB</color>
+    <color name="bacgkround_accent">#484B4D</color>
+
+    <color name="subtitle3">#CED0CE</color>
+    <color name="subtitle4">#E6E8E6</color>
+
     <color name="background">#202426</color>
-    <color name="background_card">#31393C</color>
+    <color name="background_transp_60">#B3202426</color>
+    <color name="background_card">#56585C</color>
     <color name="backgroundDark">@color/colorPrimary</color>
     <color name="backgroundLight">#24282b</color>
     <color name="title">#F6F1EB</color>
     <color name="title2">#FBF5F3</color>
     <color name="subtitle">#c4c4c4</color>
+    <color name="subtitle2">#F7A0A0A0</color>
     <color name="text">#ede9e3</color>
     <color name="red">#92140C</color>
     <color name="pale_red">#AD343E</color>
+    <color name="pale_red2">#9B1D20</color>
     <color name="grey">#565656</color>
     <color name="greyLight">#6B6E70</color>
     <color name="green">#093824</color>

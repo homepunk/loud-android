@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import homepunk.github.com.presentation.core.ext.dayOfMonth
 import homepunk.github.com.presentation.core.ext.month
-import homepunk.github.com.presentation.databinding.CustomLayoutTimelineBinding
+import homepunk.github.com.presentation.databinding.CustomLayoutTimeline2Binding
 import homepunk.github.com.presentation.util.DateTimeUtil
 import timber.log.Timber
 
@@ -59,7 +59,7 @@ class TimelineView<T> @JvmOverloads constructor(context: Context, attrs: Attribu
         }
     }
 
-    private fun getTimelineLayout(): CustomLayoutTimelineBinding {
-        return CustomLayoutTimelineBinding.inflate(LayoutInflater.from(context), this, false)
+    private fun getTimelineLayout(): CustomLayoutTimeline2Binding {
+        return CustomLayoutTimeline2Binding.inflate(LayoutInflater.from(context), this, false)
     }
 }

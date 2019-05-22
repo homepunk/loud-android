@@ -7,6 +7,7 @@ import homepunk.github.com.domain.model.songkick.SongkickArtist
 import homepunk.github.com.domain.model.songkick.SongkickEvent
 import homepunk.github.com.presentation.common.adapter.timeline.TimelineEventAdapter
 import homepunk.github.com.presentation.core.base.BaseViewModel
+import homepunk.github.com.presentation.core.ext.subList
 import homepunk.github.com.presentation.core.ext.toArrayList
 import homepunk.github.com.presentation.core.listener.OnItemClickListener
 import homepunk.github.com.presentation.feature.detail.event.model.VenueModel
@@ -18,10 +19,9 @@ import javax.inject.Inject
 class EventViewModel @Inject constructor(var eventInteractor: SongkickEventInteractor) : BaseViewModel() {
     lateinit var eventModel: EventModel
 
-    var timelineEventAdapter = TimelineEventAdapter<EventModel>()
+    var timelineEventAdapter = TimelineEventAdapter()
 
     var performanceList = ObservableArrayList<SongkickArtist>()
-//    var nearestEventList = ObservableArrayList<TimelineItem<TimelineModel>>()
 
     var venueModel = ObservableField<VenueModel>(VenueModel())
 
@@ -75,12 +75,4 @@ class EventViewModel @Inject constructor(var eventInteractor: SongkickEventInter
         }
     }
 
-}
-
-private fun <T> ObservableArrayList<T>.addAllFromIndex(startIndex: Int, source: java.util.ArrayList<T>) {
-    addAll(source.subList(startIndex, source.size - 1))
-}
-
-private fun <T> ArrayList<T>.subList(fromIndex: Int): MutableList<T> {
-    return if (fromIndex >= size) mutableListOf() else subList(fromIndex, size)
 }

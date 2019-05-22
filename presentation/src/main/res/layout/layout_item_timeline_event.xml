@@ -37,6 +37,7 @@
                 android:layout_margin="@dimen/margin_small_4dp"
                 android:scaleType="centerCrop"
                 app:imageUrl="@{model.thumb}"
+                tools:src="@drawable/background_events_6"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -51,6 +52,7 @@
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/lato_bold"
                 android:text="@{model.title}"
+                android:textSize="@dimen/text_size_default"
                 android:textColor="@color/text"
                 app:layout_constraintEnd_toStartOf="@+id/imageView"
                 app:layout_constraintStart_toEndOf="@+id/thumb"
@@ -58,6 +60,7 @@
                 tools:text="Spiritual Front" />
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -72,11 +75,11 @@
                 android:id="@+id/imageView"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
+                android:layout_marginTop="2dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="@dimen/margin_small_4dp"
                 android:layout_marginEnd="@dimen/margin_default_10dp"
                 android:src="@drawable/ic_heart"
-                app:layout_constraintBottom_toBottomOf="@+id/time"
+                app:layout_constraintBottom_toBottomOf="@+id/title"
                 app:layout_constraintEnd_toStartOf="@+id/time"
                 app:layout_constraintTop_toTopOf="parent" />
 

@@ -13,9 +13,9 @@ import homepunk.github.com.presentation.databinding.FragmentEventBinding
 import homepunk.github.com.presentation.feature.discover.event.model.EventModel
 
 
-var KEY_EVENT_MODEL_LIST = "KEY_EVENT_MODEL_LIST"
 
 class EventFragment : BaseFragment<FragmentEventBinding>() {
+
     override var layoutId = R.layout.fragment_event
 
     private lateinit var mViewModel: EventViewModel
@@ -70,6 +70,8 @@ class EventFragment : BaseFragment<FragmentEventBinding>() {
     }
 
     companion object {
+        const val KEY_EVENT_MODEL_LIST = "KEY_EVENT_MODEL_LIST"
+
         fun newInstance(itemList: ArrayList<EventModel>): EventFragment {
             val fragment = EventFragment()
             fragment.arguments = Bundle()

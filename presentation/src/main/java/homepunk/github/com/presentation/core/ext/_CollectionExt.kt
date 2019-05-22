@@ -1,5 +1,7 @@
 package homepunk.github.com.presentation.core.ext
 
+import androidx.databinding.ObservableArrayList
+
 /**Created by Homepunk on 25.01.2019. **/
 
 fun Array<String>.getMaxLenString(): String {
@@ -62,4 +64,13 @@ fun <E> MutableList<E>.removeWhen(predicate: (E) -> Boolean): Boolean{
 
 fun <E> Collection<E>.toArrayList(): java.util.ArrayList<E> {
     return ArrayList(this)
+}
+
+
+fun <T> ObservableArrayList<T>.addAllFromIndex(startIndex: Int, source: java.util.ArrayList<T>) {
+    addAll(source.subList(startIndex, source.size - 1))
+}
+
+fun <T> ArrayList<T>.subList(fromIndex: Int): MutableList<T> {
+    return if (fromIndex >= size) mutableListOf() else subList(fromIndex, size)
 }

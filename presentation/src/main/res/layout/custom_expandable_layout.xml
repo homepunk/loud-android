@@ -29,8 +29,8 @@
 
             <View
                 android:id="@+id/dot"
-                android:layout_width="4dp"
-                android:layout_height="4dp"
+                android:layout_width="@dimen/width_timeline"
+                android:layout_height="@dimen/width_timeline"
                 android:layout_marginTop="@dimen/margin_top_divider"
                 android:layout_marginBottom="@dimen/margin_top_divider"
                 android:background="@{headerTint}"

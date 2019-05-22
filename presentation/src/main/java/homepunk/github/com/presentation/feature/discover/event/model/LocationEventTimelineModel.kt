@@ -12,7 +12,7 @@ class LocationEventTimelineModel(locationName: String? = "",
                                  onItemClickListener: OnItemClickListener<EventModel>) : BaseObservable() {
 
     val locationName = ObservableField<String>(locationName)
-    var timelineEventAdapter = TimelineEventAdapter<EventModel>()
+    var timelineEventAdapter = TimelineEventAdapter()
 
     init {
         timelineEventAdapter.onItemClickListener = onItemClickListener
