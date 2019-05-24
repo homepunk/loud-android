@@ -7,6 +7,7 @@ import homepunk.github.com.data.local.repository.UserLocationDataRepository
 import homepunk.github.com.data.remote.repository.DiscogsDatabaseRemoteRepository
 import homepunk.github.com.data.remote.repository.SongkickEventDataRepository
 import homepunk.github.com.data.remote.repository.SongkickLocationDataRepository
+import homepunk.github.com.data.remote.repository.YoutubeDataRepository
 import homepunk.github.com.domain.repository.*
 
 /**Created by Homepunk on 27.12.2018. **/
@@ -26,4 +27,7 @@ interface RepositoryBindingModule {
 
     @Binds
     fun bindEventSettingsRepository(repo: UserLocationDataRepository): UserLocationRepository
+
+    @Binds
+    fun bindYoutubeDataRepository(repo: YoutubeDataRepository): YoutubeRepository
 }

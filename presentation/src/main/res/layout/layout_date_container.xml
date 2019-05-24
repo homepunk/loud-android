@@ -14,32 +14,50 @@
             type="int" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="72dp"
-        android:gravity="center"
-        android:background="@drawable/background_rect_round_corners"
         android:layout_height="72dp"
+        android:gravity="center"
         android:orientation="vertical">
-        <!---->
+
+        <FrameLayout
+            android:id="@+id/frameLayout2"
+            android:layout_width="match_parent"
+            android:alpha="0.7"
+            android:layout_height="match_parent"
+            android:background="@drawable/background_rect_round_corners" />
 
         <TextView
+            android:id="@+id/month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato"
             android:textAllCaps="true"
             android:textColor="@color/modeEventsColor"
             android:textSize="14sp"
+            android:layout_marginTop="@dimen/margin_default_10dp"
+            bind:layout_constraintTop_toTopOf="parent"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintStart_toStartOf="parent"
+            bind:layout_constraintBottom_toTopOf="@+id/date"
             bind:monthForInt="@{month}"
             tools:text="июнь" />
 
         <TextView
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:fontFamily="@font/lato"
             android:text="@{date}"
             android:textColor="@color/modeEventsColor"
             android:textSize="24sp"
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintStart_toStartOf="parent"
+            bind:layout_constraintTop_toBottomOf="@+id/month"
             tools:text="30" />
 
-    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

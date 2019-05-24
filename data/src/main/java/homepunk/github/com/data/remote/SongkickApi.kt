@@ -13,10 +13,10 @@ interface SongkickApi {
     @GET("metro_areas/{metroAreaId}/calendar.json?apikey=A2lsBUAKcGTUHv7K")
     fun getEventsAtLocation(@Path("metroAreaId") metroAreaId: Long): Single<BaseSongkickResponse<SongkickUpcomingEventResponse>>
 
-    @GET("search/locations.json")
+    @GET("searchVideo/locations.json")
     fun getLocationByLatLng(@Query("location") latLng: String, @Query("apikey") apikey: String): Single<BaseSongkickResponse<SongkickLocationResponse>>
 
-    @GET("search/locations.json")
+    @GET("searchVideo/locations.json")
     fun getLocationByQuery(@Query("query") query: String, @Query("apikey") apikey: String): Single<BaseSongkickResponse<SongkickLocationResponse>>
 
     @GET("events/{event_id}.json")

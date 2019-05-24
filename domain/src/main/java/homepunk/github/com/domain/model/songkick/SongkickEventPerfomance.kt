@@ -1,6 +1,6 @@
 package homepunk.github.com.domain.model.songkick
 
-import homepunk.github.com.domain.model.discogs.DiscogsArtist
+import java.io.Serializable
 
 data class SongkickEventPerfomance(
     var id : Long,
@@ -8,4 +8,4 @@ data class SongkickEventPerfomance(
     var billing : String = "",
     var billingIndex : Int,
     var artist : SongkickArtist?
-)
+) : Serializable

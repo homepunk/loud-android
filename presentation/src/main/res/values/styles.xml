@@ -20,7 +20,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/whiteBone</item>
         <item name="android:fontFamily">@font/lato</item>
-        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textSize">@dimen/text_size_card</item>
     </style>
 
     <style name="BlockTextStyle" parent="FieldTextStyle">

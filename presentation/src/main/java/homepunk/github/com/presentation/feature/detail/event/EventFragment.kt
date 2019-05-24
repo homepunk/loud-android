@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.library.baseAdapters.BR
 import homepunk.github.com.domain.model.songkick.SongkickArtist
+import homepunk.github.com.domain.model.youtube.YoutubeVideoPreview
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.common.adapter.SimpleBindingRecyclerAdapter
 import homepunk.github.com.presentation.core.base.BaseFragment
@@ -30,6 +31,7 @@ class EventFragment : BaseFragment<FragmentEventBinding>() {
             viewModel = mViewModel
 
             rvLineUp.adapter = SimpleBindingRecyclerAdapter<SongkickArtist>(R.layout.layout_item_event_info_line_up, BR.model)
+            rvYoutubePreview.adapter = SimpleBindingRecyclerAdapter<YoutubeVideoPreview>(R.layout.layout_item_youtube_video_preview, BR.preview)
         }
     }
 

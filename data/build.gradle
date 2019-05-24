@@ -42,8 +42,20 @@ dependencies {
     implementation dataDependencies.rxJavaAdapter
     implementation dataDependencies.gsonConverter
     implementation dataDependencies.loggingInterceptor
-    implementation dataDependencies.clientDiscogs
 
+    implementation dataDependencies.clientDiscogs
+    implementation('com.google.apis:google-api-services-youtube:v3-rev212-1.25.0') {
+        exclude group: 'org.apache.httpcomponents'
+        exclude group: "com.google.guava", module: "guava"
+    }
+
+//    implementation ("com.google.api-client:google-api-client-android:1.25.0") {
+//        exclude group: "com.google.guava", module: "listenablefuture"
+//    }
+//    implementation ("com.google.apis:google-api-services-youtube:v3-rev212-1.25.0") /*{
+//        exclude group: "com.google.guava", module: "listenablefuture"
+//    }
+//*/
     api dataDependencies.facebook
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

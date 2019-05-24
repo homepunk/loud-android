@@ -23,6 +23,10 @@ buildscript {
     }
 }
 
+//configurations.all {
+//    all*.exclude group: 'com.google.guava', module: 'listenablefuture'
+//}
+
 allprojects {
     ext {
         androidApplicationId = 'com.github.homepunk.vinylunderground'

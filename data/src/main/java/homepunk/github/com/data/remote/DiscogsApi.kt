@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.QueryMap
 
 interface DiscogsApi {
-    @GET("database/search")
+    @GET("database/searchVideo")
     fun search(@QueryMap options: Map<String, String>): Single<DiscogsSearchResponse>
 }

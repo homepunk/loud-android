@@ -28,6 +28,7 @@
     <dimen name="margin_top_divider">16dp</dimen>
 
     <dimen name="text_size_default">16sp</dimen>
+    <dimen name="text_size_card">13sp</dimen>
     <dimen name="text_size_large">18sp</dimen>
     <dimen name="text_size_large_20sp">20sp</dimen>
     <dimen name="text_size_large_26sp">26sp</dimen>
@@ -41,10 +42,13 @@
     <dimen name="plus_button_width">16dp</dimen>
     <dimen name="text_size_timeline_date">20sp</dimen>
     <dimen name="height_timeline_event">80dp</dimen>
-    <dimen name="margin_timeline">11dp</dimen>
+    <dimen name="margin_timeline">10dp</dimen>
     <dimen name="width_timeline">3dp</dimen>
 
     <dimen name="radius_filter_card">16dp</dimen>
     <dimen name="text_size_menu_item">18sp</dimen>
     <dimen name="text_size_large_22sp">22sp</dimen>
+    <dimen name="width_youtube_preview">200dp</dimen>
+    <dimen name="height_youtube_preview">150dp</dimen>
+    <dimen name="height_youtube_video_preview">110dp</dimen>
 </resources>
