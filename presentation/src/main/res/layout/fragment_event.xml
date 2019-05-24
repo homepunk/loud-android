@@ -12,6 +12,10 @@
         <variable
             name="viewModel"
             type="homepunk.github.com.presentation.feature.detail.event.EventViewModel" />
+
+        <variable
+            name="youtubeViewModel"
+            type="homepunk.github.com.presentation.feature.youtube.YoutubeViewModel" />
     </data>
 
     <ScrollView
@@ -205,7 +209,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     bind:itemDecoration_left="@{@dimen/margin_default_10dp}"
                     bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
-                    bind:itemList="@{viewModel.youtubeVideoList}"
+                    bind:itemList="@{youtubeViewModel.videoList}"
                     tools:listitem="@layout/layout_item_youtube_video_preview"
                     tools:visibility="visible" />
             </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>

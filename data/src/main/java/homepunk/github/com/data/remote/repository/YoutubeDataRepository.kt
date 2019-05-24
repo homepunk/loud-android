@@ -7,7 +7,7 @@ import com.google.api.services.youtube.YouTube
 import com.google.api.services.youtube.YouTubeScopes
 import com.google.api.services.youtube.model.SearchListResponse
 import homepunk.github.com.data.remote.model.youtube.YoutubeSearchResultMapper
-import homepunk.github.com.domain.model.youtube.YoutubeVideoPreview
+import homepunk.github.com.domain.model.youtube.YoutubeVideo
 import homepunk.github.com.domain.repository.YoutubeRepository
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -64,9 +64,10 @@ class YoutubeDataRepository @Inject constructor() : YoutubeRepository {
         youtubeSearchList.fields = "items(id/kind,id/videoId,snippet/title,snippet/description,snippet/thumbnails/high/url)"
     }
 
-    override fun searchVideo(query: String): Observable<YoutubeVideoPreview> {
+    override fun searchVideo(query: String, maxResults: Long): Observable<YoutubeVideo> {
         return Single.just(youtubeSearchList)
                 .subscribeOn(Schedulers.io())
+                .doOnSuccess { it.maxResults = maxResults }
                 .doOnSuccess { it.q = query }
                 .map { it.execute() as SearchListResponse }
                 .flatMapObservable { Observable.fromArray(it.items) }

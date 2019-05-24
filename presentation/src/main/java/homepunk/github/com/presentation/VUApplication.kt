@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
-import homepunk.github.com.presentation.common.dagger.component.DaggerAppComponent
+import homepunk.github.com.presentation.core.dagger.component.DaggerAppComponent
 import timber.log.Timber
 import javax.inject.Inject
 

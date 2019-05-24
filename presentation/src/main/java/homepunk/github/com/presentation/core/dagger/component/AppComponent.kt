@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.common.dagger.component
+package homepunk.github.com.presentation.core.dagger.component
 
 import android.app.Application
 import dagger.BindsInstance
@@ -6,7 +6,7 @@ import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.support.AndroidSupportInjectionModule
 import homepunk.github.com.presentation.VUApplication
-import homepunk.github.com.presentation.common.dagger.module.*
+import homepunk.github.com.presentation.core.dagger.module.*
 import javax.inject.Singleton
 
 

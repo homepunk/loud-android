@@ -2,11 +2,10 @@ package homepunk.github.com.presentation.feature.detail.event
 
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import homepunk.github.com.domain.interactor.SongkickEventInteractor
-import homepunk.github.com.domain.interactor.YoutubeInteractor
 import homepunk.github.com.domain.model.songkick.SongkickArtist
 import homepunk.github.com.domain.model.songkick.SongkickEvent
-import homepunk.github.com.domain.model.youtube.YoutubeVideoPreview
 import homepunk.github.com.presentation.common.adapter.timeline.TimelineEventAdapter
 import homepunk.github.com.presentation.core.base.BaseViewModel
 import homepunk.github.com.presentation.core.ext.subList
@@ -16,17 +15,17 @@ import homepunk.github.com.presentation.feature.detail.event.model.VenueModel
 import homepunk.github.com.presentation.feature.discover.event.model.EventModel
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
 /**Created by Homepunk on 08.04.2019. **/
-class EventViewModel @Inject constructor(var eventInteractor: SongkickEventInteractor,
-                                         var youtubeInteractor: YoutubeInteractor) : BaseViewModel() {
+class EventViewModel @Inject constructor(var eventInteractor: SongkickEventInteractor) : BaseViewModel() {
     lateinit var eventModel: EventModel
 
-    var timelineEventAdapter = TimelineEventAdapter()
+    var youtubeQueryLiveData = MutableLiveData<String>()
 
+    var timelineEventAdapter = TimelineEventAdapter()
     var performanceList = ObservableArrayList<SongkickArtist>()
-    var youtubeVideoList = ObservableArrayList<YoutubeVideoPreview>()
 
     var venueModel = ObservableField<VenueModel>(VenueModel())
 
@@ -40,32 +39,24 @@ class EventViewModel @Inject constructor(var eventInteractor: SongkickEventInter
 //                .sorted { o1, o2 ->  o1.billingIndex.compareTo(o2.billingIndex) }
 //                .map { it.artist!! }
                 .doOnNext { wLog(it.displayName) }
-//                .toList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     setUpLineUp(it)
-                    getArtistsYoutubeVideos(it)
+//                    getArtistsYoutubeVideos(it)
                     setUpVenueInfo(it)
                 })
     }
 
-    private fun getArtistsYoutubeVideos(it: SongkickEvent) {
-        compositeDisposable.add(Observable.fromIterable(it.performance)
-                .filter { it.artist != null }
-                .filter { it.billingIndex == 1 }
-                .flatMap { youtubeInteractor.getVideoList(it.artist!!.displayName) }
-                .subscribe {
-                    wLog("FOUND: ${it.title}, thumb = ${it.thumb}")
-                    youtubeVideoList.add(it)
-                })
-    }
-
     private fun setUpLineUp(it: SongkickEvent) {
-        it.performance
+        Observable.fromIterable(it.performance)
                 .filter { it.artist != null }
-                .forEach {
-                    performanceList.add(it.artist!!)
-                }
+                .map { it.artist!! }
+                .doOnNext { performanceList.add(it) }
+                .map { it.displayName!! }
+                .toList()
+                .subscribe(Consumer {
+                    youtubeQueryLiveData.value = it[0]
+                })
     }
 
     private fun setUpVenueInfo(it: SongkickEvent) {

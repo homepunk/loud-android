@@ -1,12 +1,12 @@
-package homepunk.github.com.presentation.common.dagger.module
+package homepunk.github.com.presentation.core.dagger.module
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import homepunk.github.com.presentation.common.dagger.ViewModelFactory
-import homepunk.github.com.presentation.common.dagger.ViewModelKey
+import homepunk.github.com.presentation.core.dagger.ViewModelFactory
+import homepunk.github.com.presentation.core.dagger.ViewModelKey
 import homepunk.github.com.presentation.feature.detail.event.EventViewModel
 import homepunk.github.com.presentation.feature.discover.DiscoverHostViewModel
 import homepunk.github.com.presentation.feature.discover.event.EventListViewModel

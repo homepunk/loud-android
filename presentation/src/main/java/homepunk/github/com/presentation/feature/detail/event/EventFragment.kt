@@ -5,14 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.library.baseAdapters.BR
+import androidx.lifecycle.Observer
 import homepunk.github.com.domain.model.songkick.SongkickArtist
-import homepunk.github.com.domain.model.youtube.YoutubeVideoPreview
+import homepunk.github.com.domain.model.youtube.YoutubeVideo
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.common.adapter.SimpleBindingRecyclerAdapter
 import homepunk.github.com.presentation.core.base.BaseFragment
 import homepunk.github.com.presentation.databinding.FragmentEventBinding
 import homepunk.github.com.presentation.feature.discover.event.model.EventModel
-
+import homepunk.github.com.presentation.feature.youtube.YoutubeViewModel
 
 
 class EventFragment : BaseFragment<FragmentEventBinding>() {
@@ -20,18 +21,23 @@ class EventFragment : BaseFragment<FragmentEventBinding>() {
     override var layoutId = R.layout.fragment_event
 
     private lateinit var mViewModel: EventViewModel
+    private lateinit var mYoutubeViewModel: YoutubeViewModel
 
     override fun init() {
         val eventList = arguments?.getSerializable(KEY_EVENT_MODEL_LIST) as ArrayList<EventModel>
 
+        mYoutubeViewModel = getViewModel(YoutubeViewModel::class.java)
         mViewModel = getViewModel(EventViewModel::class.java)
         mViewModel.init(eventList)
 
+        mViewModel.youtubeQueryLiveData.observe(this, Observer { mYoutubeViewModel.setUpQuery(it) })
+
         with(mDataBinding) {
             viewModel = mViewModel
+            youtubeViewModel = mYoutubeViewModel
 
             rvLineUp.adapter = SimpleBindingRecyclerAdapter<SongkickArtist>(R.layout.layout_item_event_info_line_up, BR.model)
-            rvYoutubePreview.adapter = SimpleBindingRecyclerAdapter<YoutubeVideoPreview>(R.layout.layout_item_youtube_video_preview, BR.preview)
+            rvYoutubePreview.adapter = SimpleBindingRecyclerAdapter<YoutubeVideo>(R.layout.layout_item_youtube_video_preview, BR.preview)
         }
     }
 

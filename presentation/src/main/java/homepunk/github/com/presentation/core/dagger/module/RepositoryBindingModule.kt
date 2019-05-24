@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.common.dagger.module
+package homepunk.github.com.presentation.core.dagger.module
 
 import dagger.Binds
 import dagger.Module

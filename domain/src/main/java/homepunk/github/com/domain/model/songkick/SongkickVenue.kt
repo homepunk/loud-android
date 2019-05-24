@@ -1,5 +1,7 @@
 package homepunk.github.com.domain.model.songkick
 
+import java.io.Serializable
+
 data class SongkickVenue(
 	val zip: String = "",
 	val website: String = "",
@@ -14,4 +16,4 @@ data class SongkickVenue(
 	val street: String = "",
 	val id: Int? = null,
 	val lat: Double? = null
-)
+) : Serializable

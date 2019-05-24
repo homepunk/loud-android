@@ -74,3 +74,8 @@ fun <T> ObservableArrayList<T>.addAllFromIndex(startIndex: Int, source: java.uti
 fun <T> ArrayList<T>.subList(fromIndex: Int): MutableList<T> {
     return if (fromIndex >= size) mutableListOf() else subList(fromIndex, size)
 }
+
+fun String.asList(): List<String> {
+    return mutableListOf(this)
+}
+

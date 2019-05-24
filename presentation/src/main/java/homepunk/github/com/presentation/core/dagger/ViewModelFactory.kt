@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.common.dagger
+package homepunk.github.com.presentation.core.dagger
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
