@@ -15,6 +15,7 @@ import homepunk.github.com.presentation.feature.main.MainViewModel
 import homepunk.github.com.presentation.feature.menu.MenuViewModel
 import homepunk.github.com.presentation.feature.menu.country.CountryListViewModel
 import homepunk.github.com.presentation.feature.mode.AppModeViewModel
+import homepunk.github.com.presentation.feature.youtube.YoutubeViewModel
 
 /**Created by Homepunk on 27.12.2018. **/
 @Module
@@ -61,4 +62,9 @@ interface ViewModelBindingModule {
     @IntoMap
     @ViewModelKey(EventViewModel::class )
     fun bindEventViewModel(viewModel: EventViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(YoutubeViewModel::class )
+    fun bindYoutubeViewModel(viewModel: YoutubeViewModel): ViewModel
 }
