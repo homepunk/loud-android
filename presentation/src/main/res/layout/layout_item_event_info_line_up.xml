@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="homepunk.github.com.domain.model.songkick.SongkickArtist"/>
+            type="homepunk.github.com.presentation.feature.artist.model.ArtistModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,8 +46,8 @@
             android:layout_marginStart="@dimen/margin_big_20dp"
             android:fontFamily="@font/lato"
             android:text="@{model.displayName}"
-            android:textColor="@color/whiteBone"
             android:textSize="@dimen/text_size_large"
+            android:textColor="@{model.isArtistClicked ? @color/colorAccent : @color/text}"
             app:layout_constraintBottom_toTopOf="@+id/tv_genre"
             app:layout_constraintStart_toEndOf="@+id/cover"
             app:layout_constraintTop_toTopOf="@+id/cover"
@@ -64,12 +64,14 @@
             app:layout_constraintBottom_toBottomOf="@+id/cover"
             app:layout_constraintStart_toEndOf="@+id/cover"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
-            android:text="RAP, EXPERIMENTAL" />
+            tools:text="RAP, EXPERIMENTAL" />
 
         <ImageView
+            android:id="@+id/btn_play"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:src="@drawable/ic_play"
+            android:tint="@{model.isPlayClicked ? @color/colorAccent : @color/text}"
             app:layout_constraintBottom_toBottomOf="@+id/tv_genre"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_name" />

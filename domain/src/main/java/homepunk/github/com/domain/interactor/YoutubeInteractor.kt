@@ -14,6 +14,7 @@ class YoutubeInteractor @Inject constructor(val youtubeRepository: YoutubeReposi
 
     fun getVideoList(queries: List<String>): Observable<YoutubeVideo> {
         val maxResults = when (queries.size) {
+//            1 -> 2
             in 1 .. 5 -> Math.round((MAX_RESULTS / queries.size).toDouble())
             else -> 1
         }

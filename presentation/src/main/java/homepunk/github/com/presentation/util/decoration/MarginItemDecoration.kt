@@ -9,7 +9,8 @@ class MarginItemDecoration(private val startLeft: Int,
                            private val left: Int,
                            private val right: Int = 0,
                            private val top: Int = 0,
-                           private val bottom: Int = 0)
+                           private val bottom: Int = 0,
+                           private val lastRight: Int = 0)
     : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(outRect: Rect, view: View,
                                 parent: RecyclerView, state: RecyclerView.State) {
@@ -22,7 +23,9 @@ class MarginItemDecoration(private val startLeft: Int,
                 startTop else
                 this@MarginItemDecoration.top
 
-            right = this@MarginItemDecoration.right
+            right = if (parent.getChildAdapterPosition(view) == parent.childCount - 1)
+                lastRight else
+                this@MarginItemDecoration.right
             bottom = this@MarginItemDecoration.bottom
         }
     }

@@ -50,6 +50,7 @@
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 bind:itemDecoration_left="@{@dimen/margin_default_10dp}"
+                bind:itemDecoration_lastRight="@{@dimen/margin_big_20dp}"
                 bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
                 bind:itemList="@{viewModel.primaryEventsList}"
                 tools:listitem="@layout/layout_item_primary_event" />

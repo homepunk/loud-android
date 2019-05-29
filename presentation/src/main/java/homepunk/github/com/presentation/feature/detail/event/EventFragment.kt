@@ -4,20 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout.HORIZONTAL
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.Observer
 import homepunk.github.com.domain.model.songkick.SongkickArtist
-import homepunk.github.com.domain.model.youtube.YoutubeVideo
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.common.adapter.SimpleBindingRecyclerAdapter
 import homepunk.github.com.presentation.core.base.BaseFragment
 import homepunk.github.com.presentation.databinding.FragmentEventBinding
 import homepunk.github.com.presentation.feature.discover.event.model.EventModel
 import homepunk.github.com.presentation.feature.youtube.YoutubeViewModel
+import homepunk.github.com.presentation.feature.youtube.model.YoutubeVideoModel
+import homepunk.github.com.presentation.util.layout.CustomLinearLayoutManager
 
 
 class EventFragment : BaseFragment<FragmentEventBinding>() {
-
     override var layoutId = R.layout.fragment_event
 
     private lateinit var mViewModel: EventViewModel
@@ -30,14 +31,15 @@ class EventFragment : BaseFragment<FragmentEventBinding>() {
         mViewModel = getViewModel(EventViewModel::class.java)
         mViewModel.init(eventList)
 
-        mViewModel.youtubeQueryLiveData.observe(this, Observer { mYoutubeViewModel.setUpQuery(it) })
+        mViewModel.onArtistClickLiveData.observe(this, Observer { mYoutubeViewModel.setUpQuery(it!!.displayName!!) })
 
         with(mDataBinding) {
             viewModel = mViewModel
             youtubeViewModel = mYoutubeViewModel
 
             rvLineUp.adapter = SimpleBindingRecyclerAdapter<SongkickArtist>(R.layout.layout_item_event_info_line_up, BR.model)
-            rvYoutubePreview.adapter = SimpleBindingRecyclerAdapter<YoutubeVideo>(R.layout.layout_item_youtube_video_preview, BR.preview)
+            rvYoutubePreview.adapter = SimpleBindingRecyclerAdapter<YoutubeVideoModel>(R.layout.layout_item_youtube_video_preview, BR.model)
+            rvYoutubePreview.layoutManager = CustomLinearLayoutManager(context!!, HORIZONTAL, false)
         }
     }
 

@@ -51,10 +51,15 @@ class ExpandableHeader @JvmOverloads constructor(context: Context, attrs: Attrib
         binding.headerTint = headerTint
         binding.btnExpand.isPressed = !isExpanded.get()
         (binding.title.layoutParams as MarginLayoutParams).marginStart = headerTitleStartMargin
+//        (binding.edSearch.layoutParams as MarginLayoutParams).marginStart = headerTitleStartMargin
+       /* if (hasHint) {
+            binding.edSearch.setOnClickListener {
+                binding.edSearch.setText(binding.edSearch.hint)
+            }
+        }*/
 
-        title?.let {
-            binding.title.text = it
-        }
+        setHeaderTitle(title)
+//        setHint(hint)
 
         binding.root.setPadding(headerHorizontalPadding, 0, headerHorizontalPadding, 0)
         binding.root.setOnClickListener {
@@ -63,8 +68,10 @@ class ExpandableHeader @JvmOverloads constructor(context: Context, attrs: Attrib
         }
     }
 
-    fun setHeaderTitle(title: String) {
-        binding.title.text = title
+    fun setHeaderTitle(title: String?) {
+        title?.let {
+            binding.title.text = it
+        }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {

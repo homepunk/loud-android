@@ -2,7 +2,9 @@
 
 package homepunk.github.com.presentation.core.ext
 
+import android.animation.ValueAnimator
 import android.view.MenuItem
+import android.view.animation.AccelerateInterpolator
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableArrayList
 import androidx.recyclerview.widget.RecyclerView
@@ -12,11 +14,12 @@ import homepunk.github.com.presentation.common.adapter.SimpleExpandableBindingRe
 import homepunk.github.com.presentation.common.adapter.model.ExpandableChildModel
 import homepunk.github.com.presentation.common.adapter.model.ExpandableParentModel
 import homepunk.github.com.presentation.core.base.BaseRecyclerViewAdapter
-import homepunk.github.com.presentation.core.listener.OnItemClickListener
 import homepunk.github.com.presentation.core.listener.OnItemPositionClickListener
 import homepunk.github.com.presentation.core.listener.OnParentChildClickListener
 import homepunk.github.com.presentation.util.decoration.MarginItemDecoration
+import homepunk.github.com.presentation.util.layout.CustomLinearLayoutManager
 import timber.log.Timber
+
 
 /**Created by Homepunk on 14.01.2019. **/
 
@@ -51,20 +54,6 @@ fun <CHILD : ExpandableChildModel, PARENT : ExpandableParentModel<CHILD>> Recycl
     }
 }
 
-@BindingAdapter("onParentClickListener")
-fun <CHILD : ExpandableChildModel, PARENT : ExpandableParentModel<CHILD>> RecyclerView.setOnParentClickListener(listener: OnItemClickListener<PARENT>) {
-    (adapter as? SimpleExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
-        it.onParentClickListener = listener
-    }
-}
-
-@BindingAdapter("onParentChildClickListener")
-fun <CHILD : ExpandableChildModel, PARENT : ExpandableParentModel<CHILD>> RecyclerView.setOnChildClickListener(listener: OnItemClickListener<CHILD>) {
-    (adapter as? SimpleExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
-        it.onChildClickListener = listener
-    }
-}
-
 
 @BindingAdapter("hasFixedSize")
 fun RecyclerView.setHasFixedSize(hasFixedSize: Boolean) {
@@ -79,13 +68,15 @@ fun RecyclerView.setHasFixedSize(hasFixedSize: Boolean) {
             "itemDecoration_left",
             "itemDecoration_right",
             "itemDecoration_top",
-            "itemDecoration_bottom"])
+            "itemDecoration_bottom",
+            "itemDecoration_lastRight"])
 fun RecyclerView.bindItemDecortaion(startLeft: Float = 0f,
                                     startTop: Float = 0f,
                                     left: Float = 0f,
                                     right: Float = 0f,
                                     top: Float = 0f,
-                                    bottom: Float = 0f) {
+                                    bottom: Float = 0f,
+                                    lastRight: Float = 0f) {
     this.addItemDecoration(MarginItemDecoration(startLeft.toInt(), startTop.toInt(), left.toInt(), right.toInt(), top.toInt(), bottom.toInt()))
 }
 
@@ -118,5 +109,38 @@ fun RecyclerView.setupWithViewPager(viewPager: ViewPager) {
     }
 }
 
+@BindingAdapter("moveToFitFullWidth")
+fun RecyclerView.moveToPosition(position: Int) {
+    if (position < 0) {
+        (layoutManager as CustomLinearLayoutManager).isHorizontalScrollEnabled = true
+    } else {
+        addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == 0) {
+                    (layoutManager as CustomLinearLayoutManager).isHorizontalScrollEnabled = false
+                    removeOnScrollListener(this)
+                }
+            }
+        })
 
+        val view = layoutManager?.findViewByPosition(position)
+        val origXY = IntArray(2)
 
+        if (position != adapter!!.itemCount - 1) {
+            view?.getLocationOnScreen(origXY)
+            smoothScrollBy(origXY[0], 0)
+        } else {
+            postDelayed({
+                view?.getLocationOnScreen(origXY)
+                val animator = ValueAnimator.ofInt(0, origXY[0])
+                animator.addUpdateListener {
+                    smoothScrollBy(it.animatedValue as Int, 0)
+                }
+                animator.duration = 100
+                animator.interpolator = AccelerateInterpolator()
+                animator.start()
+            }, 300)
+        }
+
+    }
+}

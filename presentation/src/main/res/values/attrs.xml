@@ -13,7 +13,9 @@
     </declare-styleable>
 
     <declare-styleable name="ExpandableHeader">
-        <attr name="el_title" format="string"/>
+        <attr name="el_title" format="string|reference"/>
+        <!--<attr name="el_hint" format="string|reference"/>-->
+        <attr name="el_hasHint" format="boolean"/>
         <attr name="el_expanded" format="boolean"/>
         <attr name="el_headerTint" format="color"/>
         <attr name="el_headerTitleStartMargin" format="integer|dimension"/>

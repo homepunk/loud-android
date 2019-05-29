@@ -75,8 +75,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/margin_big_20dp"
                 android:src="@drawable/ic_heart"
-                android:visibility="gone"
                 android:tint="@color/whiteBone"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_place"
                 app:layout_constraintEnd_toStartOf="@+id/frameLayout"
                 app:layout_constraintTop_toTopOf="@+id/tv_place" />
@@ -172,18 +172,21 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/thumb"
-                tools:visibility="gone">
+                tools:visibility="visible">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_line_up"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false"
+                    app:itemDecoration_top="@{@dimen/margin_default_10dp}"
+                    app:itemList="@{viewModel.lineUpList}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    bind:itemDecoration_top="@{@dimen/margin_default_10dp}"
-                    bind:itemList="@{viewModel.performanceList}"
+                    app:onFieldClickListener="@{viewModel.onPlayArtistClickListener}"
+                    app:onItemClickListener="@{viewModel.onArtistClickListener}"
+                    tools:itemCount="2"
                     tools:listitem="@layout/layout_item_event_info_line_up"
-                    tools:visibility="gone" />
+                    tools:visibility="visible" />
             </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>
 
             <homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader
@@ -198,18 +201,66 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/block_line_up"
-                tools:visibility="gone">
+                tools:visibility="visible">
+                <!--                app:el_hasHint="true"
+                app:headerHint="@{youtubeViewModel.query}"
+                -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="@dimen/margin_big_20dp"
+                    android:layout_marginEnd="@dimen/margin_big_20dp"
+                    android:layout_marginTop="@dimen/margin_small_4dp">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_circle_filled_gray"
+                        android:paddingStart="@dimen/margin_default_10dp"
+                        android:paddingTop="@dimen/margin_small_4dp"
+                        android:paddingEnd="@dimen/margin_default_10dp"
+                        android:paddingBottom="@dimen/margin_small_6dp">
+
+                        <TextView
+                            style="@style/FieldTextStyle"
+                            android:text="@{youtubeViewModel.query}"
+                            android:textColor="?colorAccent"
+                            tools:text="Cabaret Nocturne" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_default_10dp"
+                        android:background="@drawable/background_circle_filled_gray"
+                        android:paddingStart="@dimen/margin_default_10dp"
+                        android:paddingTop="@dimen/margin_small_4dp"
+                        android:paddingEnd="@dimen/margin_default_10dp"
+                        android:paddingBottom="@dimen/margin_small_6dp">
+
+                        <TextView
+                            style="@style/FieldTextStyle"
+                            android:text="@{youtubeViewModel.query + ` Live`}"
+                            android:textColor="@color/subtitle2"
+                            tools:text="Cabaret Nocturne Live" />
+                    </FrameLayout>
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_youtube_preview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginTop="@dimen/margin_default_10dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="horizontal"
+                    bind:itemDecoration_lastRight="@{@dimen/margin_big_20dp}"
                     bind:itemDecoration_left="@{@dimen/margin_default_10dp}"
                     bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
                     bind:itemList="@{youtubeViewModel.videoList}"
+                    bind:moveToFitFullWidth="@{youtubeViewModel.playPosition}"
+                    bind:onItemClickListener="@{youtubeViewModel.onPlayClickListener}"
+                    tools:itemCount="2"
                     tools:listitem="@layout/layout_item_youtube_video_preview"
                     tools:visibility="visible" />
             </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>
