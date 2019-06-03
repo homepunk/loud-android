@@ -35,16 +35,16 @@ abstract class BaseActivity<BINDING : ViewDataBinding> : AppCompatActivity() {
             currentAppModeModelLiveData.observe(this@BaseActivity, Observer {
                 mDataBinding.setVariable(BR.appModeModel, it)
 
-                if (!isThemeApplied) {
-                    recreate()
-                }
+//                if (!isThemeApplied) {
+//                    recreate()
+//                }
             })
             subscribeOnModeChanges()
         }
 
         mAppModeViewModel.currentAppModeTheme?.run {
-            mAppModeViewModel.isThemeApplied = true
-            setTheme(this)
+//            mAppModeViewModel.isThemeApplied = true
+//            setTheme(this)
         }
         super.onCreate(savedInstanceState)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -57,9 +57,9 @@ abstract class BaseActivity<BINDING : ViewDataBinding> : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         mAppModeViewModel.run {
-            if (!isThemeApplied) {
-                recreate()
-            }
+//            if (!isThemeApplied) {
+//                recreate()
+//            }
         }
     }
 

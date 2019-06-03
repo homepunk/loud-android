@@ -39,7 +39,8 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/margin_big_20dp"
             app:onMenuClickListener="@{onMenuClickListener}"
-            app:title="@{appModeModel.title}" />
+            app:onModeClickListener="@{viewModel.onModeClickListener}"
+            app:appModeModel="@{appModeModel}" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/container"
@@ -110,6 +111,7 @@
                                 android:layout_marginBottom="@dimen/margin_small_6dp"
                                 android:layout_marginStart="@dimen/margin_default_10dp"
                                 android:layout_marginEnd="@dimen/margin_default_10dp"
+                                app:onAppModeChange="@{appModeModel}"
                                 android:textColor="?colorAccent"
                                 android:textSize="14sp"
                                 android:fontFamily="@font/lato"
@@ -118,8 +120,9 @@
                             <View
                                 android:layout_width="0dp"
                                 android:layout_height="1dp"
+                                app:onAppModeChangeTint="@{appModeModel}"
                                 android:layout_marginTop="@dimen/margin_small_6dp"
-                                android:background="@drawable/background_circle_filled_accent"
+                                android:background="@drawable/background_circle_filled_gray"
                                 app:layout_constraintEnd_toEndOf="@+id/title"
                                 app:layout_constraintTop_toBottomOf="@+id/title"
                                 app:layout_constraintStart_toStartOf="@+id/title" />

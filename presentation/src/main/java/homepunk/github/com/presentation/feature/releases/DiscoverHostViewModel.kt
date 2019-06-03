@@ -18,7 +18,7 @@ class DiscoverHostViewModel @Inject constructor(var appModeInteractor: AppModeIn
                 .subscribe {
                     when (it) {
                         AppMode.LIBRARY -> {
-                            fragmentLiveData.value = DiscoverLibraryFragment()
+                            fragmentLiveData.value = EventListFragment()
                         }
                         AppMode.EVENTS -> {
                             fragmentLiveData.value = EventListFragment()

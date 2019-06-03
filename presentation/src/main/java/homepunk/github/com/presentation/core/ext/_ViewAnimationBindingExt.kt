@@ -1,8 +1,9 @@
 package homepunk.github.com.presentation.core.ext
 
+import android.animation.Animator
 import android.animation.ValueAnimator
 import android.view.View
-import android.view.View.GONE
+import android.view.View.*
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
@@ -12,7 +13,10 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import homepunk.github.com.presentation.core.wrapper.AnimationListenerWrapper
+import homepunk.github.com.presentation.core.wrapper.AnimatorListenerWrapper
 import homepunk.github.com.presentation.feature.widget.animation.ReverseInterpolator
+import homepunk.github.com.presentation.util.DimensionUtil
+
 
 /**Created by Homepunk on 31.01.2019. **/
 
@@ -74,7 +78,11 @@ fun RecyclerView.bindItemAnimation(newValue: Int, itemAnimationEnabled: Boolean)
             for (i in 0 until childCount) {
                 koef += 0.3f
                 getChildAt(i)?.apply {
-                    translationY = value * koef
+                    translationX = if (i == 0) {
+                        DimensionUtil.screenWidth.toFloat()
+                    } else {
+                        value * koef
+                    }
                 }
             }
         }
@@ -91,6 +99,44 @@ fun RecyclerView.bindItemAnimation(newValue: Int, itemAnimationEnabled: Boolean)
         }
     } else {
         visibility = newValue
+    }
+}
+
+@BindingAdapter(
+        requireAll = false,
+        value = [
+            "isVisible",
+            "itemAnimationHorizontall",
+            "startDelay"])
+fun RecyclerView.itemAnimationHorizontall(newValue: Boolean, itemAnimationEnabled: Boolean, startDelay: Int) {
+    if (itemAnimationEnabled) {
+        var isRerversed = false
+
+        val translationAnimator = ValueAnimator.ofFloat(DimensionUtil.screenWidth.toFloat(), 0f)
+        translationAnimator.duration = 520L
+        translationAnimator.addListener(object : AnimatorListenerWrapper() {
+            override fun onAnimationStart(animation: Animator?) {
+                if (!isRerversed) {
+                    visibility = VISIBLE
+                }
+            }
+
+            override fun onAnimationEnd(animation: Animator?, isReverse: Boolean) {
+                if (isRerversed) {
+                    visibility = GONE
+                }
+            }
+        })
+        translationAnimator.interpolator = AnticipateInterpolator()
+        translationAnimator.startDelay = startDelay.toLong()
+        translationAnimator.addUpdateListener { translationX = (it.animatedValue as Float) }
+        if (!newValue) {
+            isRerversed = true
+            translationAnimator.reverse()
+        } else {
+            isRerversed = false
+            translationAnimator.start()
+        }
     }
 }
 

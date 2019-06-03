@@ -10,13 +10,22 @@
 
         <variable
             name="title"
-            type="String"/>
+            type="String" />
 
         <variable
             name="onMenuClickListener"
             type="android.view.View.OnClickListener" />
 
+        <variable
+            name="onModeClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="appModeModel"
+            type="homepunk.github.com.presentation.common.model.mode.AppModeModel" />
+
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_root_layout"
         android:layout_width="match_parent"
@@ -26,11 +35,11 @@
         <View
             android:id="@+id/dot"
             android:layout_width="4dp"
-            android:visibility="gone"
             android:layout_height="0dp"
+            android:background="?attr/colorAccent"
             android:paddingTop="@dimen/margin_default_8dp"
             android:paddingBottom="@dimen/margin_default_8dp"
-            android:background="?attr/colorAccent"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/title_frame"
             app:layout_constraintEnd_toStartOf="@+id/title_frame"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,54 +49,57 @@
             android:id="@+id/title_frame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="8dp"
             android:layout_marginTop="32dp"
+            android:paddingTop="8dp"
             android:paddingBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/dot"
             app:layout_constraintTop_toBottomOf="@+id/menu">
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/btn_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_default_10dp"
-                app:changeColorOnClick2="@{true}"
                 android:fontFamily="@font/lato_bold"
+                android:onClickListener="@{onModeClickListener}"
+                android:text="EVENTS"
                 android:textAllCaps="true"
-                android:textColor="?colorAccent"
-                android:textSize="36sp"
-                bind:animationResId="@{R.anim.translate_down}"
-                bind:text="@{title}"
-                tools:text="EVENTS"/>
+                android:textSize="32sp"
+                bind:onAppModeChange="@{appModeModel}"
+                bind:color="@{@color/modeEventsColor}"
+                tools:text="EVENTS"
+                tools:textColor="@color/subtitle3" />
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/artists_frame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_big_20dp"
             android:layout_marginStart="@dimen/margin_default_10dp"
+            android:layout_marginEnd="@dimen/margin_big_20dp"
+            android:layout_marginTop="32dp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/imageView4"
             app:layout_constraintStart_toEndOf="@+id/title_frame"
-            app:layout_constraintTop_toTopOf="@+id/title_frame">
+            app:layout_constraintTop_toBottomOf="@+id/menu">
 
             <TextView
-                android:id="@+id/artists"
+                android:id="@+id/btn_releases"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_default_10dp"
-                app:changeColorOnClick="@{true}"
-                android:alpha="0.5"
                 android:fontFamily="@font/lato_bold"
-                android:textAllCaps="true"
-                android:textColor="@color/subtitle2"
-                android:textSize="32sp"
+                android:onClickListener="@{onModeClickListener}"
                 android:text="ARTISTS"
-                tools:text="ARTISTS" />
+                android:textAllCaps="true"
+                android:textSize="32sp"
+                bind:onAppModeChange="@{appModeModel}"
+                bind:color="@{@color/pale_red2}"
+                tools:text="ARTISTS"
+                tools:textColor="@color/subtitle3" />
 
         </FrameLayout>
 
@@ -109,9 +121,9 @@
             android:id="@+id/menu"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_marginStart="@dimen/margin_default_10dp"
             android:layout_marginTop="36dp"
             android:layout_marginEnd="@dimen/margin_big_20dp"
-            android:layout_marginStart="@dimen/margin_default_10dp"
             android:onClickListener="@{onMenuClickListener}"
             android:src="@drawable/ic_controls"
             app:layout_constraintStart_toStartOf="parent"
@@ -122,14 +134,14 @@
             android:layout_width="200dp"
             android:layout_height="48dp"
             android:layout_marginStart="@dimen/margin_big_20dp"
-            app:searchIcon="@drawable/ic_search"
             android:background="@drawable/background_rect_round_corners_gray"
             app:defaultQueryHint="Search for events"
+            app:layout_constraintBottom_toBottomOf="@+id/menu"
             app:layout_constraintStart_toEndOf="@+id/menu"
             app:layout_constraintTop_toTopOf="@+id/menu"
-            app:layout_constraintBottom_toBottomOf="@+id/menu"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:queryHint="Search for events" />
+            app:queryHint="Search for events"
+            app:searchIcon="@drawable/ic_search" />
 
         <View
             android:id="@+id/view2"
