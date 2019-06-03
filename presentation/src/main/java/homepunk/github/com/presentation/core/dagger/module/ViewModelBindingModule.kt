@@ -7,10 +7,12 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import homepunk.github.com.presentation.core.dagger.ViewModelFactory
 import homepunk.github.com.presentation.core.dagger.ViewModelKey
-import homepunk.github.com.presentation.feature.detail.event.EventViewModel
-import homepunk.github.com.presentation.feature.discover.DiscoverHostViewModel
-import homepunk.github.com.presentation.feature.discover.event.EventListViewModel
-import homepunk.github.com.presentation.feature.discover.library.DiscoverLibraryViewModel
+import homepunk.github.com.presentation.feature.event.EventViewModel
+import homepunk.github.com.presentation.feature.releases.DiscoverHostViewModel
+import homepunk.github.com.presentation.feature.event.home.EventListViewModel
+import homepunk.github.com.presentation.feature.event.timeline.EventTimelineFragment
+import homepunk.github.com.presentation.feature.event.timeline.EventTimelineViewModel
+import homepunk.github.com.presentation.feature.releases.library.DiscoverLibraryViewModel
 import homepunk.github.com.presentation.feature.main.MainViewModel
 import homepunk.github.com.presentation.feature.menu.MenuViewModel
 import homepunk.github.com.presentation.feature.menu.country.CountryListViewModel
@@ -67,4 +69,9 @@ interface ViewModelBindingModule {
     @IntoMap
     @ViewModelKey(YoutubeViewModel::class )
     fun bindYoutubeViewModel(viewModel: YoutubeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EventTimelineViewModel::class )
+    fun bindEventTimelineViewModel(viewModel: EventTimelineViewModel): ViewModel
 }

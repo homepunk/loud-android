@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+<data>
+    <variable
+        name="name"
+        type="String" />
+</data>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/background"
@@ -16,7 +22,10 @@
         android:layout_marginBottom="@dimen/margin_small_6dp"
         android:layout_marginStart="@dimen/margin_default_10dp"
         android:layout_marginEnd="@dimen/margin_default_10dp"
-        android:textColor="@color/text"
+        android:text="@{name}"
+        android:textColor="@color/subtitle2"
         android:textSize="14sp"
+        android:fontFamily="@font/lato"
         tools:text="DISCOVER" />
 </FrameLayout>
+</layout>

@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="homepunk.github.com.presentation.feature.discover.event.EventListViewModel" />
+            type="homepunk.github.com.presentation.feature.event.home.EventListViewModel" />
 
         <variable
             name="appModeModel"
@@ -33,47 +33,51 @@
             android:nestedScrollingEnabled="false">
 
             <include
-                android:id="@+id/header_primary_events"
+                android:id="@+id/header_nearest_events"
                 layout="@layout/item_section_header_highlighted"
+                android:layout_marginTop="@dimen/margin_big_20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                bind:sectionTitle="@{@string/title_most_popular_event}" />
+                bind:sectionTitle="@{@string/title_nearest_event}"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_primary_events"
+                android:id="@+id/rv_nearest_events"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/header_primary_events"
-                android:layout_marginTop="@dimen/margin_default_10dp"
-                android:layout_marginBottom="@dimen/margin_default_10dp"
+                android:layout_below="@id/header_nearest_events"
+                android:layout_marginTop="@dimen/text_size_large_20sp"
+                app:onItemClickListener="@{viewModel.onEventClickListener}"
                 android:orientation="horizontal"
+                app:snapHelper="@{true}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                bind:itemDecoration_left="@{@dimen/margin_default_10dp}"
-                bind:itemDecoration_lastRight="@{@dimen/margin_big_20dp}"
-                bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
-                bind:itemList="@{viewModel.primaryEventsList}"
+                 bind:itemList="@{viewModel.primaryEventsList}"
                 tools:listitem="@layout/layout_item_primary_event" />
 
             <include
-                android:id="@+id/header_upcoming_events"
+                android:id="@+id/header_favorite_events"
                 layout="@layout/item_section_header_highlighted"
+                android:layout_marginTop="@dimen/margin_big_20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rv_primary_events"
-                bind:sectionTitle="@{@string/title_upcoming_event}" />
+                android:layout_below="@id/rv_nearest_events"
+                bind:sectionTitle="@{@string/title_most_popular_event}" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_upcoming_events"
-                android:layout_width="match_parent"
+                android:id="@+id/rv_favorite_events"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/header_upcoming_events"
-                android:layout_marginTop="@dimen/margin_default_10dp"
-                android:nestedScrollingEnabled="false"
+                android:layout_below="@id/header_favorite_events"
+                android:layout_marginTop="@dimen/text_size_large_20sp"
+                android:layout_marginBottom="@dimen/margin_default_10dp"
+                app:onItemClickListener="@{viewModel.onEventClickListener}"     android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                bind:itemDecoration_top="@{@dimen/margin_default_10dp}"
-                bind:itemList="@{viewModel.upcomingEventsList}"
-                tools:listItem="@layout/layout_item_parent_location_children_events" />
+                bind:itemDecoration_left="@{@dimen/margin_big_20dp}"
+                bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
+                bind:itemList="@{viewModel.popularEventsList}"
+                tools:listitem="@layout/layout_item_popular_event" />
+
+
 
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>

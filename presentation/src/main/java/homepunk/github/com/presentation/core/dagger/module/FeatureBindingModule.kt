@@ -2,10 +2,11 @@ package homepunk.github.com.presentation.core.dagger.module
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import homepunk.github.com.presentation.feature.detail.event.EventFragment
-import homepunk.github.com.presentation.feature.discover.DiscoverHostFragment
-import homepunk.github.com.presentation.feature.discover.event.EventListFragment
-import homepunk.github.com.presentation.feature.discover.library.DiscoverLibraryFragment
+import homepunk.github.com.presentation.feature.event.EventFragment
+import homepunk.github.com.presentation.feature.releases.DiscoverHostFragment
+import homepunk.github.com.presentation.feature.event.home.EventListFragment
+import homepunk.github.com.presentation.feature.event.timeline.EventTimelineFragment
+import homepunk.github.com.presentation.feature.releases.library.DiscoverLibraryFragment
 import homepunk.github.com.presentation.feature.main.MainActivity
 import homepunk.github.com.presentation.feature.menu.MenuActivity
 import homepunk.github.com.presentation.feature.menu.country.CountryListFragment
@@ -37,4 +38,7 @@ interface FeatureBindingModule {
 
     @ContributesAndroidInjector
     fun eventFragment(): EventFragment
+
+    @ContributesAndroidInjector
+    fun eventTimelineFragment(): EventTimelineFragment
 }

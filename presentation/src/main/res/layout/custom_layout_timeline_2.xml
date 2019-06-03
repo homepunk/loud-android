@@ -19,6 +19,7 @@
             android:id="@+id/timeline"
             android:layout_width="@dimen/width_timeline"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:layout_marginStart="@dimen/margin_timeline"
             android:background="@color/timeline"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -40,32 +41,32 @@
             app:layout_constraintStart_toStartOf="@+id/cv_item"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="JUNE"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/background"
+            android:visibility="gone"
             android:text="@{model.day}"
             android:textAlignment="center"
             android:paddingTop="4dp"
             android:paddingBottom="4dp"
             android:textColor="@color/whiteBone"
             android:textSize="@dimen/text_size_timeline_date"
-            app:isVisible="@{model.isNewDay}"
             app:layout_constraintBottom_toBottomOf="@+id/cv_item"
             app:layout_constraintEnd_toEndOf="@+id/timeline"
             app:layout_constraintStart_toStartOf="@+id/timeline"
             app:layout_constraintTop_toTopOf="@+id/cv_item"
             tools:text="2"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <FrameLayout
             android:id="@+id/cv_item"
             android:layout_width="0dp"
+            android:layout_marginStart="@dimen/margin_default_10dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
             app:cardBackgroundColor="@color/darkBackground"
             app:cardCornerRadius="@dimen/radius_default_card"
             app:layout_constraintEnd_toEndOf="parent"

@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="homepunk.github.com.presentation.feature.detail.event.EventViewModel" />
+            type="homepunk.github.com.presentation.feature.event.EventViewModel" />
 
         <variable
             name="youtubeViewModel"
@@ -164,9 +164,8 @@
                 android:id="@+id/block_line_up"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/margin_default_10dp"
+                android:layout_marginTop="@dimen/margin_big_20dp"
                 app:el_expanded="true"
-                app:el_headerHorizontalPadding="@dimen/margin_big_20dp"
                 app:el_headerTitleStartMargin="@dimen/margin_big_20dp"
                 app:el_title="@string/title_line_up"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -193,9 +192,8 @@
                 android:id="@+id/block_listen_performance"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/margin_default_10dp"
+                android:layout_marginTop="@dimen/margin_big_20dp"
                 app:el_expanded="true"
-                app:el_headerHorizontalPadding="@dimen/margin_big_20dp"
                 app:el_headerTitleStartMargin="@dimen/margin_big_20dp"
                 app:el_title="@string/title_performance_youtube_preview_list"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -212,7 +210,7 @@
                     android:orientation="horizontal"
                     android:layout_marginStart="@dimen/margin_big_20dp"
                     android:layout_marginEnd="@dimen/margin_big_20dp"
-                    android:layout_marginTop="@dimen/margin_small_4dp">
+                    android:layout_marginTop="@dimen/margin_big_20dp">
 
                     <FrameLayout
                         android:layout_width="wrap_content"
@@ -252,7 +250,7 @@
                     android:id="@+id/rv_youtube_preview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_default_10dp"
+                    android:layout_marginTop="@dimen/margin_big_20dp"
                     android:orientation="horizontal"
                     bind:itemDecoration_lastRight="@{@dimen/margin_big_20dp}"
                     bind:itemDecoration_left="@{@dimen/margin_default_10dp}"
@@ -269,9 +267,8 @@
                 android:id="@+id/block_venue"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/margin_default_10dp"
+                android:layout_marginTop="@dimen/margin_big_20dp"
                 app:el_expanded="false"
-                app:el_headerHorizontalPadding="@dimen/margin_big_20dp"
                 app:el_headerTitleStartMargin="@dimen/margin_big_20dp"
                 app:el_title="@string/title_location"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -282,7 +279,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_big_20dp"
-                    android:layout_marginTop="@dimen/margin_default_10dp"
+                    android:layout_marginTop="@dimen/margin_big_20dp"
                     android:layout_marginEnd="@dimen/margin_big_20dp"
                     android:orientation="horizontal"
                     tools:visibility="gone">
@@ -328,7 +325,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_big_20dp"
-                    android:layout_marginTop="@dimen/margin_default_10dp"
+                    android:layout_marginTop="@dimen/margin_big_20dp"
                     android:gravity="center_vertical"
                     android:visibility="gone">
 
@@ -364,9 +361,8 @@
                 android:id="@+id/block_nearest_events"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_default_10dp"
+                android:layout_marginTop="@dimen/margin_big_20dp"
                 app:el_expanded="false"
-                app:el_headerHorizontalPadding="@dimen/margin_big_20dp"
                 app:el_headerTitleStartMargin="@dimen/margin_big_20dp"
                 app:el_title="@string/title_nearest_events"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -378,7 +374,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_default_10dp"
-                    android:layout_marginTop="@dimen/margin_default_10dp"
+                    android:layout_marginTop="@dimen/margin_big_20dp"
                     android:layout_marginEnd="@dimen/margin_default_10dp"
                     android:nestedScrollingEnabled="false"
                     app:timeline_adapter="@{viewModel.timelineEventAdapter}" />
@@ -388,9 +384,8 @@
                 android:id="@+id/block_related_artists"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_default_10dp"
+                android:layout_marginTop="@dimen/margin_big_20dp"
                 app:el_expanded="false"
-                app:el_headerHorizontalPadding="@dimen/margin_big_20dp"
                 app:el_headerTitleStartMargin="@dimen/margin_big_20dp"
                 app:el_title="@string/title_related_artists"
                 app:layout_constraintEnd_toEndOf="parent"

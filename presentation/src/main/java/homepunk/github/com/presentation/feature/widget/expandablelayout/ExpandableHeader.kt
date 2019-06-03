@@ -40,7 +40,7 @@ class ExpandableHeader @JvmOverloads constructor(context: Context, attrs: Attrib
             headerHorizontalPadding = typedArray.getDimensionPixelSize(R.styleable.ExpandableHeader_el_headerHorizontalPadding, 0)
             headerTitleStartMargin = typedArray.getDimensionPixelSize(R.styleable.ExpandableHeader_el_headerTitleStartMargin, dpToPx(10f))
             isExpanded.set(typedArray.getBoolean(R.styleable.ExpandableHeader_el_expanded, false))
-            headerTint = typedArray.getColor(R.styleable.ExpandableHeader_el_headerTint, ContextCompat.getColor(context, R.color.colorAccent))
+            headerTint = typedArray.getColor(R.styleable.ExpandableHeader_el_headerTint, ContextCompat.getColor(context, R.color.whiteBone))
         } finally {
             typedArray.recycle()
         }

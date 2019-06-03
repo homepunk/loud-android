@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<data>
+    <variable
+        name="viewModel"
+        type="homepunk.github.com.presentation.feature.event.timeline.EventTimelineViewModel" />
+
+    <variable
+        name="appModeModel"
+        type="homepunk.github.com.presentation.common.model.mode.AppModeModel" />
+</data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/header_upcoming_events"
+            layout="@layout/item_section_header_highlighted"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_favorite_events"
+            android:layout_marginTop="@dimen/margin_big_20dp"
+            bind:sectionTitle="@{@string/title_upcoming_event}" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/margin_big_20dp">
+
+            <TextView
+                android:id="@+id/title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_big_20dp"
+                android:fontFamily="@font/lato_bold"
+                android:letterSpacing="0.02"
+                android:lineSpacingExtra="1sp"
+                android:text="MONDAY, 6"
+                android:textAllCaps="true"
+                android:textColor="?colorAccent"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="@+id/dot"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                tools:text="понедельник, 6" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_big_20dp"
+                android:fontFamily="@font/lato_bold"
+                android:letterSpacing="0.02"
+                android:lineSpacingExtra="1sp"
+                android:text="JUNE"
+                android:layout_marginStart="@dimen/margin_default_10dp"
+                android:textAllCaps="true"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/whiteBone"
+                android:textSize="22sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/dot"
+
+                tools:text="ИЮНЬ" />
+
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:rotation="180"
+                android:src="@drawable/ic_left_arrow"
+                android:tint="@color/subtitle2"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/title"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_left_arrow"
+                android:tint="@color/subtitle2"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_upcoming_events"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/header_upcoming_events"
+            android:layout_marginStart="@dimen/margin_default_10dp"
+            android:layout_marginTop="@dimen/margin_big_20dp"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            bind:itemList="@{viewModel.upcomingEventsList}"
+            tools:listItem="@layout/layout_item_parent_location_children_events" />
+    </LinearLayout>
+</layout>

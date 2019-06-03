@@ -48,7 +48,7 @@
     <color name="pale_red2">#9B1D20</color>
     <color name="grey">#565656</color>
     <color name="greyLight">#6B6E70</color>
-    <color name="green">#093824</color>
+    <color name="green">#15740D</color>
     <color name="yellow">#FCA311</color>
     <color name="bright_yellow">#FE9920</color>
     <color name="orange">#DD7230</color>
@@ -60,7 +60,7 @@
     <color name="whiteBone">#F6F1EB</color>
     <color name="card_shadow">#40222629</color>
     <color name="darkBackground">#1b1f21</color>
-    <color name="black">#24221b</color>
+    <color name="black">#000000</color>
     <color name="background1">#262337</color>
     <color name="blue_dark">#33658A</color>
 

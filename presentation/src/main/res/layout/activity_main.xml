@@ -35,10 +35,9 @@
             android:id="@+id/toolbar"
             layout="@layout/layout_toolbar"
             android:layout_width="match_parent"
-            android:layout_marginStart="@dimen/margin_big_20dp"
-            android:layout_marginEnd="@dimen/margin_big_20dp"
-            android:layout_height="56dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/margin_big_20dp"
             app:onMenuClickListener="@{onMenuClickListener}"
             app:title="@{appModeModel.title}" />
 
@@ -66,18 +65,187 @@
                 android:id="@+id/bg_app_bar_shadow_appearance"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
+                android:layout_alignStart="@+id/container"
+                android:layout_alignTop="@+id/container"
                 android:alpha="0"
+                android:background="@drawable/background_shadow_appearance_top"
                 android:visibility="gone"
-                tools:visibility="visible"
-                android:background="@drawable/background_shadow_appearance_top" />
+                tools:visibility="visible" />
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/app_bar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default_10dp"
                 android:background="@android:color/transparent"
                 android:fitsSystemWindows="true"
                 android:stateListAnimator="@animator/appbar_elevation">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_big_20dp"
+                        android:layout_marginEnd="@dimen/margin_big_20dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/background"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_big_20dp">
+
+                            <TextView
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:id="@+id/title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_small_6dp"
+                                android:layout_marginBottom="@dimen/margin_small_6dp"
+                                android:layout_marginStart="@dimen/margin_default_10dp"
+                                android:layout_marginEnd="@dimen/margin_default_10dp"
+                                android:textColor="?colorAccent"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/lato"
+                                android:text="ALL" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="@dimen/margin_small_6dp"
+                                android:background="@drawable/background_circle_filled_accent"
+                                app:layout_constraintEnd_toEndOf="@+id/title"
+                                app:layout_constraintTop_toBottomOf="@+id/title"
+                                app:layout_constraintStart_toStartOf="@+id/title" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_big_20dp"
+                            >
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin_small_6dp"
+                                android:layout_marginBottom="@dimen/margin_small_6dp"
+                                android:layout_marginStart="@dimen/margin_default_10dp"
+                                android:layout_marginEnd="@dimen/margin_default_10dp"
+                                android:textColor="@color/subtitle2"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/lato"
+                                android:text="RAP" />
+                        </FrameLayout>
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_big_20dp"
+                            >
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin_small_6dp"
+                                android:layout_marginBottom="@dimen/margin_small_6dp"
+                                android:layout_marginStart="@dimen/margin_default_10dp"
+                                android:layout_marginEnd="@dimen/margin_default_10dp"
+                                android:textColor="@color/subtitle2"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/lato"
+                                android:text="ROCK" />
+                        </FrameLayout>
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_big_20dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin_small_6dp"
+                                android:layout_marginBottom="@dimen/margin_small_6dp"
+                                android:layout_marginStart="@dimen/margin_default_10dp"
+                                android:layout_marginEnd="@dimen/margin_default_10dp"
+                                android:textColor="@color/subtitle2"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/lato"
+                                android:text="TECHNO" />
+                        </FrameLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginStart="@dimen/margin_big_20dp"
+                        android:layout_marginEnd="@dimen/margin_big_20dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_big_20dp">
+
+                            <TextView
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:id="@+id/title1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_small_6dp"
+                                android:layout_marginBottom="@dimen/margin_small_6dp"
+                                android:layout_marginStart="@dimen/margin_default_10dp"
+                                android:layout_marginEnd="@dimen/margin_default_10dp"
+                                android:textColor="?colorAccent"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/lato"
+                                android:text="Kharkiv" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="@dimen/margin_small_6dp"
+                                android:background="@drawable/background_circle_filled_accent"
+                                app:layout_constraintEnd_toEndOf="@+id/title1"
+                                app:layout_constraintTop_toBottomOf="@+id/title1"
+                                app:layout_constraintStart_toStartOf="@+id/title1" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_big_20dp"
+                            >
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/margin_small_6dp"
+                                android:layout_marginBottom="@dimen/margin_small_6dp"
+                                android:layout_marginStart="@dimen/margin_default_10dp"
+                                android:layout_marginEnd="@dimen/margin_default_10dp"
+                                android:textColor="@color/subtitle2"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/lato"
+                                android:text="Kiev" />
+                        </FrameLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <androidx.appcompat.widget.SearchView
                     android:id="@+id/search_view"
@@ -85,9 +253,10 @@
                     android:layout_height="56dp"
                     android:layout_marginStart="@dimen/margin_big_20dp"
                     android:layout_marginEnd="@dimen/margin_big_20dp"
-                    android:alpha="0.8"
                     android:layout_marginBottom="@dimen/margin_default_8dp"
+                    android:alpha="0.8"
                     android:background="@drawable/background_rect_round_corners_gray"
+                    android:visibility="gone"
                     app:defaultQueryHint="Search for events"
                     app:layout_scrollFlags="scroll|enterAlways"
                     app:queryHint="Search for events" />
@@ -112,20 +281,21 @@
             android:id="@+id/bg_toolbar_shadow_appearance"
             android:layout_width="match_parent"
             android:layout_height="130dp"
-            android:alpha="1"
             android:layout_below="@id/toolbar"
-            android:background="@drawable/background_shadow_appearance_top" />
+            android:alpha="1"
+            android:background="@drawable/background_shadow_appearance_top"
+            android:visibility="gone" />
 
         <View
             android:id="@+id/bg_bottom_bar_shadow_appearance"
             android:layout_width="match_parent"
             android:layout_height="110dp"
-            android:visibility="gone"
-            android:layout_alignParentBottom="true"
             android:layout_above="@+id/bottom_nav"
-            android:background="@drawable/background_shadow_appearance_bottom" />
-<!--
-            android:backgroundTint="@color/red"
--->
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/background_shadow_appearance_bottom"
+            android:visibility="gone" />
+        <!--
+                    android:backgroundTint="@color/red"
+        -->
     </RelativeLayout>
 </layout>

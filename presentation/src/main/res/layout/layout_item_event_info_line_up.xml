@@ -22,7 +22,7 @@
             android:layout_width="@dimen/width_timeline"
             android:layout_height="@dimen/width_timeline"
             android:background="@color/whiteBone"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/cover"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/cover" />
@@ -31,7 +31,6 @@
             android:id="@+id/cover"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginStart="@dimen/margin_big_20dp"
             android:layout_marginTop="@dimen/margin_default_10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/divider"
@@ -54,22 +53,51 @@
             tools:text="Product KF" />
 
         <TextView
-            android:id="@+id/tv_genre"
-            android:layout_width="wrap_content"
+            android:id="@+id/subtitle4"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_big_20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/margin_small_6dp"
+            android:background="@drawable/background_circle_filled_gray"
             android:fontFamily="@font/lato"
+            android:paddingStart="@dimen/margin_default_10dp"
+            android:paddingTop="@dimen/margin_small_4dp"
+            android:paddingEnd="@dimen/margin_default_10dp"
+            android:paddingBottom="@dimen/margin_small_4dp"
+            android:text="RAP"
             android:textColor="@color/subtitle2"
-            android:textSize="@dimen/text_size_card"
+            android:textSize="12sp"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/cover"
-            app:layout_constraintStart_toEndOf="@+id/cover"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name"
-            tools:text="RAP, EXPERIMENTAL" />
+            app:layout_constraintBottom_toTopOf="@+id/place"
+            app:layout_constraintStart_toStartOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+        <TextView
+            android:id="@+id/subtitle5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_default_8dp"
+            android:background="@drawable/background_circle_filled_gray"
+            android:fontFamily="@font/lato"
+            android:paddingStart="@dimen/margin_default_10dp"
+            android:paddingTop="@dimen/margin_small_6dp"
+            android:paddingEnd="@dimen/margin_default_10dp"
+            android:paddingBottom="@dimen/margin_small_4dp"
+            android:text="EXPERIMENTAL"
+            android:textColor="@color/subtitle2"
+            android:textSize="12sp"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/subtitle4"
+            app:layout_constraintTop_toTopOf="@+id/subtitle4" />
+
 
         <ImageView
             android:id="@+id/btn_play"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:src="@drawable/ic_play"
             android:tint="@{model.isPlayClicked ? @color/colorAccent : @color/text}"
             app:layout_constraintBottom_toBottomOf="@+id/tv_genre"

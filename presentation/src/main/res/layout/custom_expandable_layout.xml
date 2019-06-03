@@ -34,6 +34,7 @@
                 android:layout_marginTop="@dimen/margin_top_divider"
                 android:layout_marginBottom="@dimen/margin_top_divider"
                 android:background="@{headerTint}"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

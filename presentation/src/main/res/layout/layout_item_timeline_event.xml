@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="homepunk.github.com.presentation.feature.discover.event.model.EventModel" />
+            type="homepunk.github.com.presentation.feature.event.model.EventModel" />
 
     </data>
 

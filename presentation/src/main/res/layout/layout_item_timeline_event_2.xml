@@ -9,7 +9,7 @@
 
         <variable
             name="model"
-            type="homepunk.github.com.presentation.feature.discover.event.model.EventModel" />
+            type="homepunk.github.com.presentation.feature.event.model.EventModel" />
 
     </data>
 
@@ -28,9 +28,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cv_event"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_timeline_event"
-        android:layout_marginBottom="@dimen/margin_default_10dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_default_10dp"
+        android:layout_marginBottom="@dimen/margin_default_10dp"
         android:paddingTop="@dimen/margin_small_4dp"
         android:paddingBottom="@dimen/margin_small_4dp">
 
@@ -43,16 +43,45 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:layout_width="@dimen/height_timeline_event"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                app:imageUrl="@{model.thumb}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/background_events_3" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
+                <ImageView
+                    android:layout_width="136dp"
+                    android:layout_height="80dp"
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{model.thumb}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/background_events_3" />
+                <View
+                    android:layout_width="136dp"
+                    android:layout_height="80dp"
+                    android:scaleType="centerCrop"
+                    android:alpha="0.4"
+                    android:background="@drawable/bg_shadow_detail"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/background_events_3" />
+
+                <TextView
+                    style="@style/FieldTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_default_10dp"
+                    android:layout_marginBottom="@dimen/margin_default_10dp"
+                    android:alpha="0.8"
+                    android:text="@{model.startFromToday}"
+                    android:layout_gravity="bottom"
+                    android:textColor="@color/whiteBone"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toTopOf="@+id/place"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </FrameLayout>
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -61,15 +90,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/margin_big_16dp"
-            android:layout_marginTop="@dimen/margin_small_4dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/lato_bold"
             android:text="@{model.title}"
-            android:textColor="@color/text"
+            android:textColor="?colorAccent"
             android:textSize="@dimen/text_size_large"
             app:layout_constraintEnd_toStartOf="@+id/imageView"
             app:layout_constraintStart_toEndOf="@+id/thumb"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/thumb"
             tools:text="Spiritual Front" />
 
         <ImageView
@@ -80,6 +108,7 @@
             android:layout_marginTop="@dimen/margin_small_4dp"
             android:layout_marginEnd="@dimen/margin_big_20dp"
             android:src="@drawable/ic_arrow_right"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -91,6 +120,7 @@
             android:layout_marginTop="@dimen/margin_small_4dp"
             android:layout_marginEnd="@dimen/margin_default_10dp"
             android:src="@drawable/ic_heart"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/time"
             app:layout_constraintEnd_toStartOf="@+id/time"
             app:layout_constraintTop_toTopOf="parent" />
@@ -101,14 +131,74 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/margin_big_16dp"
+            android:layout_marginTop="@dimen/margin_small_4dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/lato"
             android:text="@{model.location}"
-            android:textColor="@color/grey"
-            android:textSize="@dimen/text_size_event_subtitle"
+            android:textColor="@color/subtitle2"
+            android:textSize="16sp"
+            android:visibility="visible"
             app:layout_constraintStart_toEndOf="@+id/thumb"
             app:layout_constraintTop_toBottomOf="@+id/title"
             tools:text="Zhara" />
+
+        <TextView
+            android:id="@+id/subtitle2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_default_12dp"
+            android:layout_marginTop="@dimen/margin_small_6dp"
+            android:layout_marginEnd="8dp"
+            android:paddingStart="@dimen/margin_default_10dp"
+            android:paddingEnd="@dimen/margin_default_10dp"
+            android:paddingTop="@dimen/margin_small_4dp"
+            android:paddingBottom="@dimen/margin_small_4dp"
+            android:fontFamily="@font/lato"
+            android:textColor="@color/subtitle2"
+            android:textSize="12sp"
+            android:background="@drawable/background_circle_filled_gray"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/thumb"
+            app:layout_constraintTop_toBottomOf="@+id/subtitle"
+            android:text="RAP" />
+
+        <TextView
+            android:id="@+id/subtitle3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_default_8dp"
+            android:layout_marginTop="@dimen/margin_small_4dp"
+            android:layout_marginEnd="8dp"
+            android:paddingStart="@dimen/margin_default_10dp"
+            android:paddingEnd="@dimen/margin_default_10dp"
+            android:paddingTop="@dimen/margin_small_6dp"
+            android:paddingBottom="@dimen/margin_small_4dp"
+            android:fontFamily="@font/lato"
+            android:textColor="@color/subtitle2"
+            android:textSize="12sp"
+            android:background="@drawable/background_circle_filled_gray"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/subtitle2"
+            app:layout_constraintTop_toBottomOf="@+id/subtitle"
+            android:text="EXPERIMENTAL" />
+
+        <FrameLayout
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:padding="@dimen/margin_default_8dp"
+            android:layout_marginEnd="@dimen/margin_big_20dp"
+            android:layout_marginStart="@dimen/margin_default_8dp"
+            app:layout_constraintStart_toEndOf="@+id/subtitle3"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_heart" />
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!--</androidx.cardview.widget.CardView>-->
 

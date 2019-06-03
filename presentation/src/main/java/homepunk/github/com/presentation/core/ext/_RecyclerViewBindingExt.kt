@@ -5,10 +5,14 @@ package homepunk.github.com.presentation.core.ext
 import android.animation.ValueAnimator
 import android.view.MenuItem
 import android.view.animation.AccelerateInterpolator
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableArrayList
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.common.adapter.SimpleBindingRecyclerAdapter
 import homepunk.github.com.presentation.common.adapter.SimpleExpandableBindingRecyclerAdapter
 import homepunk.github.com.presentation.common.adapter.model.ExpandableChildModel
@@ -26,6 +30,79 @@ import timber.log.Timber
 @BindingAdapter("adapter")
 fun <T> RecyclerView.bindAdapter(adapter: SimpleBindingRecyclerAdapter<T>) {
     this.adapter = adapter
+}
+
+@BindingAdapter("changeColorOnClick")
+fun TextView.changeColorOnClick(change: Boolean) {
+    if (change) {
+        setOnClickListener {
+            if (currentTextColor == ContextCompat.getColor(context, R.color.pale_red2)) {
+                setTextColor(ContextCompat.getColor(context, R.color.subtitle2))
+                val animator = ValueAnimator.ofFloat(1f, 0.5f)
+                animator.duration = 400
+                animator.addUpdateListener {
+                    alpha = it.animatedValue as Float
+                    invalidate()
+                }
+                animator.start()
+            } else {
+                setTextColor(ContextCompat.getColor(context, R.color.pale_red2))
+                val animator = ValueAnimator.ofFloat(0.5f, 1f)
+                animator.duration = 400
+                animator.addUpdateListener {
+                    alpha = it.animatedValue as Float
+                    invalidate()
+                }
+                animator.start()
+            }
+        }
+    }
+}
+@BindingAdapter("changeColorOnClick3")
+fun TextView.changeColorOnClick3(change: Boolean) {
+    if (change) {
+        setOnClickListener {
+            if (currentTextColor == ContextCompat.getColor(context, R.color.colorAccent)) {
+                setTextColor(ContextCompat.getColor(context, R.color.whiteBone))
+                val animator = ValueAnimator.ofFloat(1f, 0.6f)
+                animator.duration = 1000
+                animator.addUpdateListener {
+                    alpha = it.animatedValue as Float
+                    invalidate()
+                }
+                animator.start()
+            } else {
+                setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
+                val animator = ValueAnimator.ofFloat(0.6f, 1f)
+                animator.duration = 1000
+                animator.addUpdateListener {
+                    alpha = it.animatedValue as Float
+                    invalidate()
+                }
+                animator.start()
+            }
+        }
+    }
+}
+@BindingAdapter("changeColorOnClick2")
+fun TextView.changeColorOnClick2(change: Boolean) {
+    if (change) {
+        setOnClickListener {
+            if (currentTextColor == ContextCompat.getColor(context, R.color.colorAccent)) {
+                setTextColor(ContextCompat.getColor(context, R.color.subtitle2))
+            } else {
+                setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
+            }
+        }
+    }
+}
+
+@BindingAdapter("snapHelper")
+fun RecyclerView.snapHelper(enable: Boolean) {
+    if (enable) {
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(this)
+    }
 }
 
 @BindingAdapter("itemList")

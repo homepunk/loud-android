@@ -12,7 +12,7 @@
 
         <variable
             name="viewModel"
-            type="homepunk.github.com.presentation.feature.discover.library.LibraryDiscoverSectionViewModel" />
+            type="homepunk.github.com.presentation.feature.releases.library.LibraryDiscoverSectionViewModel" />
 
         <variable
             name="appModeModel"

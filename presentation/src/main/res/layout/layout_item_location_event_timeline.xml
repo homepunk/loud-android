@@ -6,23 +6,22 @@
 
         <variable
             name="model"
-            type="homepunk.github.com.presentation.feature.discover.event.model.LocationEventTimelineModel" />
+            type="homepunk.github.com.presentation.feature.event.home.model.LocationEventTimelineModel" />
     </data>
 
     <homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_default_10dp"
+        android:layout_marginEnd="@dimen/margin_big_20dp"
         app:el_expanded="true"
-        app:el_headerHorizontalPadding="@dimen/margin_big_20dp"
         app:el_title="@{model.locationName}">
 
         <homepunk.github.com.presentation.feature.widget.timeline.TimelineView
             android:id="@+id/timeline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_default_10dp"
             android:layout_marginTop="@dimen/margin_default_10dp"
-            android:layout_marginEnd="@dimen/margin_default_10dp"
             android:nestedScrollingEnabled="false"
             app:timeline_adapter="@{model.timelineEventAdapter}" />
 

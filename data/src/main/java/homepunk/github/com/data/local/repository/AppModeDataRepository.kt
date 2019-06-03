@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 /**Created by Homepunk on 18.01.2019. **/
 class AppModeDataRepository @Inject constructor(val prefsManager: SharedPreferencesManager) : AppModeRepository {
-    private val modeObservable = SharedPreferencesValueObservable(prefsManager, KEY_CURRENT_APP_MODE, 1)
+    private val modeObservable = SharedPreferencesValueObservable(prefsManager, KEY_CURRENT_APP_MODE, 2)
 
     override fun getCurrentMode(): Observable<AppMode> {
         return modeObservable.valueObservable

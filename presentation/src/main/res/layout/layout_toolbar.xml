@@ -20,16 +20,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_root_layout"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
         <View
             android:id="@+id/dot"
             android:layout_width="4dp"
+            android:visibility="gone"
             android:layout_height="0dp"
+            android:paddingTop="@dimen/margin_default_8dp"
+            android:paddingBottom="@dimen/margin_default_8dp"
             android:background="?attr/colorAccent"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/title_frame"
             app:layout_constraintEnd_toStartOf="@+id/title_frame"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,26 +41,58 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
+            android:layout_marginTop="32dp"
             android:paddingBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/dot"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/menu">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_default_10dp"
+                app:changeColorOnClick2="@{true}"
                 android:fontFamily="@font/lato_bold"
                 android:textAllCaps="true"
-                android:textColor="@color/whiteBone"
-                android:textSize="20sp"
+                android:textColor="?colorAccent"
+                android:textSize="36sp"
                 bind:animationResId="@{R.anim.translate_down}"
                 bind:text="@{title}"
                 tools:text="EVENTS"/>
         </FrameLayout>
 
+        <FrameLayout
+            android:id="@+id/artists_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_big_20dp"
+            android:layout_marginStart="@dimen/margin_default_10dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/imageView4"
+            app:layout_constraintStart_toEndOf="@+id/title_frame"
+            app:layout_constraintTop_toTopOf="@+id/title_frame">
+
+            <TextView
+                android:id="@+id/artists"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_default_10dp"
+                app:changeColorOnClick="@{true}"
+                android:alpha="0.5"
+                android:fontFamily="@font/lato_bold"
+                android:textAllCaps="true"
+                android:textColor="@color/subtitle2"
+                android:textSize="32sp"
+                android:text="ARTISTS"
+                tools:text="ARTISTS" />
+
+        </FrameLayout>
+
         <ImageView
+            android:id="@+id/imageView4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_default_10dp"
@@ -73,16 +106,33 @@
             app:srcCompat="@drawable/title_arrow" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:id="@+id/menu"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="@dimen/margin_big_20dp"
+            android:layout_marginStart="@dimen/margin_default_10dp"
             android:onClickListener="@{onMenuClickListener}"
             android:src="@drawable/ic_controls"
-            app:layout_constraintBottom_toBottomOf="@+id/title_frame"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/title_frame" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="200dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="@dimen/margin_big_20dp"
+            app:searchIcon="@drawable/ic_search"
+            android:background="@drawable/background_rect_round_corners_gray"
+            app:defaultQueryHint="Search for events"
+            app:layout_constraintStart_toEndOf="@+id/menu"
+            app:layout_constraintTop_toTopOf="@+id/menu"
+            app:layout_constraintBottom_toBottomOf="@+id/menu"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:queryHint="Search for events" />
 
         <View
+            android:id="@+id/view2"
             android:layout_width="42dp"
             android:layout_height="2dp"
             android:layout_marginStart="8dp"
