@@ -1,143 +1,116 @@
 package homepunk.github.com.presentation.core.ext
 
 import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.content.res.ColorStateList
+import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.LinearInterpolator
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import homepunk.github.com.domain.model.AppMode
 import homepunk.github.com.presentation.common.model.mode.AppModeModel
-import android.animation.ObjectAnimator
-import android.animation.ArgbEvaluator
-import android.animation.ValueAnimator
-import android.content.res.ColorStateList
-import android.view.View
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.AnticipateInterpolator
-import android.view.animation.Interpolator
-import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.feature.widget.animation.ReverseInterpolator
-import java.nio.file.AccessMode
+import homepunk.github.com.presentation.feature.widget.animation.GammaEvaluator
+import timber.log.Timber
+
+
 
 
 fun TextView.getColor(color: Int) = ContextCompat.getColor(context, color)
 fun View.getColor(color: Int) = ContextCompat.getColor(context, color)
 
-@BindingAdapter(
-        requireAll = true,
-        value = [
-            "onAppModeChange",
-            "color"])
-fun TextView.setOnAppModeChange(appModeModel: AppModeModel, color: Int) {
-    when (color) {
-        getColor(R.color.modeEventsColor) -> {
-            getColor(R.color.modeEventsColor).let { accentColor ->
-                //                alphaAnimator.setFloatValues(0.5f, 1f)
-                val textColorAnimator = ObjectAnimator.ofObject(
-                        this, // Object to animating
-                        "textColor", // Property to animate
-                        ArgbEvaluator(), // Interpolation function
-                        getColor(R.color.subtitle3), // Start color
-                        accentColor // End color
-                )
-                textColorAnimator.duration = 800
-                val textSizeAnimator = ValueAnimator.ofFloat(32f, 36f)
-                textSizeAnimator.addUpdateListener { valueAnimator ->
-                    val animatedValue = valueAnimator.animatedValue as Float
-                    textSize = animatedValue
-                }
-                textSizeAnimator.duration = 300
-                val set = AnimatorSet()
-                textSizeAnimator.interpolator = AccelerateDecelerateInterpolator()
-                textColorAnimator.interpolator = AccelerateDecelerateInterpolator()
-                set.playTogether(textColorAnimator, textSizeAnimator)
-//                textColorAnimator.interpolator = AccelerateInterpolator()
-                if (appModeModel.mode == AppMode.EVENTS) {
-                    set.start()
-                } else {
-                    textSizeAnimator.interpolator = ReverseInterpolator(textSizeAnimator.interpolator as Interpolator)
-                    textColorAnimator.interpolator = ReverseInterpolator(textColorAnimator.interpolator as Interpolator)
-                    set.start()
-                }
+@BindingAdapter(value = ["updateModeTitleOnModeChange", "btnMode"])
+fun TextView.updateModeTitleOnModeChange(prevAppModeModel: AppModeModel?, prevBtnMode: AppMode?,
+                                         appModeModel: AppModeModel?, btnMode: AppMode?) {
+    if (appModeModel != prevAppModeModel) {
+        val inactiveColor = getColor(homepunk.github.com.presentation.R.color.subtitle3)
+        // IF FIRST RUN
+        if (prevAppModeModel == null && appModeModel != null) {
+            if (btnMode == appModeModel.mode) {
+                setTextColor(appModeModel.color)
+                textSize = 36f
+            } else {
+                setTextColor(inactiveColor)
+                textSize = 34f
             }
+            return
         }
-        getColor(R.color.pale_red2) -> {
-            getColor(R.color.pale_red2).let { accentColor ->
-                //                alphaAnimator.setFloatValues(0.5f, 1f)
-                val textColorAnimator = ObjectAnimator.ofObject(
-                        this, // Object to animating
-                        "textColor", // Property to animate
-                        ArgbEvaluator(), // Interpolation function
-                        getColor(R.color.subtitle3), // Start color
-                        accentColor // End color
-                )
-                textColorAnimator.duration = 800
-                val textSizeAnimator = ValueAnimator.ofFloat(32f, 36f)
-                textSizeAnimator.addUpdateListener { valueAnimator ->
-                    val animatedValue = valueAnimator.animatedValue as Float
-                    textSize = animatedValue
-                }
-                textSizeAnimator.duration = 300
-                val set = AnimatorSet()
-                textSizeAnimator.interpolator = AccelerateDecelerateInterpolator()
-                textColorAnimator.interpolator = AccelerateDecelerateInterpolator()
-                set.playTogether(textColorAnimator, textSizeAnimator)
-//                textColorAnimator.interpolator = AccelerateInterpolator()
-                if (appModeModel.mode != AppMode.EVENTS) {
-                    set.start()
-                } else {
-                    textSizeAnimator.interpolator = ReverseInterpolator(textSizeAnimator.interpolator as Interpolator)
-                    textColorAnimator.interpolator = ReverseInterpolator(textColorAnimator.interpolator as Interpolator)
-                    set.start()
-                }
-            }
 
+        val textColorAnimator = ObjectAnimator.ofObject(
+                this, // Object to animating
+                "textColor", // Property to animate
+                GammaEvaluator(), // Interpolation function
+                if (currentTextColor == inactiveColor) inactiveColor else prevAppModeModel!!.color,
+                if (currentTextColor == inactiveColor) appModeModel!!.color else inactiveColor
+        ).setDuration(duration)
+        val textSizeAnimator = ObjectAnimator.ofFloat(
+                this, // Object to animating
+                "textSize", // Property to animate
+                if (currentTextColor == inactiveColor) 34F else 36F,
+                if (currentTextColor == inactiveColor) 36F else 34F
+        ).setDuration(300)
+        textSizeAnimator.interpolator = LinearInterpolator()
+        AnimatorSet().apply {
+            playTogether(textColorAnimator, textSizeAnimator)
+            start()
         }
     }
 }
 
 
+var duration = 600L
 var startDelay = 0L
 var currentAppModeModel: AppModeModel? = null
 
-@BindingAdapter("onAppModeChange")
-fun TextView.setOnAppModeChange(appModeModel: AppModeModel) {
-    if (currentAppModeModel != appModeModel) {
+@BindingAdapter("updateTextColorOnModeChange")
+fun TextView.updateTextColorOnModeChange(prevAppModeModel: AppModeModel?, appModeModel: AppModeModel) {
+    Timber.w("updateTextColorOnModeChange prevAppModeModel IS NULL = ${prevAppModeModel == null}, appModeModel IS NULL = ${appModeModel == null}")
+  /*  if (currentAppModeModel != appModeModel) {
         startDelay = 0L
         currentAppModeModel = appModeModel
     } else {
-        startDelay += 200L
+        startDelay += 100L
+    }*/
+    if (prevAppModeModel == null) {
+        setTextColor(appModeModel.color)
+    } else {
+        val textColorAnimator = ObjectAnimator.ofObject(
+                this, // Object to animating
+                "textColor", // Property to animate
+                GammaEvaluator(), // Interpolation function
+                getColor(if (appModeModel.mode == AppMode.EVENTS) homepunk.github.com.presentation.R.color.pale_red2 else homepunk.github.com.presentation.R.color.modeEventsColor), // Start color
+                getColor(if (appModeModel.mode != AppMode.EVENTS) homepunk.github.com.presentation.R.color.pale_red2 else homepunk.github.com.presentation.R.color.modeEventsColor) // End color
+        ).setDuration(duration)
+        textColorAnimator.startDelay = startDelay
+        textColorAnimator.interpolator = AccelerateDecelerateInterpolator()
+        textColorAnimator.start()
     }
-    val textColorAnimator = ObjectAnimator.ofObject(
-            this, // Object to animating
-            "textColor", // Property to animate
-            ArgbEvaluator(), // Interpolation function
-            getColor(if (appModeModel.mode == AppMode.EVENTS) R.color.pale_red2 else R.color.modeEventsColor), // Start color
-            getColor(if (appModeModel.mode != AppMode.EVENTS) R.color.pale_red2 else R.color.modeEventsColor) // End color
-    ).setDuration(800)
-    textColorAnimator.startDelay = startDelay
-    textColorAnimator.interpolator = AccelerateDecelerateInterpolator()
-    textColorAnimator.start()
 }
 
-@BindingAdapter("onAppModeChangeTint")
-fun View.onAppModeChangeTint(appModeModel: AppModeModel) {
-    if (currentAppModeModel != appModeModel) {
+
+@BindingAdapter("updateTintOnModeChange")
+fun View.updateTintOnModeChange(prevAppModeModel: AppModeModel?, appModeModel: AppModeModel) {
+   /* if (currentAppModeModel != appModeModel) {
         startDelay = 0L
         currentAppModeModel = appModeModel
     } else {
-        startDelay += 200L
+        startDelay += 100L
+    }*/
+    if (prevAppModeModel == null) {
+        backgroundTintList = ColorStateList.valueOf(appModeModel.color)
+    } else {
+        val colorAnim = ObjectAnimator.ofInt(this.backgroundTintList, "backgroundTintList",
+                getColor(if (appModeModel.mode == AppMode.EVENTS) homepunk.github.com.presentation.R.color.pale_red2 else homepunk.github.com.presentation.R.color.modeEventsColor),
+                getColor(if (appModeModel.mode != AppMode.EVENTS) homepunk.github.com.presentation.R.color.pale_red2 else homepunk.github.com.presentation.R.color.modeEventsColor))
+        colorAnim.setEvaluator(GammaEvaluator())
+        colorAnim.startDelay = startDelay
+        colorAnim.duration = duration
+        colorAnim.addUpdateListener { animation ->
+            val animatedValue = animation.animatedValue as Int
+            backgroundTintList = ColorStateList.valueOf(animatedValue)
+        }
+        colorAnim.interpolator = AccelerateDecelerateInterpolator()
+        colorAnim.start()
     }
-    val colorAnim = ObjectAnimator.ofInt(this.backgroundTintList, "backgroundTintList",
-            getColor(if (appModeModel.mode == AppMode.EVENTS) R.color.pale_red2 else R.color.modeEventsColor),
-            getColor(if (appModeModel.mode != AppMode.EVENTS) R.color.pale_red2 else R.color.modeEventsColor))
-    colorAnim.setEvaluator(ArgbEvaluator())
-    colorAnim.startDelay = startDelay
-    colorAnim.duration = 800
-    colorAnim.addUpdateListener { animation ->
-        val animatedValue = animation.animatedValue as Int
-        backgroundTintList = ColorStateList.valueOf(animatedValue)
-    }
-    colorAnim.interpolator = AccelerateDecelerateInterpolator()
-    colorAnim.start()
 }

@@ -26,7 +26,9 @@ class DiscoverLibraryFragment : BaseFragment<FragmentDiscoverBinding>() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = super.onCreateView(inflater, container, savedInstanceState)
         discoverViewModel.getDiscoverSectionObservable()
-                .subscribe { addSection(inflater, it) }
+                .subscribe(
+                        { addSection(inflater, it) },
+                        { t -> t.printStackTrace() })
         return root
     }
 

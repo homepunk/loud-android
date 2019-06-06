@@ -1,5 +1,6 @@
 package homepunk.github.com.presentation.feature.menu
 
+import androidx.databinding.ObservableArrayList
 import androidx.fragment.app.Fragment
 import homepunk.github.com.domain.interactor.AppModeInteractor
 import homepunk.github.com.presentation.common.data.AppDataFactory
@@ -17,7 +18,7 @@ class MenuViewModel @Inject constructor(var appDataFactory: AppDataFactory,
 
     var modeList = mutableListOf<MenuModeModel>()
 
-    var menuItemList = listOf<MenuModel>()
+    var menuItemList = ObservableArrayList<MenuModel>()
     var menuItemFragmentList = arrayListOf<Fragment>()
 
     var onMenuTabClickListener = object : BubbleTabLayout.OnMenuTabClickListener {
@@ -29,15 +30,16 @@ class MenuViewModel @Inject constructor(var appDataFactory: AppDataFactory,
 
     init {
         modeList = appDataFactory.getModeList()
-        menuItemList = appDataFactory.getModeMenuList().apply {
-            for (menuModel in this) {
-                menuItemFragmentList.add(
-                        when (menuModel) {
-                            MenuModel.ABOUT -> Fragment()
-                            MenuModel.COUNTRY -> CountryListFragment()
-                            MenuModel.LANGUAGE -> LanguageListFragment()
-                        })
-            }
-        }
+        menuItemList.addAll(
+                appDataFactory.getModeMenuList().apply {
+                    for (menuModel in this) {
+                        menuItemFragmentList.add(
+                                when (menuModel) {
+                                    MenuModel.ABOUT -> Fragment()
+                                    MenuModel.COUNTRY -> CountryListFragment()
+                                    MenuModel.LANGUAGE -> LanguageListFragment()
+                                })
+                    }
+                })
     }
 }

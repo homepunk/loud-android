@@ -13,9 +13,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_big_20dp"
-        android:layout_marginEnd="@dimen/margin_big_20dp"
-        android:layout_height="wrap_content">
+        android:layout_marginEnd="@dimen/margin_big_20dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card"
@@ -42,6 +42,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     bind:imageUrl="@{model.thumb}"
                     tools:src="@drawable/background_events_4" />
+
                 <View
                     android:id="@+id/view"
                     android:layout_width="0dp"
@@ -54,26 +55,28 @@
                     app:layout_constraintTop_toTopOf="@+id/thumb" />
 
                 <TextView
+                    android:id="@+id/tv_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_big_20dp"
                     android:fontFamily="@font/lato_bold"
                     android:text="@{model.title}"
-                    android:layout_margin="@dimen/margin_big_20dp"
-                    android:textColor="?colorAccent"
-                    android:textSize="40sp"
                     android:textAllCaps="true"
-                    tools:text="THE COLD DICKS"
+                    android:textColor="?colorAccent"
+                    android:textSize="@dimen/text_size_largest_title"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="THE COLD DICKS" />
+
                 <ImageView
                     android:id="@+id/imageView5"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:visibility="gone"
                     android:layout_margin="@dimen/margin_big_20dp"
                     android:src="@drawable/ic_location_pin"
                     android:tint="@color/whiteBone"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@id/thumb"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -82,13 +85,13 @@
                     style="@style/FieldTextStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_default_10dp"
-                    android:layout_margin="@dimen/margin_big_20dp"
+                    android:layout_marginTop="@dimen/margin_small_6dp"
                     android:text="@{`At ` + model.location}"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:text="Zhara" />
+                    app:layout_constraintStart_toStartOf="@+id/tv_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                    tools:text="At Zhara" />
+
                 <TextView
                     android:id="@+id/subtitle2"
                     android:layout_width="0dp"
@@ -97,46 +100,6 @@
                     android:layout_marginStart="@dimen/margin_default_12dp"
                     android:layout_marginTop="@dimen/margin_small_6dp"
                     android:layout_marginEnd="8dp"
-                    android:paddingStart="@dimen/margin_default_10dp"
-                    android:paddingEnd="@dimen/margin_default_10dp"
-                    android:paddingTop="@dimen/margin_small_4dp"
-                    android:paddingBottom="@dimen/margin_small_4dp"
-                    android:fontFamily="@font/lato"
-                    android:textColor="@color/subtitle2"
-                    android:textSize="12sp"
-                    android:background="@drawable/background_circle_filled_gray"
-                    android:visibility="visible"
-                    app:layout_constraintStart_toEndOf="@+id/thumb"
-                    app:layout_constraintTop_toBottomOf="@+id/subtitle"
-                    android:text="RAP" />
-
-                <TextView
-                    android:id="@+id/subtitle3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/margin_default_8dp"
-                    android:layout_marginTop="@dimen/margin_small_4dp"
-                    android:layout_marginEnd="8dp"
-                    android:paddingStart="@dimen/margin_default_10dp"
-                    android:paddingEnd="@dimen/margin_default_10dp"
-                    android:paddingTop="@dimen/margin_small_6dp"
-                    android:paddingBottom="@dimen/margin_small_4dp"
-                    android:fontFamily="@font/lato"
-                    android:textColor="@color/subtitle2"
-                    android:textSize="12sp"
-                    android:background="@drawable/background_circle_filled_gray"
-                    android:visibility="visible"
-                    app:layout_constraintStart_toEndOf="@+id/subtitle2"
-                    app:layout_constraintTop_toBottomOf="@+id/subtitle"
-                    android:text="EXPERIMENTAL" />
-
-                <TextView
-                    android:id="@+id/subtitle4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="@dimen/margin_default_10dp"
                     android:background="@drawable/background_circle_filled_gray"
                     android:fontFamily="@font/lato"
                     android:paddingStart="@dimen/margin_default_10dp"
@@ -147,15 +110,17 @@
                     android:textColor="@color/subtitle2"
                     android:textSize="12sp"
                     android:visibility="visible"
-                    app:layout_constraintBottom_toTopOf="@+id/place"
-                    app:layout_constraintStart_toStartOf="@+id/place" />
+                    app:layout_constraintStart_toEndOf="@+id/thumb"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_place" />
 
                 <TextView
-                    android:id="@+id/subtitle5"
+                    android:id="@+id/subtitle3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="@dimen/margin_default_8dp"
+                    android:layout_marginTop="@dimen/margin_small_4dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@drawable/background_circle_filled_gray"
                     android:fontFamily="@font/lato"
                     android:paddingStart="@dimen/margin_default_10dp"
@@ -166,16 +131,61 @@
                     android:textColor="@color/subtitle2"
                     android:textSize="12sp"
                     android:visibility="visible"
+                    app:layout_constraintStart_toEndOf="@+id/subtitle2"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_place" />
+
+                <TextView
+                    android:id="@+id/subtitle4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="@dimen/margin_big_20dp"
+                    android:alpha="0.8"
+                    android:background="@drawable/background_circle_filled_gray"
+                    android:fontFamily="@font/lato"
+                    android:paddingStart="@dimen/margin_default_10dp"
+                    android:paddingTop="@dimen/margin_small_4dp"
+                    android:paddingEnd="@dimen/margin_default_10dp"
+                    android:paddingBottom="@dimen/margin_small_4dp"
+                    android:text="#RAP"
+                    android:textColor="@color/subtitle2"
+                    android:textSize="12sp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/place" />
+
+                <TextView
+                    android:id="@+id/subtitle5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_default_8dp"
+                    android:alpha="0.8"
+                    android:background="@drawable/background_circle_filled_gray"
+                    android:fontFamily="@font/lato"
+                    android:paddingStart="@dimen/margin_default_10dp"
+                    android:paddingTop="@dimen/margin_small_4dp"
+                    android:paddingEnd="@dimen/margin_default_10dp"
+                    android:paddingBottom="@dimen/margin_small_4dp"
+                    android:text="#EXPERIMENTAL"
+                    android:textColor="@color/subtitle2"
+                    android:textSize="12sp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/subtitle4"
                     app:layout_constraintStart_toEndOf="@+id/subtitle4"
                     app:layout_constraintTop_toTopOf="@+id/subtitle4" />
+
+
                 <ImageView
+                    android:id="@+id/btn_favorite"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                 android:layout_margin="@dimen/margin_big_20dp"
+                    android:layout_margin="@dimen/margin_big_20dp"
                     android:src="@drawable/ic_heart"
-                    android:tint="@color/whiteBone"
-                    app:layout_constraintBottom_toBottomOf="@+id/view"
-                    app:layout_constraintEnd_toEndOf="@+id/view" />
+                    android:tint="@color/subtitle2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/subtitle5"
+                    app:layout_constraintTop_toTopOf="@+id/subtitle5" />
                 <!--
 
                             <View
@@ -199,8 +209,8 @@
             android:paddingTop="8dp"
             android:text="@{model.title}"
             android:textColor="@color/whiteBone"
-            android:visibility="gone"
             android:textSize="18sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/card"
             app:layout_constraintStart_toStartOf="@+id/card"
             app:layout_constraintTop_toBottomOf="@+id/card"

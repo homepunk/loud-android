@@ -14,6 +14,8 @@ fun Boolean.swap() = !this
 
 
 fun <T> ObservableArrayList<T>.addAllToEmptyList(collection: List<T>) {
-    clear()
+    if (isNotEmpty()) {
+        clear()
+    }
     addAll(collection)
 }

@@ -2,6 +2,7 @@ package homepunk.github.com.presentation.common.adapter
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.ObservableArrayList
 import androidx.databinding.ViewDataBinding
 import homepunk.github.com.presentation.core.base.BaseRecyclerViewAdapter
 import homepunk.github.com.presentation.core.listener.SpecificFieldClickListener
@@ -11,7 +12,7 @@ import homepunk.github.com.presentation.core.listener.SpecificFieldClickListener
 class SimpleBindingRecyclerAdapter<ITEM>(private val layoutId: Int, val variableId: Int) : BaseRecyclerViewAdapter<ITEM, SimpleBindingRecyclerAdapter.SimpleBindingViewHolder<ITEM>>() {
     var onSpecificFieldClickListener: SpecificFieldClickListener<ITEM>? = null
 
-    constructor(layoutId: Int, variableId: Int, itemList: List<ITEM>) : this(layoutId, variableId) {
+    constructor(layoutId: Int, variableId: Int, itemList: ObservableArrayList<ITEM>) : this(layoutId, variableId) {
         this.itemList = itemList
     }
 

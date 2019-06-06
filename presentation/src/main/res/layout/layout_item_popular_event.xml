@@ -52,10 +52,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="36dp"
-                    android:layout_height="42dp"
+                    android:layout_height="36dp"
                     android:layout_margin="@dimen/margin_default_10dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -99,12 +97,12 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:id="@+id/btn_favorite"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:layout_marginEnd="@dimen/margin_default_10dp"
                     android:layout_marginBottom="@dimen/margin_default_10dp"
                     android:src="@drawable/ic_heart"
-                    android:tint="@color/whiteBone"
                     app:layout_constraintBottom_toBottomOf="@+id/view"
                     app:layout_constraintEnd_toEndOf="@+id/view" />
 
@@ -181,26 +179,26 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato"
-            android:text="@{model.title }"
+            android:text="@{model.title}"
             android:layout_marginTop="@dimen/margin_default_10dp"
             android:textColor="?colorAccent"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/card"
             app:layout_constraintStart_toStartOf="@+id/card"
             app:layout_constraintTop_toBottomOf="@+id/card"
-            tools:text="atlas weekend " />
+            tools:text="Atlas Weekend" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato"
-            android:text="@{model.startFromToday }"
+            android:text="\RAP \u2022 EXPERIMENTAL"
             android:textColor="@color/whiteBone"
-            android:textSize="14sp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/card"
             app:layout_constraintStart_toStartOf="@+id/card"
             app:layout_constraintTop_toBottomOf="@+id/title"
-            tools:text="atlas weekend" />
+            tools:text="RAP \u2022 ATLAS" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

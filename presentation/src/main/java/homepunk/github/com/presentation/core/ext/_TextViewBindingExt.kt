@@ -12,21 +12,12 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.BindingAdapter
 import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.util.DateTimeUtil
 import timber.log.Timber
 
 
 
 /**Created by Homepunk on 18.01.2019. **/
-@BindingAdapter("textRes")
-fun TextView.bindTextRes(value: Int) {
-    text = context.getString(value)
-}
 
-@BindingAdapter("monthForInt")
-fun TextView.bindMonthForInt(value: Int) {
-    text = DateTimeUtil.getMonthForInt(value).substring(0, 3).plus(".")
-}
 
 @BindingAdapter("link")
 fun TextView.bindUrl(value: String?) {

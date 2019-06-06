@@ -13,7 +13,11 @@ class DiscoverHostFragment : BaseFragment<DiscoverHostFragmentBinding>() {
     override fun init() {
         viewModel = getViewModel(DiscoverHostViewModel::class.java)
         viewModel.fragmentLiveData.observe(this, Observer {
-            childFragmentManager.beginTransaction().replace(R.id.container, it).commit()
+            if (it != null) {
+                childFragmentManager.beginTransaction()
+                        .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                        .replace(R.id.container, it).commit()
+            }
         })
     }
 }

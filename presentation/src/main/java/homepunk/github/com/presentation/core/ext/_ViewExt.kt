@@ -42,6 +42,7 @@ fun View.swapVisibility() {
 
 @BindingAdapter("isVisible")
 fun View.isVisible(isVisible: Boolean) {
+    Timber.w("isVisible = $isVisible")
     visibility = if (isVisible) VISIBLE else GONE
 }
 

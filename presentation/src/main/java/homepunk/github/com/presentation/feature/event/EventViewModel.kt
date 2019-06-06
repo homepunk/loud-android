@@ -6,16 +6,14 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import homepunk.github.com.domain.interactor.SongkickEventInteractor
 import homepunk.github.com.domain.model.songkick.SongkickEvent
-import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.common.adapter.timeline.TimelineEventAdapter
 import homepunk.github.com.presentation.core.base.BaseViewModel
 import homepunk.github.com.presentation.core.ext.subList
 import homepunk.github.com.presentation.core.ext.toArrayList
 import homepunk.github.com.presentation.core.listener.OnItemClickListener
-import homepunk.github.com.presentation.core.listener.SpecificFieldClickListener
 import homepunk.github.com.presentation.feature.artist.model.ArtistModel
-import homepunk.github.com.presentation.feature.event.model.VenueModel
 import homepunk.github.com.presentation.feature.event.model.EventModel
+import homepunk.github.com.presentation.feature.event.model.VenueModel
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
@@ -34,12 +32,6 @@ class EventViewModel @Inject constructor(var eventInteractor: SongkickEventInter
     var onArtistClickListener = object : OnItemClickListener<ArtistModel> {
         override fun onClick(position: Int, item: ArtistModel) {
             setUpListenToArtist(item, false)
-        }
-    }
-
-    var onPlayArtistClickListener = object : SpecificFieldClickListener<ArtistModel>(R.id.btn_play) {
-        override fun onClick(position: Int, item: ArtistModel) {
-            setUpListenToArtist(item, true)
         }
     }
 

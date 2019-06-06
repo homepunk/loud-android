@@ -39,7 +39,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/radius_default_card"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -48,7 +47,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:layout_width="136dp"
+                    android:layout_width="120dp"
                     android:layout_height="80dp"
                     android:scaleType="centerCrop"
                     app:imageUrl="@{model.thumb}"
@@ -57,7 +56,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@drawable/background_events_3" />
                 <View
-                    android:layout_width="136dp"
+                    android:layout_width="120dp"
                     android:layout_height="80dp"
                     android:scaleType="centerCrop"
                     android:alpha="0.4"
@@ -67,6 +66,17 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@drawable/background_events_3" />
 
+                <ImageView
+                    android:id="@+id/btn_favorite"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="@dimen/margin_small_6dp"
+                    android:layout_gravity="bottom|end"
+                    android:paddingStart="@dimen/margin_small_4dp"
+                    android:paddingEnd="@dimen/margin_small_4dp"
+                    android:src="@drawable/ic_heart"
+                    android:tint="@color/subtitle2"
+                    android:layout_marginStart="@dimen/margin_default_10dp" />
                 <TextView
                     style="@style/FieldTextStyle"
                     android:layout_width="wrap_content"
@@ -74,6 +84,7 @@
                     android:layout_marginStart="@dimen/margin_default_10dp"
                     android:layout_marginBottom="@dimen/margin_default_10dp"
                     android:alpha="0.8"
+                    android:visibility="gone"
                     android:text="@{model.startFromToday}"
                     android:layout_gravity="bottom"
                     android:textColor="@color/whiteBone"
@@ -126,7 +137,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/subtitle"
+            android:id="@+id/tv_place"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -134,71 +145,31 @@
             android:layout_marginTop="@dimen/margin_small_4dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/lato"
-            android:text="@{model.location}"
+            android:text="@{`At ` + model.location}"
             android:textColor="@color/subtitle2"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:visibility="visible"
             app:layout_constraintStart_toEndOf="@+id/thumb"
             app:layout_constraintTop_toBottomOf="@+id/title"
-            tools:text="Zhara" />
+            tools:text="At Zhara" />
 
         <TextView
             android:id="@+id/subtitle2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/margin_default_12dp"
             android:layout_marginTop="@dimen/margin_small_6dp"
-            android:layout_marginEnd="8dp"
-            android:paddingStart="@dimen/margin_default_10dp"
-            android:paddingEnd="@dimen/margin_default_10dp"
-            android:paddingTop="@dimen/margin_small_4dp"
-            android:paddingBottom="@dimen/margin_small_4dp"
             android:fontFamily="@font/lato"
+            android:layout_marginStart="@dimen/margin_big_16dp"
+            android:paddingBottom="@dimen/margin_small_4dp"
+            android:text="#EXPERIMENTAL"
+            android:alpha="0.5"
             android:textColor="@color/subtitle2"
             android:textSize="12sp"
-            android:background="@drawable/background_circle_filled_gray"
             android:visibility="visible"
             app:layout_constraintStart_toEndOf="@+id/thumb"
-            app:layout_constraintTop_toBottomOf="@+id/subtitle"
-            android:text="RAP" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_place"/>
 
-        <TextView
-            android:id="@+id/subtitle3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/margin_default_8dp"
-            android:layout_marginTop="@dimen/margin_small_4dp"
-            android:layout_marginEnd="8dp"
-            android:paddingStart="@dimen/margin_default_10dp"
-            android:paddingEnd="@dimen/margin_default_10dp"
-            android:paddingTop="@dimen/margin_small_6dp"
-            android:paddingBottom="@dimen/margin_small_4dp"
-            android:fontFamily="@font/lato"
-            android:textColor="@color/subtitle2"
-            android:textSize="12sp"
-            android:background="@drawable/background_circle_filled_gray"
-            android:visibility="visible"
-            app:layout_constraintStart_toEndOf="@+id/subtitle2"
-            app:layout_constraintTop_toBottomOf="@+id/subtitle"
-            android:text="EXPERIMENTAL" />
-
-        <FrameLayout
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:padding="@dimen/margin_default_8dp"
-            android:layout_marginEnd="@dimen/margin_big_20dp"
-            android:layout_marginStart="@dimen/margin_default_8dp"
-            app:layout_constraintStart_toEndOf="@+id/subtitle3"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_heart" />
-        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <!--</androidx.cardview.widget.CardView>-->
 

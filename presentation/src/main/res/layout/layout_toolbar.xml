@@ -12,6 +12,8 @@
             name="title"
             type="String" />
 
+        <import type="homepunk.github.com.domain.model.AppMode" />
+
         <variable
             name="onMenuClickListener"
             type="android.view.View.OnClickListener" />
@@ -32,76 +34,46 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <View
-            android:id="@+id/dot"
-            android:layout_width="4dp"
-            android:layout_height="0dp"
-            android:background="?attr/colorAccent"
-            android:paddingTop="@dimen/margin_default_8dp"
-            android:paddingBottom="@dimen/margin_default_8dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/title_frame"
-            app:layout_constraintEnd_toStartOf="@+id/title_frame"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/title_frame" />
-
-        <FrameLayout
-            android:id="@+id/title_frame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/dot"
-            app:layout_constraintTop_toBottomOf="@+id/menu">
-
             <TextView
                 android:id="@+id/btn_event"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_default_10dp"
+                android:layout_width="160dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="@dimen/margin_default_8dp"
+                android:layout_marginTop="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/menu"
+                android:gravity="start|bottom"
                 android:fontFamily="@font/lato_bold"
                 android:onClickListener="@{onModeClickListener}"
                 android:text="EVENTS"
                 android:textAllCaps="true"
-                android:textSize="32sp"
-                bind:onAppModeChange="@{appModeModel}"
-                bind:color="@{@color/modeEventsColor}"
-                tools:text="EVENTS"
-                tools:textColor="@color/subtitle3" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/artists_frame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_default_10dp"
-            android:layout_marginEnd="@dimen/margin_big_20dp"
-            android:layout_marginTop="32dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/title_frame"
-            app:layout_constraintTop_toBottomOf="@+id/menu">
+                android:textSize="34sp"
+                android:textColor="@color/subtitle3"
+                bind:updateModeTitleOnModeChange="@{appModeModel}"
+                bind:btnMode="@{AppMode.EVENTS}"/>
 
             <TextView
                 android:id="@+id/btn_releases"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="160dp"
+                android:layout_height="48dp"
+                android:gravity="start|bottom"
                 android:layout_marginStart="@dimen/margin_default_10dp"
+                android:layout_marginEnd="@dimen/margin_big_20dp"
+                android:layout_marginTop="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="@dimen/margin_default_8dp"
+                app:layout_constraintStart_toEndOf="@+id/btn_event"
+                app:layout_constraintTop_toBottomOf="@+id/menu"
                 android:fontFamily="@font/lato_bold"
                 android:onClickListener="@{onModeClickListener}"
                 android:text="ARTISTS"
                 android:textAllCaps="true"
-                android:textSize="32sp"
-                bind:onAppModeChange="@{appModeModel}"
-                bind:color="@{@color/pale_red2}"
-                tools:text="ARTISTS"
-                tools:textColor="@color/subtitle3" />
-
-        </FrameLayout>
+                android:textSize="34sp"
+                android:textColor="@color/subtitle3"
+                bind:updateModeTitleOnModeChange="@{appModeModel}"
+                bind:btnMode="@{AppMode.RELEASES}" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -121,7 +93,6 @@
             android:id="@+id/menu"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginStart="@dimen/margin_default_10dp"
             android:layout_marginTop="36dp"
             android:layout_marginEnd="@dimen/margin_big_20dp"
             android:onClickListener="@{onMenuClickListener}"
@@ -134,14 +105,14 @@
             android:layout_width="200dp"
             android:layout_height="48dp"
             android:layout_marginStart="@dimen/margin_big_20dp"
+            app:searchIcon="@drawable/ic_search"
             android:background="@drawable/background_rect_round_corners_gray"
             app:defaultQueryHint="Search for events"
-            app:layout_constraintBottom_toBottomOf="@+id/menu"
             app:layout_constraintStart_toEndOf="@+id/menu"
             app:layout_constraintTop_toTopOf="@+id/menu"
+            app:layout_constraintBottom_toBottomOf="@+id/menu"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:queryHint="Search for events"
-            app:searchIcon="@drawable/ic_search" />
+            app:queryHint="Search for events" />
 
         <View
             android:id="@+id/view2"

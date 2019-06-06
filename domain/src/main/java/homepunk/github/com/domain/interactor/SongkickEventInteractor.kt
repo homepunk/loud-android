@@ -9,16 +9,23 @@ import homepunk.github.com.domain.repository.SongkickEventRepository
 import homepunk.github.com.domain.repository.UserLocationRepository
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class SongkickEventInteractor @Inject constructor(private val songkickEventRepository: SongkickEventRepository,
                                                   locationRepository: LocationRepository,
                                                   private var userLocationRepository: UserLocationRepository)
     : BaseSongkickInteractor(locationRepository) {
 
+    private var userLocation: UserLocation? = null
+    private var upcomingEventsForUserLocationObservable: Observable<Pair<SongkickLocation, List<SongkickEvent>>>? = null
+
     fun getUpcomingEventList() =
             locationRepository.getSongkickLocationByLatLng("geo:49.9,36.2")
 //                    .map { it.metroArea?.id }
+                    .subscribeOn(Schedulers.io())
                     .filter { it.metroArea != null }
                     .flatMap {
                         Observable.zip(Observable.just(it), songkickEventRepository.getUpcomingEventList(it.metroArea!!.id),
@@ -29,6 +36,7 @@ class SongkickEventInteractor @Inject constructor(private val songkickEventRepos
 
     fun getUpcomingEventsFromUserList(): Observable<List<Pair<SongkickLocation, List<SongkickEvent>>>> {
         return userLocationRepository.getUserLocationListForCountry(userLocationRepository.getUserCountryName())
+                .subscribeOn(Schedulers.io())
                 .flatMapIterable { it.locations }
                 .filter { it.metroArea != null }
                 .flatMapSingle {
@@ -39,15 +47,21 @@ class SongkickEventInteractor @Inject constructor(private val songkickEventRepos
                 }
     }
 
-    fun getUpcomingEventsForUserLocation(userLocation: UserLocation): Observable<Pair<SongkickLocation, List<SongkickEvent>>> {
-        return Observable.fromIterable(userLocation.locations)
-                .filter { it.metroArea != null }
-                .flatMap {
-                    Observable.zip(Observable.just(it), songkickEventRepository.getUpcomingEventList(it.metroArea!!.id),
-                            BiFunction { location: SongkickLocation, events: List<SongkickEvent> ->
-                                Pair(location, events)
-                            })
-                }
+    fun getUpcomingEventsForUserLocation(location: UserLocation): Observable<Pair<SongkickLocation, List<SongkickEvent>>> {
+        if (upcomingEventsForUserLocationObservable == null ||
+                userLocation != location) {
+            upcomingEventsForUserLocationObservable = Observable.fromIterable(location.locations)
+                    .filter { it.metroArea != null }
+                    .flatMap {
+                        Observable.zip(Observable.just(it), songkickEventRepository.getUpcomingEventList(it.metroArea!!.id),
+                                BiFunction { location: SongkickLocation, events: List<SongkickEvent> ->
+                                    Pair(location, events)
+                                })
+                    }
+                    .cache()
+            userLocation = location
+        }
+        return upcomingEventsForUserLocationObservable!!
     }
 
     fun getEventDetails(eventId: Long): Observable<SongkickEvent> {

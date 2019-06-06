@@ -48,7 +48,11 @@
     <dimen name="radius_filter_card">16dp</dimen>
     <dimen name="text_size_menu_item">18sp</dimen>
     <dimen name="text_size_large_22sp">22sp</dimen>
-    <dimen name="width_youtube_preview">200dp</dimen>
+    <dimen name="width_youtube_video">200dp</dimen>
+    <dimen name="height_youtube_video">110dp</dimen>
+    <dimen name="width_youtube_preview">198dp</dimen>
     <dimen name="height_youtube_preview">150dp</dimen>
     <dimen name="height_youtube_video_preview">110dp</dimen>
+    <dimen name="height_bottom_nav">56dp</dimen>
+    <dimen name="text_size_largest_title">40sp</dimen>
 </resources>

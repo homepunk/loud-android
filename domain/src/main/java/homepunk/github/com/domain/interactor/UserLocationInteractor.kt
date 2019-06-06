@@ -2,8 +2,8 @@ package homepunk.github.com.domain.interactor
 
 import homepunk.github.com.domain.model.internal.UserLocation
 import homepunk.github.com.domain.model.songkick.SongkickLocation
-import homepunk.github.com.domain.repository.UserLocationRepository
 import homepunk.github.com.domain.repository.LocationRepository
+import homepunk.github.com.domain.repository.UserLocationRepository
 import io.reactivex.Observable
 import javax.inject.Inject
 import javax.inject.Singleton

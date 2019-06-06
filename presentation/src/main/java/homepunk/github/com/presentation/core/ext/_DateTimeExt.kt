@@ -1,5 +1,8 @@
 package homepunk.github.com.presentation.core.ext
 
+import android.widget.TextView
+import androidx.databinding.BindingAdapter
+import homepunk.github.com.presentation.util.DateTimeUtil
 import java.text.DateFormatSymbols
 import java.util.*
 
@@ -31,4 +34,10 @@ fun Date.monthName(): String {
             month = months[num]
         }
         return month
+}
+
+
+@BindingAdapter("monthForInt")
+fun TextView.bindMonthForInt(value: Int) {
+    text = DateTimeUtil.getMonthForInt(value).substring(0, 3).plus(".")
 }

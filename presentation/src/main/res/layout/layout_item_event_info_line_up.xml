@@ -47,7 +47,6 @@
             android:text="@{model.displayName}"
             android:textSize="@dimen/text_size_large"
             android:textColor="@{model.isArtistClicked ? @color/colorAccent : @color/text}"
-            app:layout_constraintBottom_toTopOf="@+id/tv_genre"
             app:layout_constraintStart_toEndOf="@+id/cover"
             app:layout_constraintTop_toTopOf="@+id/cover"
             tools:text="Product KF" />
@@ -58,13 +57,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="@dimen/margin_small_6dp"
-            android:background="@drawable/background_circle_filled_gray"
             android:fontFamily="@font/lato"
-            android:paddingStart="@dimen/margin_default_10dp"
-            android:paddingTop="@dimen/margin_small_4dp"
-            android:paddingEnd="@dimen/margin_default_10dp"
-            android:paddingBottom="@dimen/margin_small_4dp"
-            android:text="RAP"
+            android:text="#RAP"
             android:textColor="@color/subtitle2"
             android:textSize="12sp"
             android:visibility="visible"
@@ -78,21 +72,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/margin_default_8dp"
-            android:background="@drawable/background_circle_filled_gray"
+            android:layout_marginStart="@dimen/margin_default_10dp"
             android:fontFamily="@font/lato"
-            android:paddingStart="@dimen/margin_default_10dp"
-            android:paddingTop="@dimen/margin_small_6dp"
-            android:paddingEnd="@dimen/margin_default_10dp"
-            android:paddingBottom="@dimen/margin_small_4dp"
-            android:text="EXPERIMENTAL"
+            android:text="#EXPERIMENTAL"
             android:textColor="@color/subtitle2"
             android:textSize="12sp"
             android:visibility="visible"
             app:layout_constraintStart_toEndOf="@+id/subtitle4"
             app:layout_constraintTop_toTopOf="@+id/subtitle4" />
 
-
+<!--
         <ImageView
             android:id="@+id/btn_play"
             android:layout_width="wrap_content"
@@ -102,6 +91,6 @@
             android:tint="@{model.isPlayClicked ? @color/colorAccent : @color/text}"
             app:layout_constraintBottom_toBottomOf="@+id/tv_genre"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_name" />
+            app:layout_constraintTop_toTopOf="@+id/tv_name" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

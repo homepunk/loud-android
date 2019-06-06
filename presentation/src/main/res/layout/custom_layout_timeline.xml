@@ -17,7 +17,7 @@
 
         <View
             android:id="@+id/timeline"
-            android:layout_width="@dimen/width_timeline"
+            android:layout_width="2dp"
             android:layout_height="0dp"
             android:visibility="gone"
             android:layout_marginStart="@dimen/margin_timeline"

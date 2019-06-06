@@ -2,9 +2,14 @@
 
 package homepunk.github.com.presentation.core.ext
 
+import android.animation.Animator
+import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
@@ -19,9 +24,8 @@ import homepunk.github.com.presentation.common.adapter.model.ExpandableChildMode
 import homepunk.github.com.presentation.common.adapter.model.ExpandableParentModel
 import homepunk.github.com.presentation.core.base.BaseRecyclerViewAdapter
 import homepunk.github.com.presentation.core.listener.OnItemPositionClickListener
-import homepunk.github.com.presentation.core.listener.OnParentChildClickListener
+import homepunk.github.com.presentation.core.wrapper.AnimatorListenerWrapper
 import homepunk.github.com.presentation.util.decoration.MarginItemDecoration
-import homepunk.github.com.presentation.util.layout.CustomLinearLayoutManager
 import timber.log.Timber
 
 
@@ -106,9 +110,16 @@ fun RecyclerView.snapHelper(enable: Boolean) {
 }
 
 @BindingAdapter("itemList")
-fun <T> RecyclerView.bindItemList(itemList: List<T>) {
+fun <T> RecyclerView.bindItemList(itemList: ObservableArrayList<T>) {
+    if (layoutAnimation != null) {
+        Timber.w("scheduleLayoutAnimation")
+        scheduleLayoutAnimation()
+    }
     (adapter as? SimpleBindingRecyclerAdapter<T>)?.let {
-        it.itemList = itemList
+        if (!it.isParentListInitialized()) {
+            Timber.w("INITIALIZE")
+            it.setItemList(itemList)
+        }
     }
 }
 
@@ -122,19 +133,6 @@ fun <CHILD : ExpandableChildModel, PARENT : ExpandableParentModel<CHILD>> Recycl
             it.setItemList(itemList)
         }
     }
-}
-
-@BindingAdapter("onParentChildClickListener")
-fun <CHILD : ExpandableChildModel, PARENT : ExpandableParentModel<CHILD>> RecyclerView.setOnParentChildClickListener(listener: OnParentChildClickListener<PARENT, CHILD>) {
-    (adapter as? SimpleExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
-        it.onParentChildClickListener = listener
-    }
-}
-
-
-@BindingAdapter("hasFixedSize")
-fun RecyclerView.setHasFixedSize(hasFixedSize: Boolean) {
-    setHasFixedSize(hasFixedSize)
 }
 
 @BindingAdapter(
@@ -189,12 +187,12 @@ fun RecyclerView.setupWithViewPager(viewPager: ViewPager) {
 @BindingAdapter("moveToFitFullWidth")
 fun RecyclerView.moveToPosition(position: Int) {
     if (position < 0) {
-        (layoutManager as CustomLinearLayoutManager).isHorizontalScrollEnabled = true
+//        (layoutManager as CustomLinearLayoutManager).isHorizontalScrollEnabled = true
     } else {
         addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (newState == 0) {
-                    (layoutManager as CustomLinearLayoutManager).isHorizontalScrollEnabled = false
+//                    (layoutManager as CustomLinearLayoutManager).isHorizontalScrollEnabled = false
                     removeOnScrollListener(this)
                 }
             }
@@ -221,3 +219,84 @@ fun RecyclerView.moveToPosition(position: Int) {
 
     }
 }
+
+@BindingAdapter("moveAndRemove")
+fun RecyclerView.moveAndRemove(position: Int) {
+    if (position >= 0) {
+        val view = layoutManager?.findViewByPosition(position + 1)
+        val viewXY = IntArray(2)
+        view?.getLocationOnScreen(viewXY)
+        val animator = ValueAnimator.ofInt()
+
+        if (position >= adapter!!.itemCount - 2) {
+            animator.setIntValues(0, -viewXY[0])
+        } else {
+            animator.setIntValues(0, viewXY[0])
+        }
+        animator.addUpdateListener {
+            smoothScrollBy(it.animatedValue as Int, 0)
+        }
+        animator.duration = 500
+        animator.interpolator = AccelerateInterpolator()
+        animator.start()
+        addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == 0) {
+                    with(adapter as SimpleBindingRecyclerAdapter<Any>) {
+                        itemList.removeAt(position)
+//                        notifyItemRemoved(position)
+                    }
+                    removeOnScrollListener(this)
+                }
+            }
+        })
+
+    }
+}
+
+@BindingAdapter(
+        value = ["expand"],
+        requireAll = false)
+fun RecyclerView.expand(prevExpand: Boolean,
+                        expand: Boolean) {
+    measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    if (expand == prevExpand) {
+        if (expand) {
+            layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            visibility = View.VISIBLE
+        } else {
+            layoutParams.height = 0
+            visibility = View.GONE
+        }
+        return
+    } else {
+        if (expand) {
+            layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        }
+    }
+
+    val va: ObjectAnimator?
+    if (expand) {
+        va = ObjectAnimator.ofFloat(layoutParams, "height", 1f, measuredHeight.toFloat())
+        va.interpolator = AccelerateInterpolator()
+        visibility = View.VISIBLE
+    } else {
+        va = ObjectAnimator.ofFloat(layoutParams, "height", measuredHeight.toFloat(), 0f)
+        va.interpolator = DecelerateInterpolator()
+    }
+    va.addListener(object : AnimatorListenerWrapper() {
+        override fun onAnimationEnd(animation: Animator?) {
+            if (expand) {
+                layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                requestLayout()
+            } else {
+                visibility = View.GONE
+            }
+        }
+    })
+    va.duration = 600
+    va.start()
+}
+
+

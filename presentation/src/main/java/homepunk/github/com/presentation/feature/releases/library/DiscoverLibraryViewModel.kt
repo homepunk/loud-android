@@ -19,7 +19,7 @@ class DiscoverLibraryViewModel @Inject constructor(var appDataFactory: AppDataFa
                 .doOnError { it.printStackTrace() }
                 .flatMap {
                     Observable.zip(Observable.just(it), getDiscogsDiscoverLatestByType(it.type),
-                            BiFunction { section: DiscoverSectionModel, dataList: List<SearchResult> ->
+                            BiFunction { section: DiscoverSectionModel, dataList: MutableList<SearchResult> ->
                                 LibraryDiscoverSectionViewModel(section, dataList)
                             })
                 }

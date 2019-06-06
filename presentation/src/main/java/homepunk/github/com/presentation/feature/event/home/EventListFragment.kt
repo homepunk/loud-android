@@ -8,9 +8,6 @@ import homepunk.github.com.presentation.core.base.BaseFragment
 import homepunk.github.com.presentation.databinding.FragmentEventListBinding
 import homepunk.github.com.presentation.feature.event.EventFragment
 import homepunk.github.com.presentation.feature.event.model.EventModel
-import homepunk.github.com.presentation.feature.event.home.model.LocationEventTimelineModel
-import homepunk.github.com.presentation.feature.widget.animation.AnimationEventLiveData
-import homepunk.github.com.presentation.feature.widget.animation.ScrollEvent
 
 class EventListFragment : BaseFragment<FragmentEventListBinding>() {
     private lateinit var mViewModel: EventListViewModel
@@ -38,7 +35,7 @@ class EventListFragment : BaseFragment<FragmentEventListBinding>() {
             rvNearestEvents.adapter = SimpleBindingRecyclerAdapter<EventModel>(R.layout.layout_item_primary_event, BR.model)
 
             svRootLayout.viewTreeObserver.addOnScrollChangedListener {
-                AnimationEventLiveData.getInstance().onScrollEvent(ScrollEvent(svRootLayout.scrollY, svRootLayout.getChildAt(0).height))
+//                AnimationEventLiveData.getInstance().onScrollEvent(ScrollEvent(svRootLayout.scrollY, svRootLayout.getChildAt(0).height))
             }
             viewModel = mViewModel
         }

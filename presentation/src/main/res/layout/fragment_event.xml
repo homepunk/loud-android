@@ -18,147 +18,149 @@
             type="homepunk.github.com.presentation.feature.youtube.YoutubeViewModel" />
     </data>
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background"
-        android:clipToPadding="false"
-        android:fillViewport="true">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true">
+            android:layout_height="match_parent"
+            android:layout_above="@+id/cl_player_controls"
+            android:background="@color/background"
+            android:clipToPadding="false"
+            android:fillViewport="true">
 
-            <ImageView
-                android:id="@+id/thumb"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:scaleType="centerCrop"
-                app:imageUrl="@{viewModel.eventModel.thumb}"
-                app:layout_constraintDimensionRatio="H,1:1.3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/background_events_5" />
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:alpha="0.8"
-                android:background="@drawable/bg_shadow_detail"
-                app:layout_constraintBottom_toBottomOf="@+id/thumb"
-                app:layout_constraintEnd_toEndOf="@+id/thumb"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/thumb" />
-
-            <!--android:background="@drawable/background_rect_round_left_corners_red"-->
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center"
-                android:layout_marginEnd="@dimen/margin_big_20dp"
-                android:src="@drawable/ic_play"
-                android:tint="@color/pale_red2"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                app:layout_constraintEnd_toStartOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="@+id/imageView3" />
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="@dimen/margin_big_20dp"
-                android:src="@drawable/ic_heart"
-                android:tint="@color/whiteBone"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_place"
-                app:layout_constraintEnd_toStartOf="@+id/frameLayout"
-                app:layout_constraintTop_toTopOf="@+id/tv_place" />
-
-            <include
-                android:id="@+id/layout_date"
-                layout="@layout/layout_date_container"
-                android:layout_width="64dp"
-                android:layout_height="72dp"
-                android:layout_marginStart="@dimen/margin_big_20dp"
-                android:layout_marginBottom="@dimen/margin_big_20dp"
-                android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@+id/tv_title"
-                app:layout_constraintStart_toStartOf="parent"
-                bind:date="@{viewModel.eventModel.date}"
-                bind:month="@{viewModel.eventModel.month}" />
-
-            <TextView
-                android:id="@+id/tv_place"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_big_20dp"
-                android:layout_marginBottom="@dimen/margin_big_26dp"
-                android:fontFamily="@font/lato"
-                android:text="@{`At ` + viewModel.eventModel.location}"
-                android:textColor="@color/whiteBone"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="@+id/view"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="At Green Theatre" />
-
-            <FrameLayout
-                android:id="@+id/frameLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
-                android:alpha="0.7"
-                android:background="@drawable/background_rect_round_left_corners_red"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_place"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_place">
+                android:fitsSystemWindows="true">
 
                 <ImageView
+                    android:id="@+id/thumb"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{viewModel.eventModel.thumb}"
+                    app:layout_constraintDimensionRatio="H,1:1.3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/background_events_5" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:alpha="0.8"
+                    android:background="@drawable/bg_shadow_detail"
+                    app:layout_constraintBottom_toBottomOf="@+id/thumb"
+                    app:layout_constraintEnd_toEndOf="@+id/thumb"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/thumb" />
+
+                <!--android:background="@drawable/background_rect_round_left_corners_red"-->
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_play"
+                    android:tint="@color/pale_red2"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView3"
+                    app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_heart"
+                    android:tint="@color/whiteBone"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_place"
+                    app:layout_constraintEnd_toStartOf="@+id/frameLayout"
+                    app:layout_constraintTop_toTopOf="@+id/tv_place" />
+
+                <include
+                    android:id="@+id/layout_date"
+                    layout="@layout/layout_date_container"
+                    android:layout_width="64dp"
+                    android:layout_height="72dp"
                     android:layout_marginStart="@dimen/margin_big_20dp"
-                    android:layout_marginEnd="@dimen/margin_big_20dp"
+                    android:layout_marginBottom="@dimen/margin_big_20dp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    bind:date="@{viewModel.eventModel.date}"
+                    bind:month="@{viewModel.eventModel.month}" />
+
+                <TextView
+                    android:id="@+id/tv_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_big_20dp"
+                    android:layout_marginBottom="@dimen/margin_big_26dp"
+                    android:fontFamily="@font/lato"
+                    android:text="@{`At ` + viewModel.eventModel.location}"
+                    android:textColor="@color/whiteBone"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/view"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="At Green Theatre" />
+
+                <FrameLayout
+                    android:id="@+id/frameLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:alpha="0.7"
+                    android:background="@drawable/background_rect_round_left_corners_red"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_place"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_place">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/margin_big_20dp"
+                        android:fontFamily="@font/lato_bold"
+                        android:gravity="center"
+                        android:src="@drawable/ic_play"
+                        android:text="PLAY" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_big_20dp"
                     android:fontFamily="@font/lato_bold"
-                    android:gravity="center"
-                    android:src="@drawable/ic_play"
-                    android:text="PLAY" />
-            </FrameLayout>
+                    android:text="@{viewModel.eventModel.title}"
+                    android:textColor="?colorAccent"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_largest_title"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_place"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/layout_date"
+                    tools:text="Spiritual Front Lavaland" />
 
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_big_20dp"
-                android:layout_marginBottom="@dimen/margin_big_20dp"
-                android:fontFamily="@font/lato_bold"
-                android:text="@{viewModel.eventModel.title}"
-                android:textColor="?colorAccent"
-                android:textSize="42sp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_place"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/layout_date"
-                tools:text="Spiritual Front Lavaland" />
-
-            <ImageView
-                android:id="@+id/btn_back"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/margin_big_20dp"
-                android:layout_marginTop="34dp"
-                android:src="@drawable/ic_left_arrow"
-                android:tint="@color/whiteBone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_big_20dp"
+                    android:layout_marginTop="34dp"
+                    android:src="@drawable/ic_left_arrow"
+                    android:tint="@color/whiteBone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             <homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader
                 android:id="@+id/block_line_up"
@@ -173,20 +175,21 @@
                 app:layout_constraintTop_toBottomOf="@+id/thumb"
                 tools:visibility="visible">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_line_up"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    app:itemDecoration_top="@{@dimen/margin_default_10dp}"
-                    app:itemList="@{viewModel.lineUpList}"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:onFieldClickListener="@{viewModel.onPlayArtistClickListener}"
-                    app:onItemClickListener="@{viewModel.onArtistClickListener}"
-                    tools:itemCount="2"
-                    tools:listitem="@layout/layout_item_event_info_line_up"
-                    tools:visibility="visible" />
-            </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_line_up"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        app:itemDecoration_top="@{@dimen/margin_default_10dp}"
+                        app:itemList="@{viewModel.lineUpList}"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:onItemClickListener="@{viewModel.onArtistClickListener}"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/layout_item_event_info_line_up"
+                        tools:visibility="visible" />
+                <!--                        app:onFieldClickListener="@{viewModel.onPlayArtistClickListener}"
+-->
+                </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>
 
             <homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader
                 android:id="@+id/block_listen_performance"
@@ -204,59 +207,72 @@
                 app:headerHint="@{youtubeViewModel.query}"
                 -->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="@dimen/margin_big_20dp"
-                    android:layout_marginEnd="@dimen/margin_big_20dp"
-                    android:layout_marginTop="@dimen/margin_big_20dp">
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/background_circle_filled_gray"
-                        android:paddingStart="@dimen/margin_default_10dp"
-                        android:paddingTop="@dimen/margin_small_4dp"
-                        android:paddingEnd="@dimen/margin_default_10dp"
-                        android:paddingBottom="@dimen/margin_small_6dp">
+                        android:layout_marginStart="@dimen/margin_big_20dp"
+                        android:layout_marginTop="@dimen/margin_default_10dp"
+                        android:orientation="horizontal">
 
-                        <TextView
-                            style="@style/FieldTextStyle"
-                            android:text="@{youtubeViewModel.query}"
-                            android:textColor="?colorAccent"
-                            tools:text="Cabaret Nocturne" />
-                    </FrameLayout>
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/background_circle_filled_gray"
+                            android:paddingStart="@dimen/margin_default_10dp"
+                            android:paddingTop="@dimen/margin_small_4dp"
+                            android:paddingEnd="@dimen/margin_default_10dp"
+                            android:paddingBottom="@dimen/margin_small_6dp">
 
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_default_10dp"
-                        android:background="@drawable/background_circle_filled_gray"
-                        android:paddingStart="@dimen/margin_default_10dp"
-                        android:paddingTop="@dimen/margin_small_4dp"
-                        android:paddingEnd="@dimen/margin_default_10dp"
-                        android:paddingBottom="@dimen/margin_small_6dp">
+                            <TextView
+                                style="@style/FieldTextStyle"
+                                android:text="@{youtubeViewModel.query}"
+                                android:textColor="?colorAccent"
+                                tools:text="Cabaret Nocturne" />
+                        </FrameLayout>
 
-                        <TextView
-                            style="@style/FieldTextStyle"
-                            android:text="@{youtubeViewModel.query + ` Live`}"
-                            android:textColor="@color/subtitle2"
-                            tools:text="Cabaret Nocturne Live" />
-                    </FrameLayout>
-                </LinearLayout>
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_default_10dp"
+                            android:background="@drawable/background_circle_filled_gray"
+                            android:paddingStart="@dimen/margin_default_10dp"
+                            android:paddingTop="@dimen/margin_small_4dp"
+                            android:paddingEnd="@dimen/margin_default_10dp"
+                            android:paddingBottom="@dimen/margin_small_6dp">
+
+                            <TextView
+                                style="@style/FieldTextStyle"
+                                android:text="@{youtubeViewModel.query + ` Live`}"
+                                android:textColor="@color/subtitle2"
+                                tools:text="Cabaret Nocturne Live" />
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_default_10dp"
+                            android:background="@drawable/background_circle_filled_gray"
+                            android:padding="@dimen/margin_small_6dp">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_gravity="center"
+                                android:background="@drawable/background_circle_filled_gray"
+                                android:src="@drawable/plus" />
+                        </FrameLayout>
+                    </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_youtube_preview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_big_20dp"
+                    android:layout_marginTop="@dimen/margin_default_10dp"
                     android:orientation="horizontal"
                     bind:itemDecoration_lastRight="@{@dimen/margin_big_20dp}"
                     bind:itemDecoration_left="@{@dimen/margin_default_10dp}"
                     bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
                     bind:itemList="@{youtubeViewModel.videoList}"
-                    bind:moveToFitFullWidth="@{youtubeViewModel.playPosition}"
                     bind:onItemClickListener="@{youtubeViewModel.onPlayClickListener}"
                     tools:itemCount="2"
                     tools:listitem="@layout/layout_item_youtube_video_preview"
@@ -280,7 +296,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_big_20dp"
                     android:layout_marginTop="@dimen/margin_big_20dp"
-                    android:layout_marginEnd="@dimen/margin_big_20dp"
                     android:orientation="horizontal"
                     tools:visibility="gone">
 
@@ -369,16 +384,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/block_venue">
 
-                <homepunk.github.com.presentation.feature.widget.timeline.TimelineView
-                    android:id="@+id/timeline_nearest_events"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_default_10dp"
-                    android:layout_marginTop="@dimen/margin_big_20dp"
-                    android:layout_marginEnd="@dimen/margin_default_10dp"
-                    android:nestedScrollingEnabled="false"
-                    app:timeline_adapter="@{viewModel.timelineEventAdapter}" />
-            </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>
+                    <homepunk.github.com.presentation.feature.widget.timeline.TimelineView
+                        android:id="@+id/timeline_nearest_events"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_default_10dp"
+                        android:layout_marginTop="@dimen/margin_default_10dp"
+                        android:layout_marginEnd="@dimen/margin_default_10dp"
+                        android:nestedScrollingEnabled="false"
+                        app:timeline_adapter="@{viewModel.timelineEventAdapter}" />
+                </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>
 
             <homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader
                 android:id="@+id/block_related_artists"
@@ -392,8 +407,112 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/block_nearest_events">
 
-            </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>
+                </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/width_youtube_video"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_big_20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            app:animationResId="@{R.anim.translate_from_right_to_left}"
+            app:cardBackgroundColor="@color/background_card"
+            app:cardCornerRadius="@dimen/radius_default_card"
+            app:isVisible="@{youtubeViewModel.playPosition != -1}"
+            app:moveOnTouch="@{true}">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="@dimen/width_youtube_video"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:id="@+id/youtube_fragment"
+                    android:layout_width="@dimen/width_youtube_video"
+                    android:layout_height="@dimen/height_youtube_video"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/btn_prev"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:rotation="180"
+                    android:src="@drawable/ic_next"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_play"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/youtube_fragment" />
+
+                <ImageView
+                    android:id="@+id/btn_play"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="@dimen/margin_default_8dp"
+                    android:layout_marginBottom="@dimen/margin_default_8dp"
+                    android:src="@drawable/ic_play"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/youtube_fragment" />
+
+                <ImageView
+                    android:id="@+id/btn_next"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="@dimen/margin_small_6dp"
+                    android:layout_marginBottom="@dimen/margin_small_6dp"
+                    android:src="@drawable/ic_next"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_play"
+                    app:layout_constraintTop_toBottomOf="@+id/youtube_fragment" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_player_controls"
+                    app:isVisible="@{youtubeViewModel.playPosition != -1}"
+                    app:animationResId="@{R.anim.translate_from_down_to_top}"
+                    android:layout_width="match_parent"
+                    android:background="@color/background"
+                    android:layout_alignParentBottom="true"
+                    android:layout_height="@dimen/height_bottom_nav">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_next"
+                        android:rotation="180"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_play"/>
+
+                    <ImageView
+                        android:id="@+id/btn_play"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_play"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_next"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/btn_play"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+        -->
+
+    </RelativeLayout>
 </layout>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -22,6 +21,7 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/sv_root_layout"
         android:layout_width="match_parent"
+        android:animateLayoutChanges="true"
         android:layout_height="match_parent"
         android:fillViewport="true">
         <!--
@@ -39,25 +39,24 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="@dimen/margin_big_20dp"
-                bind:sectionTitle="@{@string/title_nearest_event}" />
+                app:sectionTitle="@{@string/title_nearest_event}" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_nearest_events"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/header_nearest_events"
-                android:layout_marginTop="@dimen/text_size_large_20sp"
+                android:layout_marginTop="@dimen/margin_big_20dp"
                 android:orientation="horizontal"
-                app:isVisible="@{@{!viewModel.primaryEventsList.isEmpty()}}"
+                android:layoutAnimation="@anim/layout_animation_slide_from_right"
+                app:itemList="@{viewModel.primaryEventsList}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:onItemClickListener="@{viewModel.onEventClickListener}"
                 app:snapHelper="@{true}"
-                bind:expand="@{@{!viewModel.primaryEventsList.isEmpty()}}"
-                bind:itemAnimationHorizontall="@{true}"
-                bind:startDelay="@{600}"
-                bind:itemList="@{viewModel.primaryEventsList}"
                 tools:listitem="@layout/layout_item_primary_event" />
-
+            <!--bind:expand="@{@{!viewModel.primaryEventsList.isEmpty()}}"-->
+            <!--app:isAppearanceEnabled="@{true}"
+                app:isVisible="@{!viewModel.primaryEventsList.isEmpty()}"-->
             <include
                 android:id="@+id/header_favorite_events"
                 layout="@layout/item_section_header_highlighted"
@@ -65,27 +64,26 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rv_nearest_events"
                 android:layout_marginTop="@dimen/margin_big_20dp"
-                bind:sectionTitle="@{@string/title_most_popular_event}" />
+                app:sectionTitle="@{@string/title_most_popular_event}" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_favorite_events"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/header_favorite_events"
-                bind:startDelay="@{600}"
                 android:layout_marginTop="@dimen/text_size_large_20sp"
                 android:layout_marginBottom="@dimen/margin_default_10dp"
                 android:orientation="horizontal"
-                app:isVisible="@{@{!viewModel.popularEventsList.isEmpty()}}"
+                android:layoutAnimation="@anim/layout_animation_slide_from_right"
+                app:itemDecoration_left="@{@dimen/margin_big_20dp}"
+                app:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
+                app:itemList="@{viewModel.popularEventsList}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:onItemClickListener="@{viewModel.onEventClickListener}"
-                bind:itemAnimationHorizontall="@{true}"
-                bind:itemDecoration_left="@{@dimen/margin_big_20dp}"
-                bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
-                bind:itemList="@{viewModel.popularEventsList}"
                 tools:listitem="@layout/layout_item_popular_event" />
-
-
         </RelativeLayout>
+        <!--      app:isAppearanceEnabled="@{true}"
+                app:isVisible="@{!viewModel.popularEventsList.isEmpty()}"
+        -->
     </androidx.core.widget.NestedScrollView>
 </layout>

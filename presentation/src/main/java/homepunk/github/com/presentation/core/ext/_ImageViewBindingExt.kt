@@ -6,16 +6,23 @@ import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Picasso
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.util.SongkickUtil
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Consumer
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 /**Created by Homepunk on 11.01.2019. **/
 @BindingAdapter("imageUrl")
 fun ImageView.bindImageUrl(imageUrl: String?) {
     if (!imageUrl.isNullOrEmpty()) {
-        Picasso.get()
-                .load(imageUrl)
-                .error(R.drawable.ic_image_black_24dp)
-                .into(this)
+        Single.just(Picasso.get())
+                .subscribeOn(Schedulers.computation())
+                .map { it.load(imageUrl) }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(Consumer {
+                    it.into(this)
+                }, Consumer { it.printStackTrace() })
     }
 }
 
@@ -28,6 +35,11 @@ fun ImageView.bindSongkickThumb(id: Long) {
                 .into(this)
     }
 
+}
+
+@BindingAdapter("imageResId")
+fun ImageView.bindDrawable(resId: Int) {
+    setImageResource(resId)
 }
 
 @BindingAdapter("animatableImageResId")
@@ -43,9 +55,4 @@ fun ImageView.bindAnimatebleDrawable(resId: Int) {
         it.start()
     }
 //    }
-}
-
-@BindingAdapter("imageResId")
-fun ImageView.bindDrawable(resId: Int) {
-    setImageResource(resId)
 }

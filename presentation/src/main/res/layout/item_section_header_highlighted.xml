@@ -37,6 +37,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:paddingStart="@dimen/margin_big_20dp"
+        android:layoutAnimation="@anim/layout_animation_slide_from_left"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         bind:onClickListener="@{onClickListener}"
@@ -57,7 +58,6 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_default_10dp"
             android:fontFamily="@font/lato_bold"
             android:letterSpacing="0.02"
             android:lineSpacingExtra="1sp"

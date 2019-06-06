@@ -59,6 +59,7 @@
                 android:layout_width="@dimen/plus_button_width"
                 android:layout_height="@dimen/plus_button_width"
                 android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/margin_big_20dp"
                 android:src="@drawable/plus"
                 android:stateListAnimator="@animator/plus_minus_state_list_animator"
                 android:tint="@{headerTint}"

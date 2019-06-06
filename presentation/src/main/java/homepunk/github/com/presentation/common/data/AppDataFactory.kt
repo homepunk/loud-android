@@ -20,9 +20,9 @@ class AppDataFactory @Inject constructor(val context: Context) {
     lateinit var modeTabArray: Array<BubbleTabLayout.TabItem>
 
     init {
-        modeModelList.add(AppModeModel(AppMode.LIBRARY, context.getString(R.string.title_menu_library), ContextCompat.getColor(context, R.color.modeLibraryColor), R.drawable.ic_mode_library, R.style.AppModeLibraryTheme))
+        modeModelList.add(AppModeModel(AppMode.RELEASES, context.getString(R.string.title_menu_library), ContextCompat.getColor(context, R.color.modeLibraryColor), R.drawable.ic_mode_library, R.style.AppModeLibraryTheme))
         modeModelList.add(AppModeModel(AppMode.EVENTS, context.getString(R.string.title_menu_events), ContextCompat.getColor(context, R.color.modeEventsColor), R.drawable.ic_mode_events, R.style.AppModeEventTheme))
-        modeModelList.add(AppModeModel(AppMode.GEAR, context.getString(R.string.title_menu_gear), ContextCompat.getColor(context, R.color.modeGearColor), R.drawable.ic_mode_gear, R.style.AppModeGearTheme))
+//        modeModelList.add(AppModeModel(AppMode.GEAR, context.getString(R.string.title_menu_gear), ContextCompat.getColor(context, R.color.modeGearColor), R.drawable.ic_mode_gear, R.style.AppModeGearTheme))
 
 
         librarySectionList.add(DiscoverSectionModel(0, Constant.DISCOGS.LATEST_RELEASE_GENRE_TYPE_RAP, context.resources.getStringArray(R.array.genres)[0]))
@@ -45,9 +45,9 @@ class AppDataFactory @Inject constructor(val context: Context) {
 
     fun getModeList(): MutableList<MenuModeModel> {
         val menuList = mutableListOf<MenuModeModel>()
-        menuList.add(MenuModeModel(MenuModeModel.TYPE.LIBRARY, R.color.modeLibraryColor, R.string.title_menu_library, R.drawable.ic_mode_library, AppMode.LIBRARY))
+        menuList.add(MenuModeModel(MenuModeModel.TYPE.LIBRARY, R.color.modeLibraryColor, R.string.title_menu_library, R.drawable.ic_mode_library, AppMode.RELEASES))
         menuList.add(MenuModeModel(MenuModeModel.TYPE.EVENTS, R.color.modeEventsColor, R.string.title_menu_events, R.drawable.ic_mode_events, AppMode.EVENTS))
-        menuList.add(MenuModeModel(MenuModeModel.TYPE.GEAR, R.color.modeGearColor, R.string.title_menu_gear, R.drawable.ic_mode_gear, AppMode.GEAR))
+//        menuList.add(MenuModeModel(MenuModeModel.TYPE.GEAR, R.color.modeGearColor, R.string.title_menu_gear, R.drawable.ic_mode_gear, AppMode.GEAR))
         return menuList
     }
 
