@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="BubbleTabLayout">
-        <attr name="bubble_buttonGap" format="integer|dimension"/>
-        <attr name="bubble_defaultColor" format="color"/>
-        <attr name="bubble_highlightedColor" format="color"/>
-        <attr name="bubble_textAllCaps" format="boolean"/>
-        <attr name="bubble_tabFixedWidth" format="boolean"/>
-        <attr name="bubble_tabVerticalMargin" format="integer|dimension"/>
-        <attr name="bubble_startMargin" format="integer|dimension"/>
-        <attr name="bubble_iconWidth" format="integer|dimension"/>
-        <attr name="bubble_iconHeight" format="integer|dimension"/>
+    <declare-styleable name="FiltersLayout">
+        <attr name="fl_buttonGap" format="integer|dimension"/>
+        <attr name="fl_highlightedColor" format="color"/>
+        <attr name="fl_textAllCaps" format="boolean"/>
+        <attr name="fl_tabFixedWidth" format="boolean"/>
+        <attr name="fl_tabVerticalMargin" format="integer|dimension"/>
     </declare-styleable>
 
     <declare-styleable name="ExpandableHeader">

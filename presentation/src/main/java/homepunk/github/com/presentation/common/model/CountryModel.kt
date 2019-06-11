@@ -1,4 +1,4 @@
-package homepunk.github.com.presentation.feature.widget.countrypicker
+package homepunk.github.com.presentation.common.model
 
 import android.content.Context
 import android.graphics.drawable.Drawable

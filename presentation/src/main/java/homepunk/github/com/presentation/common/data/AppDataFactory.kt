@@ -5,19 +5,19 @@ import androidx.core.content.ContextCompat
 import homepunk.github.com.data.core.constant.Constant
 import homepunk.github.com.domain.model.AppMode
 import homepunk.github.com.presentation.R
+import homepunk.github.com.presentation.common.model.CountryModel
 import homepunk.github.com.presentation.common.model.menu.MenuModeModel
 import homepunk.github.com.presentation.common.model.menu.MenuModel
 import homepunk.github.com.presentation.common.model.mode.AppModeModel
 import homepunk.github.com.presentation.common.model.section.DiscoverSectionModel
-import homepunk.github.com.presentation.feature.widget.countrypicker.CountryModel
-import homepunk.github.com.presentation.feature.widget.tablayout.BubbleTabLayout
+import homepunk.github.com.presentation.feature.widget.filterlayout.FilterModel
 import javax.inject.Inject
 
 class AppDataFactory @Inject constructor(val context: Context) {
     private var modeModelList= mutableListOf<AppModeModel>()
     private var librarySectionList = mutableListOf<DiscoverSectionModel>()
 
-    lateinit var modeTabArray: Array<BubbleTabLayout.TabItem>
+//    lateinit var modeTabArray: Array<BubbleTabLayout.TabItem>
 
     init {
         modeModelList.add(AppModeModel(AppMode.RELEASES, context.getString(R.string.title_menu_library), ContextCompat.getColor(context, R.color.modeLibraryColor), R.drawable.ic_mode_library, R.style.AppModeLibraryTheme))
@@ -39,6 +39,10 @@ class AppDataFactory @Inject constructor(val context: Context) {
 
     fun getAppModeModelList(): List<AppModeModel> {
         return modeModelList
+    }
+
+    fun getFilters(): Array<FilterModel> {
+        return arrayOf(FilterModel("ALL", true), FilterModel("#Rap"), FilterModel("#Rock"), FilterModel("#Techno"), FilterModel("#Experimental"))
     }
 
     fun getAppModeModel(mode: AppMode) = modeModelList.find { it.mode == mode }!!

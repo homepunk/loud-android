@@ -19,3 +19,4 @@ fun <T> ObservableArrayList<T>.addAllToEmptyList(collection: List<T>) {
     }
     addAll(collection)
 }
+

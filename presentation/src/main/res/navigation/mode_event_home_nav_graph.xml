@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/event_mode_home_fragment">
+    <!--LIST OF EVENT MODE FRAGMENTS-->
+    <fragment
+        android:id="@+id/event_mode_home_fragment"
+        tools:layout="@layout/fragment_event_list"
+        android:name="homepunk.github.com.presentation.feature.event.home.EventListFragment"
+        android:label="EventListFragment" />
+
+    <!--LIST OF RELEASE MODE FRAGMENTS-->
+</navigation>

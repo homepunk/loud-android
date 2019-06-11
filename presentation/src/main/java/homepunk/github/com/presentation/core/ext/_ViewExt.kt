@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import homepunk.github.com.presentation.core.wrapper.AnimatorListenerWrapper
 import homepunk.github.com.presentation.feature.widget.animation.AnimationEventLiveData
 import homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader
+import homepunk.github.com.presentation.feature.widget.filterlayout.FilterModel
+import homepunk.github.com.presentation.feature.widget.filterlayout.FiltersLayout
 import org.xmlpull.v1.XmlPullParserException
 import timber.log.Timber
 import java.io.IOException
@@ -44,6 +46,11 @@ fun View.swapVisibility() {
 fun View.isVisible(isVisible: Boolean) {
     Timber.w("isVisible = $isVisible")
     visibility = if (isVisible) VISIBLE else GONE
+}
+
+@BindingAdapter("filters")
+fun FiltersLayout.addFilters(filters: Array<FilterModel>) {
+    addFilters(filters)
 }
 
 @BindingAdapter("scrollToPosition", "scrollToRecyclerId", requireAll = true)

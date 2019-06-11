@@ -17,6 +17,7 @@ class MainViewModel @Inject constructor(var appDataFactory: AppDataFactory,
 
     var fragmentList = arrayListOf<Fragment>()
     var modeList = mutableListOf<MenuModeModel>()
+    var filers = appDataFactory.getFilters()
 
     var onModeClickListener = View.OnClickListener { v ->
         v?.let {

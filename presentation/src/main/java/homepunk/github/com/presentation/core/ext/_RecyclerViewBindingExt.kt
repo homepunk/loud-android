@@ -111,10 +111,7 @@ fun RecyclerView.snapHelper(enable: Boolean) {
 
 @BindingAdapter("itemList")
 fun <T> RecyclerView.bindItemList(itemList: ObservableArrayList<T>) {
-    if (layoutAnimation != null) {
-        Timber.w("scheduleLayoutAnimation")
-        scheduleLayoutAnimation()
-    }
+    scheduleLayoutAnimation()
     (adapter as? SimpleBindingRecyclerAdapter<T>)?.let {
         if (!it.isParentListInitialized()) {
             Timber.w("INITIALIZE")

@@ -3,7 +3,7 @@ package homepunk.github.com.presentation.feature.menu.country.model
 import homepunk.github.com.presentation.BR
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.common.adapter.model.ExpandableParentModel
-import homepunk.github.com.presentation.feature.widget.countrypicker.CountryModel
+import homepunk.github.com.presentation.common.model.CountryModel
 
 /**Created by Homepunk on 27.03.2019. **/
 class CountryBindingParentModel(val countryModel: CountryModel, cities: List<CityBindingChildModel>) : ExpandableParentModel<CityBindingChildModel>(cities) {

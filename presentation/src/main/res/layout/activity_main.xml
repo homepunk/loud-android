@@ -88,6 +88,16 @@
                     android:orientation="vertical"
                     app:layout_scrollFlags="scroll|enterAlways"
                     android:layout_height="wrap_content">
+
+                    <homepunk.github.com.presentation.feature.widget.filterlayout.FiltersLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="@dimen/margin_big_20dp"
+                        android:layout_marginEnd="@dimen/margin_big_20dp"
+                        app:fl_highlightedColor="@{appModeModel.color}"
+                        app:fl_buttonGap="@dimen/margin_big_20dp"
+                        app:filters="@{viewModel.filers}"
+                        android:layout_height="wrap_content"/>
+<!--
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -104,7 +114,7 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                android:id="@+id/title"
+                                android:id="@+id/defaultTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/margin_small_6dp"
@@ -123,9 +133,9 @@
                                 app:updateTintOnModeChange="@{appModeModel}"
                                 android:layout_marginTop="@dimen/margin_small_6dp"
                                 android:background="@drawable/background_circle_filled_gray"
-                                app:layout_constraintEnd_toEndOf="@+id/title"
-                                app:layout_constraintTop_toBottomOf="@+id/title"
-                                app:layout_constraintStart_toStartOf="@+id/title" />
+                                app:layout_constraintEnd_toEndOf="@+id/defaultTitle"
+                                app:layout_constraintTop_toBottomOf="@+id/defaultTitle"
+                                app:layout_constraintStart_toStartOf="@+id/defaultTitle" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <FrameLayout
@@ -187,6 +197,9 @@
 
                     </LinearLayout>
 
+
+-->
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -229,8 +242,7 @@
                         <FrameLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/margin_big_20dp"
-                            >
+                            android:layout_marginEnd="@dimen/margin_big_20dp">
 
                             <TextView
                                 android:layout_width="match_parent"

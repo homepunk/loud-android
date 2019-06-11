@@ -12,6 +12,7 @@ import androidx.databinding.BindingAdapter
 import homepunk.github.com.domain.model.AppMode
 import homepunk.github.com.presentation.common.model.mode.AppModeModel
 import homepunk.github.com.presentation.feature.widget.animation.GammaEvaluator
+import homepunk.github.com.presentation.feature.widget.filterlayout.FiltersLayout
 import timber.log.Timber
 
 
@@ -57,7 +58,10 @@ fun TextView.updateModeTitleOnModeChange(prevAppModeModel: AppModeModel?, prevBt
         }
     }
 }
-
+@BindingAdapter("fl_highlightedColor")
+fun FiltersLayout.highlightedColor(color: Int) {
+    setHighlightColor(color)
+}
 
 var duration = 600L
 var startDelay = 0L

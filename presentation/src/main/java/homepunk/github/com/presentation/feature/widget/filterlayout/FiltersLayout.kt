@@ -1,119 +1,167 @@
 package homepunk.github.com.presentation.feature.widget.filterlayout
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.Context
-import android.graphics.Color
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.viewpager.widget.ViewPager
-import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.core.ext.getMaxLenString
-import homepunk.github.com.presentation.feature.widget.OrderChildLayout
-import homepunk.github.com.presentation.feature.widget.tablayout.BubbleTab
+import androidx.core.content.ContextCompat
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayout
+import homepunk.github.com.presentation.core.ext.duration
+import homepunk.github.com.presentation.core.ext.swap
+import homepunk.github.com.presentation.feature.widget.animation.GammaEvaluator
+
 
 /**Created by Homepunk on 28.01.2019. **/
 class FiltersLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : ConstraintLayout(context, attrs, defStyleAttr) {
+    : FrameLayout(context, attrs, defStyleAttr) {
 
-    private var startMargin: Int
-    private var buttonGap: Int
-    private var buttonVerticalMargin: Int
-    private var buttonTextAllCaps: Boolean
-    private var buttonFixedWidth: Boolean
+    private var currentFilterItem: FilterItem? = null
+
+    private var filterGap: Int
+    private var verticalMargin: Int
+    private var textAllCaps: Boolean
+    private var isFilterFixedWidth: Boolean
     @ColorInt
-    private var buttonDefaultColor: Int
-    @ColorInt
-    private var buttonHighlightColor: Int
+    private var highlightColor: Int
 
-    private var mFiltersLayout: OrderChildLayout
-    private var mPager: ViewPager? = null
+    private var mFilters = arrayOf<FilterModel>()
+    private val mFiltersCount
+        get() = mFilters.size
 
-    private var mTabTextArray = arrayOf<String>()
-    private val mTabCount
-        get() = mTabTextArray.size
-
+    private var mFiltersLayout: FlexboxLayout
+    private var mHighlightView: View
 
     init {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.BubbleTabLayout, 0, 0)
+        val typedArray = context.obtainStyledAttributes(attrs, homepunk.github.com.presentation.R.styleable.FiltersLayout, 0, 0)
         try {
-            buttonGap = typedArray.getDimensionPixelSize(R.styleable.BubbleTabLayout_bubble_buttonGap, 0)
-            buttonVerticalMargin = typedArray.getDimensionPixelSize(R.styleable.BubbleTabLayout_bubble_tabVerticalMargin, 0)
-            startMargin = typedArray.getDimensionPixelSize(R.styleable.BubbleTabLayout_bubble_startMargin, 0)
-            buttonDefaultColor = typedArray.getColor(R.styleable.BubbleTabLayout_bubble_defaultColor, Color.DKGRAY)
-            buttonHighlightColor = typedArray.getColor(R.styleable.BubbleTabLayout_bubble_highlightedColor, Color.LTGRAY)
-            buttonTextAllCaps = typedArray.getBoolean(R.styleable.BubbleTabLayout_bubble_textAllCaps, true)
-            buttonFixedWidth = typedArray.getBoolean(R.styleable.BubbleTabLayout_bubble_tabFixedWidth, false)
+            filterGap = typedArray.getDimensionPixelSize(homepunk.github.com.presentation.R.styleable.FiltersLayout_fl_buttonGap, 0)
+            verticalMargin = typedArray.getDimensionPixelSize(homepunk.github.com.presentation.R.styleable.FiltersLayout_fl_tabVerticalMargin, 0)
+            highlightColor = typedArray.getColor(homepunk.github.com.presentation.R.styleable.FiltersLayout_fl_highlightedColor, getColor(homepunk.github.com.presentation.R.color.modeEventsColor))
+            textAllCaps = typedArray.getBoolean(homepunk.github.com.presentation.R.styleable.FiltersLayout_fl_textAllCaps, true)
+            isFilterFixedWidth = typedArray.getBoolean(homepunk.github.com.presentation.R.styleable.FiltersLayout_fl_tabFixedWidth, false)
         } finally {
             typedArray.recycle()
         }
 
-//        isFillViewport = true
+        LayoutInflater.from(context).inflate(homepunk.github.com.presentation.R.layout.layout_filter_menu, this, true)
         clipChildren = false
         clipToPadding = false
-//        mFiltersLayout = LinearLayout(context)
-//        addView(mFiltersLayout)
-        val rootLayout = LayoutInflater.from(context).inflate(R.layout.layout_filter_menu, this, true)
-        mFiltersLayout = rootLayout.findViewById(R.id.layout_filters)
+
+        mHighlightView = findViewById(homepunk.github.com.presentation.R.id.highlight_strip)
+        mFiltersLayout = findViewById(homepunk.github.com.presentation.R.id.layout_filters)
+        mFiltersLayout.flexWrap = FlexWrap.WRAP
+        mFiltersLayout.flexDirection = FlexDirection.ROW
     }
 
-    private fun highlightTab(position: Int?) {
-        for (i in 0 until mTabCount) {
-            val isSelected = i == position
-            mFiltersLayout.getChildAt(i)
-                    ?.run {
-                        this as? BubbleTab
-                    }?.apply {
-                        if (isSelected) {
-                            updateBackground(R.drawable.background_rect_round_corners_accent)
-                        } else {
-                            updateBackground(R.drawable.background_rect_round_corners_gray)
-                        }
+    fun setHighlightColor(color: Int) {
+        highlightColor = color
+        currentFilterItem?.updateHighlightColor(color)
+        mHighlightView.backgroundTintList = ColorStateList.valueOf(highlightColor)
+
+        ObjectAnimator.ofObject(mHighlightView, // Object to animating
+                "backgroundTintList", // Property to animate
+                GammaEvaluator(),// Interpolation function)
+                mHighlightView.backgroundTintList.defaultColor,
+                color)
+                .apply {
+                    interpolator = AccelerateDecelerateInterpolator()
+                    duration = 500
+                    start()
+                }
+
+    }
+
+    private fun highlightItem(position: Int) {
+        if (currentFilterItem?.index != position) {
+            currentFilterItem?.highlight(false)
+            currentFilterItem = (mFiltersLayout.getChildAt(position) as FilterItem)
+                    .apply {
+                        highlightColor = this@FiltersLayout.highlightColor
+                        highlight(true)
+                        updateHighlightView(measuredWidth, x.toInt(), y.toInt() + measuredHeight - dp2px(1f))
                     }
         }
     }
 
-    fun setTitleArray(arr: Array<String>) {
-        mTabTextArray = arr
-        setUpTabLayout()
-    }
-
-    private fun setUpTabLayout() {
-        val tabWidth = if (buttonFixedWidth) {
-            getBubbleTab(mTabTextArray.getMaxLenString())
-                    .apply { measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT) }
-                    .measuredWidth
-        } else {
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        }
-
-        for (i in 0 until mTabTextArray.size) {
-            val tab = getBubbleTab(mTabTextArray[i]).apply {
-                setOnClickListener { highlightTab(i) }
+    fun updateHighlightView(width: Int, toX: Int, toY: Int) {
+        (mHighlightView.layoutParams as MarginLayoutParams).let { lP ->
+            val translateX = ValueAnimator.ofInt(lP.marginStart, toX).apply {
+                addUpdateListener {
+                    lP.marginStart = it.animatedValue as Int
+                    mHighlightView.layoutParams = lP
+                }
             }
-            val params = LinearLayout.LayoutParams(tabWidth, ViewGroup.LayoutParams.MATCH_PARENT)
-
-            if (i == 0) {
-                params.marginStart = startMargin
-            } else {
-                params.marginStart = buttonGap
+            val translateY = ValueAnimator.ofInt(lP.topMargin, toY).apply {
+                addUpdateListener { lP.topMargin = it.animatedValue as Int }
             }
-
-            params.topMargin = buttonVerticalMargin
-            params.bottomMargin = buttonVerticalMargin
-            mFiltersLayout.addView(tab)
+            val widthAnimation = ValueAnimator.ofInt(lP.width, width).apply {
+                addUpdateListener {
+                    lP.width = it.animatedValue as Int
+                }
+            }
+            with(AnimatorSet()) {
+                duration = 500
+                interpolator = AccelerateDecelerateInterpolator()
+                playTogether(translateX, translateY, widthAnimation)
+                start()
+            }
         }
     }
 
-    private fun getBubbleTab(title: String): BubbleTab {
-        val tab = BubbleTab(context)
-        tab.title.isAllCaps = buttonTextAllCaps
-        tab.title.text = title
+    fun addFilters(arr: Array<FilterModel>) {
+        mFilters = arr
+        setUpLayout()
+    }
+
+    private fun setUpLayout() {
+        var highlightPosition = -1
+        for (i in 0 until mFiltersCount) {
+            val filter = mFilters[i].also {
+                if (it.isSelected) {
+                    highlightPosition = i
+                }
+            }
+            val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            params.marginEnd = filterGap
+            params.topMargin = verticalMargin
+            params.bottomMargin = verticalMargin
+            mFiltersLayout.addView(getFilterItem(filter, i).apply {
+                setOnClickListener {
+                    highlightItem(i)
+                    filter.isSelected.swap()
+                }
+            }, params)
+        }
+        mHighlightView.backgroundTintList = ColorStateList.valueOf(highlightColor)
+        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                viewTreeObserver.removeGlobalOnLayoutListener(this)
+                highlightItem(highlightPosition)
+            }
+        })
+    }
+
+    private fun getFilterItem(item: FilterModel, position: Int): FilterItem {
+        val tab = FilterItem(context)
+        tab.setUpFilter(position, item.name, textAllCaps)
+        tab.highlightColor = highlightColor
 
         return tab
     }
 
     private fun dp2px(dpValue: Float) = (dpValue * resources.displayMetrics.density + 0.5f).toInt()
 }
+
+fun View.getColor(colorID: Int) = ContextCompat.getColor(context, colorID)

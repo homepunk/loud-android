@@ -43,23 +43,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:onMenuClickListener="@{onMenuClickListener}" />
 
-        <homepunk.github.com.presentation.feature.widget.tablayout.BubbleTabLayout
-            android:id="@+id/mode_tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:bubble_defaultColor="@color/whiteBone"
-            app:bubble_iconHeight="48dp"
-            app:bubble_iconWidth="48dp"
-            app:bubble_textAllCaps="true"
-            app:bubble_buttonGap="@dimen/margin_big_20dp"
-            app:bubble_startMargin="-20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            bind:menu="@{menuViewModel.modeList}"
-            bind:currentTabItem="@{appModeModel}"
-            bind:onBubbleTabClickListener="@{menuViewModel.onMenuTabClickListener}" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_mode_menu"
             android:layout_width="match_parent"

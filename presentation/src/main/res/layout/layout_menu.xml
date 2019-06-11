@@ -28,21 +28,6 @@
 <!--
         bind:animationResId="@{R.anim.translate_up_and_fade}"
         bind:visibility="@{menuViewModel.isMenuOpened ? View.VISIBLE : View.GONE}"-->
-        <homepunk.github.com.presentation.feature.widget.tablayout.BubbleTabLayout
-            android:id="@+id/mode_tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:bubble_defaultColor="@color/whiteBone"
-            app:bubble_iconHeight="48dp"
-            app:bubble_iconWidth="48dp"
-            app:bubble_textAllCaps="true"
-            app:bubble_buttonGap="@dimen/margin_big_20dp"
-            app:bubble_startMargin="-20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            bind:menu="@{menuViewModel.modeList}"
-            bind:currentTabItem="@{appModeModel}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_mode_menu"
@@ -52,7 +37,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mode_tab_layout"
+            app:layout_constraintTop_toTopOf="parent"
             bind:itemAnimationEnabled="@{true}"
             bind:itemDecoration_top="@{@dimen/margin_big_20dp}"/>
 <!--
