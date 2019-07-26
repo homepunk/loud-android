@@ -17,17 +17,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:paddingBottom="@dimen/margin_small_6dp"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/flag"
             android:layout_width="24dp"
             android:layout_height="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/country_name"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/country_name"
-            bind:imageResId="@{model.countryModel.countryFlag}"
-            bind:layout_constraintStart_toStartOf="parent"
+            app:roundCornersImageResId="@{model.countryModel.countryFlag}"
             tools:src="@drawable/ic_ua" />
 
         <TextView
@@ -40,20 +39,21 @@
             android:text="@{model.countryModel.countryName}"
             android:textColor="@color/text"
             android:textSize="@dimen/text_size_large"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/flag"
             app:layout_constraintTop_toTopOf="parent"
-            bind:layout_constraintStart_toEndOf="@+id/flag"
             tools:text="Ukraine" />
 
         <ImageView
-            android:layout_width="@dimen/plus_button_width"
-            android:layout_height="@dimen/plus_button_width"
-            android:layout_gravity="end"
-            android:src="@drawable/plus"
-            android:stateListAnimator="@animator/plus_minus_state_list_animator"
+            android:id="@+id/iv_country"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:tint="@color/whiteBone"
+            app:imageResId="@{@{model.countryModel.countryMap}}"
+            app:scaleWithSize="@{model.isParentExpanded ? 0.4f : 1f}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            bind:animatableImageResId="@{model.isParentExpanded ? R.drawable.animated_plus : R.drawable.animated_minus}" />
+            app:layout_constraintTop_toBottomOf="@id/country_name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -123,7 +123,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/iv_location"
             app:layout_constraintStart_toStartOf="@+id/iv_location"
             app:layout_constraintEnd_toEndOf="@+id/iv_location"
-            app:scale="@{isMenuOpened ? 6 : 1}"
+            app:scale="@{isMenuOpened ? 6f : 1f}"
             android:layout_width="4dp"
             android:layout_height="4dp"
             android:background="@drawable/shape_circle"/>

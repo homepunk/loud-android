@@ -22,6 +22,7 @@ import homepunk.github.com.presentation.feature.widget.animation.AnimationTextVi
 import homepunk.github.com.presentation.feature.widget.animation.ReverseInterpolator
 import homepunk.github.com.presentation.util.DimensionUtil
 import timber.log.Timber
+import kotlin.math.roundToInt
 
 
 /**Created by Homepunk on 31.01.2019. **/
@@ -136,15 +137,53 @@ fun View.scale(oldScale: Float, scale: Float) {
     if (oldScale != scale) {
         if (oldScale == 0f) {
             if (scale > 1.0f) {
-                animateScaleChange(1f, scale)
+                getScaleAnimation(1f, scale).start()
             }
         } else {
-            animateScaleChange(oldScale, scale)
+            getScaleAnimation(oldScale, scale).start()
         }
     }
 }
 
-private fun View.animateScaleChange(oldScale: Float, newScale: Float) {
+@BindingAdapter(requireAll = false, value = ["scaleWithSize"])
+fun View.scaleWithSize(oldScale: Float, scale: Float) {
+    pivotX = 0f
+    pivotY = 0f
+    if (oldScale != scale) {
+        if (oldScale == 0f) {
+            if (scale > 1.0f) {
+                val animation = getScaleAnimation(1f, scale)
+            }
+        } else {
+            val scaleAnimation = getScaleAnimation(oldScale, scale)
+            val newHeight = (if (scale > oldScale) height * scale else height / oldScale).roundToInt()
+//            val newWidth = if (height != width) {
+//                (if (oldScale > scale) width * scale else width / oldScale).roundToInt()
+//            } else newHeight
+            val sizeAnimation = getSizeAnimation(newHeight)
+            AnimatorSet().apply {
+                playTogether(scaleAnimation, sizeAnimation)
+                start()
+            }
+        }
+    }
+}
+
+fun View.getSizeAnimation(newSize: Int): Animator{
+    val sizeAnimator = ValueAnimator.ofInt(height, newSize)
+    sizeAnimator.addUpdateListener { animation ->
+        val animatedValue = animation.animatedValue as Int
+        with(layoutParams) {
+            height = animatedValue
+            width = animatedValue
+        }
+        requestLayout()
+    }
+    sizeAnimator.duration = 400
+    return sizeAnimator
+}
+
+fun View.getScaleAnimation(oldScale: Float, newScale: Float): ValueAnimator {
     val scaleAnimator = ValueAnimator.ofFloat(oldScale, newScale)
     scaleAnimator.addUpdateListener { animation ->
         val animatedValue = animation.animatedValue as Float
@@ -152,7 +191,7 @@ private fun View.animateScaleChange(oldScale: Float, newScale: Float) {
         scaleY = animatedValue
     }
     scaleAnimator.duration = 400
-    scaleAnimator.start()
+    return scaleAnimator
 }
 
 @BindingAdapter(

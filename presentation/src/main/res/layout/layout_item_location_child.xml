@@ -4,7 +4,7 @@
     <data>
         <variable
             name="model"
-            type="homepunk.github.com.presentation.feature.menu.country.model.CityBindingChildModel"/>
+            type="homepunk.github.com.domain.model.internal.UserLocation"/>
 
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,8 +19,7 @@
             android:layout_marginStart="@dimen/margin_big_24dp"
             android:textSize="@dimen/text_size_default"
             android:fontFamily="@font/lato"
-            android:textColor="@{model.isSelected ? @color/colorAccent : @color/text}"
-            android:text="@{model.name}"
+            android:text="@{model.locationName}"
             tools:text="KHARKIV" />
     </LinearLayout>
 </layout>

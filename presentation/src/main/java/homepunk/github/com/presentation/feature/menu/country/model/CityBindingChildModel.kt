@@ -9,7 +9,7 @@ import homepunk.github.com.presentation.common.adapter.model.ExpandableChildMode
 
 /**Created by Homepunk on 27.03.2019. **/
 class CityBindingChildModel(var location: UserLocation, isSaved: Boolean = false) : ExpandableChildModel() {
-    var name = ObservableField<String>(location.locationName)
+    var name = ObservableField(location.locationName)
     var isSelected = ObservableBoolean(isSaved)
 
     override fun getBindingVariableId() = BR.model

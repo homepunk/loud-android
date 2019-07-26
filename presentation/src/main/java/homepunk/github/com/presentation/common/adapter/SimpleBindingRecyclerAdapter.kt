@@ -9,7 +9,7 @@ import homepunk.github.com.presentation.core.listener.SpecificFieldClickListener
 
 
 /**Created by Homepunk on 11.01.2019. **/
-class SimpleBindingRecyclerAdapter<ITEM>(private val layoutId: Int, val variableId: Int) : BaseRecyclerViewAdapter<ITEM, SimpleBindingRecyclerAdapter.SimpleBindingViewHolder<ITEM>>() {
+open class SimpleBindingRecyclerAdapter<ITEM>(private val layoutId: Int, val variableId: Int) : BaseRecyclerViewAdapter<ITEM, SimpleBindingRecyclerAdapter.SimpleBindingViewHolder<ITEM>>() {
     var onSpecificFieldClickListener: SpecificFieldClickListener<ITEM>? = null
 
     constructor(layoutId: Int, variableId: Int, itemList: ObservableArrayList<ITEM>) : this(layoutId, variableId) {

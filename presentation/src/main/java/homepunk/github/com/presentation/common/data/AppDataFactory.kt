@@ -60,8 +60,9 @@ class AppDataFactory @Inject constructor(val context: Context) {
     fun getCountryModelList(): List<CountryModel> {
         val dataList = mutableListOf<CountryModel>()
         dataList.add(CountryModel.UA)
-//        dataList.add(CountryModel.RU)
-//        dataList.add(CountryModel.US)
+        dataList.add(CountryModel.FR)
+        dataList.add(CountryModel.DE)
+        dataList.add(CountryModel.US)
         return dataList
     }
 }

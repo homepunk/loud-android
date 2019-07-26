@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -35,6 +36,11 @@ import timber.log.Timber
 @BindingAdapter("adapter")
 fun <T> RecyclerView.bindAdapter(adapter: SimpleBindingRecyclerAdapter<T>) {
     this.adapter = adapter
+}
+
+@BindingAdapter("gridLayoutManager")
+fun <T> RecyclerView.gridLayoutManager(columns: Int) {
+    layoutManager = GridLayoutManager(context, columns)
 }
 
 @BindingAdapter("changeColorOnClick")

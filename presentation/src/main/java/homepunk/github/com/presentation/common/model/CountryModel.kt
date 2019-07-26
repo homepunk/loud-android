@@ -8,11 +8,11 @@ import java.util.*
 
 
 /**Created by Homepunk on 15.01.2019. **/
-enum class CountryModel constructor(val countryFlag: Int) {
+enum class CountryModel constructor(val countryFlag: Int, val countryMap: Int? = 0) {
     /* FR, NL and US are specified first because their flags are also used for other countries */
-    FR(R.drawable.ic_fr),
+    FR(R.drawable.ic_fr, R.drawable.ic_map_fr),
     NL(R.drawable.ic_nl),
-    US(R.drawable.ic_us),
+    US(R.drawable.ic_us, R.drawable.ic_map_usa),
     AD(R.drawable.ic_ad),
     AE(R.drawable.ic_ae),
     AF(R.drawable.ic_af),
@@ -68,7 +68,7 @@ enum class CountryModel constructor(val countryFlag: Int) {
     CW(R.drawable.ic_cw),
     CY(R.drawable.ic_cy),
     CZ(R.drawable.ic_cz),
-    DE(R.drawable.ic_de),
+    DE(R.drawable.ic_de, R.drawable.ic_map_ge),
     DJ(R.drawable.ic_dj),
     DK(R.drawable.ic_dk),
     DM(R.drawable.ic_dm),
@@ -238,7 +238,7 @@ enum class CountryModel constructor(val countryFlag: Int) {
     TV(R.drawable.ic_tv),
     TW(R.drawable.ic_tw),
     TZ(R.drawable.ic_tz),
-    UA(R.drawable.ic_ua),
+    UA(R.drawable.ic_ua, R.drawable.ic_map_ua),
     UG(R.drawable.ic_ug),
     UM(US.countryFlag),
     UY(R.drawable.ic_uy),

@@ -2,16 +2,17 @@ package homepunk.github.com.presentation.core.ext
 
 import android.graphics.*
 import android.graphics.drawable.Animatable
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Picasso
-import com.sun.prism.impl.shape.BasicRoundRectRep.drawRoundRect
 import homepunk.github.com.presentation.util.SongkickUtil
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
-import java.awt.AlphaComposite.SRC_IN
+
+
 
 
 /**Created by Homepunk on 11.01.2019. **/
@@ -46,8 +47,17 @@ fun ImageView.bindDrawable(resId: Int) {
 
 @BindingAdapter("roundCornersImageResId")
 fun ImageView.roundCornersImageResId(resId: Int) {
-    val bitmap = BitmapFactory.decodeResource(resources, resId)
-    setImageBitmap(getRoundedCornerBitmap(bitmap, dpToPx(10f)))
+    val bitmap = drawableToBitmap(resources.getDrawable(resId))
+    setImageBitmap(getRoundedCornerBitmap(bitmap, dpToPx(2f)))
+}
+
+fun drawableToBitmap(drawable: Drawable): Bitmap {
+    val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(bitmap)
+    drawable.setBounds(0, 0, canvas.width, canvas.height)
+    drawable.draw(canvas)
+
+    return bitmap
 }
 
 fun getRoundedCornerBitmap(bitmap: Bitmap, pixels: Int): Bitmap {

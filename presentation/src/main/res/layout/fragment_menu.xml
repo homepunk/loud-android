@@ -20,7 +20,7 @@
 
         <variable
             name="onMenuClickListener"
-            type="android.view.View.OnClickListener"/>
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,40 +32,66 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_mode_menu"
-            android:layout_marginTop="@dimen/margin_big_20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_big_20dp"
+            android:layout_marginTop="@dimen/margin_big_20dp"
+            android:layoutAnimation="@anim/layout_animation_slide_from_right"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:itemList="@{menuViewModel.menuItemList}"
-            android:layoutAnimation="@anim/layout_animation_slide_from_right"
             bind:itemDecoration_top="@{@dimen/margin_big_20dp}"
+            bind:itemList="@{menuViewModel.menuItemList}"
             tools:listitem="@layout/layout_item_menu" />
 
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginBottom="@dimen/margin_big_20dp"
             android:layout_marginStart="@dimen/margin_big_20dp"
-            android:layout_marginEnd="@dimen/margin_big_20dp"
             android:layout_marginTop="40dp"
+            android:layout_marginEnd="@dimen/margin_big_20dp"
+            android:layout_marginBottom="@dimen/margin_big_20dp"
+            android:alpha="0.5"
+            android:background="@drawable/background_circle_filled_gray"
+            android:backgroundTint="@color/subtitle2"
             app:layout_constraintBottom_toTopOf="@+id/vp_menu_item_detail"
-            app:layout_constraintTop_toBottomOf="@+id/rv_mode_menu"
-            android:background="@drawable/background_circle_filled_gray"/>
+            app:layout_constraintTop_toBottomOf="@+id/rv_mode_menu" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/vp_menu_item_detail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            bind:fragmentList="@{menuViewModel.menuItemFragmentList}"
-            app:layout_constraintTop_toBottomOf="@+id/divider"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            bind:fragmentList="@{menuViewModel.menuItemFragmentList}" />
+        <!-- <com.google.android.flexbox.FlexboxLayout
+             android:id="@+id/vp_menu_item_detail"
+             android:layout_width="match_parent"
+             android:layout_height="0dp"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/divider">
+
+             <include
+                 layout="@layout/layout_item_country"
+                 app:layout_columnWeight="1" />
+
+             <include
+                 app:layout_columnWeight="1"
+                 layout="@layout/layout_item_country" />
+
+             <include
+                 app:layout_columnWeight="1"
+                 layout="@layout/layout_item_country" />
+             <include
+                 app:layout_columnWeight="1"
+                 layout="@layout/layout_item_country" />
+         </com.google.android.flexbox.FlexboxLayout>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
