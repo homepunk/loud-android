@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/flag"
+            android:layout_width="36dp"
+            android:layout_height="24dp"
+            app:imageResId="@{model.countryModel.countryFlag}"
+            app:layout_constraintBottom_toBottomOf="@+id/country_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/country_name"
+            app:roundCornersImageResId="@{model.countryModel.countryFlag}"
+            tools:src="@drawable/ic_ua" />
+
+        <TextView
+            android:id="@+id/country_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/lato"
+            android:text="@{model.countryModel.countryName}"
+            android:textColor="@color/text"
+            android:textSize="@dimen/text_size_large"
+            app:layout_constraintStart_toEndOf="@+id/flag"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Ukraine" />
+
+        <ImageView
+            android:id="@+id/iv_country"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            tools:src="@drawable/ic_placeholder"
+            android:layout_marginTop="@dimen/margin_default_10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/country_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

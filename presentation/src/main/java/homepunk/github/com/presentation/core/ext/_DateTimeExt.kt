@@ -13,6 +13,13 @@ fun Date.dayOfMonth(): Int {
     return cal.get(Calendar.DAY_OF_MONTH)
 }
 
+
+fun Date.dayOfWeek(): String {
+    val cal = Calendar.getInstance();
+    cal.time = this
+    return DateFormatSymbols.getInstance().weekdays[cal.get(Calendar.DAY_OF_WEEK)]
+}
+
 fun Date.month(): Int {
     val cal = Calendar.getInstance()
     cal.setTime(this)

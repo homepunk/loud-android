@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 /**Created by Homepunk on 27.12.2018. **/
 @Module
-class DataModule {
+class RemoteDataModule {
     @Provides
     @Singleton
     fun provideDiscogsApi(): DiscogsApi = ApiClient.Builder.buildDiscogsApi()

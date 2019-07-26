@@ -9,6 +9,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.R.layout
+import homepunk.github.com.presentation.core.ext.getColor
 import homepunk.github.com.presentation.feature.widget.animation.GammaEvaluator
 
 

@@ -34,9 +34,10 @@ class MenuViewModel @Inject constructor(var appDataFactory: AppDataFactory,
                     for (menuModel in this) {
                         menuItemFragmentList.add(
                                 when (menuModel) {
-                                    MenuModel.ABOUT -> Fragment()
+                                    MenuModel.MAP -> Fragment()
                                     MenuModel.COUNTRY -> CountryListFragment()
-                                    MenuModel.LANGUAGE -> LanguageListFragment()
+                                    MenuModel.CALENDAR -> Fragment()
+                                    MenuModel.SETTINGS -> LanguageListFragment()
                                 })
                     }
                 })

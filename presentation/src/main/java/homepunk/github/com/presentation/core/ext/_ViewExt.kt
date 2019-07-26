@@ -3,10 +3,14 @@ package homepunk.github.com.presentation.core.ext
 import android.animation.Animator
 import android.animation.ValueAnimator
 import android.graphics.drawable.Drawable
+import android.util.TypedValue
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.ViewTreeObserver
 import android.view.animation.LinearInterpolator
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -42,9 +46,25 @@ fun View.swapVisibility() {
     }
 }
 
+fun <T> View.dpToPx(value: Float): T {
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, context.resources.displayMetrics) as T
+}
+
+fun View.getColor(colorID: Int) = ContextCompat.getColor(context, colorID)
+
+fun View.onGlobalLayout(action: (() -> Unit)? = null) {
+    viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+        override fun onGlobalLayout() {
+            viewTreeObserver.removeGlobalOnLayoutListener(this)
+            action?.invoke()
+        }
+    })
+
+}
+
 @BindingAdapter("isVisible")
 fun View.isVisible(isVisible: Boolean) {
-    Timber.w("isVisible = $isVisible")
+//    Timber.w("isVisible = $isVisible")
     visibility = if (isVisible) VISIBLE else GONE
 }
 
@@ -95,6 +115,13 @@ fun NestedScrollView.scrollToRecyclerChild(position: Int, scrollAnchorId: Int) {
 @BindingAdapter("el_title")
 fun ExpandableHeader.bindElTitle(title: String) {
     setHeaderTitle(title)
+}
+
+
+@BindingAdapter("bindText")
+fun TextView.text(text: String) {
+    setText(text)
+    Timber.w("text = $text")
 }
 
 

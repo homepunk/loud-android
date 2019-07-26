@@ -1,8 +1,8 @@
 package homepunk.github.com.data.local.repository
 
-import homepunk.github.com.data.local.SharedPreferencesManager
-import homepunk.github.com.data.local.SharedPreferencesManager.Companion.KEY_CURRENT_APP_MODE
-import homepunk.github.com.data.local.SharedPreferencesValueObservable
+import homepunk.github.com.data.local.prefs.SharedPreferencesManager
+import homepunk.github.com.data.local.prefs.SharedPreferencesManager.Companion.KEY_CURRENT_APP_MODE
+import homepunk.github.com.data.local.prefs.SharedPreferencesValueObservable
 import homepunk.github.com.domain.model.AppMode
 import homepunk.github.com.domain.repository.AppModeRepository
 import io.reactivex.Observable
@@ -15,7 +15,6 @@ class AppModeDataRepository @Inject constructor(val prefsManager: SharedPreferen
 
     override fun getCurrentMode(): Observable<AppMode> {
         return modeObservable.valueObservable
-                .doOnNext { Timber.e("CURRENT MODE = $it") }
                 .map { AppMode.values().find { mode -> mode.ordinal == it }!! }
     }
 

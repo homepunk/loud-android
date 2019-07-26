@@ -13,7 +13,8 @@ import javax.inject.Singleton
 /**Created by Homepunk on 26.12.2018. **/
 @Component(modules = [
     AppModule::class,
-    DataModule::class,
+    LocalDataModule::class,
+    RemoteDataModule::class,
     ViewModelBindingModule::class,
     RepositoryBindingModule::class,
     FeatureBindingModule::class,

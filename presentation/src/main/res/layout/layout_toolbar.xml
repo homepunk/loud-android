@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -14,8 +14,36 @@
 
         <import type="homepunk.github.com.domain.model.AppMode" />
 
+        <import type="homepunk.github.com.domain.model.internal.UserLocation" />
+
+        <import type="homepunk.github.com.presentation.feature.widget.dropdownlistview.OnDropDownClickListener" />
+
+        <import type="java.util.List" />
+
+        <import type="androidx.lifecycle.MutableLiveData" />
+
         <variable
             name="onMenuClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="isMenuOpened"
+            type="MutableLiveData&lt;Boolean>" />
+
+        <variable
+            name="dropDownSelection"
+            type="Integer" />
+
+        <variable
+            name="dropDownList"
+            type="List&lt;UserLocation>" />
+
+        <variable
+            name="onLocationDropDownClickListener"
+            type="OnDropDownClickListener&lt;UserLocation>" />
+
+        <variable
+            name="onLocationPinClickListener"
             type="android.view.View.OnClickListener" />
 
         <variable
@@ -34,60 +62,6 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-            <TextView
-                android:id="@+id/btn_event"
-                android:layout_width="160dp"
-                android:layout_height="48dp"
-                android:layout_marginBottom="@dimen/margin_default_8dp"
-                android:layout_marginTop="40dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/menu"
-                android:gravity="start|bottom"
-                android:fontFamily="@font/lato_bold"
-                android:onClickListener="@{onModeClickListener}"
-                android:text="EVENTS"
-                android:textAllCaps="true"
-                android:textSize="34sp"
-                android:textColor="@color/subtitle3"
-                bind:updateModeTitleOnModeChange="@{appModeModel}"
-                bind:btnMode="@{AppMode.EVENTS}"/>
-
-            <TextView
-                android:id="@+id/btn_releases"
-                android:layout_width="160dp"
-                android:layout_height="48dp"
-                android:gravity="start|bottom"
-                android:layout_marginStart="@dimen/margin_default_10dp"
-                android:layout_marginEnd="@dimen/margin_big_20dp"
-                android:layout_marginTop="40dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginBottom="@dimen/margin_default_8dp"
-                app:layout_constraintStart_toEndOf="@+id/btn_event"
-                app:layout_constraintTop_toBottomOf="@+id/menu"
-                android:fontFamily="@font/lato_bold"
-                android:onClickListener="@{onModeClickListener}"
-                android:text="ARTISTS"
-                android:textAllCaps="true"
-                android:textSize="34sp"
-                android:textColor="@color/subtitle3"
-                bind:updateModeTitleOnModeChange="@{appModeModel}"
-                bind:btnMode="@{AppMode.RELEASES}" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_default_10dp"
-            android:layout_marginEnd="@dimen/margin_default_10dp"
-            android:layout_marginBottom="@dimen/margin_small_6dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/title_frame"
-            app:layout_constraintStart_toStartOf="@+id/title_frame"
-            app:layout_constraintTop_toBottomOf="@+id/title_frame"
-            app:srcCompat="@drawable/title_arrow" />
 
         <ImageView
             android:id="@+id/menu"
@@ -102,30 +76,57 @@
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="48dp"
             android:layout_marginStart="@dimen/margin_big_20dp"
-            app:searchIcon="@drawable/ic_search"
             android:background="@drawable/background_rect_round_corners_gray"
             app:defaultQueryHint="Search for events"
+            app:layout_constraintBottom_toBottomOf="@+id/menu"
             app:layout_constraintStart_toEndOf="@+id/menu"
             app:layout_constraintTop_toTopOf="@+id/menu"
-            app:layout_constraintBottom_toBottomOf="@+id/menu"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:queryHint="Search for events" />
+            app:queryHint="Search for events"
+            app:searchIcon="@drawable/ic_search" />
+
+        <homepunk.github.com.presentation.feature.widget.dropdownlistview.DropDownListView
+            android:id="@+id/location_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_default_8dp"
+            app:isVisible="@{!isMenuOpened}"
+            app:animationResId="@{R.anim.item_animation_from_top}"
+            app:animationDuration="@{300}"
+            app:dropDownList="@{dropDownList}"
+            app:dropDownSelection="@{dropDownSelection}"
+            app:onDropDownClickListener="@{onLocationDropDownClickListener}"
+            app:layoutResource="@layout/layout_item_spinner_location"
+            app:dropDownLayoutResource="@layout/layout_item_spinner_dropdown_location"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_location"
+            app:layout_constraintEnd_toStartOf="@+id/iv_location"
+            app:layout_constraintTop_toTopOf="@+id/iv_location"/>
+<!--            app:dropDownSelection="@{currentUserLocationPosition}"
+-->
+
+        <ImageView
+            android:id="@+id/iv_location"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:onClickListener="@{onLocationPinClickListener}"
+            android:src="@drawable/ic_target"
+            android:tint="@color/whiteBone"
+            app:layout_constraintBottom_toBottomOf="@+id/menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/menu" />
 
         <View
-            android:id="@+id/view2"
-            android:layout_width="42dp"
-            android:layout_height="2dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/colorAccent"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_frame" />
+            app:layout_constraintTop_toTopOf="@+id/iv_location"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_location"
+            app:layout_constraintStart_toStartOf="@+id/iv_location"
+            app:layout_constraintEnd_toEndOf="@+id/iv_location"
+            app:scale="@{isMenuOpened ? 6 : 1}"
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:background="@drawable/shape_circle"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

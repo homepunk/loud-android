@@ -8,7 +8,7 @@ import homepunk.github.com.presentation.feature.event.home.EventListFragment
 import homepunk.github.com.presentation.feature.event.timeline.EventTimelineFragment
 import homepunk.github.com.presentation.feature.releases.library.DiscoverLibraryFragment
 import homepunk.github.com.presentation.feature.main.MainActivity
-import homepunk.github.com.presentation.feature.menu.MenuActivity
+import homepunk.github.com.presentation.feature.menu.MenuFragment
 import homepunk.github.com.presentation.feature.menu.country.CountryListFragment
 import homepunk.github.com.presentation.feature.menu.language.LanguageListFragment
 
@@ -19,7 +19,7 @@ interface FeatureBindingModule {
     fun mainAcitivity(): MainActivity
 
     @ContributesAndroidInjector
-    fun menuAcitivity(): MenuActivity
+    fun menuAcitivity(): MenuFragment
 
     @ContributesAndroidInjector
     fun discoverHostFragment(): DiscoverHostFragment

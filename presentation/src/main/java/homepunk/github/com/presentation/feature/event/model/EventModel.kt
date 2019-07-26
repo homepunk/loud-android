@@ -6,10 +6,10 @@ import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import homepunk.github.com.domain.model.songkick.SongkickEvent
 import homepunk.github.com.presentation.core.ext.dayOfMonth
+import homepunk.github.com.presentation.core.ext.dayOfWeek
 import homepunk.github.com.presentation.core.ext.month
 import homepunk.github.com.presentation.util.DateTimeUtil
 import homepunk.github.com.presentation.util.SongkickUtil
-import timber.log.Timber
 import java.io.Serializable
 import java.util.*
 
@@ -21,15 +21,18 @@ class EventModel(var event: SongkickEvent) : Serializable, BaseObservable() {
     var fullDate = ObservableField<String>()
     var title = ObservableField<String>()
     var location = ObservableField<String>()
+    var day = ObservableField<String>()
 
     init {
-        Timber.w("THREAD = ${Thread.currentThread().name}, item name = ${event.displayName}")
+//        Timber.w("THREAD = ${Thread.currentThread().name}, item name = ${item.displayName}")
         if (!event.start?.date.isNullOrEmpty()) {
             val startDate = SongkickUtil.getDate(event.start?.date!!)
             date.set(getDate(startDate))
             month.set(getMonth(startDate))
             fullDate.set(date.get() + " " + DateTimeUtil.getMonthForInt(month.get()))
             startFromToday.set(getStartFromToday(startDate))
+            day.set("${startDate!!.dayOfWeek()}, ${startDate.dayOfMonth()}")
+
         }
         title.set(getEventName(event.displayName))
         location.set(getLocationName(event.displayName))

@@ -13,7 +13,7 @@ class SimpleBindingRecyclerAdapter<ITEM>(private val layoutId: Int, val variable
     var onSpecificFieldClickListener: SpecificFieldClickListener<ITEM>? = null
 
     constructor(layoutId: Int, variableId: Int, itemList: ObservableArrayList<ITEM>) : this(layoutId, variableId) {
-        this.itemList = itemList
+        setItemList(itemList)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimpleBindingViewHolder<ITEM> {

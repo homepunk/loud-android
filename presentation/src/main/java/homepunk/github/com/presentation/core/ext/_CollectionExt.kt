@@ -39,7 +39,7 @@ fun Array<String>.getMaxLenStringIndex(): Int {
 }
 
 
-fun <E> MutableList<E>.containsLike(predicate: (E) -> Boolean): Boolean {
+fun <E> List<E>.containsLike(predicate: (E) -> Boolean): Boolean {
     forEachIndexed { index, item ->
         if (predicate.invoke(item)) {
             return true

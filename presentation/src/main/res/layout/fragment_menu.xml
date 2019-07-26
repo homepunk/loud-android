@@ -30,30 +30,18 @@
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/layout_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginStart="@dimen/margin_big_20dp"
-            android:layout_marginEnd="@dimen/margin_big_20dp"
-            app:title="@{@string/label_menu}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:onMenuClickListener="@{onMenuClickListener}" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_mode_menu"
+            android:layout_marginTop="@dimen/margin_big_20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_big_20dp"
+            android:layout_marginStart="@dimen/margin_big_20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mode_tab_layout"
+            app:layout_constraintTop_toTopOf="parent"
             bind:itemList="@{menuViewModel.menuItemList}"
-            bind:itemAnimationEnabled="@{true}"
+            android:layoutAnimation="@anim/layout_animation_slide_from_right"
             bind:itemDecoration_top="@{@dimen/margin_big_20dp}"
             tools:listitem="@layout/layout_item_menu" />
 

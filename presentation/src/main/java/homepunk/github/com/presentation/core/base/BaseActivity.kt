@@ -50,6 +50,7 @@ abstract class BaseActivity<BINDING : ViewDataBinding> : AppCompatActivity() {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         window.navigationBarColor = ContextCompat.getColor(this, R.color.background)
         mDataBinding = DataBindingUtil.setContentView(this, layoutId)
+        mDataBinding.lifecycleOwner = this
 
         init()
     }

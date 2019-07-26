@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import homepunk.github.com.presentation.core.listener.OnItemClickListener
 import homepunk.github.com.presentation.core.listener.OnItemPositionClickListener
-import timber.log.Timber
 
 /**Created by Homepunk on 10.01.2019. **/
 abstract class BaseRecyclerViewAdapter<ITEM, VH : BaseRecyclerViewAdapter.BaseViewHolder<ITEM>> : RecyclerView.Adapter<VH>() {
@@ -21,42 +20,47 @@ abstract class BaseRecyclerViewAdapter<ITEM, VH : BaseRecyclerViewAdapter.BaseVi
 
     fun isParentListInitialized() = ::itemList.isInitialized
 
+    fun setItemList(itemList: List<ITEM>) {
+        setItemList(ObservableArrayList<ITEM>()
+                .apply {
+                    addAll(itemList)
+                })
+    }
+
     fun setItemList(itemList: ObservableArrayList<ITEM>) {
         this.itemList = itemList
         this.itemList.addOnListChangedCallback(object : ObservableList.OnListChangedCallback<ObservableList<ITEM>?>() {
             override fun onChanged(sender: ObservableList<ITEM>?) {
                 notifyDataSetChanged()
-                Timber.w("onChanged")
+//                Timber.w("onChanged")
             }
 
             override fun onItemRangeRemoved(sender: ObservableList<ITEM>?, positionStart: Int, itemCount: Int) {
-                Timber.w("onItemRangeRemoved $positionStart, $itemCount")
+//                Timber.w("onItemRangeRemoved $positionStart, $itemCount")
                 notifyItemRangeRemoved(positionStart, itemCount)
             }
 
             override fun onItemRangeMoved(sender: ObservableList<ITEM>?, fromPosition: Int, toPosition: Int, itemCount: Int) {
-                Timber.w("onItemRangeMoved")
+//                Timber.w("onItemRangeMoved")
                 notifyItemMoved(fromPosition, toPosition)
             }
 
             override fun onItemRangeInserted(sender: ObservableList<ITEM>?, positionStart: Int, itemCount: Int) {
-                Timber.w("onItemRangeInserted")
+//                Timber.w("onItemRangeInserted")
                 notifyItemRangeInserted(positionStart, itemCount)
             }
 
             override fun onItemRangeChanged(sender: ObservableList<ITEM>?, positionStart: Int, itemCount: Int) {
-                Timber.w("onItemRangeChanged")
+//                Timber.w("onItemRangeChanged")
                 notifyItemRangeChanged(positionStart, itemCount)
             }
         })
     }
 
-    override fun getItemCount() = if (isParentListInitialized()) itemList.size else 0
-
     open var onItemClickListener: OnItemClickListener<ITEM>? = null
     open var onItemPositionClickListener: OnItemPositionClickListener? = null
 
-//    override fun getItemCount() = itemList.size
+    override fun getItemCount() = if (isParentListInitialized()) itemList.size else 0
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)

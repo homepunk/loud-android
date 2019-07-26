@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="homepunk.github.com.presentation.feature.widget.timeline.TimelineDataModel" />
+            type="homepunk.github.com.presentation.feature.widget.timeline.model.TimelineEventModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,78 +15,56 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent">
 
-        <View
-            android:id="@+id/timeline"
-            android:layout_width="@dimen/width_timeline"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            android:layout_marginStart="@dimen/margin_timeline"
-            android:background="@color/timeline"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
+       <!-- <TextView
             android:id="@+id/month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato"
             android:paddingTop="@dimen/margin_default_10dp"
-            android:paddingBottom="@dimen/margin_big_16dp"
+            android:visibility="gone"
+            android:paddingBottom="@dimen/margin_big_20dp"
             android:text="@{model.month}"
             android:textAllCaps="true"
             android:textColor="@{model.isUpcoming ? @color/modeEventsColor : @color/whiteBone}"
             android:textSize="@dimen/text_size_large"
-            app:isVisible="@{model.isNewMonth}"
             app:layout_constraintStart_toStartOf="@+id/cv_item"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="JUNE"
-            tools:visibility="gone" />
+            tools:text="JUNE" />
+        &lt;!&ndash;app:isVisible="@{model.isNewMonth}"&ndash;&gt;
 
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/background"
-            android:visibility="gone"
+            android:fontFamily="@font/lato_bold"
+            android:letterSpacing="0.02"
+            android:lineSpacingExtra="1sp"
+            android:paddingTop="@dimen/margin_default_10dp"
+            android:paddingBottom="@dimen/margin_big_20dp"
             android:text="@{model.day}"
             android:textAlignment="center"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
             android:textColor="@color/whiteBone"
-            android:textSize="@dimen/text_size_timeline_date"
-            app:layout_constraintBottom_toBottomOf="@+id/cv_item"
-            app:layout_constraintEnd_toEndOf="@+id/timeline"
-            app:layout_constraintStart_toStartOf="@+id/timeline"
-            app:layout_constraintTop_toTopOf="@+id/cv_item"
+            android:textSize="22sp"
+            android:textAllCaps="true"
+            app:isVisible="@{model.isNewDay}"
+            app:layout_constraintStart_toStartOf="@+id/cv_item"
+            app:layout_constraintTop_toBottomOf="@+id/month"
             tools:text="2"
-            tools:visibility="gone" />
-
+            tools:visibility="visible" />
+-->
         <FrameLayout
             android:id="@+id/cv_item"
             android:layout_width="0dp"
-            android:layout_marginStart="@dimen/margin_default_10dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_default_10dp"
             app:cardBackgroundColor="@color/darkBackground"
             app:cardCornerRadius="@dimen/radius_default_card"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/timeline"
-            app:layout_constraintTop_toBottomOf="@+id/month"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date"
             tools:background="@color/whiteBone"
             tools:layout_height="80dp"
             tools:visibility="visible" />
-
-        <ImageView
-            android:id="@+id/iv_endpoint"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@color/background"
-            android:src="@drawable/ic_timeline_end_accent_24dp"
-            app:isVisible="@{model.isLast}"
-            app:layout_constraintEnd_toEndOf="@+id/timeline"
-            app:layout_constraintStart_toStartOf="@+id/timeline"
-            app:layout_constraintTop_toBottomOf="@+id/cv_item"
-            tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

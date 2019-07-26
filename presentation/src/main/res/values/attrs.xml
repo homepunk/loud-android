@@ -18,4 +18,11 @@
         <attr name="el_headerHorizontalPadding" format="integer|dimension"/>
     </declare-styleable>
 
+    <declare-styleable name="DropDownListView">
+        <attr name="layoutResource" format="reference"/>
+        <attr name="layoutResourceVariableId" format="integer"/>
+        <attr name="dropDownLayoutResource" format="reference"/>
+        <attr name="dropDownLayoutResourceVariableId" format="integer"/>
+    </declare-styleable>
+
 </resources>

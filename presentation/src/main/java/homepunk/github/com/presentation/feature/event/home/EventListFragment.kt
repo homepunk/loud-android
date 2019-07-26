@@ -16,11 +16,7 @@ class EventListFragment : BaseFragment<FragmentEventListBinding>() {
 
     override fun init() {
         mViewModel = getViewModel(EventListViewModel::class.java).apply {
-            userLocationLiveData.observe(this@EventListFragment, Observer {
-                updateUpcomingEventList(it)
-            })
-
-            onEventClickLiveData.observe(this@EventListFragment, Observer {
+            onEventClickLiveData.observe(viewLifecycleOwner, Observer {
                 val fragment = EventFragment.newInstance(it)
                 activity?.supportFragmentManager?.run {
                     beginTransaction().replace(android.R.id.content, fragment)
@@ -35,7 +31,7 @@ class EventListFragment : BaseFragment<FragmentEventListBinding>() {
             rvNearestEvents.adapter = SimpleBindingRecyclerAdapter<EventModel>(R.layout.layout_item_primary_event, BR.model)
 
             svRootLayout.viewTreeObserver.addOnScrollChangedListener {
-//                AnimationEventLiveData.getInstance().onScrollEvent(ScrollEvent(svRootLayout.scrollY, svRootLayout.getChildAt(0).height))
+                //                AnimationEventLiveData.getInstance().onScrollEvent(ScrollEvent(svRootLayout.scrollY, svRootLayout.getChildAt(0).height))
             }
             viewModel = mViewModel
         }
@@ -43,6 +39,5 @@ class EventListFragment : BaseFragment<FragmentEventListBinding>() {
 
     override fun onResume() {
         super.onResume()
-        wLog("onResume")
     }
 }

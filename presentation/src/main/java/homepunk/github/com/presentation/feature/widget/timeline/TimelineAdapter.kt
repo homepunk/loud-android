@@ -1,20 +1,24 @@
 package homepunk.github.com.presentation.feature.widget.timeline
 
-import android.content.Context
-import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
-import java.text.SimpleDateFormat
+import homepunk.github.com.presentation.core.listener.OnNotifyDataSeChangedListener
 import java.util.*
 
 /**Created by Homepunk on 14.05.2019. **/
 abstract class TimelineAdapter<T> {
-    var itemList: ArrayList<T>? = null
+    var onNotifyDataSeChangedListener: OnNotifyDataSeChangedListener? = null
+    var itemList: List<T>? = null
+    set(value) {
+        field = value
+        onNotifyDataSeChangedListener?.onDataSetChanged()
+    }
 
-    abstract fun getDate(value: T) : String
+    abstract fun getDateLayoutId(): Int
 
-    abstract fun getDateFormat(): SimpleDateFormat
+    abstract fun getDefaultLayoutId(): Int
 
-    abstract fun onInflateLayout(context: Context, root: ViewGroup): ViewDataBinding
+    abstract fun getDate(value: T) : Date
 
-    abstract fun onBindLayout(binding: ViewDataBinding, index: Int)
+    abstract fun getDateText(value: T): String
+
+    abstract fun getMonthText(value: T): String
 }

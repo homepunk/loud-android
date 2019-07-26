@@ -1,11 +1,10 @@
 package homepunk.github.com.presentation.common.adapter.timeline
 
-import android.content.Context
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
+import homepunk.github.com.presentation.R
+import homepunk.github.com.presentation.core.ext.dayOfMonth
+import homepunk.github.com.presentation.core.ext.dayOfWeek
+import homepunk.github.com.presentation.core.ext.monthName
 import homepunk.github.com.presentation.core.listener.OnItemClickListener
-import homepunk.github.com.presentation.databinding.LayoutItemTimelineEvent2Binding
 import homepunk.github.com.presentation.feature.event.model.EventModel
 import homepunk.github.com.presentation.feature.widget.timeline.TimelineAdapter
 import java.text.SimpleDateFormat
@@ -14,27 +13,17 @@ import java.util.*
 /**Created by Homepunk on 15.05.2019. **/
 
 class TimelineEventAdapter : TimelineAdapter<EventModel>() {
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
     var onItemClickListener: OnItemClickListener<EventModel>? = null
 
-    override fun getDate(value: EventModel): String {
-        return value.event.start!!.date!!
-    }
+    override fun getDateLayoutId() = R.layout.custom_layout_item_timeline_day
 
-    override fun getDateFormat(): SimpleDateFormat {
-        return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-    }
+    override fun getDefaultLayoutId() = R.layout.custom_layout_item_timeline_event
 
-    override fun onInflateLayout(context: Context, root: ViewGroup): ViewDataBinding {
-        return LayoutItemTimelineEvent2Binding.inflate(LayoutInflater.from(context), root, true)
-    }
+    override fun getDate(value: EventModel)= dateFormat.parse(value.event.start!!.date!!)!!
 
-    override fun onBindLayout(binding: ViewDataBinding, index: Int) {
-        with(binding as LayoutItemTimelineEvent2Binding) {
-            val eventModel = itemList!![index]
-            model = eventModel
-            cvEvent.setOnClickListener {
-                onItemClickListener?.onClick(index, eventModel)
-            }
-        }
-    }
+    override fun getDateText(value: EventModel) = getDate(value).run { "${dayOfWeek()}, ${dayOfMonth()}" }
+
+    override fun getMonthText(value: EventModel) = getDate(value).run { monthName() }
 }

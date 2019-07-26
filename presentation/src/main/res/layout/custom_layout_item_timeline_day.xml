@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="model"
+            type="homepunk.github.com.presentation.feature.event.model.EventModel" />
+
+    </data>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:background="@color/background"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_default_10dp"
+            android:fontFamily="@font/lato_bold"
+            android:letterSpacing="0.02"
+            android:lineSpacingExtra="1sp"
+            android:text="@{model.day}"
+            android:textAllCaps="true"
+            android:textColor="?colorAccent"
+            android:textSize="22sp"
+            tools:text="понедельник, 6" />
+    </FrameLayout>
+</layout>

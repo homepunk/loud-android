@@ -1,4 +1,4 @@
-package homepunk.github.com.data.local
+package homepunk.github.com.data.local.prefs
 
 import android.content.SharedPreferences
 import io.reactivex.Observable

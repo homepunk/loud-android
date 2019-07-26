@@ -16,7 +16,7 @@ class AppModeViewModel @Inject constructor(var appDataFactory: AppDataFactory,
     val currentAppModeModelLiveData = MutableLiveData<AppModeModel>()
 
     fun subscribeOnModeChanges() {
-        compositeDisposable.add(appModeInteractor.getAppMode()
+        subscriptions.add(appModeInteractor.getAppMode()
                 .map { mode -> appDataFactory.getAppModeModel(mode) }
                 .doOnError { it.printStackTrace() }
                 .doOnNext { currentAppModeModelLiveData.value = it }

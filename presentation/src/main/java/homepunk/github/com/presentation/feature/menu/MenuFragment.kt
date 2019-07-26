@@ -1,46 +1,32 @@
 package homepunk.github.com.presentation.feature.menu
 
-import android.os.Bundle
-import android.transition.Slide
-import android.view.Gravity
-import android.view.View
-import android.view.Window
 import homepunk.github.com.presentation.BR
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.common.adapter.SimpleBindingRecyclerAdapter
 import homepunk.github.com.presentation.common.adapter.SimpleViewPagerAdapter
 import homepunk.github.com.presentation.common.model.menu.MenuModel
-import homepunk.github.com.presentation.core.base.BaseActivity
+import homepunk.github.com.presentation.core.base.BaseFragment
 import homepunk.github.com.presentation.core.ext.setupWithViewPager
-import homepunk.github.com.presentation.databinding.ActivityMenuBinding
+import homepunk.github.com.presentation.databinding.FragmentMenuBinding
 
 
-
-class MenuActivity : BaseActivity<ActivityMenuBinding>() {
+class MenuFragment : BaseFragment<FragmentMenuBinding>() {
     private lateinit var mMenuViewModel: MenuViewModel
 
-    override var layoutId = R.layout.activity_menu
+    override var layoutId = R.layout.fragment_menu
 
     override fun init() {
         mMenuViewModel = getViewModel(MenuViewModel::class.java)
         mDataBinding.run {
             menuViewModel = mMenuViewModel
 
-            vpMenuItemDetail.adapter = SimpleViewPagerAdapter(supportFragmentManager)
+            vpMenuItemDetail.adapter = SimpleViewPagerAdapter(childFragmentManager)
             rvModeMenu.adapter = SimpleBindingRecyclerAdapter<MenuModel>(R.layout.layout_item_menu, BR.model)
             rvModeMenu.setupWithViewPager(vpMenuItemDetail)
 
-            onMenuClickListener = View.OnClickListener {
+           /* onMenuClickListener = View.OnClickListener {
                 onBackPressed()
-            }
+            }*/
         }
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
-        window.enterTransition = Slide(Gravity.BOTTOM)
-        window.exitTransition = Slide(Gravity.TOP)
-        super.onCreate(savedInstanceState)
-    }
-
 }

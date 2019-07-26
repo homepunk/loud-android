@@ -38,6 +38,16 @@ fun <T> Observable<T>.useIfEmpty(dataSource: Observable<T>): Observable<T> {
             }
 }
 
+/*fun <T> doOnFirst(consumer: Consumer<in T>): FlowableTransformer<T, T> {
+    return Flowable.defer<T> {
+            val first = AtomicBoolean(true)
+            f.doOnNext({ t ->
+                if (first.compareAndSet(true, false)) {
+                    consumer.accept(t)
+                }
+            })
+}*/
+
 //fun <T> applySchedulers(): Transformer<T, T> {
 //    return { observable ->
 //        observable.subscribeOn(Schedulers.io())

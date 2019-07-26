@@ -1,8 +1,5 @@
 package homepunk.github.com.presentation.feature.main
 
-import android.app.ActivityOptions
-import android.content.Intent
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.lifecycle.Observer
@@ -14,7 +11,7 @@ import homepunk.github.com.presentation.core.ext.isNotVisible
 import homepunk.github.com.presentation.core.ext.isVisible
 import homepunk.github.com.presentation.core.ext.setupWithViewPager
 import homepunk.github.com.presentation.databinding.ActivityMainBinding
-import homepunk.github.com.presentation.feature.menu.MenuActivity
+import homepunk.github.com.presentation.feature.menu.MenuFragment
 import homepunk.github.com.presentation.feature.widget.animation.AnimationEventLiveData
 import homepunk.github.com.presentation.feature.widget.animation.ScrollEvent
 
@@ -28,13 +25,24 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         mMainViewModel = getViewModel(MainViewModel::class.java)
 
         mDataBinding.run {
-            viewModel = mMainViewModel
-            onMenuClickListener = View.OnClickListener {
-                startActivity(Intent(this@MainActivity, MenuActivity::class.java), ActivityOptions.makeSceneTransitionAnimation(this@MainActivity).toBundle())
+            viewModel = mMainViewModel.apply {
+                isMenuOpenedLiveData.observe(this@MainActivity, Observer { open ->
+                    if (open) {
+                        supportFragmentManager.run {
+                            beginTransaction()
+                                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                                    .replace(R.id.menu_fragment_container, MenuFragment())
+                                    .addToBackStack(null)
+                                    .commit()
+                        }
+                    } else {
+                        onBackPressed()
+                    }
+                })
             }
-
             viewPager.adapter = SimpleViewPagerAdapter(supportFragmentManager)
             bottomNav.setupWithViewPager(viewPager)
+
         }
 
 
@@ -49,7 +57,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 bgToolbarShadowAppearance.alpha = alpha
                 bgAppBarShadowAppearance.alpha = 1f - alpha
                 with(scrollEvent) {
-//                    wLog("SCROLL APP BAR scrollY $scrollY, contentHeight = $contentHeight")
+                    //                    wLog("SCROLL APP BAR scrollY $scrollY, contentHeight = $contentHeight")
                     if (scrollY > segmentBoundaryY) {
                         val segmentDelta = appBarLayout.totalScrollRange - segmentHeight
 //                        val alpha = (scrollY - segmentBoundaryY).toFloat() / segmentHeight
@@ -110,6 +118,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 
+    override fun onBackPressed() {
+        if (mMainViewModel.isMenuOpenedLiveData.value == true) {
+            mMainViewModel.isMenuOpenedLiveData.value = false
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     private fun setUpTopShadowBehaviour(it: ScrollEvent) {
         with(mDataBinding) {
             if (it.scrollY > appBarLayout.height &&
@@ -127,5 +143,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 }
+
 
 

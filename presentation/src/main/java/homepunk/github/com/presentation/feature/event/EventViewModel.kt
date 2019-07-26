@@ -60,7 +60,7 @@ class EventViewModel @Inject constructor(var eventInteractor: SongkickEventInter
     fun init(model: ArrayList<EventModel>) {
         eventModel = model[0]
         setUpNearestEventsTimeline(model)
-        compositeDisposable.add(eventInteractor.getEventDetails(eventModel.event.id)
+        subscriptions.add(eventInteractor.getEventDetails(eventModel.event.id)
                 .doOnError { it.printStackTrace() }
 //                .flatMapIterable { it.performance }
 //                .filter { it.artist != null }

@@ -14,13 +14,17 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:textColor="@drawable/menu_text_color_selector"
-            android:fontFamily="@font/lato"
-            android:text="@{model.title}"
-            android:layout_gravity="center_horizontal"
-            android:textSize="@dimen/text_size_menu_item"
-            tools:text="Setting"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:letterSpacing="0.02"
+            android:textColor="@drawable/menu_text_color_selector"
+            android:lineSpacingExtra="1sp"
+            android:text="@{model.title}"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_size_large"
+            tools:text="Setting" />
+
     </FrameLayout>
 </layout>

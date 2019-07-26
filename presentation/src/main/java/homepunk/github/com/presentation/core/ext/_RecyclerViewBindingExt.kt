@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableArrayList
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -62,6 +63,7 @@ fun TextView.changeColorOnClick(change: Boolean) {
         }
     }
 }
+
 @BindingAdapter("changeColorOnClick3")
 fun TextView.changeColorOnClick3(change: Boolean) {
     if (change) {
@@ -88,6 +90,7 @@ fun TextView.changeColorOnClick3(change: Boolean) {
         }
     }
 }
+
 @BindingAdapter("changeColorOnClick2")
 fun TextView.changeColorOnClick2(change: Boolean) {
     if (change) {
@@ -114,7 +117,6 @@ fun <T> RecyclerView.bindItemList(itemList: ObservableArrayList<T>) {
     scheduleLayoutAnimation()
     (adapter as? SimpleBindingRecyclerAdapter<T>)?.let {
         if (!it.isParentListInitialized()) {
-            Timber.w("INITIALIZE")
             it.setItemList(itemList)
         }
     }
@@ -126,8 +128,18 @@ fun <CHILD : ExpandableChildModel, PARENT : ExpandableParentModel<CHILD>> Recycl
     Timber.w("BIND NEW PARENT LIST: ${itemList.size}")
     (adapter as? SimpleExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
         if (!it.isParentListInitialized()) {
-            Timber.w("INITIALIZE")
             it.setItemList(itemList)
+        }
+    }
+}
+
+@BindingAdapter("expandableItemList")
+fun <CHILD : ExpandableChildModel, PARENT : ExpandableParentModel<CHILD>> RecyclerView.bindParentList(itemList: MutableLiveData<List<PARENT>>) {
+    (adapter as? SimpleExpandableBindingRecyclerAdapter<CHILD, PARENT>)?.let {
+        if (!it.isParentListInitialized()) {
+            it.setItemList(ObservableArrayList<PARENT>().apply {
+                addAll(itemList.value!!)
+            })
         }
     }
 }

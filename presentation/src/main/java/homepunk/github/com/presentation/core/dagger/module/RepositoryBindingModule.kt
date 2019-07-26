@@ -3,7 +3,7 @@ package homepunk.github.com.presentation.core.dagger.module
 import dagger.Binds
 import dagger.Module
 import homepunk.github.com.data.local.repository.AppModeDataRepository
-import homepunk.github.com.data.local.repository.UserLocationDataRepository
+import homepunk.github.com.data.local.repository.UserConfigurationDataRepository
 import homepunk.github.com.data.remote.repository.DiscogsDatabaseRemoteRepository
 import homepunk.github.com.data.remote.repository.SongkickEventDataRepository
 import homepunk.github.com.data.remote.repository.SongkickLocationDataRepository
@@ -20,13 +20,13 @@ interface RepositoryBindingModule {
     fun bindSongkickEventRepository(repo: SongkickEventDataRepository): SongkickEventRepository
 
     @Binds
-    fun bindLocationRepository(repo: SongkickLocationDataRepository): LocationRepository
+    fun bindLocationRepository(repo: SongkickLocationDataRepository): SongkickLocationRepository
 
     @Binds
     fun bindAppModeDataRepository(repo: AppModeDataRepository): AppModeRepository
 
     @Binds
-    fun bindEventSettingsRepository(repo: UserLocationDataRepository): UserLocationRepository
+    fun bindUserConfigurationRepository(repo: UserConfigurationDataRepository): UserConfigurationRepository
 
     @Binds
     fun bindYoutubeDataRepository(repo: YoutubeDataRepository): YoutubeRepository

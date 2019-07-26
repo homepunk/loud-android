@@ -3,6 +3,7 @@ package homepunk.github.com.presentation
 import android.app.Activity
 import android.app.Application
 import androidx.fragment.app.Fragment
+import com.facebook.stetho.Stetho
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -19,6 +20,7 @@ class VUApplication : Application(), HasSupportFragmentInjector, HasActivityInje
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
+        Stetho.initializeWithDefaults(this)
 
         DaggerAppComponent
                 .builder()

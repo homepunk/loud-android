@@ -9,16 +9,15 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
-import androidx.core.content.ContextCompat
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayout
-import homepunk.github.com.presentation.core.ext.duration
+import homepunk.github.com.presentation.core.ext.getColor
+import homepunk.github.com.presentation.core.ext.onGlobalLayout
 import homepunk.github.com.presentation.core.ext.swap
 import homepunk.github.com.presentation.feature.widget.animation.GammaEvaluator
 
@@ -145,12 +144,7 @@ class FiltersLayout @JvmOverloads constructor(context: Context, attrs: Attribute
             }, params)
         }
         mHighlightView.backgroundTintList = ColorStateList.valueOf(highlightColor)
-        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                viewTreeObserver.removeGlobalOnLayoutListener(this)
-                highlightItem(highlightPosition)
-            }
-        })
+        onGlobalLayout { highlightItem(highlightPosition) }
     }
 
     private fun getFilterItem(item: FilterModel, position: Int): FilterItem {
@@ -163,5 +157,3 @@ class FiltersLayout @JvmOverloads constructor(context: Context, attrs: Attribute
 
     private fun dp2px(dpValue: Float) = (dpValue * resources.displayMetrics.density + 0.5f).toInt()
 }
-
-fun View.getColor(colorID: Int) = ContextCompat.getColor(context, colorID)

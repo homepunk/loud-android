@@ -5,19 +5,20 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.*
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView
 import homepunk.github.com.presentation.core.wrapper.AnimationListenerWrapper
 import homepunk.github.com.presentation.core.wrapper.AnimatorListenerWrapper
+import homepunk.github.com.presentation.feature.widget.animation.AnimationTextView
 import homepunk.github.com.presentation.feature.widget.animation.ReverseInterpolator
 import homepunk.github.com.presentation.util.DimensionUtil
 import timber.log.Timber
@@ -30,7 +31,7 @@ import timber.log.Timber
 fun ViewGroup.bindAnimationResId(resId: Int, visibilityValue: Int, startOffset: Int) {
     if (resId != 0) {
         val set: AnimationSet = AnimationUtils.loadAnimation(context, resId) as AnimationSet
-        if (visibilityValue == View.GONE) {
+        if (visibilityValue == GONE) {
             set.interpolator = AnticipateInterpolator()
         } else {
             set.startOffset = startOffset.toLong()
@@ -38,13 +39,13 @@ fun ViewGroup.bindAnimationResId(resId: Int, visibilityValue: Int, startOffset: 
         }
         set.animations[0]?.setAnimationListener(object : AnimationListenerWrapper() {
             override fun onAnimationStart(animation: Animation?) {
-                if (visibilityValue != View.GONE) {
+                if (visibilityValue != GONE) {
                     visibility = visibilityValue
                 }
             }
 
             override fun onAnimationEnd(animation: Animation?) {
-                if (visibilityValue == View.GONE) {
+                if (visibilityValue == GONE) {
                     visibility = visibilityValue
                 }
             }
@@ -53,6 +54,47 @@ fun ViewGroup.bindAnimationResId(resId: Int, visibilityValue: Int, startOffset: 
     } else {
         visibility = visibilityValue
     }
+}
+
+@BindingAdapter(requireAll = true, value = ["animationResId", "isVisible", "animationDuration"])
+fun ViewGroup.swapVisiblityWithAnimation(resId: Int, isVisible: Boolean, duration: Int) {
+    if (resId != 0) {
+        val set: AnimationSet = AnimationUtils.loadAnimation(context, resId) as AnimationSet
+        if (isVisible) {
+            visibility = INVISIBLE
+            set.interpolator = AccelerateInterpolator()
+        } else {
+            set.interpolator = ReverseInterpolator(set.interpolator)
+        }
+        set.duration = duration.toLong()
+        set.animations[0]?.setAnimationListener(object : AnimationListenerWrapper() {
+            override fun onAnimationStart(animation: Animation?) {
+                if (isVisible) {
+                    visibility = VISIBLE
+                }
+            }
+
+            override fun onAnimationEnd(animation: Animation?) {
+                if (!isVisible) {
+                    visibility = GONE
+                }
+            }
+        })
+        startAnimation(set)
+    } else {
+        isVisible(isVisible)
+    }
+}
+
+fun TextView.setTextWithAnimation(text: String) {
+    animate().translationY(height.toFloat()).setDuration(200).start()
+}
+
+@BindingAdapter("swapOnClick")
+fun View.swapOnClick(booleanLiveData: MutableLiveData<Boolean>) {
+//    setOnClickListener {
+//        booleanLiveData.swap()
+//    }
 }
 
 @BindingAdapter(requireAll = false, value = ["animationResId", "text"])
@@ -69,6 +111,48 @@ fun TextView.bindAnimationResId(resId: Int, text: String) {
     } else {
         setText(text)
     }
+}
+
+var lastSet: AnimatorSet? = null
+var maxScale: Float = 1.2f
+var defScale: Float = 1.0f
+
+@BindingAdapter("scale")
+fun AnimationTextView.scale(oldScale: Float, scale: Float) {
+    if (oldScale != scale) {
+        if (oldScale == 0f) {
+            if (scale > 1.0f) {
+                animateScaleChange(1f, scale)
+            }
+        } else {
+            animateScaleChange(oldScale, scale)
+        }
+    }
+}
+
+
+@BindingAdapter(requireAll = false, value = ["scale"])
+fun View.scale(oldScale: Float, scale: Float) {
+    if (oldScale != scale) {
+        if (oldScale == 0f) {
+            if (scale > 1.0f) {
+                animateScaleChange(1f, scale)
+            }
+        } else {
+            animateScaleChange(oldScale, scale)
+        }
+    }
+}
+
+private fun View.animateScaleChange(oldScale: Float, newScale: Float) {
+    val scaleAnimator = ValueAnimator.ofFloat(oldScale, newScale)
+    scaleAnimator.addUpdateListener { animation ->
+        val animatedValue = animation.animatedValue as Float
+        scaleX = animatedValue
+        scaleY = animatedValue
+    }
+    scaleAnimator.duration = 400
+    scaleAnimator.start()
 }
 
 @BindingAdapter(
@@ -170,7 +254,7 @@ fun RecyclerView.animateAppearanceOnVisibilityChange(oldAnimationEnabled: Boolea
                 }
 
             })
-            AnimatorSet().apply set@ {
+            AnimatorSet().apply set@{
                 duration = 600
                 interpolator = AnticipateOvershootInterpolator()
                 playTogether(heightAnimator, appearanceAnimator)

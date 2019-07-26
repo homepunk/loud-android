@@ -372,7 +372,7 @@
                     tools:layout_height="0dp" />
             </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>
 
-            <homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader
+<!--            <homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader
                 android:id="@+id/block_nearest_events"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -393,7 +393,7 @@
                         android:layout_marginEnd="@dimen/margin_default_10dp"
                         android:nestedScrollingEnabled="false"
                         app:timeline_adapter="@{viewModel.timelineEventAdapter}" />
-                </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>
+                </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>-->
 
             <homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader
                 android:id="@+id/block_related_artists"

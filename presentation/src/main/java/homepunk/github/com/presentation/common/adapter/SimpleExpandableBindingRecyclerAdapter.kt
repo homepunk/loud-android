@@ -16,7 +16,7 @@ import homepunk.github.com.presentation.core.ext.swap
 import homepunk.github.com.presentation.core.listener.OnItemClickListener
 import homepunk.github.com.presentation.core.listener.OnParentChildClickListener
 import homepunk.github.com.presentation.databinding.CustomLayoutItemExpandableParentBinding
-import homepunk.github.com.presentation.util.LayoutUtil.inflateVH
+import homepunk.github.com.presentation.util.LayoutUtil.inflateBindingLayout
 import timber.log.Timber
 
 /**Created by Homepunk on 18.03.2019. **/
@@ -27,7 +27,7 @@ open class SimpleExpandableBindingRecyclerAdapter<CHILD : ExpandableChildModel, 
     var onParentClickListener: OnItemClickListener<PARENT>? = null
     var onParentChildClickListener: OnParentChildClickListener<PARENT, CHILD>? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ExpandableViewHolder<CHILD, PARENT>(inflateVH(parent, R.layout.custom_layout_item_expandable_parent))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ExpandableViewHolder<CHILD, PARENT>(inflateBindingLayout(parent, R.layout.custom_layout_item_expandable_parent))
 
     override fun onBindViewHolder(holder: ExpandableViewHolder<CHILD, PARENT>, position: Int) {
         Timber.w("BIND: ${itemList.size}, position = $position")

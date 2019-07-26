@@ -63,7 +63,7 @@ class YoutubeViewModel @Inject constructor(var youtubeInteractor: YoutubeInterac
 
     fun setUpQuery(queries: List<String>) {
         videoList.clear()
-        compositeDisposable.add(youtubeInteractor.getVideoList(queries)
+        subscriptions.add(youtubeInteractor.getVideoList(queries)
                 .doOnError { it.printStackTrace() }
                 .map { YoutubeVideoModel(it) }
                 .toList()

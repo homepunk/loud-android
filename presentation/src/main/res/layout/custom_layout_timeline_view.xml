@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_months"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:itemDecoration_lastRight="@{@dimen/margin_default_10dp}"
+            app:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
+            tools:listitem="@layout/custom_layout_item_timeline_month" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_timeline"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_big_20dp"
+            android:layout_marginStart="@dimen/margin_big_20dp"
+            android:layout_marginEnd="@dimen/margin_big_20dp"
+            android:layout_below="@id/rv_months"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/layout_item_timeline_event_2" />
+
+    </RelativeLayout>
+
+</layout>

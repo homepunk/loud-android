@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" /><!--
+<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -6,9 +10,10 @@
 
         <variable
             name="model"
-            type="homepunk.github.com.presentation.feature.event.home.model.LocationEventTimelineModel" />
+            type="homepunk.github.com.presentation.feature.item.home.model.LocationEventTimelineModel" />
     </data>
 
+&lt;!&ndash;
     <homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,4 +31,5 @@
             app:timeline_adapter="@{model.timelineEventAdapter}" />
 
     </homepunk.github.com.presentation.feature.widget.expandablelayout.ExpandableHeader>
-</layout>
+&ndash;&gt;
+</layout>-->

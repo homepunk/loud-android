@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="homepunk.github.com.presentation.feature.widget.timeline.model.TimelineMonthModel" />
+    </data>
+
+    <homepunk.github.com.presentation.feature.widget.animation.AnimationTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lato_bold"
+        android:letterSpacing="0.02"
+        android:paddingEnd="@dimen/margin_default_10dp"
+        android:lineSpacingExtra="1sp"
+        android:text="@{model.name}"
+        android:textAllCaps="true"
+        android:textColor="@{model.isCurrent() ? @color/whiteBone : @color/subtitle2}"
+        android:textSize="@dimen/text_size_default_18sp"
+        app:scale="@{model.isCurrent() ? 1.2f : 1f}"
+        tools:text="JUNE" />
+</layout>

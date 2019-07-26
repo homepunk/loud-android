@@ -37,6 +37,8 @@ abstract class BaseFragment<BINDING : ViewDataBinding> : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         mDataBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        mDataBinding.lifecycleOwner = viewLifecycleOwner
+
         mAppModeViewModel = getViewModel(AppModeViewModel::class.java)
         mAppModeViewModel.run {
             currentAppModeModelLiveData.observe(this@BaseFragment, Observer {

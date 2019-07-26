@@ -2,9 +2,9 @@ package homepunk.github.com.presentation.feature.menu.country
 
 import android.annotation.SuppressLint
 import androidx.databinding.ObservableArrayList
-import homepunk.github.com.domain.interactor.UserLocationInteractor
-import homepunk.github.com.domain.model.songkick.SongkickLocation
-import homepunk.github.com.domain.repository.LocationRepository
+import homepunk.github.com.domain.interactor.UserConfigurationInteractor
+import homepunk.github.com.domain.model.internal.UserLocation
+import homepunk.github.com.domain.repository.SongkickLocationRepository
 import homepunk.github.com.presentation.common.data.AppDataFactory
 import homepunk.github.com.presentation.core.base.BaseViewModel
 import homepunk.github.com.presentation.core.ext.swap
@@ -18,26 +18,25 @@ import javax.inject.Inject
 
 /**Created by Homepunk on 17.01.2019. **/
 class CountryListViewModel @Inject constructor(appDataFactory: AppDataFactory,
-                                               private var locationRepository: LocationRepository,
-                                               private var userLocationInteractor: UserLocationInteractor) : BaseViewModel() {
+                                               private var songkickLocationRepository: SongkickLocationRepository,
+                                               private var userConfigurationInteractor: UserConfigurationInteractor) : BaseViewModel() {
 
     var itemList = ObservableArrayList<CountryBindingParentModel>()
 
     init {
         appDataFactory.getCountryModelList().run {
             forEach { countryModel ->
-                val userLocationListObservable = userLocationInteractor.getCountryUserLocation(countryModel.countryName)
-                        .doOnNext { Timber.w("CHANGED: ${it.countryName}, CITY COUNT: ${it.locations.size}") }
+                val userLocationsObservable = userConfigurationInteractor.getUserConfiguration(0)
                         .map { it.locations }
+                        .doOnNext { Timber.w("RECEIVE NEXT LOCATIONS = ${it.size}") }
 
+                val locationsObservable = songkickLocationRepository.getSongkickLocationByQuery(countryModel.countryName)
 
-                val locationObservable = locationRepository.getSongkickLocationByQuery(countryModel.countryName)
-                        .filter { it.city != null }
-
-                compositeDisposable.add(locationObservable.withLatestFrom(userLocationListObservable,
-                        BiFunction { location: SongkickLocation, countryLocationUserList: List<SongkickLocation> ->
+                subscriptions.add(locationsObservable.withLatestFrom(userLocationsObservable,
+                        BiFunction { location: UserLocation, countryLocationUserList: List<UserLocation> ->
                             CityBindingChildModel(location, countryLocationUserList.contains(location))
                         })
+//                        .map { CityBindingChildModel(it, false) }
                         .toSortedList { o1, o2 ->
                             if (!o1.isSelected.get() && o2.isSelected.get()) 1
                             else if (o1.isSelected.get() && !o2.isSelected.get()) -1
@@ -56,8 +55,11 @@ class CountryListViewModel @Inject constructor(appDataFactory: AppDataFactory,
         @SuppressLint("CheckResult")
         override fun onClick(position: Int, parent: CountryBindingParentModel, childPosition: Int, child: CityBindingChildModel) {
             Timber.w("onClick $position, PARENT: ${parent.countryModel.countryName} -> CHILD: ${child.name.get()}")
-            child.isSelected.swap()
-            userLocationInteractor.saveUserLocationForCountry(parent.countryModel.countryName, child.location)
+            if (child.isSelected.swap()) {
+                userConfigurationInteractor.addUserLocation(child.location)
+            } else {
+                userConfigurationInteractor.removeUserLocation(child.location)
+            }
         }
     }
 }

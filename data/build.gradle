@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -30,6 +31,15 @@ dependencies {
     def androidX = rootProject.ext.androidXDependencies
 
     implementation project(path: ':domain')
+    api 'android.arch.persistence.room:runtime:1.1.1'
+    kapt 'android.arch.persistence.room:compiler:1.1.1'
+
+    api "android.arch.persistence.room:rxjava2:1.1.1"
+
+    api 'com.facebook.stetho:stetho:1.5.1'
+    // Coroutine
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1"
 
     // ViewModel & LiveData
     implementation androidX.lifecycleExtensions
