@@ -33,29 +33,31 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_mode_menu"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_big_20dp"
             android:layout_marginTop="40dp"
+            android:orientation="horizontal"
+            android:layout_marginStart="@dimen/margin_big_20dp"
+            app:itemDecoration_left="@{@dimen/margin_big_20dp}"
             android:layoutAnimation="@anim/layout_animation_slide_from_left"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/vp_menu_item_detail"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:itemDecoration_top="@{@dimen/margin_big_20dp}"
             bind:itemList="@{menuViewModel.menuItemList}"
             tools:listitem="@layout/layout_item_menu" />
 
         <include
             android:id="@+id/country"
             layout="@layout/layout_item_country"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_marginBottom="8dp"
+            android:visibility="@{menuViewModel.userLocation.get() != null ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toTopOf="@+id/vp_menu_item_detail"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/rv_mode_menu"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_mode_menu"
             app:model="@{menuViewModel.userLocation}" />
 
         <View
@@ -82,7 +84,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_mode_menu"
+            app:layout_constraintTop_toBottomOf="@+id/country"
             bind:fragmentList="@{menuViewModel.menuItemFragmentList}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

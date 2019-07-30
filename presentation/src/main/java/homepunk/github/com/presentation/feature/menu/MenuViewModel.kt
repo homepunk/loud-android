@@ -42,10 +42,8 @@ class MenuViewModel @Inject constructor(var appDataFactory: AppDataFactory,
                                     MenuModel.MAP -> Fragment()
                                     MenuModel.COUNTRY -> CountryListFragment()
                                     MenuModel.CALENDAR -> Fragment()
-                                    MenuModel.SETTINGS -> LanguageListFragment()
-                                })
-                    }
-                })
+                    })
+                }})
         CountryListViewModel.userLocationPublisher.subscribeOn(Schedulers.single()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe { userLocation.set(it) }
     }

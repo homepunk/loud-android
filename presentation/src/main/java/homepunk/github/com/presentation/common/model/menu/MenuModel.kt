@@ -5,5 +5,4 @@ enum class MenuModel(var title: String) {
     COUNTRY("Country"),
     CALENDAR("Calendar"),
     MAP("Map"),
-    SETTINGS("Settings")
 }

@@ -68,7 +68,7 @@
             android:layout_marginEnd="@dimen/margin_big_20dp"
             android:orientation="horizontal">
 
-            <homepunk.github.com.presentation.feature.widget.animation.AnimationTextView
+            <TextView
                 android:id="@+id/btn_event"
                 android:layout_width="160dp"
                 android:layout_height="48dp"
@@ -87,7 +87,7 @@
                 bind:btnMode="@{AppMode.EVENTS}"
                 bind:updateModeTitleOnModeChange="@{appModeModel}" />
 
-            <homepunk.github.com.presentation.feature.widget.animation.AnimationTextView
+            <TextView
                 android:id="@+id/btn_releases"
                 android:layout_width="160dp"
                 android:layout_height="48dp"

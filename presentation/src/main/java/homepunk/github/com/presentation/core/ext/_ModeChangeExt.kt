@@ -20,7 +20,7 @@ import timber.log.Timber
 
 
 @BindingAdapter(value = ["updateModeTitleOnModeChange", "btnMode"])
-fun homepunk.github.com.presentation.feature.widget.animation.AnimationTextView.updateModeTitleOnModeChange(prevAppModeModel: AppModeModel?, prevBtnMode: AppMode?,
+fun TextView.updateModeTitleOnModeChange(prevAppModeModel: AppModeModel?, prevBtnMode: AppMode?,
                                          appModeModel: AppModeModel?, btnMode: AppMode?) {
     if (appModeModel != prevAppModeModel) {
         val inactiveColor = getColor(homepunk.github.com.presentation.R.color.subtitle3)
@@ -28,7 +28,9 @@ fun homepunk.github.com.presentation.feature.widget.animation.AnimationTextView.
         if (prevAppModeModel == null && appModeModel != null) {
             if (btnMode == appModeModel.mode) {
                 setTextColor(appModeModel.color)
-                scale(1.2f)
+//                scale(1.2f)
+                scaleX = 1.2f
+                scaleY = 1.2f
 
 //                textSize = 36f
             } else {

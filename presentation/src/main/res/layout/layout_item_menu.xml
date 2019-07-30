@@ -12,20 +12,21 @@
 
     </data>
     <FrameLayout
+        android:layout_gravity="bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <TextView
+        <TextViewsfda
             android:id="@+id/title"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato_bold"
             android:letterSpacing="0.02"
             android:textColor="@drawable/menu_text_color_selector"
+            android:stateListAnimator="@animator/animator_state_list_text_size"
             android:lineSpacingExtra="1sp"
             android:text="@{model.title}"
-            android:textSize="@dimen/text_size_menu_item"
             android:textAllCaps="true"
             tools:text="Setting" />
     </FrameLayout>

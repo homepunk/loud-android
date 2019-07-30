@@ -46,7 +46,7 @@
     <dimen name="width_timeline">3dp</dimen>
 
     <dimen name="radius_filter_card">16dp</dimen>
-    <dimen name="text_size_menu_item">20sp</dimen>
+    <dimen name="text_size_menu_item">24sp</dimen>
     <dimen name="text_size_large_22sp">22sp</dimen>
     <dimen name="text_size_default_18sp">18sp</dimen>
     <dimen name="width_youtube_video">200dp</dimen>

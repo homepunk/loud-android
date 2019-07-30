@@ -10,7 +10,7 @@
             type="homepunk.github.com.presentation.feature.widget.timeline.model.TimelineMonthModel" />
     </data>
 
-    <homepunk.github.com.presentation.feature.widget.animation.AnimationTextView
+    <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

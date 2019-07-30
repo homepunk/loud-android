@@ -4,6 +4,8 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import homepunk.github.com.presentation.feature.widget.dropdownlistview.DropDownListView
 import homepunk.github.com.presentation.feature.widget.dropdownlistview.OnDropDownClickListener
+import homepunk.github.com.presentation.feature.widget.menu.MenuItemView
+import homepunk.github.com.presentation.feature.widget.menu.MenuLayout
 import timber.log.Timber
 
 /**Created by Homepunk on 09.07.2019. **/
@@ -23,6 +25,12 @@ fun  <T> DropDownListView<T>.dropDownList(items: List<T>?, selection: Int) {
     Timber.d("dropDownList: LIST SIZE = ${items?.size}, , POSITION = $selection")
     if (!items.isNullOrEmpty() && selection >= 0) {
         setItemList(selection, items)
+    }
+}
+@BindingAdapter(value = ["menuItems"])
+fun   MenuLayout.setMenuItems(items: List<MenuItemView.MenuItem>?) {
+    if (!items.isNullOrEmpty()) {
+        setMenu(items)
     }
 }
 
