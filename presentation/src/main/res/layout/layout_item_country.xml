@@ -9,39 +9,56 @@
 
         <import type="android.view.View" />
 
+        <import type="com.google.android.flexbox.FlexDirection" />
         <variable
             name="model"
             type="homepunk.github.com.presentation.feature.menu.country.model.CountryLocationModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:animateLayoutChanges="true"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_width="match_parent"
+        android:animateLayoutChanges="true">
 
-        <ImageView
-            android:id="@+id/flag"
-            android:layout_width="24dp"
-            android:layout_height="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/country_name"
-            app:roundCornersImageResId="@{model.countryModel.countryFlag}"
-            tools:src="@drawable/ic_ua" />
 
-        <TextView
-            android:id="@+id/country_name"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/layout_info"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/lato"
-            android:text="@{model.countryModel.countryName}"
-            android:textColor="@color/text"
-            android:textSize="@dimen/text_size_large"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/flag"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Ukraine" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/rv_locations"
+            app:layout_constraintTop_toBottomOf="@id/iv_country">
+
+            <ImageView
+                android:id="@+id/flag"
+                android:layout_width="24dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintEnd_toStartOf="@+id/country_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/country_name"
+                app:roundCornersImageResId="@{model.countryModel.countryFlag}"
+                tools:src="@drawable/ic_ua" />
+
+            <TextView
+                android:id="@+id/country_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/margin_default_8dp"
+                android:fontFamily="@font/lato"
+                android:text="@{model.countryModel.countryName}"
+                android:textColor="@color/text"
+                android:textSize="@dimen/text_size_large"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/iv_country"
+                app:layout_constraintStart_toEndOf="@+id/flag"
+                app:layout_constraintTop_toBottomOf="@id/iv_country"
+                app:layout_constraintWidth_default="wrap"
+                tools:text="Ukraine" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/iv_country"
@@ -50,48 +67,11 @@
             android:adjustViewBounds="true"
             android:tint="@{model.isParentExpanded ? @color/colorAccent : @color/whiteBone}"
             app:imageResId="@{@{model.countryModel.countryMap}}"
-            tools:src="@drawable/ic_map_usa"
-            app:layout_constraintBottom_toTopOf="@id/rv_locations"
-            app:layout_constraintEnd_toStartOf="@+id/a"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/country_name" />
-
-        <ImageView
-            android:id="@+id/a"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            app:isVisible="@{model.isParentExpanded}"
-            app:imageResId="@{@{model.countryModel.countryMap}}"
-            tools:src="@drawable/ic_map_usa"
-            app:layout_constraintBottom_toTopOf="@id/rv_locations"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_country"
-            app:layout_constraintTop_toBottomOf="@id/country_name" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_selected_locations"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:adapter="@{model.savedLocationListAdapter}"
-            app:layout_constraintBottom_toTopOf="@+id/rv_locations"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_country"
-            app:layout_constraintTop_toTopOf="@+id/iv_country"
-            tools:listitem="@layout/layout_item_location_child" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_locations"
-            android:layout_width="0dp"
-            android:visibility="gone"
-            android:layout_height="wrap_content"
-            app:adapter="@{model.countryLocationListAdapter}"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_country"
-            tools:listitem="@layout/layout_item_location_child" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_map_usa" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

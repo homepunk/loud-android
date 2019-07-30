@@ -145,6 +145,17 @@ fun View.scale(oldScale: Float, scale: Float) {
     }
 }
 
+@BindingAdapter("stateListScale")
+fun AnimationTextView.stateListScale(scale: Float) {
+    setOnClickListener {
+        if (it.isSelected) {
+            getScaleAnimation(1f, scale).start()
+        } else {
+            getScaleAnimation(scale, 1f).start()
+        }
+    }
+}
+
 @BindingAdapter(requireAll = false, value = ["scaleWithSize"])
 fun View.scaleWithSize(oldScale: Float, scale: Float) {
     pivotX = 0f
@@ -169,7 +180,7 @@ fun View.scaleWithSize(oldScale: Float, scale: Float) {
     }
 }
 
-fun View.getSizeAnimation(newSize: Int): Animator{
+fun View.getSizeAnimation(newSize: Int): Animator {
     val sizeAnimator = ValueAnimator.ofInt(height, newSize)
     sizeAnimator.addUpdateListener { animation ->
         val animatedValue = animation.animatedValue as Int
@@ -281,22 +292,10 @@ fun RecyclerView.animateAppearanceOnVisibilityChange(oldAnimationEnabled: Boolea
 
             })
 
-            val appearanceAnimator = ObjectAnimator.ofFloat(this, "translationX", if (isVisible) DimensionUtil.screenWidth.toFloat() else 0f, if (!isVisible) DimensionUtil.screenWidth.toFloat() else 0f)
-            appearanceAnimator.addListener(object : AnimatorListenerWrapper() {
-                override fun onAnimationStart(animation: Animator?) {
-                    visibility = VISIBLE
-                    Timber.w("appearanceAnimator onAnimationStart measuredHeight $measuredHeight , translationY = ${translationY}, translationX = ${translationX}, isVisible = ${isVisible}")
-                }
-
-                override fun onAnimationEnd(animation: Animator?) {
-                    Timber.w("appearanceAnimator onAnimationEnd measuredHeight $measuredHeight , translationY = ${translationY}, translationX = ${translationX}, isVisible = ${isVisible}")
-                }
-
-            })
             AnimatorSet().apply set@{
                 duration = 600
                 interpolator = AnticipateOvershootInterpolator()
-                playTogether(heightAnimator, appearanceAnimator)
+                playTogether(heightAnimator)
                 if (isVisible) {
                     start()
                 } else {
@@ -305,6 +304,93 @@ fun RecyclerView.animateAppearanceOnVisibilityChange(oldAnimationEnabled: Boolea
                 }
             }
         }
+    }
+}
+
+@BindingAdapter("isVisibleWithAnimation")
+fun RecyclerView.isVisibleWithAnimation(oldIsVisible: Boolean, isVisible: Boolean) {
+    // DO FIRST RUN
+    if (oldIsVisible == isVisible) {
+        visibility = INVISIBLE
+//        isVisible(isVisible)
+    } else {
+        measure(MATCH_PARENT, WRAP_CONTENT)
+        translationY = if (isVisible) -measuredHeight.toFloat() else 0f
+        val heightAnimator: ObjectAnimator? = ObjectAnimator.ofFloat(this, "translationY", if (isVisible) -measuredHeight.toFloat() else 0f, if (!isVisible) -measuredHeight.toFloat() else 0f)
+
+        Timber.w("animateAppearanceOnVisibilityChange measuredHeight $measuredHeight")
+        heightAnimator!!.addListener(object : AnimatorListenerWrapper() {
+            override fun onAnimationStart(animation: Animator?) {
+                visibility = VISIBLE
+                Timber.w("heightAnimator onAnimationStart measuredHeight $measuredHeight")
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                Timber.w("heightAnimator onAnimationEnd measuredHeight $measuredHeight, translationY = ${translationY}, translationX = ${translationX}, isVisible = ${isVisible}")
+            }
+
+            override fun onAnimationStart(animation: Animator?, isReverse: Boolean) {
+                Timber.w("heightAnimator onAnimationStart measuredHeight $measuredHeight [isReverse  = $isReverse]")
+            }
+
+            override fun onAnimationEnd(animation: Animator?, isReverse: Boolean) {
+                Timber.w("heightAnimator onAnimationEnd measuredHeight $measuredHeight [isReverse  = $isReverse]")
+                if (isReverse) {
+                    visibility = GONE
+                }
+            }
+
+        })
+
+        AnimatorSet().apply set@{
+            duration = 600
+            interpolator = AnticipateOvershootInterpolator()
+            playTogether(heightAnimator)
+            if (isVisible) {
+                start()
+            } else {
+                interpolator = ReverseInterpolator(interpolator as Interpolator)
+                start()
+            }
+        }
+    }
+}
+
+@BindingAdapter("isVisibleWithSlideDownAnimation")
+fun RecyclerView.isVisibleWithSlideDownAnimation(oldIsVisible: Boolean, isVisible: Boolean) {
+    // DO FIRST RUN
+    if (oldIsVisible == isVisible) {
+        visibility = INVISIBLE
+        measure(MATCH_PARENT, WRAP_CONTENT)
+        onGlobalLayout {
+            translationY = -height.toFloat()
+        }
+    } else {
+        animate()
+                .translationY(if (isVisible) 0f else -height.toFloat())
+                .setDuration(300)
+                .setListener(object : AnimatorListenerWrapper() {
+                    override fun onAnimationStart(animation: Animator?, isReverse: Boolean) {
+                        isVisible(isVisible)
+                    }
+
+                    override fun onAnimationEnd(animation: Animator?) {
+                        isVisible(isVisible)
+                    }
+                })
+    }
+}
+
+
+@BindingAdapter("translateDownAnimation")
+fun View.translateDownAnimation(oldIsVisible: Boolean, isVisible: Boolean) {
+    // DO FIRST RUN
+    if (oldIsVisible == isVisible) {
+        measure(MATCH_PARENT, WRAP_CONTENT)
+    } else {
+        animate()
+                .translationY(if (isVisible) 0f else -height.toFloat())
+                .setDuration(300).start()
     }
 }
 

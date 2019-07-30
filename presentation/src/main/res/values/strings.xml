@@ -21,6 +21,7 @@
     </string-array>
 
     <string name="title_menu_library">LIBRARY</string>
+    <string name="title_menu_current_location">Current location</string>
     <string name="title_menu_events">EVENTS</string>
     <string name="title_menu_gear">GEAR</string>
     <string name="title_menu_settings">SETTINGS</string>

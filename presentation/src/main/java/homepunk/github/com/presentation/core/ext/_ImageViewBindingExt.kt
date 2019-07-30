@@ -47,8 +47,10 @@ fun ImageView.bindDrawable(resId: Int) {
 
 @BindingAdapter("roundCornersImageResId")
 fun ImageView.roundCornersImageResId(resId: Int) {
-    val bitmap = drawableToBitmap(resources.getDrawable(resId))
-    setImageBitmap(getRoundedCornerBitmap(bitmap, dpToPx(2f)))
+    if (resId != 0x0) {
+        val bitmap = drawableToBitmap(resources.getDrawable(resId))
+        setImageBitmap(getRoundedCornerBitmap(bitmap, dpToPx(2f)))
+    }
 }
 
 fun drawableToBitmap(drawable: Drawable): Bitmap {

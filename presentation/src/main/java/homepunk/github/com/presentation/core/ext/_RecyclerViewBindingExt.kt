@@ -19,6 +19,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.common.adapter.SimpleBindingRecyclerAdapter
 import homepunk.github.com.presentation.common.adapter.SimpleExpandableBindingRecyclerAdapter
@@ -34,14 +37,28 @@ import timber.log.Timber
 /**Created by Homepunk on 14.01.2019. **/
 
 @BindingAdapter("adapter")
-fun <T> RecyclerView.bindAdapter(adapter: SimpleBindingRecyclerAdapter<T>) {
-    this.adapter = adapter
+fun <T> RecyclerView.bindAdapter(adapter: SimpleBindingRecyclerAdapter<T>?) {
+    Timber.w("adapter")
+    if (adapter != null) {
+        this.adapter = adapter
+    }
 }
 
 @BindingAdapter("gridLayoutManager")
 fun <T> RecyclerView.gridLayoutManager(columns: Int) {
     layoutManager = GridLayoutManager(context, columns)
 }
+
+
+@BindingAdapter("flexLayoutManager")
+fun <T> RecyclerView.flexLayoutManager(direction: Int) {
+    layoutManager = FlexboxLayoutManager(context).apply {
+        flexDirection = direction
+        flexWrap = FlexWrap.WRAP
+        justifyContent = JustifyContent.SPACE_AROUND
+    }
+}
+
 
 @BindingAdapter("changeColorOnClick")
 fun TextView.changeColorOnClick(change: Boolean) {
@@ -311,6 +328,46 @@ fun RecyclerView.expand(prevExpand: Boolean,
         }
     })
     va.duration = 600
+    va.start()
+}
+@BindingAdapter("animation_translateDown")
+fun RecyclerView.animation_translateDown(prevExpand: Boolean, expand: Boolean) {
+    var height = dpToPx<Int>(200f)
+    measure(ViewGroup.LayoutParams.MATCH_PARENT, height)
+    if (expand == prevExpand) {
+        if (expand) {
+            layoutParams.height = height
+            visibility = View.VISIBLE
+        } else {
+            layoutParams.height = 0
+            visibility = View.GONE
+        }
+        return
+    } else {
+        if (expand) {
+            layoutParams.height = height
+            measure(ViewGroup.LayoutParams.MATCH_PARENT, height)
+        }
+    }
+
+
+    val va: ObjectAnimator?
+    if (expand) {
+        va = ObjectAnimator.ofFloat(this, "translationY", -height.toFloat(), 0f)
+        va.interpolator = AccelerateInterpolator()
+        visibility = View.VISIBLE
+    } else {
+        va = ObjectAnimator.ofFloat(this, "translationY", 0f, -height.toFloat())
+        va.interpolator = DecelerateInterpolator()
+    }
+    va.addListener(object : AnimatorListenerWrapper() {
+        override fun onAnimationEnd(animation: Animator?) {
+            if (!expand) {
+                visibility = View.GONE
+            }
+        }
+    })
+    va.duration = 400
     va.start()
 }
 

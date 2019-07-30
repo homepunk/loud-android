@@ -8,6 +8,7 @@
 
         <import type="android.view.View" />
 
+
         <import type="homepunk.github.com.presentation.R" />
 
         <variable
@@ -32,18 +33,30 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_mode_menu"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_big_20dp"
-            android:layout_marginTop="@dimen/margin_big_20dp"
-            android:layoutAnimation="@anim/layout_animation_slide_from_right"
+            android:layout_marginTop="40dp"
+            android:layoutAnimation="@anim/layout_animation_slide_from_left"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/vp_menu_item_detail"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             bind:itemDecoration_top="@{@dimen/margin_big_20dp}"
             bind:itemList="@{menuViewModel.menuItemList}"
             tools:listitem="@layout/layout_item_menu" />
+
+        <include
+            android:id="@+id/country"
+            layout="@layout/layout_item_country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/vp_menu_item_detail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/rv_mode_menu"
+            app:layout_constraintTop_toTopOf="parent"
+            app:model="@{menuViewModel.userLocation}" />
 
         <View
             android:id="@+id/divider"
@@ -56,6 +69,7 @@
             android:alpha="0.5"
             android:background="@drawable/background_circle_filled_gray"
             android:backgroundTint="@color/subtitle2"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/vp_menu_item_detail"
             app:layout_constraintTop_toBottomOf="@+id/rv_mode_menu" />
 
@@ -63,35 +77,12 @@
             android:id="@+id/vp_menu_item_detail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:nestedScrollingEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider"
+            app:layout_constraintTop_toBottomOf="@+id/rv_mode_menu"
             bind:fragmentList="@{menuViewModel.menuItemFragmentList}" />
-        <!-- <com.google.android.flexbox.FlexboxLayout
-             android:id="@+id/vp_menu_item_detail"
-             android:layout_width="match_parent"
-             android:layout_height="0dp"
-             app:layout_constraintBottom_toBottomOf="parent"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintTop_toBottomOf="@+id/divider">
-
-             <include
-                 layout="@layout/layout_item_country"
-                 app:layout_columnWeight="1" />
-
-             <include
-                 app:layout_columnWeight="1"
-                 layout="@layout/layout_item_country" />
-
-             <include
-                 app:layout_columnWeight="1"
-                 layout="@layout/layout_item_country" />
-             <include
-                 app:layout_columnWeight="1"
-                 layout="@layout/layout_item_country" />
-         </com.google.android.flexbox.FlexboxLayout>-->
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -2,6 +2,7 @@ package homepunk.github.com.presentation.feature.menu.country
 
 import android.annotation.SuppressLint
 import androidx.databinding.ObservableArrayList
+import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import homepunk.github.com.domain.interactor.UserConfigurationInteractor
 import homepunk.github.com.domain.model.internal.UserLocation
@@ -16,6 +17,7 @@ import homepunk.github.com.presentation.feature.menu.country.model.CountryBindin
 import homepunk.github.com.presentation.feature.menu.country.model.CountryLocationModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
+import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -24,14 +26,26 @@ class CountryListViewModel @Inject constructor(appDataFactory: AppDataFactory,
                                                private var songkickLocationRepository: SongkickLocationRepository,
                                                private var userConfigurationInteractor: UserConfigurationInteractor) : BaseViewModel() {
 
+//    var userCountryLocationList = ObservableArrayList<UserLocation>()
+    val currentUserCountry = ObservableField<CountryLocationModel>()
+
     var itemList = ObservableArrayList<CountryLocationModel>()
     var countryLiveData = MutableLiveData<Int>()
     var onCountryClickListener: OnItemClickListener<CountryLocationModel> = object : OnItemClickListener<CountryLocationModel> {
         override fun onClick(position: Int, item: CountryLocationModel) {
+            if (currentUserCountry.get() != null &&
+                    item.countryModel.countryName != currentUserCountry.get()!!.countryModel.countryName) {
+                currentUserCountry.get()!!.isParentExpanded.swap()
+            }
             item.isParentExpanded.swap()
-            item.savedLocationListAdapter.notifyDataSetChanged()
             countryLiveData.value = position
+            userLocationPublisher.onNext(item)
+            currentUserCountry.set(item)
         }
+    }
+
+    companion object {
+        val userLocationPublisher = PublishSubject.create<CountryLocationModel>()
     }
 
     init {
@@ -41,7 +55,9 @@ class CountryListViewModel @Inject constructor(appDataFactory: AppDataFactory,
                         .map { it.locations }
 
                 val locationsObservable = songkickLocationRepository.getSongkickLocationByQuery(countryModel.countryName)
-                        .toList().toObservable()
+                        .filter { it.countryName == countryModel.countryName }
+                        .toSortedList { o1, o2 -> o1.locationName.compareTo(o2.locationName) }
+                        .toObservable()
 
                 subscriptions.add(locationsObservable.withLatestFrom(userLocationsObservable,
                         BiFunction { locations: List<UserLocation>, savedLocations: List<UserLocation> ->

@@ -1,7 +1,5 @@
 package homepunk.github.com.presentation.feature.menu.country
 
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexboxLayoutManager
 import homepunk.github.com.presentation.BR
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.common.adapter.FlexLayoutRecyclerAdapter
@@ -17,10 +15,6 @@ class CountryListFragment : BaseFragment<FragmentCountryListBinding>() {
     override fun init() {
         viewModel = getViewModel(CountryListViewModel::class.java)
         mDataBinding.viewModel = viewModel
-        val flexboxLayoutManager = FlexboxLayoutManager(context).apply {
-            flexDirection = FlexDirection.ROW
-        }
-        mDataBinding.rvCountries.layoutManager = flexboxLayoutManager
         mDataBinding.rvCountries.adapter = FlexLayoutRecyclerAdapter(R.layout.layout_item_country, BR.model)
     }
 }
