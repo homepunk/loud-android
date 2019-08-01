@@ -21,8 +21,8 @@ class MenuFragment : BaseFragment<FragmentMenuBinding>() {
             menuViewModel = mMenuViewModel
 
             vpMenuItemDetail.adapter = SimpleViewPagerAdapter(childFragmentManager)
-            rvModeMenu.adapter = SimpleBindingRecyclerAdapter<MenuModel>(R.layout.layout_item_menu, BR.model)
-            rvModeMenu.setupWithViewPager(vpMenuItemDetail)
+//            rvModeMenu.adapter = SimpleBindingRecyclerAdapter<MenuModel>(R.layout.layout_item_menu, BR.model)
+//            rvModeMenu.setupWithViewPager(vpMenuItemDetail)
 
            /* onMenuClickListener = View.OnClickListener {
                 onBackPressed()

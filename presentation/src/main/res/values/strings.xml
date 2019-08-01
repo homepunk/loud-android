@@ -45,5 +45,8 @@
     <string name="title_nearest_events">Nearest events</string>
     <string name="title_related_artists">Related artists</string>
     <string name="title_performance_youtube_preview_list">Listen to</string>
+    <string name="menu_item_location">Location</string>
+    <string name="menu_item_calendar">Calendar</string>
+    <string name="menu_item_map">Map</string>
 
 </resources>

@@ -26,7 +26,7 @@
             android:text="@{model.month}"
             android:textAllCaps="true"
             android:textColor="@{model.isUpcoming ? @color/modeEventsColor : @color/whiteBone}"
-            android:textSize="@dimen/text_size_large"
+            android:textSizePx="@dimen/text_size_large"
             app:layout_constraintStart_toStartOf="@+id/cv_item"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="JUNE" />
@@ -44,7 +44,7 @@
             android:text="@{model.day}"
             android:textAlignment="center"
             android:textColor="@color/whiteBone"
-            android:textSize="22sp"
+            android:textSizePx="22sp"
             android:textAllCaps="true"
             app:isVisible="@{model.isNewDay}"
             app:layout_constraintStart_toStartOf="@+id/cv_item"

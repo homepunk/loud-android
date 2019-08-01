@@ -32,10 +32,10 @@ fun TextView.updateModeTitleOnModeChange(prevAppModeModel: AppModeModel?, prevBt
                 scaleX = 1.2f
                 scaleY = 1.2f
 
-//                textSize = 36f
+//                textSizePx = 36f
             } else {
                 setTextColor(inactiveColor)
-//                textSize = 34f
+//                textSizePx = 34f
             }
             return
         }
@@ -59,7 +59,7 @@ fun TextView.updateModeTitleOnModeChange(prevAppModeModel: AppModeModel?, prevBt
 /*
         val textSizeAnimator = ObjectAnimator.ofFloat(
                 this, // Object to animating
-                "textSize", // Property to animate
+                "textSizePx", // Property to animate
                 if (currentTextColor == inactiveColor) 34F else 36F,
                 if (currentTextColor == inactiveColor) 36F else 34F
         ).setDuration(300)

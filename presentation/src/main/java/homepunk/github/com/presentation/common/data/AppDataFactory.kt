@@ -11,6 +11,8 @@ import homepunk.github.com.presentation.common.model.menu.MenuModel
 import homepunk.github.com.presentation.common.model.mode.AppModeModel
 import homepunk.github.com.presentation.common.model.section.DiscoverSectionModel
 import homepunk.github.com.presentation.feature.widget.filterlayout.FilterModel
+import homepunk.github.com.presentation.feature.widget.menu.MenuItemView.MenuItemConfiguration
+import homepunk.github.com.presentation.feature.widget.menu.MenuLayout
 import javax.inject.Inject
 
 class AppDataFactory @Inject constructor(val context: Context) {
@@ -55,7 +57,15 @@ class AppDataFactory @Inject constructor(val context: Context) {
         return menuList
     }
 
-    fun getModeMenuList() = MenuModel.values().asList()
+//    fun getModeMenuList() = MenuModel.values().asList()
+
+    fun getModeMenuList() : List<MenuLayout.MenuItem> {
+        return arrayListOf(
+                MenuLayout.MenuItem(MenuModel.COUNTRY.ordinal, R.string.menu_item_location),
+                MenuLayout.MenuItem(MenuModel.CALENDAR.ordinal, R.string.menu_item_calendar),
+                MenuLayout.MenuItem(MenuModel.MAP.ordinal, R.string.menu_item_map)
+        )
+    }
 
     fun getCountryModelList(): List<CountryModel> {
         val dataList = mutableListOf<CountryModel>()

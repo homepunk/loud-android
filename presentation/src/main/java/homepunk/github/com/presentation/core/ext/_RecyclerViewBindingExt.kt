@@ -330,7 +330,7 @@ fun RecyclerView.expand(prevExpand: Boolean,
     va.duration = 600
     va.start()
 }
-@BindingAdapter("animation_translateDown")
+@BindingAdapter("animation_translateFromDown")
 fun RecyclerView.animation_translateDown(prevExpand: Boolean, expand: Boolean) {
     var height = dpToPx<Int>(200f)
     measure(ViewGroup.LayoutParams.MATCH_PARENT, height)
@@ -358,6 +358,46 @@ fun RecyclerView.animation_translateDown(prevExpand: Boolean, expand: Boolean) {
         visibility = View.VISIBLE
     } else {
         va = ObjectAnimator.ofFloat(this, "translationY", 0f, -height.toFloat())
+        va.interpolator = DecelerateInterpolator()
+    }
+    va.addListener(object : AnimatorListenerWrapper() {
+        override fun onAnimationEnd(animation: Animator?) {
+            if (!expand) {
+                visibility = View.GONE
+            }
+        }
+    })
+    va.duration = 400
+    va.start()
+}
+@BindingAdapter("animation_translateFromEnd")
+fun RecyclerView.animation_translateFromEnd(prevExpand: Boolean, expand: Boolean) {
+    var height = dpToPx<Int>(200f)
+    measure(ViewGroup.LayoutParams.MATCH_PARENT, height)
+    if (expand == prevExpand) {
+        if (expand) {
+            layoutParams.height = height
+            visibility = View.VISIBLE
+        } else {
+            layoutParams.height = 0
+            visibility = View.GONE
+        }
+        return
+    } else {
+        if (expand) {
+            layoutParams.height = height
+            measure(ViewGroup.LayoutParams.MATCH_PARENT, height)
+        }
+    }
+
+
+    val va: ObjectAnimator?
+    if (expand) {
+        va = ObjectAnimator.ofFloat(this, "translationX", width.toFloat(), 0f)
+        va.interpolator = AccelerateInterpolator()
+        visibility = View.VISIBLE
+    } else {
+        va = ObjectAnimator.ofFloat(this, "translationX", 0f, width.toFloat())
         va.interpolator = DecelerateInterpolator()
     }
     va.addListener(object : AnimatorListenerWrapper() {

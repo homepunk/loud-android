@@ -13,6 +13,10 @@
         <variable
             name="model"
             type="homepunk.github.com.presentation.feature.menu.country.model.CountryLocationModel" />
+
+        <variable
+            name="onCountryClickListener"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -67,6 +71,7 @@
             android:adjustViewBounds="true"
             android:tint="@{model.isParentExpanded ? @color/colorAccent : @color/whiteBone}"
             app:imageResId="@{@{model.countryModel.countryMap}}"
+            android:onClickListener="@{onCountryClickListener}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

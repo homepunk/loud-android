@@ -1,6 +1,7 @@
 package homepunk.github.com.presentation.feature.menu.country
 
 import android.annotation.SuppressLint
+import android.view.View
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
@@ -26,8 +27,9 @@ class CountryListViewModel @Inject constructor(appDataFactory: AppDataFactory,
                                                private var songkickLocationRepository: SongkickLocationRepository,
                                                private var userConfigurationInteractor: UserConfigurationInteractor) : BaseViewModel() {
 
-//    var userCountryLocationList = ObservableArrayList<UserLocation>()
+    //    var userCountryLocationList = ObservableArrayList<UserLocation>()
     val currentUserCountry = ObservableField<CountryLocationModel>()
+    val onCurrentCountryClickListener = View.OnClickListener { currentUserCountry.get()?.isParentExpanded?.swap() }
 
     var itemList = ObservableArrayList<CountryLocationModel>()
     var countryLiveData = MutableLiveData<Int>()

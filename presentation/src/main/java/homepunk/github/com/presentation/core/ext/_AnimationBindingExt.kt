@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.*
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
@@ -57,6 +58,35 @@ fun ViewGroup.bindAnimationResId(resId: Int, visibilityValue: Int, startOffset: 
     }
 }
 
+@BindingAdapter(requireAll = true, value = ["animationResId", "isVisible", "animationDuration"])
+fun LinearLayout.swapVisiblityWithAnimation(resId: Int, isVisible: Boolean, duration: Int) {
+    if (resId != 0) {
+        val set: AnimationSet = AnimationUtils.loadAnimation(context, resId) as AnimationSet
+        if (isVisible) {
+            visibility = INVISIBLE
+            set.interpolator = AccelerateInterpolator()
+        } else {
+            set.interpolator = ReverseInterpolator(set.interpolator)
+        }
+        set.duration = duration.toLong()
+        set.animations[0]?.setAnimationListener(object : AnimationListenerWrapper() {
+            override fun onAnimationStart(animation: Animation?) {
+                if (isVisible) {
+                    visibility = VISIBLE
+                }
+            }
+
+            override fun onAnimationEnd(animation: Animation?) {
+                if (!isVisible) {
+                    visibility = GONE
+                }
+            }
+        })
+        startAnimation(set)
+    } else {
+        isVisible(isVisible)
+    }
+}
 @BindingAdapter(requireAll = true, value = ["animationResId", "isVisible", "animationDuration"])
 fun ViewGroup.swapVisiblityWithAnimation(resId: Int, isVisible: Boolean, duration: Int) {
     if (resId != 0) {
@@ -180,6 +210,40 @@ fun View.scaleWithSize(oldScale: Float, scale: Float) {
     }
 }
 
+
+fun View.getWidthAnimation(newSize: Int): Animator {
+    val sizeAnimator = ValueAnimator.ofInt(width, newSize)
+    sizeAnimator.addUpdateListener { animation ->
+        val animatedValue = animation.animatedValue as Int
+        with(layoutParams) {
+            width = animatedValue
+            requestLayout()
+        }
+    }
+    return sizeAnimator
+}
+
+fun View.getHeightAnimation(newSize: Int): Animator {
+    val sizeAnimator = ValueAnimator.ofInt(height, newSize)
+    sizeAnimator.addUpdateListener { animation ->
+        val animatedValue = animation.animatedValue as Int
+        with(layoutParams) {
+            height = animatedValue
+        }
+    }
+    return sizeAnimator
+}
+
+fun View.getScaleAnimation(oldScale: Float, newScale: Float): ValueAnimator {
+    val scaleAnimator = ValueAnimator.ofFloat(oldScale, newScale)
+    scaleAnimator.addUpdateListener { animation ->
+        val animatedValue = animation.animatedValue as Float
+        scaleX = animatedValue
+        scaleY = animatedValue
+    }
+    return scaleAnimator
+}
+
 fun View.getSizeAnimation(newSize: Int): Animator {
     val sizeAnimator = ValueAnimator.ofInt(height, newSize)
     sizeAnimator.addUpdateListener { animation ->
@@ -192,17 +256,6 @@ fun View.getSizeAnimation(newSize: Int): Animator {
     }
     sizeAnimator.duration = 400
     return sizeAnimator
-}
-
-fun View.getScaleAnimation(oldScale: Float, newScale: Float): ValueAnimator {
-    val scaleAnimator = ValueAnimator.ofFloat(oldScale, newScale)
-    scaleAnimator.addUpdateListener { animation ->
-        val animatedValue = animation.animatedValue as Float
-        scaleX = animatedValue
-        scaleY = animatedValue
-    }
-    scaleAnimator.duration = 400
-    return scaleAnimator
 }
 
 @BindingAdapter(

@@ -11,9 +11,11 @@ import homepunk.github.com.presentation.core.base.BaseViewModel
 import homepunk.github.com.presentation.feature.menu.country.CountryListFragment
 import homepunk.github.com.presentation.feature.menu.country.CountryListViewModel
 import homepunk.github.com.presentation.feature.menu.country.model.CountryLocationModel
-import homepunk.github.com.presentation.feature.menu.language.LanguageListFragment
+import homepunk.github.com.presentation.feature.widget.menu.MenuItemView
+import homepunk.github.com.presentation.feature.widget.menu.MenuLayout
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.lang.UnsupportedOperationException
 import javax.inject.Inject
 
 /**Created by Homepunk on 18.01.2019. **/
@@ -22,7 +24,7 @@ class MenuViewModel @Inject constructor(var appDataFactory: AppDataFactory,
 
     var modeList = mutableListOf<MenuModeModel>()
 
-    var menuItemList = ObservableArrayList<MenuModel>()
+    var menuItemList = ObservableArrayList<MenuLayout.MenuItem>()
     var menuItemFragmentList = arrayListOf<Fragment>()
     var userLocation = ObservableField<CountryLocationModel>()
 //    var onMenuTabClickListener = object : BubbleTabLayout.OnMenuTabClickListener {
@@ -38,13 +40,15 @@ class MenuViewModel @Inject constructor(var appDataFactory: AppDataFactory,
                 appDataFactory.getModeMenuList().apply {
                     for (menuModel in this) {
                         menuItemFragmentList.add(
-                                when (menuModel) {
-                                    MenuModel.MAP -> Fragment()
-                                    MenuModel.COUNTRY -> CountryListFragment()
-                                    MenuModel.CALENDAR -> Fragment()
+                                when (menuModel.actionId) {
+                                    MenuModel.MAP.ordinal -> Fragment()
+                                    MenuModel.COUNTRY.ordinal -> CountryListFragment()
+                                    MenuModel.CALENDAR.ordinal -> Fragment()
+                                    else -> throw UnsupportedOperationException("NO MENU ITEM WITH THIS TYPE ${menuModel.actionId}")
                     })
                 }})
-        CountryListViewModel.userLocationPublisher.subscribeOn(Schedulers.single()).observeOn(AndroidSchedulers.mainThread())
+        CountryListViewModel.userLocationPublisher.subscribeOn(Schedulers.single())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { userLocation.set(it) }
     }
 }

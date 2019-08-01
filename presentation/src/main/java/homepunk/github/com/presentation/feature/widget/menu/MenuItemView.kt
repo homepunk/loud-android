@@ -1,78 +1,77 @@
 package homepunk.github.com.presentation.feature.widget.menu
 
-import android.animation.Animator
 import android.animation.AnimatorSet
-import android.animation.ValueAnimator
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.util.AttributeSet
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.LinearLayout
+import android.util.TypedValue
+import android.view.Gravity
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.core.ext.getColor
+import homepunk.github.com.presentation.core.ext.dpToPx
 import homepunk.github.com.presentation.core.ext.getScaleAnimation
-import homepunk.github.com.presentation.core.ext.getSizeAnimation
+import homepunk.github.com.presentation.core.ext.getWidthAnimation
+import homepunk.github.com.presentation.core.ext.onGlobalLayout
+import homepunk.github.com.presentation.feature.widget.animation.GammaEvaluator
 import kotlin.math.roundToInt
 
 class MenuItemView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : FrameLayout(context, attrs, defStyleAttr) {
+    : TextView(context, attrs, defStyleAttr) {
 
-    private lateinit var menuItem: MenuItem
-    private var menuItemView: TextView?
-    private var scaleFactor = 1.2f
+    private lateinit var configuration: MenuItemConfiguration
 
-    constructor(context: Context, menuItem: MenuItem) : this(context) {
-        this.menuItem = menuItem
-    }
+    constructor(context: Context, text: String, menuItemConfiguration: MenuItemConfiguration) : this(context) {
+        with(menuItemConfiguration) {
+            configuration = this
 
-    init {
-        LayoutInflater.from(context)!!.inflate(R.layout.custom_layout_item_menu, this, true)
-        menuItemView = findViewById<TextView>(R.id.item)
-        with(menuItem) {
-            menuItemView?.setText(nameResId)
-            menuItemView?.setTextColor(getColor(if (isCurrent) highlightColorResId else defaultColorResId))
-        }
-    }
+            isAllCaps = true
+            gravity = Gravity.BOTTOM
+            typeface = ResourcesCompat.getFont(context, R.font.lato_bold)
 
-    fun highlight(highligh: Boolean) {
-        pivotX = 0f
-        pivotY = height.toFloat()
-
-        val scaleAnimation = getScaleAnimation(if (highligh) scaleFactor else 1f, if (highligh) 1f else scaleFactor)
-        val sizeAnimation = getSizeAnimation((if (highligh) height * scaleFactor else height / scaleFactor).roundToInt())
-        AnimatorSet().apply {
-            playTogether(scaleAnimation, sizeAnimation)
-            start()
-        }
-    }
-
-    fun View.getSizeAnimation(newSize: Int): Animator {
-        val sizeAnimator = ValueAnimator.ofInt(height, newSize)
-        sizeAnimator.addUpdateListener { animation ->
-            val animatedValue = animation.animatedValue as Int
-            with(layoutParams) {
-                height = animatedValue
-                width = animatedValue
+            setText(text)
+            setTextColor(textDefaultColor)
+            setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizePx)
+            onGlobalLayout {
+                val height = height * scaleFactor
+                pivotX = 0f
+                pivotY = height
+                layoutParams?.height = height.roundToInt()
+                requestLayout()
             }
-            requestLayout()
         }
-        sizeAnimator.duration = 400
-        return sizeAnimator
     }
 
-    fun View.getScaleAnimation(oldScale: Float, newScale: Float): ValueAnimator {
-        val scaleAnimator = ValueAnimator.ofFloat(oldScale, newScale)
-        scaleAnimator.addUpdateListener { animation ->
-            val animatedValue = animation.animatedValue as Float
-            scaleX = animatedValue
-            scaleY = animatedValue
+    fun highlight(highlight: Boolean) {
+        with(configuration) {
+            val scaleAnimation = getScaleAnimation(if (highlight) 1f else scaleFactor, if (highlight) scaleFactor else 1f)
+            val widthAnimation = getWidthAnimation((if (highlight) width * scaleFactor else width / scaleFactor).roundToInt())
+            val colorAnimator = if (highlight)
+                getColorAnimator(textDefaultColor, textHighlightColor) else
+                getColorAnimator(textHighlightColor, textDefaultColor)
+
+            AnimatorSet().apply {
+                playTogether(scaleAnimation, widthAnimation, colorAnimator)
+                duration = 400
+                start()
+            }
         }
-        scaleAnimator.duration = 400
-        return scaleAnimator
     }
 
-    enum class MenuItem(var isCurrent: Boolean, var nameResId: Int, var highlightColorResId: Int, var defaultColorResId: Int, var itemType: Int)
+    fun getColorAnimator(fromColor: Int, toCoclor: Int) = ObjectAnimator.ofObject(
+            this, // Object to animating
+            "textColor", // Property to animate
+            GammaEvaluator(), // Interpolation function
+            fromColor,
+            toCoclor
+    )
+
+
+    class MenuItemConfiguration {
+        var scaleFactor: Float = 1f
+        var textGap: Int = 0
+        var textSizePx: Float = 0f
+        var textDefaultColor: Int = 0
+        var textHighlightColor: Int = 0
+    }
 }

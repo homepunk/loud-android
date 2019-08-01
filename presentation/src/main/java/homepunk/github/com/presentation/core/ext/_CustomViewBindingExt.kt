@@ -28,7 +28,7 @@ fun  <T> DropDownListView<T>.dropDownList(items: List<T>?, selection: Int) {
     }
 }
 @BindingAdapter(value = ["menuItems"])
-fun   MenuLayout.setMenuItems(items: List<MenuItemView.MenuItem>?) {
+fun   MenuLayout.setMenuItems(items: List<MenuLayout.MenuItem>?) {
     if (!items.isNullOrEmpty()) {
         setMenu(items)
     }

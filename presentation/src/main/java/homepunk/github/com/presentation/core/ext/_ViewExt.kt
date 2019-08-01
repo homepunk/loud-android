@@ -7,6 +7,8 @@ import android.util.TypedValue
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.ViewGroup
+import android.view.ViewGroup.MarginLayoutParams
 import android.view.ViewTreeObserver
 import android.view.animation.LinearInterpolator
 import android.widget.TextView
@@ -44,6 +46,10 @@ fun View.swapVisibility() {
     } else {
         GONE
     }
+}
+
+fun View.marginLayoutParams() :  MarginLayoutParams? {
+    return (layoutParams as? MarginLayoutParams)
 }
 
 fun <T> View.dpToPx(value: Float): T {

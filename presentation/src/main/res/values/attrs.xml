@@ -25,4 +25,13 @@
         <attr name="dropDownLayoutResourceVariableId" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="MenuLayout">
+        <attr name="menu_scaleFactor" format="float"/>
+        <attr name="menu_textGap" format="integer|dimension"/>
+        <attr name="menu_textSize" format="integer|dimension"/>
+        <attr name="menu_textDefaultColor" format="color"/>
+        <attr name="menu_textHighlightColor" format="color"/>
+        <attr name="menu_currentActionId" format="integer"/>
+    </declare-styleable>
+
 </resources>
