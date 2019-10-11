@@ -80,7 +80,7 @@
 
         <TextView
             android:id="@+id/tv_title"
-            style="@style/FieldTextStyle"
+            style="@style/ItemTitleTextStyle"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/margin_default_10dp"

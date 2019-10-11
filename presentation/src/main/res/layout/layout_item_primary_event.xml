@@ -82,7 +82,7 @@
 
                 <TextView
                     android:id="@+id/place"
-                    style="@style/FieldTextStyle"
+                    style="@style/ItemTitleTextStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_small_6dp"

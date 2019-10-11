@@ -4,9 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.content.Context
-import android.text.TextPaint
 import android.util.AttributeSet
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import homepunk.github.com.presentation.R
@@ -14,8 +12,8 @@ import homepunk.github.com.presentation.core.ext.onGlobalLayout
 import homepunk.github.com.presentation.core.wrapper.AnimatorListenerWrapper
 import timber.log.Timber
 
-/**Created by Homepunk on 24.07.2019. **/
-class AnimationTextView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+/**Created by Homepunk on 19.08.2019. **/
+class AnimSyncTextView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : TextView(context, attrs, defStyleAttr) {
     //    var currentAnimationSet: AnimatorSet? = null
     var isAnimationRunning = false
@@ -23,6 +21,7 @@ class AnimationTextView @JvmOverloads constructor(context: Context, attrs: Attri
     var scaledWidth: Int = 0
 
     init {
+//        TypefaceCompat.createFromResourcesFontFile(context, resources, R.font.lato_bold, NORMAL)
         typeface = ResourcesCompat.getFont(context, R.font.lato_bold)
         onGlobalLayout {
             pivotX = 0f
@@ -51,11 +50,11 @@ class AnimationTextView @JvmOverloads constructor(context: Context, attrs: Attri
 
 
     override fun setText(text: CharSequence?, type: BufferType?) {
-        Timber.w("CURRENT TEXT ${getText()}, current width = ${measuredWidth} new text = $text, new width = ${TextPaint().measureText(text.toString())} ")
+//        Timber.w("CURRENT TEXT ${getText()}, current width = ${measuredWidth} new text = $text, new width = ${TextPaint().measureText(text.toString())} ")
         defaultWidth = 0
         scaledWidth = 0
         super.setText(text, type)
-        measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+//        measure(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
 

@@ -15,7 +15,7 @@
         <item name="android:windowContentTransitions">true</item>
     </style>
 
-    <style name="FieldTextStyle">
+    <style name="ItemTitleTextStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/whiteBone</item>
@@ -23,7 +23,33 @@
         <item name="android:textSize">@dimen/text_size_card</item>
     </style>
 
-    <style name="BlockTextStyle" parent="FieldTextStyle">
+    <style name="ItemSubtitleTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/subtitle2</item>
+        <item name="android:fontFamily">@font/lato</item>
+        <item name="android:textSize">@dimen/text_size_card</item>
+    </style>
+
+    <style name="PrimaryTitleTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/whiteBone</item>
+        <item name="android:fontFamily">@font/lato_bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+    <style name="SecondaryTitleTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/whiteBone</item>
+        <item name="android:fontFamily">@font/lato</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="BlockTextStyle" parent="ItemTitleTextStyle">
         <item name="android:textSize">@dimen/text_size_default</item>
         <item name="android:layout_marginStart">@dimen/margin_big_20dp</item>
         <item name="android:layout_marginEnd">@dimen/margin_big_20dp</item>

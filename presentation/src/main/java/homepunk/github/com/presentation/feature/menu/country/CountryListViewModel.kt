@@ -9,6 +9,7 @@ import homepunk.github.com.domain.interactor.UserConfigurationInteractor
 import homepunk.github.com.domain.model.internal.UserLocation
 import homepunk.github.com.domain.repository.SongkickLocationRepository
 import homepunk.github.com.presentation.common.data.AppDataFactory
+import homepunk.github.com.presentation.common.model.CountryModel
 import homepunk.github.com.presentation.core.base.BaseViewModel
 import homepunk.github.com.presentation.core.ext.swap
 import homepunk.github.com.presentation.core.listener.OnItemClickListener
@@ -61,6 +62,7 @@ class CountryListViewModel @Inject constructor(appDataFactory: AppDataFactory,
                         .toSortedList { o1, o2 -> o1.locationName.compareTo(o2.locationName) }
                         .toObservable()
 
+                var i = 0
                 subscriptions.add(locationsObservable.withLatestFrom(userLocationsObservable,
                         BiFunction { locations: List<UserLocation>, savedLocations: List<UserLocation> ->
                             CountryLocationModel(countryModel, locations, savedLocations)
@@ -68,6 +70,10 @@ class CountryListViewModel @Inject constructor(appDataFactory: AppDataFactory,
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe { parent ->
                             itemList.add(parent)
+                            i++
+                            if (countryModel.countryName == CountryModel.UA.countryName) {
+                                onCountryClickListener.onClick(i, parent)
+                            }
                         })
             }
         }

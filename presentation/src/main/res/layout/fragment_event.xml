@@ -224,7 +224,7 @@
                             android:paddingBottom="@dimen/margin_small_6dp">
 
                             <TextView
-                                style="@style/FieldTextStyle"
+                                style="@style/ItemTitleTextStyle"
                                 android:text="@{youtubeViewModel.query}"
                                 android:textColor="?colorAccent"
                                 tools:text="Cabaret Nocturne" />
@@ -241,7 +241,7 @@
                             android:paddingBottom="@dimen/margin_small_6dp">
 
                             <TextView
-                                style="@style/FieldTextStyle"
+                                style="@style/ItemTitleTextStyle"
                                 android:text="@{youtubeViewModel.query + ` Live`}"
                                 android:textColor="@color/subtitle2"
                                 tools:text="Cabaret Nocturne Live" />

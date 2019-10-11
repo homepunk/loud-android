@@ -56,4 +56,6 @@
     <dimen name="height_youtube_video_preview">110dp</dimen>
     <dimen name="height_bottom_nav">56dp</dimen>
     <dimen name="text_size_largest_title">40sp</dimen>
+    <dimen name="height_collapsed_country_fragment">300dp</dimen>
+    <dimen name="elevation">10dp</dimen>
 </resources>

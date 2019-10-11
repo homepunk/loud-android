@@ -58,13 +58,11 @@ class MainViewModel @Inject constructor(var appDataFactory: AppDataFactory,
         }
     }
 
-    var onLocationPinClickListener = View.OnClickListener { v ->
-        v?.let {
-        }
-    }
-
     val isMenuOpenedLiveData = MutableLiveData<Boolean>()
     val onMenuClickListener = View.OnClickListener { isMenuOpenedLiveData.swap() }
+
+    val isLocationOpenedLiveData = MutableLiveData<Boolean>()
+    val onLocationClickListener = View.OnClickListener { isLocationOpenedLiveData.swap() }
 
     init {
         modeList = appDataFactory.getModeList()

@@ -87,6 +87,7 @@ fun LinearLayout.swapVisiblityWithAnimation(resId: Int, isVisible: Boolean, dura
         isVisible(isVisible)
     }
 }
+
 @BindingAdapter(requireAll = true, value = ["animationResId", "isVisible", "animationDuration"])
 fun ViewGroup.swapVisiblityWithAnimation(resId: Int, isVisible: Boolean, duration: Int) {
     if (resId != 0) {
@@ -439,11 +440,63 @@ fun RecyclerView.isVisibleWithSlideDownAnimation(oldIsVisible: Boolean, isVisibl
 fun View.translateDownAnimation(oldIsVisible: Boolean, isVisible: Boolean) {
     // DO FIRST RUN
     if (oldIsVisible == isVisible) {
-        measure(MATCH_PARENT, WRAP_CONTENT)
+        measure(MATCH_PARENT, MATCH_PARENT)
     } else {
         animate()
-                .translationY(if (isVisible) 0f else -height.toFloat())
-                .setDuration(300).start()
+                .translationY(if (isVisible) dpToPx(300f) else 0f)
+                .setDuration(500).start()
+    }
+}
+
+@BindingAdapter(value = ["animation_translationY", "animation_start"], requireAll = true)
+fun View.animation_translateByY(oldTranslateToY: Float, oldStart: Boolean,
+                                translateToY: Float, start: Boolean) {
+    // DO FIRST RUN
+    if (oldStart == start) {
+
+    } else {
+        animate()
+                .translationY(if (start) translateToY else 0f)
+                .setDuration(500)
+                .start()
+    }
+}
+
+@BindingAdapter(value = ["animation_translationByHeight", "animation_start"], requireAll = true)
+fun View.animation_translationByHeight(oldViewId: Int, oldStart: Boolean,
+                                       viewId: Int, start: Boolean) {
+    // DO FIRST RUN
+    if (oldStart == start) {
+    } else {
+        rootView.findViewById<View>(viewId).let { view ->
+            Timber.w("view height = ${view.height}, measuredHeight = ${view.measuredHeight}")
+            val animator = animate().setDuration(500)
+
+            if (start) {
+                view.onGlobalLayout {
+                    Timber.w("onGlobalLayout view height = ${view.height}, measuredHeight = ${view.measuredHeight}")
+                    animator.translationY(view.height.toFloat())
+                }
+            } else {
+                animator.translationY(0f)
+            }
+            animator.start()
+
+        }
+    }
+}
+
+@BindingAdapter(value = ["animation_alphaFrom", "animation_alphaTo", "animation_start"], requireAll = true)
+fun View.animateAlpha(oldAlphaFrom: Float, oldAlphaTo: Float, oldStart: Boolean,
+                      alphaFrom: Float, alphaTo: Float, start: Boolean) {
+    // DO FIRST RUN
+    if (oldStart == start && !start) {
+        alpha = alphaFrom
+    } else {
+        animate()
+                .alpha(if (start) alphaTo else alphaFrom)
+                .setDuration(500)
+                .start()
     }
 }
 

@@ -83,6 +83,38 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:onItemClickListener="@{viewModel.onEventClickListener}"
                 tools:listitem="@layout/layout_item_popular_event" />
+
+            <FrameLayout
+                android:id="@+id/btn_places"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:elevation="@dimen/margin_default_10dp"
+                android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
+                android:layout_below="@+id/rv_favorite_events"
+                android:layout_marginStart="@dimen/margin_big_20dp"
+                android:background="@drawable/background_rect_round_corners_dark">
+
+                <TextView
+                    style="@style/SecondaryTitleTextStyle"
+                    android:layout_gravity="center"
+                    android:text="ARTISTS" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layoutAnimation="@anim/layout_animation_slide_from_bottom"
+                android:elevation="@dimen/margin_default_10dp"
+                android:layout_below="@+id/rv_favorite_events"
+                android:layout_marginStart="@dimen/margin_big_20dp"
+                android:layout_toEndOf="@id/btn_places"
+                android:background="@drawable/background_rect_round_corners_dark"
+                >
+
+                <TextView
+                    style="@style/SecondaryTitleTextStyle"
+                    android:layout_gravity="center"
+                    android:text="PLACES" />
+            </FrameLayout>
         </RelativeLayout>
         <!--      app:isAppearanceEnabled="@{true}"
                 app:isVisible="@{!viewModel.popularEventsList.isEmpty()}"

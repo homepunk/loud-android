@@ -4,22 +4,31 @@
     <item
         android:id="@+id/action_discover"
         android:enabled="true"
-        android:icon="@drawable/ic_discover"
-        android:title="Discover"
+        android:icon="@drawable/ic_website_home_page"
+        android:title="Home page"
         android:orderInCategory="0"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_favorites"
+        android:id="@+id/action_calendar"
         android:enabled="true"
         android:orderInCategory="1"
-        android:icon="@drawable/ic_calendar"
-        android:title="Collection"
+        android:icon="@drawable/ic_calendar_page"
+        android:title="Calendar"
         app:showAsAction="ifRoom" />
+
     <item
         android:id="@+id/action_map"
         android:enabled="true"
         android:icon="@drawable/ic_map"
         android:orderInCategory="2"
-        android:title="Map"
+        android:title="Map/Places"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_favorites"
+        android:enabled="true"
+        android:icon="@drawable/ic_black_male_user_symbol"
+        android:orderInCategory="3"
+        android:title="Profile/Settings"
         app:showAsAction="ifRoom" />
 </menu>

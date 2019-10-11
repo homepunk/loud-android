@@ -20,7 +20,7 @@ import timber.log.Timber
 
 
 @BindingAdapter(value = ["updateModeTitleOnModeChange", "btnMode"])
-fun TextView.updateModeTitleOnModeChange(prevAppModeModel: AppModeModel?, prevBtnMode: AppMode?,
+fun homepunk.github.com.presentation.feature.widget.animation.AnimSyncTextView.updateModeTitleOnModeChange(prevAppModeModel: AppModeModel?, prevBtnMode: AppMode?,
                                          appModeModel: AppModeModel?, btnMode: AppMode?) {
     if (appModeModel != prevAppModeModel) {
         val inactiveColor = getColor(homepunk.github.com.presentation.R.color.subtitle3)
@@ -28,14 +28,9 @@ fun TextView.updateModeTitleOnModeChange(prevAppModeModel: AppModeModel?, prevBt
         if (prevAppModeModel == null && appModeModel != null) {
             if (btnMode == appModeModel.mode) {
                 setTextColor(appModeModel.color)
-//                scale(1.2f)
-                scaleX = 1.2f
-                scaleY = 1.2f
-
-//                textSizePx = 36f
+                scale(1.1f)
             } else {
                 setTextColor(inactiveColor)
-//                textSizePx = 34f
             }
             return
         }
@@ -48,7 +43,7 @@ fun TextView.updateModeTitleOnModeChange(prevAppModeModel: AppModeModel?, prevBt
                 if (currentTextColor == inactiveColor) appModeModel!!.color else inactiveColor
         ).setDuration(duration)
 
-        val scaleAnimator = ValueAnimator.ofFloat(if (currentTextColor == inactiveColor) 1f else 1.2f, if (currentTextColor == inactiveColor) 1.2f else 1f)
+        val scaleAnimator = ValueAnimator.ofFloat(if (currentTextColor == inactiveColor) 1f else 1.1f, if (currentTextColor == inactiveColor) 1.1f else 1f)
         scaleAnimator.addUpdateListener { animation ->
             val animatedValue = animation.animatedValue as Float
             scaleX = animatedValue
@@ -56,17 +51,7 @@ fun TextView.updateModeTitleOnModeChange(prevAppModeModel: AppModeModel?, prevBt
         }
         scaleAnimator.interpolator = LinearInterpolator()
 
-/*
-        val textSizeAnimator = ObjectAnimator.ofFloat(
-                this, // Object to animating
-                "textSizePx", // Property to animate
-                if (currentTextColor == inactiveColor) 34F else 36F,
-                if (currentTextColor == inactiveColor) 36F else 34F
-        ).setDuration(300)
-*/
-//        textSizeAnimator.interpolator = LinearInterpolator()
         AnimatorSet().apply {
-//            playTogether(textColorAnimator, textSizeAnimator)
             playTogether(textColorAnimator, scaleAnimator)
             start()
         }
@@ -84,12 +69,6 @@ var currentAppModeModel: AppModeModel? = null
 @BindingAdapter("updateTextColorOnModeChange")
 fun TextView.updateTextColorOnModeChange(prevAppModeModel: AppModeModel?, appModeModel: AppModeModel) {
     Timber.w("updateTextColorOnModeChange prevAppModeModel IS NULL = ${prevAppModeModel == null}, appModeModel IS NULL = ${appModeModel == null}")
-  /*  if (currentAppModeModel != appModeModel) {
-        startDelay = 0L
-        currentAppModeModel = appModeModel
-    } else {
-        startDelay += 100L
-    }*/
     if (prevAppModeModel == null) {
         setTextColor(appModeModel.color)
     } else {

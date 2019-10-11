@@ -9,9 +9,10 @@ import homepunk.github.com.presentation.common.adapter.SimpleViewPagerAdapter
 import homepunk.github.com.presentation.core.base.BaseActivity
 import homepunk.github.com.presentation.core.ext.isNotVisible
 import homepunk.github.com.presentation.core.ext.isVisible
+import homepunk.github.com.presentation.core.ext.replace
 import homepunk.github.com.presentation.core.ext.setupWithViewPager
 import homepunk.github.com.presentation.databinding.ActivityMainBinding
-import homepunk.github.com.presentation.feature.menu.MenuFragment
+import homepunk.github.com.presentation.feature.menu.country.CountryListFragment
 import homepunk.github.com.presentation.feature.widget.animation.AnimationEventLiveData
 import homepunk.github.com.presentation.feature.widget.animation.ScrollEvent
 
@@ -26,20 +27,25 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
         mDataBinding.run {
             viewModel = mMainViewModel.apply {
+/*
                 isMenuOpenedLiveData.observe(this@MainActivity, Observer { open ->
                     if (open) {
-                        supportFragmentManager.run {
-                            beginTransaction()
-                                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-                                    .replace(R.id.menu_fragment_container, MenuFragment())
-                                    .addToBackStack(null)
-                                    .commit()
-                        }
+                        supportFragmentManager.replace(R.id.menu_fragment_container, MenuFragment())
+                    } else {
+                        onBackPressed()
+                    }
+                })
+*/
+                isLocationOpenedLiveData.observe(this@MainActivity, Observer { open ->
+                    if (open) {
+                        supportFragmentManager.replace(R.id.menu_fragment_container, CountryListFragment())
                     } else {
                         onBackPressed()
                     }
                 })
             }
+
+
             viewPager.adapter = SimpleViewPagerAdapter(supportFragmentManager)
             bottomNav.setupWithViewPager(viewPager)
 
@@ -119,10 +125,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun onBackPressed() {
-        if (mMainViewModel.isMenuOpenedLiveData.value == true) {
-            mMainViewModel.isMenuOpenedLiveData.value = false
-        } else {
-            super.onBackPressed()
+        when {
+            mMainViewModel.isMenuOpenedLiveData.value == true -> mMainViewModel.isMenuOpenedLiveData.value = false
+            mMainViewModel.isLocationOpenedLiveData.value == true -> mMainViewModel.isLocationOpenedLiveData.value = false
+            else -> super.onBackPressed()
         }
     }
 

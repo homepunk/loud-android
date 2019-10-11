@@ -55,7 +55,7 @@ fun <T> RecyclerView.flexLayoutManager(direction: Int) {
     layoutManager = FlexboxLayoutManager(context).apply {
         flexDirection = direction
         flexWrap = FlexWrap.WRAP
-        justifyContent = JustifyContent.SPACE_AROUND
+        justifyContent = JustifyContent.FLEX_START
     }
 }
 

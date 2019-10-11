@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="homepunk.github.com.presentation.R" />
 
         <import type="com.google.android.flexbox.FlexDirection" />
@@ -16,134 +17,190 @@
 
     </data>
 
-    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:animateLayoutChanges="true">
+        android:animateLayoutChanges="true"
+        android:background="@color/background"
+        android:minHeight="350dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_big_20dp"
-                android:fontFamily="@font/lato"
-                android:letterSpacing="0.02"
-                android:lineSpacingExtra="1sp"
-                android:text="Country"
-                android:textAllCaps="true"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:textColor="@color/text"
-                android:textSize="@dimen/text_size_large"
-                android:visibility="@{viewModel.currentUserCountry.isParentExpanded? View.VISIBLE : View.GONE}" />
-
-            <include
-                android:id="@+id/country"
-                layout="@layout/layout_item_country"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:visibility="@{viewModel.currentUserCountry.isParentExpanded? View.VISIBLE : View.GONE}"
-                app:onCountryClickListener="@{viewModel.onCurrentCountryClickListener}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title"
-                app:model="@{viewModel.currentUserCountry}" />
-
-            <TextView
-                android:id="@+id/title_saved_cities"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lato"
-                android:letterSpacing="0.02"
-                android:lineSpacingExtra="1sp"
-                android:text="Saved locations"
-                android:textAllCaps="true"
-                app:layout_constraintTop_toTopOf="@+id/title"
-                app:layout_constraintStart_toEndOf="@+id/country"
-                android:textColor="@color/text"
-                android:textSize="@dimen/text_size_large"
-                android:visibility="@{viewModel.currentUserCountry.isParentExpanded? View.VISIBLE : View.GONE}" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_big_20dp"
-                app:adapter="@{viewModel.currentUserCountry.savedAdapter}"
-                app:animation_translateFromEnd="@{viewModel.currentUserCountry.isParentExpanded}"
-                app:flexLayoutManager="@{FlexDirection.COLUMN}"
-                app:layout_constraintBottom_toTopOf="@+id/layout_cities"
-                app:layout_constraintStart_toEndOf="@+id/country"
-                app:layout_constraintTop_toBottomOf="@+id/title_saved_cities" />
-
-            <LinearLayout
-                android:id="@+id/layout_cities"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:visibility="gone"
-                app:isVisible="@{viewModel.currentUserCountry.isParentExpanded}"
-                app:animationResId="@{R.anim.item_animation_from_top}"
-                app:layout_constraintTop_toBottomOf="@id/country"
-                android:paddingBottom="@dimen/margin_big_20dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_rect_bottom_round_corners_dark"
+                android:elevation="@dimen/elevation"
+                android:paddingStart="@dimen/margin_big_20dp"
+                android:paddingTop="@dimen/margin_big_20dp"
+                android:paddingEnd="@dimen/margin_big_20dp"
+                android:paddingBottom="@dimen/margin_big_20dp">
 
                 <TextView
+                    android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_big_20dp"
-                    android:layout_marginTop="@dimen/margin_big_20dp"
                     android:fontFamily="@font/lato"
                     android:letterSpacing="0.02"
                     android:lineSpacingExtra="1sp"
-                    android:text="Country locations"
+                    android:text="selected location"
                     android:textAllCaps="true"
                     android:textColor="@color/text"
                     android:textSize="@dimen/text_size_large"
-                     />
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <include
+                    android:id="@+id/country"
+                    layout="@layout/layout_item_country"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{viewModel.currentUserCountry.isParentExpanded? View.VISIBLE : View.GONE}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/title"
+                    app:model="@{viewModel.currentUserCountry}"
+                    app:onCountryClickListener="@{viewModel.onCurrentCountryClickListener}" />
+
+                <TextView
+                    android:id="@+id/title_saved_cities"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_big_20dp"
+                    android:fontFamily="@font/lato"
+                    android:letterSpacing="0.02"
+                    android:lineSpacingExtra="1sp"
+                    android:text="interested \ncities"
+                    android:textAllCaps="true"
+                    android:textColor="@color/text"
+                    android:textSize="@dimen/text_size_large"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@+id/country"
+                    app:layout_constraintTop_toTopOf="@+id/title" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_locations"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="@dimen/margin_big_20dp"
-                    app:adapter="@{viewModel.currentUserCountry.adapter}"
-                    app:flexLayoutManager="@{FlexDirection.COLUMN}"
+                    android:id="@+id/recyclerView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:adapter="@{viewModel.currentUserCountry.savedAdapter}"
+                    app:animation_translateFromEnd="@{viewModel.currentUserCountry.isParentExpanded}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:itemDecoration_top="@{@dimen/margin_default_10dp}"
+                    app:layout_constraintBottom_toBottomOf="@id/country"
+                    app:layout_constraintStart_toEndOf="@+id/country"
+                    app:layout_constraintTop_toTopOf="@id/country"
+                    tools:itemCount="5"
                     tools:listitem="@layout/layout_item_location_child" />
-            </LinearLayout>
+                <!--app:flexLayoutManager="@{FlexDirection.COLUMN}"-->
+
+                <TextView
+                    style="@style/ItemTitleTextStyle"
+                    android:layout_marginStart="@dimen/margin_big_20dp"
+                    android:layout_marginTop="@dimen/margin_default_10dp"
+                    android:text="see all"
+                    android:textAllCaps="true"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/recyclerView"
+                    app:layout_constraintTop_toBottomOf="@id/recyclerView" />
+
+                <View
+                    style="@style/SecondaryTitleTextStyle"
+                    android:layout_width="50dp"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/background_rect_round_corners_accent"
+                    android:text="DRAG to View all"
+                    android:textColor="?colorAccent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/country" />
+
+                <!--
+                            <LinearLayout
+                                android:id="@+id/layout_cities"
+                                android:layout_width="match_parent"
+                                android:orientation="vertical"
+                                android:visibility="gone"
+                                app:isVisible="@{viewModel.currentUserCountry.isParentExpanded}"
+                                app:animationResId="@{R.anim.item_animation_from_top}"
+                                app:layout_constraintTop_toBottomOf="@id/country"
+                                android:paddingBottom="@dimen/margin_big_20dp"
+                                android:layout_height="wrap_content">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_big_20dp"
+                                    android:layout_marginTop="@dimen/margin_big_20dp"
+                                    android:fontFamily="@font/lato"
+                                    android:letterSpacing="0.02"
+                                    android:lineSpacingExtra="1sp"
+                                    android:text="Country locations"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/text"
+                                    android:textSize="@dimen/text_size_large"
+                                     />
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rv_locations"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="200dp"
+                                    android:layout_marginTop="@dimen/margin_big_20dp"
+                                    app:adapter="@{viewModel.currentUserCountry.adapter}"
+                                    app:flexLayoutManager="@{FlexDirection.COLUMN}"
+                                    tools:listitem="@layout/layout_item_location_child" />
+                            </LinearLayout>
+                -->
+                <!--
+                            <TextView
+                                android:id="@+id/title_countries"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@+id/layout_cities"
+                                app:layout_constraintStart_toStartOf="parent"
+                                android:layout_marginStart="@dimen/margin_big_20dp"
+                                android:visibility="gone"
+                                android:layout_marginTop="@dimen/margin_big_20dp"
+                                android:fontFamily="@font/lato"
+                                android:letterSpacing="0.02"
+                                android:lineSpacingExtra="1sp"
+                                android:text="Countries"
+                                android:textAllCaps="true"
+                                android:textColor="@color/text"
+                                android:textSize="@dimen/text_size_large" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_countries"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:visibility="gone"
+                                app:flexLayoutManager="@{FlexDirection.ROW}"
+                                app:layout_constraintTop_toBottomOf="@+id/title_countries"
+                                app:onItemClickListener="@{viewModel.onCountryClickListener}"
+                                bind:itemDecoration_bottom="@{@dimen/margin_default_10dp}"
+                                bind:itemDecoration_left="@{@dimen/margin_big_20dp}"
+                                bind:itemDecoration_right="@{@dimen/margin_big_20dp}"
+                                bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
+                                bind:itemList="@{viewModel.itemList}"
+                                tools:listitem="@layout/layout_item_country" />-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-                android:id="@+id/title_countries"
+                style="@style/SecondaryTitleTextStyle"
+                android:layout_marginTop="@dimen/margin_big_20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/layout_cities"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/margin_big_20dp"
-                android:fontFamily="@font/lato"
-                android:letterSpacing="0.02"
-                android:lineSpacingExtra="1sp"
-                android:text="Countries"
-                android:textAllCaps="true"
-                android:textColor="@color/text"
-                android:textSize="@dimen/text_size_large" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_countries"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:flexLayoutManager="@{FlexDirection.ROW}"
-                app:layout_constraintTop_toBottomOf="@+id/title_countries"
-                app:onItemClickListener="@{viewModel.onCountryClickListener}"
-                bind:itemDecoration_bottom="@{@dimen/margin_default_10dp}"
-                bind:itemDecoration_left="@{@dimen/margin_big_20dp}"
-                bind:itemDecoration_right="@{@dimen/margin_big_20dp}"
-                bind:itemDecoration_startLeft="@{@dimen/margin_big_20dp}"
-                bind:itemList="@{viewModel.itemList}"
-                tools:listitem="@layout/layout_item_country" />
-            <!--            bind:expandableItemList="@{viewModel.itemList}"
-                bind:onParentChildClickListener="@{viewModel.onParentChildClickListener}"
-    -->
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:alpha="0.2"
+                android:text="drag to see all"
+                android:layout_gravity="center_horizontal"
+                android:textAllCaps="true" />
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>
