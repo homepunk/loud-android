@@ -5,5 +5,5 @@
         android:bottomLeftRadius="@dimen/radius_default_card"
         android:bottomRightRadius="@dimen/radius_default_card" />
 
-    <solid android:color="@color/background"/>
+    <solid android:color="@color/darkBackground"/>
 </shape>

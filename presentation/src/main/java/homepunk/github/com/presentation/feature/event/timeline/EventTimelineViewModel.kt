@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import homepunk.github.com.domain.interactor.SongkickEventInteractor
 import homepunk.github.com.domain.interactor.UserConfigurationInteractor
-import homepunk.github.com.domain.model.internal.UserLocation
+import homepunk.github.com.domain.model.internal.CityLocation
 import homepunk.github.com.presentation.common.data.SingleLiveData
 import homepunk.github.com.presentation.core.base.BaseViewModel
 import homepunk.github.com.presentation.core.ext.toArrayList
@@ -38,7 +38,7 @@ class EventTimelineViewModel @Inject constructor(var eventInteractor: SongkickEv
                         .subscribe { upcomingEventsList.value = it })
     }
 
-    private fun getUpcomingEventList(userLocation: UserLocation) =
+    private fun getUpcomingEventList(userLocation: CityLocation) =
             eventInteractor.getUpcomingEventsForUserLocation(userLocation)
                     .subscribeOn(Schedulers.computation())
                     .map {

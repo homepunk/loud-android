@@ -9,10 +9,9 @@ import android.view.Gravity
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.core.ext.dpToPx
 import homepunk.github.com.presentation.core.ext.getScaleAnimation
 import homepunk.github.com.presentation.core.ext.getWidthAnimation
-import homepunk.github.com.presentation.core.ext.onGlobalLayout
+import homepunk.github.com.presentation.core.ext.doOnGlobalLayout
 import homepunk.github.com.presentation.feature.widget.animation.GammaEvaluator
 import kotlin.math.roundToInt
 
@@ -32,7 +31,7 @@ class MenuItemView @JvmOverloads constructor(context: Context, attrs: AttributeS
             setText(text)
             setTextColor(textDefaultColor)
             setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizePx)
-            onGlobalLayout {
+            doOnGlobalLayout {
                 val height = height * scaleFactor
                 pivotX = 0f
                 pivotY = height

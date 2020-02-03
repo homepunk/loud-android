@@ -16,15 +16,20 @@
             type="homepunk.github.com.presentation.feature.main.MainViewModel" />
 
         <variable
+            name="changeLocationViewModel"
+            type="homepunk.github.com.presentation.feature.menu.country.ChangeLocationViewModel" />
+
+        <variable
             name="appModeModel"
             type="homepunk.github.com.presentation.common.model.mode.AppModeModel" />
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
+        android:animationCache="false"
         android:background="@color/background"
         android:fitsSystemWindows="true"
         android:orientation="vertical">
@@ -34,169 +39,168 @@
             layout="@layout/layout_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_big_20dp"
-            android:layout_marginEnd="@dimen/margin_big_20dp"
             app:appModeModel="@{appModeModel}"
-            app:dropDownList="@{viewModel.userLocationListLiveData}"
-            app:dropDownSelection="@{viewModel.currentUserLocationPosition}"
-            app:isMenuOpened="@{viewModel.isLocationOpenedLiveData}"
-            app:onLocationDropDownClickListener="@{viewModel.onLocationDropDownClickListener}"
-            app:onLocationPinClickListener="@{viewModel.onLocationClickListener}"
-            app:onMenuClickListener="@{viewModel.onMenuClickListener}" />
+            app:changeLocationViewModel="@{changeLocationViewModel}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:mainViewModel="@{viewModel}" />
 
 
-        <FrameLayout
+        <!--
+                    <FrameLayout
+                        android:id="@+id/menu_fragment_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+        -->
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_marginTop="56dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <!--
+            app:animation_translationByHeight="@{@id/toolbar}"
+            app:animation_start="@{changeLocationViewModel.isLocationChangeMode}"-->
 
-            <FrameLayout
-                android:id="@+id/menu_fragment_container"
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_nav"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="@dimen/height_bottom_nav"
+                android:layout_alignParentBottom="true"
+                android:background="@color/background"
+                app:itemBackground="@android:color/transparent"
+                app:itemIconTint="@drawable/selector_bottom_nav"
+                app:labelVisibilityMode="unlabeled"
+                app:menu="@menu/navigation" />
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/mode_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="@dimen/margin_big_20dp"
+                android:layout_marginEnd="@dimen/margin_big_20dp"
+                android:orientation="horizontal">
+
+                <homepunk.github.com.presentation.feature.widget.animation.AnimSyncTextView
+                    android:id="@+id/btn_event"
+                    android:layout_width="160dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="@dimen/margin_big_16dp"
+                    android:gravity="start|bottom"
+                    android:onClickListener="@{viewModel.onModeClickListener}"
+                    android:text="EVENT"
+                    android:textAllCaps="true"
+                    android:textColor="@color/subtitle3"
+                    android:textSize="36sp"
+                    app:btnMode="@{AppMode.EVENTS}"
+                    app:updateModeTitleOnModeChange="@{appModeModel}" />
+
+                <homepunk.github.com.presentation.feature.widget.animation.AnimSyncTextView
+                    android:id="@+id/btn_releases"
+                    android:layout_width="160dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="@dimen/margin_default_10dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="@dimen/margin_big_20dp"
+                    android:layout_marginBottom="@dimen/margin_big_16dp"
+                    android:gravity="start|bottom"
+                    android:onClickListener="@{viewModel.onModeClickListener}"
+                    android:text="PARTY"
+                    android:textAllCaps="true"
+                    android:textColor="@color/subtitle3"
+                    android:textSize="36sp"
+                    app:btnMode="@{AppMode.RELEASES}"
+                    app:updateModeTitleOnModeChange="@{appModeModel}" />
+            </LinearLayout>
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:animation_start="@{viewModel.isLocationOpenedLiveData}"
-                app:animation_translationByHeight="@{@id/menu_fragment_container}">
+                android:layout_above="@id/bottom_nav"
+                android:layout_below="@id/mode_layout"
+                android:background="@color/transparent"
+                android:fitsSystemWindows="false">
 
-                <com.google.android.material.bottomnavigation.BottomNavigationView
-                    android:id="@+id/bottom_nav"
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/view_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_bottom_nav"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/background"
-                    app:itemBackground="@android:color/transparent"
-                    app:itemIconTint="@drawable/selector_bottom_nav"
-                    app:labelVisibilityMode="unlabeled"
-                    app:menu="@menu/navigation" />
+                    android:layout_height="match_parent"
+                    app:fragmentList="@{viewModel.fragmentList}"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-                <LinearLayout
-                    android:id="@+id/mode_layout"
+                <View
+                    android:id="@+id/bg_app_bar_shadow_appearance"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_alignStart="@+id/container"
+                    android:layout_alignTop="@+id/container"
+                    android:alpha="0"
+                    android:background="@drawable/background_shadow_appearance_top"
+                    android:visibility="gone"
+                    tools:visibility="gone" />
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/app_bar_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="@dimen/margin_big_20dp"
-                    android:layout_marginEnd="@dimen/margin_big_20dp"
-                    android:orientation="horizontal">
+                    android:background="@android:color/transparent"
+                    android:fitsSystemWindows="true"
+                    android:layoutAnimation="@anim/layout_animation_translate_in_from_top"
+                    android:stateListAnimator="@animator/appbar_elevation">
 
-                    <homepunk.github.com.presentation.feature.widget.animation.AnimSyncTextView
-                        android:id="@+id/btn_event"
-                        android:layout_width="160dp"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginBottom="@dimen/margin_big_16dp"
-                        android:gravity="start|bottom"
-                        android:onClickListener="@{viewModel.onModeClickListener}"
-                        android:text="EVENT"
-                        android:textAllCaps="true"
-                        android:textColor="@color/subtitle3"
-                        android:textSize="36sp"
-                        app:btnMode="@{AppMode.EVENTS}"
-                        app:updateModeTitleOnModeChange="@{appModeModel}" />
-
-                    <homepunk.github.com.presentation.feature.widget.animation.AnimSyncTextView
-                        android:id="@+id/btn_releases"
-                        android:layout_width="160dp"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="@dimen/margin_default_10dp"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginEnd="@dimen/margin_big_20dp"
-                        android:layout_marginBottom="@dimen/margin_big_16dp"
-                        android:gravity="start|bottom"
-                        android:onClickListener="@{viewModel.onModeClickListener}"
-                        android:text="PARTY"
-                        android:textAllCaps="true"
-                        android:textColor="@color/subtitle3"
-                        android:textSize="36sp"
-                        app:btnMode="@{AppMode.RELEASES}"
-                        app:updateModeTitleOnModeChange="@{appModeModel}" />
-                </LinearLayout>
-
-                <androidx.coordinatorlayout.widget.CoordinatorLayout
-                    android:id="@+id/container"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_above="@id/bottom_nav"
-                    android:layout_below="@id/mode_layout"
-                    android:background="@color/transparent"
-                    android:fitsSystemWindows="false">
-
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/view_pager"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:fragmentList="@{viewModel.fragmentList}"
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <View
-                        android:id="@+id/bg_app_bar_shadow_appearance"
-                        android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_alignStart="@+id/container"
-                        android:layout_alignTop="@+id/container"
-                        android:alpha="0"
-                        android:background="@drawable/background_shadow_appearance_top"
-                        android:visibility="gone"
-                        tools:visibility="gone" />
-
-                    <com.google.android.material.appbar.AppBarLayout
-                        android:id="@+id/app_bar_layout"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:fitsSystemWindows="true"
-                        android:layoutAnimation="@anim/layout_animation_slide_from_top"
-                        android:stateListAnimator="@animator/appbar_elevation">
+                        android:orientation="vertical"
+                        app:layout_scrollFlags="scroll|enterAlways">
 
-                        <LinearLayout
+                        <homepunk.github.com.presentation.feature.widget.filterlayout.FiltersLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_scrollFlags="scroll|enterAlways">
+                            android:layout_marginStart="@dimen/margin_big_20dp"
+                            android:layout_marginEnd="@dimen/margin_big_20dp"
+                            app:filters="@{viewModel.filers}"
+                            app:fl_buttonGap="@dimen/margin_big_20dp"
+                            app:fl_highlightedColor="@{appModeModel.color}" />
 
-                            <homepunk.github.com.presentation.feature.widget.filterlayout.FiltersLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/margin_big_20dp"
-                                android:layout_marginEnd="@dimen/margin_big_20dp"
-                                app:filters="@{viewModel.filers}"
-                                app:fl_buttonGap="@dimen/margin_big_20dp"
-                                app:fl_highlightedColor="@{appModeModel.color}" />
+                    </LinearLayout>
+                </com.google.android.material.appbar.AppBarLayout>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-                        </LinearLayout>
-                    </com.google.android.material.appbar.AppBarLayout>
-                </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <View
+                android:id="@+id/bg_toolbar_shadow_appearance"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:alpha="1"
+                android:background="@drawable/background_shadow_appearance_top"
+                android:visibility="gone" />
 
-                <View
-                    android:id="@+id/bg_toolbar_shadow_appearance"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:alpha="1"
-                    android:background="@drawable/background_shadow_appearance_top"
-                    android:visibility="gone" />
+            <View
+                android:id="@+id/bg_bottom_bar_shadow_appearance"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_above="@+id/bottom_nav"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/background_shadow_appearance_bottom"
+                android:visibility="gone" />
 
-                <View
-                    android:id="@+id/bg_bottom_bar_shadow_appearance"
-                    android:layout_width="match_parent"
-                    android:layout_height="110dp"
-                    android:layout_above="@+id/bottom_nav"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/background_shadow_appearance_bottom"
-                    android:visibility="gone" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/background"
-                    app:animation_alphaFrom="@{0f}"
-                    app:animation_alphaTo="@{0.7f}"
-                    app:animation_start="@{viewModel.isLocationOpenedLiveData}" />
-            </RelativeLayout>
-
-        </FrameLayout>
-    </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background"
+                app:animation_alphaFrom="@{0f}"
+                app:animation_alphaTo="@{0.7f}"
+                app:animation_start="@{changeLocationViewModel.isLocationChangeMode}" />
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

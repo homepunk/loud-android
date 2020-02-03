@@ -89,7 +89,7 @@ class TimelineStickyDateRecyclerAdapter<T>(private val defaultLayoutId: Int,
         return items[itemPosition].dayIndex
     }
 
-  /*  fun setItemList(items: List<TimelineEventModel<T>>, getHeaderDateText: (TimelineEventModel<T>) -> String) {
+  /*  fun setFavoriteCountries(items: List<TimelineEventModel<T>>, getHeaderDateText: (TimelineEventModel<T>) -> String) {
         this.items = items
         this.getHeaderDateText = getHeaderDateText
         notifyDataSetChanged()

@@ -419,9 +419,9 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             app:animationResId="@{R.anim.translate_from_right_to_left}"
+            app:isVisible="@{youtubeViewModel.playPosition != -1}"
             app:cardBackgroundColor="@color/background_card"
             app:cardCornerRadius="@dimen/radius_default_card"
-            app:isVisible="@{youtubeViewModel.playPosition != -1}"
             app:moveOnTouch="@{true}">
 
             <androidx.constraintlayout.widget.ConstraintLayout

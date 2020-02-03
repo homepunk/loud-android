@@ -132,6 +132,50 @@ fun LinearLayout.expand(prevExpand: Boolean,
     va.start()
 }
 
+@BindingAdapter(
+        value = ["expand"],
+        requireAll = false)
+fun ViewGroup.expand(prevExpand: Boolean,
+                        expand: Boolean) {
+    measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    if (expand == prevExpand) {
+        if (expand) {
+            layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            visibility = View.VISIBLE
+        } else {
+            layoutParams.height = 0
+            visibility = View.GONE
+        }
+        return
+    }
+
+    val va: ValueAnimator?
+    if (expand) {
+        va = ValueAnimator.ofInt(1, measuredHeight)
+        va.interpolator = AccelerateInterpolator()
+        visibility = View.VISIBLE
+    } else {
+        va = ValueAnimator.ofInt(measuredHeight, 0)
+        va.interpolator = DecelerateInterpolator()
+    }
+
+    va.addUpdateListener { animation ->
+        layoutParams.height = animation.animatedValue as Int
+        requestLayout()
+    }
+    va.addListener(object : AnimatorListenerWrapper() {
+        override fun onAnimationEnd(animation: Animator?) {
+            if (expand) {
+                layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            } else {
+                visibility = View.GONE
+            }
+        }
+    })
+    va.duration = 400
+    va.start()
+}
+
 
 @BindingAdapter("resizeToFullWidth")
 fun ConstraintLayout.resizeToFullWidth(resize: Boolean) {

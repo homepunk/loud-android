@@ -8,7 +8,7 @@ import android.util.AttributeSet
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.core.ext.onGlobalLayout
+import homepunk.github.com.presentation.core.ext.doOnGlobalLayout
 import homepunk.github.com.presentation.core.wrapper.AnimatorListenerWrapper
 import timber.log.Timber
 
@@ -23,7 +23,7 @@ class AnimSyncTextView @JvmOverloads constructor(context: Context, attrs: Attrib
     init {
 //        TypefaceCompat.createFromResourcesFontFile(context, resources, R.font.lato_bold, NORMAL)
         typeface = ResourcesCompat.getFont(context, R.font.lato_bold)
-        onGlobalLayout {
+        doOnGlobalLayout {
             pivotX = 0f
             pivotY = height.toFloat()
         }
@@ -35,7 +35,7 @@ class AnimSyncTextView @JvmOverloads constructor(context: Context, attrs: Attrib
             defaultWidth = measuredWidth
             scaledWidth = Math.round(measuredWidth * scale)
         }
-        onGlobalLayout {
+        doOnGlobalLayout {
             scaleX = scale
             scaleY = scale
             layoutParams.width = scaledWidth

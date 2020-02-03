@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:orientation="horizontal"
-            android:layoutAnimation="@anim/layout_animation_slide_from_left"
+            android:layoutAnimation="@anim/layout_animation_translate_in_from_left"
             app:menuItems="@{menuViewModel.menuItemList}"
             app:menu_currentActionId="0"
             app:menu_scaleFactor="1.4"

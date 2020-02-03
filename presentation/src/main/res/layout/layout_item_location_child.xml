@@ -4,22 +4,33 @@
     <data>
         <variable
             name="model"
-            type="homepunk.github.com.domain.model.internal.UserLocation"/>
+            type="homepunk.github.com.domain.model.internal.CityLocation"/>
 
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:paddingEnd="@dimen/margin_big_20dp"
+        android:paddingStart="@dimen/margin_big_20dp"
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_big_20dp"
-            android:textSize="20sp"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
             android:fontFamily="@font/lato"
             android:textColor="@drawable/menu_location_text_color_selector"
             android:text="@{model.locationName}"
-            tools:text="KHARKIV" />
+            tools:text="Kharkiv" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:tint="@color/whiteBone"
+            android:src="@drawable/ic_star"/>
     </LinearLayout>
 </layout>

@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import homepunk.github.com.presentation.R
-import homepunk.github.com.presentation.core.ext.onGlobalLayout
+import homepunk.github.com.presentation.core.ext.doOnGlobalLayout
 import homepunk.github.com.presentation.core.wrapper.AnimatorListenerWrapper
 import timber.log.Timber
 
@@ -24,7 +24,7 @@ class AnimationTextView @JvmOverloads constructor(context: Context, attrs: Attri
 
     init {
         typeface = ResourcesCompat.getFont(context, R.font.lato_bold)
-        onGlobalLayout {
+        doOnGlobalLayout {
             pivotX = 0f
             pivotY = height.toFloat()
         }
@@ -36,7 +36,7 @@ class AnimationTextView @JvmOverloads constructor(context: Context, attrs: Attri
             defaultWidth = measuredWidth
             scaledWidth = Math.round(measuredWidth * scale)
         }
-        onGlobalLayout {
+        doOnGlobalLayout {
             scaleX = scale
             scaleY = scale
             layoutParams.width = scaledWidth

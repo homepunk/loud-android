@@ -1,7 +1,7 @@
 package homepunk.github.com.domain.interactor
 
 import homepunk.github.com.domain.model.internal.UserConfiguration
-import homepunk.github.com.domain.model.internal.UserLocation
+import homepunk.github.com.domain.model.internal.CityLocation
 import homepunk.github.com.domain.repository.UserConfigurationRepository
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -50,7 +50,7 @@ class UserConfigurationInteractor @Inject constructor(var userConfigurationRepos
         return userConfigurationBehaviorSubject!!
     }
 
-    fun getUserLocationList(): Observable<MutableList<UserLocation>> {
+    fun getUserLocationList(): Observable<MutableList<CityLocation>> {
         return getUserConfiguration(0)
                 .filter { it.locations.isNotEmpty() }
                 .map { it.locations }
@@ -58,31 +58,31 @@ class UserConfigurationInteractor @Inject constructor(var userConfigurationRepos
 
     }
 
-    fun getUserCurrentLocation(): Observable<UserLocation> {
+    fun getUserCurrentLocation(): Observable<CityLocation> {
         return getUserConfiguration(0)
                 .flatMapIterable { it.locations }
                 .filter { it.isCurrent }
     }
 
-    fun addUserLocation(location: UserLocation) {
+    fun addUserLocation(location: CityLocation) {
         userConfiguration?.run {
             userConfigurationRepository.saveUserLocation(userId, location)
         }
     }
 
-    fun removeUserLocation(location: UserLocation) {
+    fun removeUserLocation(location: CityLocation) {
         userConfiguration?.run {
             userConfigurationRepository.removeUserLocation(userId, location)
         }
     }
 
-    fun updateUserLocation(location: UserLocation) {
+    fun updateUserLocation(location: CityLocation) {
         userConfiguration?.run {
             userConfigurationRepository.updateUserLocation(userId, location)
         }
     }
 
-    fun updateUserLocationList(location: List<UserLocation>) {
+    fun updateUserLocationList(location: List<CityLocation>) {
         userConfiguration?.run {
             userConfigurationRepository.updateUserLocationList(userId, location)
         }

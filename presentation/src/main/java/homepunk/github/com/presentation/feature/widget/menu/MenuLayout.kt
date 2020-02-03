@@ -5,9 +5,7 @@ import android.util.AttributeSet
 import android.widget.LinearLayout
 import androidx.databinding.ObservableField
 import homepunk.github.com.presentation.R.*
-import homepunk.github.com.presentation.core.ext.getColor
-import homepunk.github.com.presentation.core.ext.marginLayoutParams
-import homepunk.github.com.presentation.core.ext.onGlobalLayout
+import homepunk.github.com.presentation.core.ext.doOnGlobalLayout
 
 class MenuLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
     : LinearLayout(context, attrs, defStyleAttr) {
@@ -56,7 +54,7 @@ class MenuLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet
                         mMenuItemViews.add(this)
                         if (mCurrentActionId == item.actionId) {
                             mCurrentMenuItemIndex = index
-                            onGlobalLayout {
+                            doOnGlobalLayout {
                                 highlight(true)
                             }
                         }

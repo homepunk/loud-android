@@ -39,7 +39,7 @@
                 android:layout_marginTop="@dimen/margin_big_20dp"
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                bind:itemList="@{viewModel.upcomingEventsList}"
+                bind:favoriteCountries="@{viewModel.upcomingEventsList}"
                 tools:listItem="@layout/layout_item_parent_location_children_events" />
     -->
 </layout>

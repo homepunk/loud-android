@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="model"
+            type="homepunk.github.com.domain.model.internal.CityLocation"/>
+
+    </data>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/margin_big_20dp"
+        android:paddingStart="@dimen/margin_big_20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/lato"
+            android:textColor="@drawable/menu_location_text_color_selector_not_favotire"
+            android:text="@{model.locationName}"
+            tools:text="Kharkiv" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:tint="@color/grey"
+            android:src="@drawable/ic_star"/>
+    </LinearLayout>
+</layout>

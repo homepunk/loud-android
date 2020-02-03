@@ -8,6 +8,7 @@ import android.animation.ValueAnimator
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.TextView
@@ -54,7 +55,7 @@ fun <T> RecyclerView.gridLayoutManager(columns: Int) {
 fun <T> RecyclerView.flexLayoutManager(direction: Int) {
     layoutManager = FlexboxLayoutManager(context).apply {
         flexDirection = direction
-        flexWrap = FlexWrap.WRAP
+        flexWrap = FlexWrap.NOWRAP
         justifyContent = JustifyContent.FLEX_START
     }
 }
@@ -143,6 +144,49 @@ fun <T> RecyclerView.bindItemList(itemList: ObservableArrayList<T>) {
             it.setItemList(itemList)
         }
     }
+}
+
+@BindingAdapter("animation_spanFirstItemToParentEnd")
+fun RecyclerView.animation_spanFirstItemToParentEnd(oldShowOnlyFirst: Boolean,
+                                           showOnlyFirst: Boolean) {
+    if (oldShowOnlyFirst == showOnlyFirst &&
+            showOnlyFirst) {
+        addOnChildAttachStateChangeListener(object : RecyclerView.OnChildAttachStateChangeListener {
+            override fun onChildViewDetachedFromWindow(view: View) {
+
+            }
+
+            override fun onChildViewAttachedToWindow(view: View) {
+                removeOnChildAttachStateChangeListener(this)
+                translationX = (width - getChildAt(0).width).toFloat()
+            }
+        })
+    } else {
+        if (getChildAt(0) == null) {
+            addOnChildAttachStateChangeListener(object : RecyclerView.OnChildAttachStateChangeListener {
+                override fun onChildViewDetachedFromWindow(view: View) {
+
+                }
+
+                override fun onChildViewAttachedToWindow(view: View) {
+                    removeOnChildAttachStateChangeListener(this)
+                    getChildAt(0).doOnGlobalLayout {
+                        startSnapAnimation(showOnlyFirst)
+                    }
+                }
+            })
+        } else {
+            startSnapAnimation(showOnlyFirst)
+        }
+    }
+}
+
+private fun RecyclerView.startSnapAnimation(showOnlyFirst: Boolean) {
+    animate()
+            .translationX(if (showOnlyFirst) (width - getChildAt(0).width).toFloat() else 0f)
+            .setInterpolator(AccelerateDecelerateInterpolator())
+            .setDuration(500)
+            .start()
 }
 
 
@@ -330,6 +374,7 @@ fun RecyclerView.expand(prevExpand: Boolean,
     va.duration = 600
     va.start()
 }
+
 @BindingAdapter("animation_translateFromDown")
 fun RecyclerView.animation_translateDown(prevExpand: Boolean, expand: Boolean) {
     var height = dpToPx<Int>(200f)
@@ -370,32 +415,26 @@ fun RecyclerView.animation_translateDown(prevExpand: Boolean, expand: Boolean) {
     va.duration = 400
     va.start()
 }
-@BindingAdapter("animation_translateFromEnd")
-fun RecyclerView.animation_translateFromEnd(prevExpand: Boolean, expand: Boolean) {
-    var height = dpToPx<Int>(200f)
-    measure(ViewGroup.LayoutParams.MATCH_PARENT, height)
+
+@BindingAdapter("animation_translateInFromEnd")
+fun RecyclerView.animation_translateInFromEnd(prevExpand: Boolean, expand: Boolean) {
     if (expand == prevExpand) {
         if (expand) {
-            layoutParams.height = height
             visibility = View.VISIBLE
         } else {
             layoutParams.height = 0
             visibility = View.GONE
         }
         return
-    } else {
-        if (expand) {
-            layoutParams.height = height
-            measure(ViewGroup.LayoutParams.MATCH_PARENT, height)
-        }
     }
-
 
     val va: ObjectAnimator?
     if (expand) {
+        measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        visibility = View.VISIBLE
+
         va = ObjectAnimator.ofFloat(this, "translationX", width.toFloat(), 0f)
         va.interpolator = AccelerateInterpolator()
-        visibility = View.VISIBLE
     } else {
         va = ObjectAnimator.ofFloat(this, "translationX", 0f, width.toFloat())
         va.interpolator = DecelerateInterpolator()

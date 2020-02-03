@@ -13,6 +13,8 @@
     <dimen name="height_card_primary">170dp</dimen>
 
     <dimen name="margin_small_2dp">2dp</dimen>
+    <dimen name="size_64dp">64dp</dimen>
+    <dimen name="margin_small_3dp">3dp</dimen>
     <dimen name="margin_small_4dp">4dp</dimen>
     <dimen name="margin_small_6dp">6dp</dimen>
     <dimen name="margin_default_8dp">8dp</dimen>

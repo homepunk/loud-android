@@ -4,7 +4,7 @@ import java.io.Serializable
 
 /**Created by Homepunk on 11.07.2019. **/
 data class UserConfiguration(val userId: Int,
-                             val locations: MutableList<UserLocation>,
+                             val locations: MutableList<CityLocation>,
                              val filters: MutableList<UserFilter>
 ) : Serializable {
 

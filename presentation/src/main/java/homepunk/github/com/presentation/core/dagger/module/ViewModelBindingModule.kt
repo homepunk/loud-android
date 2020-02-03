@@ -8,15 +8,14 @@ import dagger.multibindings.IntoMap
 import homepunk.github.com.presentation.core.dagger.ViewModelFactory
 import homepunk.github.com.presentation.core.dagger.ViewModelKey
 import homepunk.github.com.presentation.feature.event.EventViewModel
-import homepunk.github.com.presentation.feature.releases.DiscoverHostViewModel
 import homepunk.github.com.presentation.feature.event.home.EventListViewModel
-import homepunk.github.com.presentation.feature.event.timeline.EventTimelineFragment
 import homepunk.github.com.presentation.feature.event.timeline.EventTimelineViewModel
-import homepunk.github.com.presentation.feature.releases.library.DiscoverLibraryViewModel
 import homepunk.github.com.presentation.feature.main.MainViewModel
 import homepunk.github.com.presentation.feature.menu.MenuViewModel
-import homepunk.github.com.presentation.feature.menu.country.CountryListViewModel
+import homepunk.github.com.presentation.feature.menu.country.ChangeLocationViewModel
 import homepunk.github.com.presentation.feature.mode.AppModeViewModel
+import homepunk.github.com.presentation.feature.releases.DiscoverHostViewModel
+import homepunk.github.com.presentation.feature.releases.library.DiscoverLibraryViewModel
 import homepunk.github.com.presentation.feature.youtube.YoutubeViewModel
 
 /**Created by Homepunk on 27.12.2018. **/
@@ -57,8 +56,8 @@ interface ViewModelBindingModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(CountryListViewModel::class )
-    fun bindCountryListViewModel(viewModel: CountryListViewModel):  ViewModel
+    @ViewModelKey(ChangeLocationViewModel::class )
+    fun bindCountryListViewModel(viewModel: ChangeLocationViewModel):  ViewModel
 
     @Binds
     @IntoMap

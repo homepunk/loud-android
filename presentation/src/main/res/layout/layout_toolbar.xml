@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <import type="homepunk.github.com.presentation.R" />
 
-        <variable
-            name="title"
-            type="String" />
-
         <import type="homepunk.github.com.domain.model.AppMode" />
 
-        <import type="homepunk.github.com.domain.model.internal.UserLocation" />
+        <import type="homepunk.github.com.domain.model.internal.CityLocation" />
 
         <import type="homepunk.github.com.presentation.feature.widget.dropdownlistview.OnDropDownClickListener" />
 
@@ -23,32 +18,12 @@
         <import type="androidx.lifecycle.MutableLiveData" />
 
         <variable
-            name="onMenuClickListener"
-            type="android.view.View.OnClickListener" />
+            name="mainViewModel"
+            type="homepunk.github.com.presentation.feature.main.MainViewModel" />
 
         <variable
-            name="isMenuOpened"
-            type="MutableLiveData&lt;Boolean>" />
-
-        <variable
-            name="dropDownSelection"
-            type="Integer" />
-
-        <variable
-            name="dropDownList"
-            type="List&lt;UserLocation>" />
-
-        <variable
-            name="onLocationDropDownClickListener"
-            type="OnDropDownClickListener&lt;UserLocation>" />
-
-        <variable
-            name="onLocationPinClickListener"
-            type="android.view.View.OnClickListener" />
-
-        <variable
-            name="onModeClickListener"
-            type="android.view.View.OnClickListener" />
+            name="changeLocationViewModel"
+            type="homepunk.github.com.presentation.feature.menu.country.ChangeLocationViewModel" />
 
         <variable
             name="appModeModel"
@@ -60,74 +35,192 @@
         android:id="@+id/cl_root_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
-
-
-        <ImageView
-            android:id="@+id/menu"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:rotation="90"
-            android:layout_marginTop="36dp"
-            android:visibility="invisible"
-            android:layout_marginEnd="@dimen/margin_big_20dp"
-            android:onClickListener="@{onMenuClickListener}"
-            android:src="@drawable/ic_menu_dots"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/background"
+        android:fitsSystemWindows="true"
+        android:clipToPadding="false"
+        android:paddingStart="@dimen/margin_small_6dp"
+        android:paddingTop="@dimen/margin_default_8dp">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
             android:layout_width="150dp"
             android:layout_height="48dp"
             android:background="@drawable/background_rect_round_corners_gray"
+            app:animation_translateInFromTop="@{!changeLocationViewModel.isLocationChangeMode}"
             app:defaultQueryHint="Search for events"
-            app:layout_constraintBottom_toBottomOf="@+id/menu"
-            app:layout_constraintStart_toStartOf="@+id/menu"
-            app:layout_constraintTop_toTopOf="@+id/menu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_scrollFlags="scroll|enterAlways"
             app:queryHint="Search for events"
             app:searchIcon="@drawable/ic_search" />
-
-        <homepunk.github.com.presentation.feature.widget.dropdownlistview.DropDownListView
-            android:id="@+id/location_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_default_8dp"
-            app:isVisible="@{!isMenuOpened}"
-            app:animationResId="@{R.anim.item_animation_from_top}"
-            app:animationDuration="@{300}"
-            app:dropDownList="@{dropDownList}"
-            app:dropDownSelection="@{dropDownSelection}"
-            app:onDropDownClickListener="@{onLocationDropDownClickListener}"
-            app:layoutResource="@layout/layout_item_spinner_location"
-            app:dropDownLayoutResource="@layout/layout_item_spinner_dropdown_location"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_location"
-            app:layout_constraintEnd_toStartOf="@+id/iv_location"
-            app:layout_constraintTop_toTopOf="@+id/iv_location"/>
-<!--            app:dropDownSelection="@{currentUserLocationPosition}"
+<!--            app:animation_translateInFromStart="@{changeLocationViewModel.isLocationChangeMode}"
 -->
 
-        <ImageView
-            android:id="@+id/iv_location"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:onClickListener="@{onLocationPinClickListener}"
-            android:src="@drawable/ic_map_ua"
-            android:tint="@color/whiteBone"
-            app:layout_constraintBottom_toBottomOf="@+id/menu"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/menu" />
-
-        <View
-            app:layout_constraintTop_toTopOf="@+id/iv_location"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_location"
-            app:layout_constraintStart_toStartOf="@+id/iv_location"
-            app:layout_constraintEnd_toEndOf="@+id/iv_location"
+        <LinearLayout
+            android:id="@+id/layout_cities"
+            android:layout_width="match_parent"
+            android:clipToPadding="false"
             android:visibility="gone"
-            android:layout_width="4dp"
-            android:layout_height="4dp"
-            android:background="@drawable/shape_circle"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_countries"
+            tools:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_country_cities_title"
+                style="@style/PrimaryTitleTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_big_20dp"
+                android:layout_marginTop="@dimen/margin_big_20dp"
+                android:letterSpacing="0.02"
+                android:lineSpacingExtra="1sp"
+                android:text="Select a city"
+                android:textAllCaps="false"
+                android:textColor="@color/text"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_country_cities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default_10dp"
+                android:orientation="vertical"
+                app:adapter="@{changeLocationViewModel.currentCountry.countryUserCitiesAdapter}"
+                app:itemDecoration_top="@{@dimen/margin_small_6dp}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="4"
+                tools:listitem="@layout/layout_item_location_child" />
+
+
+            <TextView
+                style="@style/ItemSubtitleTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_big_20dp"
+                android:alpha="0.8"
+                android:letterSpacing="0.02"
+                android:layout_gravity="center_horizontal"
+                android:lineSpacingExtra="1sp"
+                android:text="show all country cities"
+                android:textAllCaps="true"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+
+            <TextView
+                style="@style/ItemSubtitleTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_default_8dp"
+                android:layout_gravity="center_horizontal"
+                android:alpha="0.8"
+                android:letterSpacing="0.02"
+                android:lineSpacingExtra="1sp"
+                android:text="show all countries"
+                android:textAllCaps="true"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_big_20dp"
+                android:clipToPadding="false"
+                android:clipChildren="false"
+                android:gravity="center"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_default_10dp"
+                    android:background="@drawable/background_rect_round_corners_dark"
+                    android:backgroundTint="@color/backgroundDark"
+                    android:elevation="@dimen/elevation"
+                    android:paddingStart="@dimen/margin_default_10dp"
+                    android:paddingTop="@dimen/margin_default_10dp"
+                    android:paddingEnd="@dimen/margin_default_10dp"
+                    android:paddingBottom="@dimen/margin_default_10dp"
+                    android:src="@drawable/ic_close_gray"
+                    android:textColor="@color/text" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_default_10dp"
+                    android:background="@drawable/background_rect_round_corners_dark"
+                    android:backgroundTint="@color/backgroundDark"
+                    android:elevation="@dimen/elevation"
+                    android:paddingStart="@dimen/margin_default_10dp"
+                    android:paddingTop="@dimen/margin_default_10dp"
+                    android:paddingEnd="@dimen/margin_default_10dp"
+                    android:paddingBottom="@dimen/margin_default_10dp"
+                    android:src="@drawable/ic_ok"
+                    android:textColor="@color/colorAccent"
+                    android:tint="@color/colorAccent" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_countries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small_4dp"
+            android:visibility="gone"
+            android:background="@color/background"
+            android:orientation="horizontal"
+            app:animation_spanFirstItemToParentEnd="@{!changeLocationViewModel.isLocationChangeMode}"
+            app:itemList="@{changeLocationViewModel.favoriteCountries}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/search_view"
+            app:onItemClickListener="@{changeLocationViewModel.onFavoriteCountryClickListener}"
+            tools:itemCount="4"
+            tools:listitem="@layout/layout_item_country" />
+
+        <!--
+                <homepunk.github.com.presentation.feature.widget.dropdownlistview.DropDownListView
+                    android:id="@+id/location_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_default_8dp"
+                    app:animationDuration="@{300}"
+                    app:animationResId="@{R.anim.animation_translate_in_from_top}"
+                    app:dropDownLayoutResource="@layout/layout_item_spinner_dropdown_location"
+                    app:dropDownList="@{mainViewModel.userLocationListLiveData}"
+                    app:dropDownListCurrentForUserLocation="@{true}"
+                    app:isVisible="@{!changeLocationViewModel.isLocationChangeMode}"
+                    app:layoutResource="@layout/layout_item_spinner_location"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_location"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_location"
+                    app:layout_constraintTop_toTopOf="@+id/iv_location"
+                    app:onDropDownClickListener="@{mainViewModel.onLocationDropDownClickListener}" />
+
+
+                <View
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:background="@drawable/shape_circle"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_location"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_location"
+                    app:layout_constraintStart_toStartOf="@+id/iv_location"
+                    app:layout_constraintTop_toTopOf="@+id/iv_location" />-->
+                <ImageView
+                    android:id="@+id/iv_location"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/ic_map_ua"
+                    android:layout_marginEnd="@dimen/margin_big_20dp"
+                    android:tint="@color/whiteBone"
+                    android:onClickListener="@{mainViewModel.onCountryChangeClickListener}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+        <!--            android:onClickListener="@{mainViewModel.onCountryChangeClickListener}"-->
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

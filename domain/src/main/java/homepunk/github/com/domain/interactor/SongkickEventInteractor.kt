@@ -1,6 +1,6 @@
 package homepunk.github.com.domain.interactor
 
-import homepunk.github.com.domain.model.internal.UserLocation
+import homepunk.github.com.domain.model.internal.CityLocation
 import homepunk.github.com.domain.model.songkick.SongkickEvent
 import homepunk.github.com.domain.repository.SongkickEventRepository
 import homepunk.github.com.domain.repository.SongkickLocationRepository
@@ -16,7 +16,7 @@ class SongkickEventInteractor @Inject constructor(private val songkickEventRepos
                                                   private val songkickLocationRepository: SongkickLocationRepository,
                                                   private val userConfigurationRepository: UserConfigurationRepository) {
 
-    private var userLocation: UserLocation? = null
+    private var userLocation: CityLocation? = null
 
     fun getUpcomingEventList() =
             songkickLocationRepository.getSongkickLocationByLatLng("geo:49.9,36.2")
@@ -24,14 +24,14 @@ class SongkickEventInteractor @Inject constructor(private val songkickEventRepos
                     .filter { it.id != 0L }
                     .flatMap {
                         Observable.zip(Observable.just(it), songkickEventRepository.getUpcomingEventList(it.id),
-                                BiFunction { location: UserLocation, eventList: List<SongkickEvent> ->
+                                BiFunction { location: CityLocation, eventList: List<SongkickEvent> ->
                                     Pair(location, eventList)
                                 })
                     }
 
 
     /*
-        fun getUpcomingEventsForUserLocation(location: UserLocation): Observable<Pair<SongkickLocation, List<SongkickEvent>>> {
+        fun getUpcomingEventsForUserLocation(location: CityLocation): Observable<Pair<SongkickLocation, List<SongkickEvent>>> {
             if (upcomingEventsForUserLocationObservable == null ||
                     userLocation != location) {
                 upcomingEventsForUserLocationObservable = Observable.fromIterable(location.locations)
@@ -49,7 +49,7 @@ class SongkickEventInteractor @Inject constructor(private val songkickEventRepos
             return upcomingEventsForUserLocationObservable!!
         }
     */
-    fun getUpcomingEventsForUserLocation(location: UserLocation): Observable<List<SongkickEvent>> {
+    fun getUpcomingEventsForUserLocation(location: CityLocation): Observable<List<SongkickEvent>> {
         return songkickEventRepository.getUpcomingEventList(location.id)
     }
 

@@ -6,7 +6,7 @@ import homepunk.github.com.data.local.room.model.EntityDataMapper
 import homepunk.github.com.data.local.room.model.configuration.UserConfigurationEntity
 import homepunk.github.com.data.util.runInBackground
 import homepunk.github.com.domain.model.internal.UserConfiguration
-import homepunk.github.com.domain.model.internal.UserLocation
+import homepunk.github.com.domain.model.internal.CityLocation
 import homepunk.github.com.domain.repository.UserConfigurationRepository
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
@@ -66,7 +66,7 @@ class UserConfigurationDataRepository @Inject constructor(private val userConfig
     }
 
     @WorkerThread
-    override fun saveUserLocation(userId: Int, location: UserLocation) {
+    override fun saveUserLocation(userId: Int, location: CityLocation) {
         Timber.w("SAVE USER LOCATION")
         runInBackground {
             userConfigurationDao.insert(EntityDataMapper.map(userId, location))
@@ -74,7 +74,7 @@ class UserConfigurationDataRepository @Inject constructor(private val userConfig
     }
 
     @WorkerThread
-    override fun removeUserLocation(userId: Int, location: UserLocation) {
+    override fun removeUserLocation(userId: Int, location: CityLocation) {
         Timber.w("REMOVE USER LOCATION")
         runInBackground {
             userConfigurationDao.delete(EntityDataMapper.map(userId, location))
@@ -82,7 +82,7 @@ class UserConfigurationDataRepository @Inject constructor(private val userConfig
     }
 
     @WorkerThread
-    override fun updateUserLocation(userId: Int, location: UserLocation) {
+    override fun updateUserLocation(userId: Int, location: CityLocation) {
         Timber.w("UPDATE USER LOCATION")
         runInBackground {
             userConfigurationDao.update(EntityDataMapper.map(userId, location))
@@ -90,7 +90,7 @@ class UserConfigurationDataRepository @Inject constructor(private val userConfig
     }
 
     @WorkerThread
-    override fun updateUserLocationList(userId: Int, locations: List<UserLocation>) {
+    override fun updateUserLocationList(userId: Int, locations: List<CityLocation>) {
         runInBackground {
             val updateAll = userConfigurationDao.updateAll(locations.map { EntityDataMapper.map(userId, it) })
             Timber.w("UPDATE LOCATIONS LIST $updateAll")

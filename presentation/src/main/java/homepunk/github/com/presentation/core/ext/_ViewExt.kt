@@ -7,7 +7,6 @@ import android.util.TypedValue
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import android.view.ViewTreeObserver
 import android.view.animation.LinearInterpolator
@@ -58,7 +57,7 @@ fun <T> View.dpToPx(value: Float): T {
 
 fun View.getColor(colorID: Int) = ContextCompat.getColor(context, colorID)
 
-fun View.onGlobalLayout(action: (() -> Unit)? = null) {
+fun View.doOnGlobalLayout(action: (() -> Unit)? = null) {
     viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
         override fun onGlobalLayout() {
             viewTreeObserver.removeGlobalOnLayoutListener(this)
@@ -114,8 +113,8 @@ fun NestedScrollView.scrollToRecyclerChild(position: Int, scrollAnchorId: Int) {
 }
 
 //@BindingAdapter("timeline_list")
-//fun <T> TimelineView<T>.bindTimelineList(itemList: List<TimelineItem<T>>) {
-//    setUpTimeline(itemList)
+//fun <T> TimelineView<T>.bindTimelineList(favoriteCountries: List<TimelineItem<T>>) {
+//    setUpTimeline(favoriteCountries)
 //}
 
 @BindingAdapter("el_title")

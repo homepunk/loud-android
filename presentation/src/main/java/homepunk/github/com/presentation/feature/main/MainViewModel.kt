@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import homepunk.github.com.domain.interactor.AppModeInteractor
 import homepunk.github.com.domain.interactor.UserConfigurationInteractor
 import homepunk.github.com.domain.model.AppMode
-import homepunk.github.com.domain.model.internal.UserLocation
+import homepunk.github.com.domain.model.internal.CityLocation
 import homepunk.github.com.presentation.R
 import homepunk.github.com.presentation.common.data.AppDataFactory
 import homepunk.github.com.presentation.common.model.menu.MenuModeModel
@@ -26,8 +26,8 @@ class MainViewModel @Inject constructor(var appDataFactory: AppDataFactory,
     var modeList = mutableListOf<MenuModeModel>()
     var filers = appDataFactory.getFilters()
 
-    var currentUserLocationPosition = MutableLiveData(-1)
-    var userLocationListLiveData = MutableLiveData<List<UserLocation>>()
+    private var currentUserLocationIndex = -1
+    var userLocationListLiveData = MutableLiveData<List<CityLocation>>()
 
     var onModeClickListener = View.OnClickListener { v ->
         v?.let {
@@ -42,15 +42,15 @@ class MainViewModel @Inject constructor(var appDataFactory: AppDataFactory,
         }
     }
 
-    var onLocationDropDownClickListener = object : OnDropDownClickListener<UserLocation> {
-        override fun onClick(position: Int, item: UserLocation) {
+    var onLocationDropDownClickListener = object : OnDropDownClickListener<CityLocation> {
+        override fun onClick(position: Int, item: CityLocation) {
             Timber.w("onClick $position, ${item.locationName}")
         }
 
-        override fun onSelect(position: Int, newLocation: UserLocation) {
+        override fun onSelect(position: Int, newLocation: CityLocation) {
             Timber.w("onSelect $position, ${newLocation.locationName}")
-            if (currentUserLocationPosition.value != position) {
-                val currentLocation = userLocationListLiveData.value?.get(currentUserLocationPosition.value!!)!!
+            if (currentUserLocationIndex != position) {
+                val currentLocation = userLocationListLiveData.value?.get(currentUserLocationIndex)!!
                 userConfigurationInteractor.updateUserLocationList(listOf(
                         currentLocation.apply { isCurrent = false },
                         newLocation.apply { isCurrent = true }))
@@ -58,11 +58,8 @@ class MainViewModel @Inject constructor(var appDataFactory: AppDataFactory,
         }
     }
 
-    val isMenuOpenedLiveData = MutableLiveData<Boolean>()
-    val onMenuClickListener = View.OnClickListener { isMenuOpenedLiveData.swap() }
-
-    val isLocationOpenedLiveData = MutableLiveData<Boolean>()
-    val onLocationClickListener = View.OnClickListener { isLocationOpenedLiveData.swap() }
+    val isCountryChangeMenuOpenedLiveData = MutableLiveData<Boolean>()
+    val onCountryChangeClickListener = View.OnClickListener { isCountryChangeMenuOpenedLiveData.swap() }
 
     init {
         modeList = appDataFactory.getModeList()
@@ -73,7 +70,7 @@ class MainViewModel @Inject constructor(var appDataFactory: AppDataFactory,
         subscriptions.add(userConfigurationInteractor.getUserLocationList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    currentUserLocationPosition.value = it.indexOfFirst { it.isCurrent }
+                    currentUserLocationIndex = it.indexOfFirst { it.isCurrent }
                     userLocationListLiveData.value = it
                 }
         )

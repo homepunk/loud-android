@@ -2,46 +2,64 @@ package homepunk.github.com.presentation.feature.main
 
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.databinding.Observable
 import androidx.lifecycle.Observer
 import com.google.android.material.appbar.AppBarLayout
+import homepunk.github.com.presentation.BR
 import homepunk.github.com.presentation.R
+import homepunk.github.com.presentation.common.adapter.FlexLayoutRecyclerAdapter
 import homepunk.github.com.presentation.common.adapter.SimpleViewPagerAdapter
 import homepunk.github.com.presentation.core.base.BaseActivity
 import homepunk.github.com.presentation.core.ext.isNotVisible
 import homepunk.github.com.presentation.core.ext.isVisible
-import homepunk.github.com.presentation.core.ext.replace
 import homepunk.github.com.presentation.core.ext.setupWithViewPager
+import homepunk.github.com.presentation.core.ext.swap
 import homepunk.github.com.presentation.databinding.ActivityMainBinding
-import homepunk.github.com.presentation.feature.menu.country.CountryListFragment
+import homepunk.github.com.presentation.feature.menu.country.ChangeLocationFragment
+import homepunk.github.com.presentation.feature.menu.country.ChangeLocationViewModel
 import homepunk.github.com.presentation.feature.widget.animation.AnimationEventLiveData
 import homepunk.github.com.presentation.feature.widget.animation.ScrollEvent
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
     private lateinit var mMainViewModel: MainViewModel
+    private lateinit var mChangeLocationViewModel: ChangeLocationViewModel
 
     override var layoutId = R.layout.activity_main
 
+    private val changeLocationDialogFragment: ChangeLocationFragment by lazy { ChangeLocationFragment() }
+
     override fun init() {
         mMainViewModel = getViewModel(MainViewModel::class.java)
+        mChangeLocationViewModel = getViewModel(ChangeLocationViewModel::class.java)
+        mChangeLocationViewModel.apply {
+            isLocationChangeMode.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
+                override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+                    if (isLocationChangeMode.get()) {
+                        changeLocationDialogFragment.show(supportFragmentManager, "ChangeLocationFragment")
+                    } else {
+                        changeLocationDialogFragment.dismiss()
+                    }
+                }
+            })
+        }
 
         mDataBinding.run {
+            toolbar.rvCountries.adapter = FlexLayoutRecyclerAdapter(R.layout.layout_item_country, BR.model)
+            changeLocationViewModel = mChangeLocationViewModel
+
             viewModel = mMainViewModel.apply {
-/*
-                isMenuOpenedLiveData.observe(this@MainActivity, Observer { open ->
-                    if (open) {
-                        supportFragmentManager.replace(R.id.menu_fragment_container, MenuFragment())
-                    } else {
-                        onBackPressed()
-                    }
-                })
-*/
-                isLocationOpenedLiveData.observe(this@MainActivity, Observer { open ->
-                    if (open) {
-                        supportFragmentManager.replace(R.id.menu_fragment_container, CountryListFragment())
-                    } else {
-                        onBackPressed()
-                    }
+                /*
+                                isMenuOpenedLiveData.observe(this@MainActivity, Observer { open ->
+                                    if (open) {
+                                        supportFragmentManager.replace(R.id.menu_fragment_container, MenuFragment())
+                                    } else {
+                                        onBackPressed()
+                                    }
+                                })
+                */
+                isCountryChangeMenuOpenedLiveData.observe(this@MainActivity, Observer { open ->
+                    mChangeLocationViewModel.isLocationChangeMode.swap()
                 })
             }
 
@@ -126,8 +144,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun onBackPressed() {
         when {
-            mMainViewModel.isMenuOpenedLiveData.value == true -> mMainViewModel.isMenuOpenedLiveData.value = false
-            mMainViewModel.isLocationOpenedLiveData.value == true -> mMainViewModel.isLocationOpenedLiveData.value = false
+            mChangeLocationViewModel.isLocationChangeMode.get() -> mChangeLocationViewModel.isLocationChangeMode.swap()
             else -> super.onBackPressed()
         }
     }

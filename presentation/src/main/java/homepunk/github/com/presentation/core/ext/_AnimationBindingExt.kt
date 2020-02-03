@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.animation.*
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
@@ -24,6 +23,8 @@ import homepunk.github.com.presentation.feature.widget.animation.ReverseInterpol
 import homepunk.github.com.presentation.util.DimensionUtil
 import timber.log.Timber
 import kotlin.math.roundToInt
+
+
 
 
 /**Created by Homepunk on 31.01.2019. **/
@@ -58,35 +59,6 @@ fun ViewGroup.bindAnimationResId(resId: Int, visibilityValue: Int, startOffset: 
     }
 }
 
-@BindingAdapter(requireAll = true, value = ["animationResId", "isVisible", "animationDuration"])
-fun LinearLayout.swapVisiblityWithAnimation(resId: Int, isVisible: Boolean, duration: Int) {
-    if (resId != 0) {
-        val set: AnimationSet = AnimationUtils.loadAnimation(context, resId) as AnimationSet
-        if (isVisible) {
-            visibility = INVISIBLE
-            set.interpolator = AccelerateInterpolator()
-        } else {
-            set.interpolator = ReverseInterpolator(set.interpolator)
-        }
-        set.duration = duration.toLong()
-        set.animations[0]?.setAnimationListener(object : AnimationListenerWrapper() {
-            override fun onAnimationStart(animation: Animation?) {
-                if (isVisible) {
-                    visibility = VISIBLE
-                }
-            }
-
-            override fun onAnimationEnd(animation: Animation?) {
-                if (!isVisible) {
-                    visibility = GONE
-                }
-            }
-        })
-        startAnimation(set)
-    } else {
-        isVisible(isVisible)
-    }
-}
 
 @BindingAdapter(requireAll = true, value = ["animationResId", "isVisible", "animationDuration"])
 fun ViewGroup.swapVisiblityWithAnimation(resId: Int, isVisible: Boolean, duration: Int) {
@@ -208,6 +180,24 @@ fun View.scaleWithSize(oldScale: Float, scale: Float) {
                 start()
             }
         }
+    }
+}
+
+@BindingAdapter(requireAll = false, value = ["animation_maxWidthAndHeight", "animation_updateWidthAndHeightToMax"])
+fun View.animation_maxWidthAndHeight(oldMaxWidthHeight: Float, oldStart: Boolean,
+                                     maxWidthHeight: Float, start: Boolean) {
+
+    if (oldStart == start) {
+        if (start) {
+            with(layoutParams) {
+                width = maxWidthHeight.toInt()
+                height = maxWidthHeight.toInt()
+                requestLayout()
+            }
+        }
+    } else {
+        getSizeAnimation(if (start) maxWidthHeight.toInt() else minimumWidth)
+                .start()
     }
 }
 
@@ -361,8 +351,8 @@ fun RecyclerView.animateAppearanceOnVisibilityChange(oldAnimationEnabled: Boolea
     }
 }
 
-@BindingAdapter("isVisibleWithAnimation")
-fun RecyclerView.isVisibleWithAnimation(oldIsVisible: Boolean, isVisible: Boolean) {
+@BindingAdapter("setVisibilityWithTranslateInFromTopAnimation")
+fun RecyclerView.setVisibilityWithTranslateInFromTopAnimation(oldIsVisible: Boolean, isVisible: Boolean) {
     // DO FIRST RUN
     if (oldIsVisible == isVisible) {
         visibility = INVISIBLE
@@ -410,13 +400,140 @@ fun RecyclerView.isVisibleWithAnimation(oldIsVisible: Boolean, isVisible: Boolea
     }
 }
 
+@BindingAdapter("animation_translateInFromTop")
+fun View.setVisibilityWithTranslateInFromTopAnimation(oldIsVisible: Boolean,
+                                                      isVisible: Boolean) {
+    // DO FIRST RUN
+    if (oldIsVisible == isVisible) {
+        if (!isVisible) {
+            visibility = INVISIBLE
+            measure(MATCH_PARENT, WRAP_CONTENT)
+            translationY = -measuredHeight.toFloat()
+        }
+    } else {
+        animate().translationY(if (isVisible) 0f else -measuredHeight.toFloat())
+                .alpha(if (isVisible) 1f else 0f)
+                .setListener(object : AnimatorListenerWrapper() {
+                    override fun onAnimationStart(animation: Animator?) {
+                        if (isVisible) {
+                            visibility = VISIBLE
+                        }
+                    }
+                    override fun onAnimationEnd(animation: Animator?) {
+                        if (!isVisible) {
+                            visibility = GONE
+                        }
+                    }
+                })
+                .setInterpolator(AccelerateDecelerateInterpolator())
+                .setDuration(500)
+                .start()
+    }
+}
+@BindingAdapter("animation_translateInFromStart")
+fun View.setVisibilityWithTranslateInFromStartAnimation(oldIsVisible: Boolean,
+                                                      isVisible: Boolean) {
+    // DO FIRST RUN
+    if (oldIsVisible == isVisible) {
+        if (!isVisible) {
+            visibility = INVISIBLE
+            measure(MATCH_PARENT, WRAP_CONTENT)
+            translationX = -measuredWidth.toFloat()
+        }
+    } else {
+        animate().translationX(if (isVisible) 0f else -measuredWidth.toFloat())
+                .alpha(if (isVisible) 1f else 0f)
+                .setListener(object : AnimatorListenerWrapper() {
+                    override fun onAnimationStart(animation: Animator?) {
+                        if (isVisible) {
+                            visibility = VISIBLE
+                        }
+                    }
+                    override fun onAnimationEnd(animation: Animator?) {
+                        if (!isVisible) {
+                            visibility = GONE
+                        }
+                    }
+                })
+                .setInterpolator(AccelerateDecelerateInterpolator())
+                .setDuration(500)
+                .start()
+    }
+}
+@BindingAdapter("animation_translateInFromEnd")
+fun View.setVisibilityWithTranslateInFromEndAnimation(oldIsVisible: Boolean,
+                                                      isVisible: Boolean) {
+    // DO FIRST RUN
+    if (oldIsVisible == isVisible) {
+        if (!isVisible) {
+            visibility = INVISIBLE
+            measure(MATCH_PARENT, WRAP_CONTENT)
+            translationX = measuredWidth.toFloat()
+        }
+    } else {
+        animate().translationX(if (isVisible) 0f else measuredWidth.toFloat())
+                .alpha(if (isVisible) 1f else 0f)
+                .setListener(object : AnimatorListenerWrapper() {
+                    override fun onAnimationStart(animation: Animator?) {
+                        if (isVisible) {
+                            visibility = VISIBLE
+                        }
+                    }
+                    override fun onAnimationEnd(animation: Animator?) {
+                        if (!isVisible) {
+                            visibility = GONE
+                        }
+                    }
+                })
+                .setInterpolator(AccelerateDecelerateInterpolator())
+                .setDuration(500)
+                .start()
+    }
+}
+
+@BindingAdapter("animation_toFullHeight")
+fun View.setVisibilityWithTranslateInFromTopWithHeightAnimation(oldIsVisible: Boolean, isVisible: Boolean) {
+    // DO FIRST RUN
+    if (oldIsVisible == isVisible) {
+        isVisible(isVisible)
+    } else {
+        if (isVisible) {
+            if (!oldIsVisible) {
+                visibility = INVISIBLE
+                measure(MATCH_PARENT, WRAP_CONTENT)
+            }
+            translationY = -measuredHeight.toFloat()
+        }
+
+        animate().translationY(if (isVisible) 0f else -measuredHeight.toFloat())
+                .alpha(if (isVisible) 1f else 0f)
+                .setListener(object : AnimatorListenerWrapper() {
+                    override fun onAnimationStart(animation: Animator?) {
+                        isVisible(true)
+                    }
+
+                    override fun onAnimationEnd(animation: Animator?) {
+                        if (!isVisible) {
+                            visibility = GONE
+                        }
+                    }
+
+                    override fun onAnimationEnd(animation: Animator?, isReverse: Boolean) {
+                    }
+                })
+                .setInterpolator(AccelerateDecelerateInterpolator())
+                .setDuration(500)
+                .start()
+    }
+}
+
 @BindingAdapter("isVisibleWithSlideDownAnimation")
 fun RecyclerView.isVisibleWithSlideDownAnimation(oldIsVisible: Boolean, isVisible: Boolean) {
     // DO FIRST RUN
     if (oldIsVisible == isVisible) {
         visibility = INVISIBLE
         measure(MATCH_PARENT, WRAP_CONTENT)
-        onGlobalLayout {
+        doOnGlobalLayout {
             translationY = -height.toFloat()
         }
     } else {
@@ -469,19 +586,35 @@ fun View.animation_translationByHeight(oldViewId: Int, oldStart: Boolean,
     if (oldStart == start) {
     } else {
         rootView.findViewById<View>(viewId).let { view ->
-            Timber.w("view height = ${view.height}, measuredHeight = ${view.measuredHeight}")
             val animator = animate().setDuration(500)
 
             if (start) {
-                view.onGlobalLayout {
-                    Timber.w("onGlobalLayout view height = ${view.height}, measuredHeight = ${view.measuredHeight}")
-                    animator.translationY(view.height.toFloat())
+                view.doOnGlobalLayout {
+                    animator.translationY(view.height.toFloat()).scaleX(0.8f).scaleY(0.8f)
                 }
             } else {
-                animator.translationY(0f)
+                animator.translationY(0f).scaleX(1f).scaleY(1f)
             }
             animator.start()
 
+        }
+    }
+}
+
+@BindingAdapter(value = ["animation_snapMarginTopToViewHeight", "animation_start"], requireAll = true)
+fun View.animation_snapToViewHeight(oldViewId: Int, oldStart: Boolean,
+                                    viewId: Int, start: Boolean) {
+    // DO FIRST RUN
+    if (start) {
+        rootView.findViewById<View>(viewId).let { view ->
+            view.addOnLayoutChangeListener { v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom ->
+                val heightChanged = bottom - top != oldBottom - oldTop
+                if (heightChanged) {
+                    ObjectAnimator
+                            .ofInt(this, "y", marginLayoutParams()!!.topMargin, top - bottom)
+                            .start()
+                }
+            }
         }
     }
 }
@@ -496,6 +629,50 @@ fun View.animateAlpha(oldAlphaFrom: Float, oldAlphaTo: Float, oldStart: Boolean,
         animate()
                 .alpha(if (start) alphaTo else alphaFrom)
                 .setDuration(500)
+                .start()
+    }
+}
+
+@BindingAdapter(value = ["animation_scaleFrom", "animation_scaleTo", "animation_start"], requireAll = true)
+fun View.animation_scale(oldScaleFrom: Float, oldScaleTo: Float, oldStart: Boolean,
+                         scaleFrom: Float, scaleTo: Float, start: Boolean) {
+    // DO FIRST RUN
+    if (oldStart == start && !start) {
+        scaleY = scaleFrom
+        scaleX = scaleFrom
+    } else {
+        animate()
+                .scaleY(if (start) scaleTo else scaleFrom)
+                .scaleX(if (start) scaleTo else scaleFrom)
+                .setDuration(500)
+                .start()
+    }
+}
+
+@BindingAdapter(value = ["animation_startFadeIn"], requireAll = true)
+fun View.animateAlpha(oldStart: Boolean,
+                      start: Boolean) {
+    // DO FIRST RUN
+    if (oldStart == start && !start) {
+        visibility = GONE
+    } else {
+        visibility = INVISIBLE
+        animate()
+                .alpha(if (start) 1f else 0f)
+                .setDuration(500)
+                .setListener(object : AnimatorListenerWrapper() {
+                    override fun onAnimationStart(animation: Animator?) {
+                        if (start) {
+                            visibility = VISIBLE
+                        }
+                    }
+
+                    override fun onAnimationEnd(animation: Animator?) {
+                        if (!start) {
+                            visibility = GONE
+                        }
+                    }
+                })
                 .start()
     }
 }

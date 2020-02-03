@@ -2,12 +2,12 @@ package homepunk.github.com.presentation.common.adapter
 
 import homepunk.github.com.presentation.BR
 import homepunk.github.com.presentation.core.ext.dpToPx
-import homepunk.github.com.presentation.feature.menu.country.model.CountryLocationModel
+import homepunk.github.com.presentation.feature.menu.country.model.CountryViewModel
 import homepunk.github.com.presentation.util.DimensionUtil
 
 /**Created by Homepunk on 26.07.2019. **/
-class FlexLayoutRecyclerAdapter(layoutId: Int, variableId: Int = BR.model) : SimpleBindingRecyclerAdapter<CountryLocationModel>(layoutId, variableId) {
-    override fun onBindViewHolder(holder: SimpleBindingViewHolder<CountryLocationModel>, position: Int) {
+class FlexLayoutRecyclerAdapter(layoutId: Int, variableId: Int = BR.model) : SimpleBindingRecyclerAdapter<CountryViewModel>(layoutId, variableId) {
+    override fun onBindViewHolder(holder: SimpleBindingViewHolder<CountryViewModel>, position: Int) {
         with(holder.binding) {
             val model = itemList[position]
 //            if (model.isParentExpanded.get()) {

@@ -17,7 +17,7 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayout
 import homepunk.github.com.presentation.core.ext.getColor
-import homepunk.github.com.presentation.core.ext.onGlobalLayout
+import homepunk.github.com.presentation.core.ext.doOnGlobalLayout
 import homepunk.github.com.presentation.core.ext.swap
 import homepunk.github.com.presentation.feature.widget.animation.GammaEvaluator
 
@@ -144,7 +144,7 @@ class FiltersLayout @JvmOverloads constructor(context: Context, attrs: Attribute
             }, params)
         }
         mHighlightView.backgroundTintList = ColorStateList.valueOf(highlightColor)
-        onGlobalLayout { highlightItem(highlightPosition) }
+        doOnGlobalLayout { highlightItem(highlightPosition) }
     }
 
     private fun getFilterItem(item: FilterModel, position: Int): FilterItem {

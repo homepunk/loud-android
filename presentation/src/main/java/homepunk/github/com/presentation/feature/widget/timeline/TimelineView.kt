@@ -92,10 +92,10 @@ class TimelineView<T> @JvmOverloads constructor(context: Context, attrs: Attribu
                         }
                     }
             rvMonths.adapter = mRvMonthsAdapter
-            rvMonths.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_slide_from_right)
+            rvMonths.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_translate_in_from_right)
 
             rvTimeline.adapter = mRvTimelineAdapter
-            rvTimeline.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_slide_from_bottom)
+            rvTimeline.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_translate_in_from_bottom)
             rvTimeline.layoutAnimationListener = object : AnimationListenerWrapper() {
                 override fun onAnimationEnd(animation: Animation?) {
                     stickyDateHeaderDecoration = StickHeaderItemDecoration(mRvTimelineAdapter!! as StickyAdapter<RecyclerView.ViewHolder, RecyclerView.ViewHolder>)

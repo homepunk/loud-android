@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<set xmlns:android="http://schemas.android.com/apk/res/android">
-    <alpha
-        android:duration="600"
-        android:fillAfter="true"
-        android:fromAlpha="1"
-        android:toAlpha="0" />
-</set>
+<layoutAnimation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:animation="@anim/animation_fade_in"
+    android:delay="15%"
+    android:interpolator="@android:anim/accelerate_interpolator"
+    android:animationOrder="reverse"
+    />
